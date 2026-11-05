@@ -1,0 +1,54 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "L8Play",
+  "version": "0.1.0",
+  "identifier": "com.l8play.app",
+  "build": {
+    "beforeDevCommand": "bun run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "bun run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "L8Play",
+        "width": 1366,
+        "height": 768,
+        "minWidth": 1100,
+        "minHeight": 680,
+        "center": true,
+        "decorations": false,
+        "shadow": true,
+        "backgroundColor": "#3b1b1f"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' http://l8art.localhost l8art: data: blob: https://cdn.cloudflare.steamstatic.com https://cdn2.steamgriddb.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src ipc: http://ipc.localhost; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "nsis"
+    ],
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.ico"
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser"
+      }
+    },
+    "externalBin": [
+      "binaries/ludusavi"
+    ],
+    "resources": {
+      "binaries/ludusavi-third-party-notices.txt": "licenses/ludusavi-third-party-notices.txt"
+    }
+  }
+}

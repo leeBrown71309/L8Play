@@ -1,0 +1,36 @@
+/*
+ * Hero card carousel: the incoming game's art fades in over the outgoing one (which stays opaque
+ * underneath), and its text rises into place. Reduced motion zeroes the durations globally.
+ */
+.l8-hero-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.l8-hero-layer.is-entering {
+  animation: l8-hero-layer-in 600ms var(--ease-out) both;
+}
+
+.l8-hero-body-in {
+  animation: l8-hero-text-in 420ms var(--ease-out) both;
+}
+
+/* Pager dots grow smoothly when the carousel moves on. */
+.l8-herocard-pages i {
+  transition:
+    width 260ms var(--ease-out),
+    background-color 260ms var(--ease-out);
+}
+
+@keyframes l8-hero-layer-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes l8-hero-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

@@ -1,0 +1,254 @@
+/* Artwork picker dialog (design system ScreenArtwork). Only the candidate list scrolls. */
+@layer components {
+  .aw {
+    display: grid;
+    grid-template-columns: minmax(190px, 270px) minmax(0, 1fr);
+    gap: 22px;
+    /* Fixed height: the dialog body never scrolls, only .aw-grid does. */
+    height: clamp(380px, calc(100vh - 300px), 540px);
+  }
+  .aw-prev {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 0;
+    overflow: hidden;
+    /* Room for the flare ring around the cover preview, which overflow:hidden would otherwise clip. */
+    padding: 4px;
+    margin: -4px;
+  }
+  .aw-lbl {
+    font: 600 11px/16px var(--l8-font-sans);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--l8-ink-faint);
+  }
+  .aw-heroprev {
+    position: relative;
+    flex: none;
+    aspect-ratio: 3.1 / 1;
+    border-radius: var(--l8-radius-sm);
+    overflow: hidden;
+    background: var(--l8-stage);
+  }
+  .aw-heroprev img.aw-logo {
+    position: absolute;
+    left: 10px;
+    bottom: 8px;
+    width: 120px;
+    height: 36px;
+    object-fit: contain;
+    object-position: left bottom;
+  }
+  .aw-row2 {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 12px;
+    align-items: end;
+  }
+  .aw-cov {
+    aspect-ratio: 2 / 3;
+    border-radius: var(--l8-radius-sm);
+    overflow: hidden;
+    box-shadow: 0 0 0 2px var(--l8-flare);
+  }
+  .aw-icn {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--l8-radius-sm);
+    overflow: hidden;
+  }
+  .aw-pick {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-width: 0;
+    min-height: 0;
+  }
+  .aw-bar {
+    flex: none;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .aw-search {
+    flex: none;
+    display: flex;
+    gap: 8px;
+  }
+  .aw-search .l8-search {
+    flex: 1;
+    min-width: 0;
+  }
+  .aw-grid {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: grid;
+    /* Rows are exactly as tall as their cells: they can never collapse into each other. */
+    grid-auto-rows: min-content;
+    align-content: start;
+    gap: 12px;
+    padding: 6px 6px 8px;
+    margin: -6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--l8-bg-400) transparent;
+  }
+  .aw-grid.is-cover {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .aw-grid.is-icon {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .aw-grid.is-logo {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .aw-grid.is-hero {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  /* Cell height comes from --r (height / width) through a padding spacer, so grid track sizing can't squash it. */
+  .aw-cand,
+  .aw-upload {
+    --r: 1.5;
+    position: relative;
+    display: block;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: var(--l8-radius-sm);
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .aw-cand::before,
+  .aw-upload::before {
+    content: "";
+    display: block;
+    padding-top: calc(var(--r) * 100%);
+  }
+  .aw-cand.is-cover,
+  .aw-upload.is-cover {
+    --r: 1.5;
+  }
+  .aw-cand.is-hero,
+  .aw-upload.is-hero {
+    --r: 0.3229;
+  }
+  .aw-cand.is-logo,
+  .aw-upload.is-logo {
+    --r: 0.4375;
+  }
+  .aw-cand.is-icon,
+  .aw-upload.is-icon {
+    --r: 1;
+  }
+  .aw-cand {
+    border: 0;
+    background: var(--l8-bg-300);
+  }
+  .aw-cand.is-logo {
+    background: #08090c;
+  }
+  .aw-cand img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .aw-cand.is-cover img,
+  .aw-cand.is-hero img {
+    object-fit: cover;
+  }
+  .aw-cand.is-logo img,
+  .aw-cand.is-icon img {
+    object-fit: contain;
+  }
+  .aw-cand:hover {
+    box-shadow: 0 0 0 2px var(--l8-line-strong);
+  }
+  .aw-cand.on {
+    box-shadow:
+      0 0 0 3px var(--l8-bg-200),
+      0 0 0 5px var(--l8-flare);
+  }
+  .aw-cand:disabled {
+    cursor: progress;
+    opacity: 0.7;
+  }
+  .aw-chk {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--l8-flare);
+    color: var(--l8-on-flare);
+  }
+  .aw-src {
+    position: absolute;
+    left: 6px;
+    bottom: 6px;
+    max-width: calc(100% - 12px);
+    height: 20px;
+    padding: 0 8px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--l8-radius-pill);
+    background: rgba(30, 13, 16, 0.75);
+    color: var(--l8-on-stage);
+    font: 500 10.5px/1 var(--l8-font-mono);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .aw-upload {
+    border: 2px dashed var(--l8-line-strong);
+    background: transparent;
+    color: var(--l8-ink-muted);
+    font: 500 12.5px/16px var(--l8-font-sans);
+    text-align: center;
+  }
+  .aw-upload:hover {
+    background: var(--l8-bg-300);
+    color: var(--l8-ink);
+  }
+  .aw-upload-in {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px;
+  }
+  .aw-upload.is-hero .aw-upload-hint,
+  .aw-upload.is-logo .aw-upload-hint,
+  .aw-upload.is-icon .aw-upload-hint,
+  .aw-upload.is-icon .aw-upload-label {
+    display: none;
+  }
+  .aw-note {
+    padding: 14px;
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-100);
+    font: 400 13.5px/20px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  @media (max-width: 1000px) {
+    .aw-grid.is-cover {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .aw-grid.is-icon {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .aw-grid.is-logo {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+}

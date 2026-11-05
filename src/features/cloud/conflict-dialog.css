@@ -1,0 +1,65 @@
+/* Sync-conflict comparison cards, ported from the design system's ScreenConflict preview. */
+@layer components {
+  .conflict-cmp {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .conflict-ver {
+    position: relative;
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-100);
+    box-shadow: inset 0 0 0 1px var(--l8-line-strong);
+    overflow: hidden;
+  }
+  .conflict-ver.pick {
+    box-shadow: inset 0 0 0 2px var(--l8-flare);
+  }
+  .conflict-ver .hd {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 14px 4px;
+  }
+  .conflict-ver .hd b {
+    font: 600 15px/20px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .conflict-ver .hd .l8-status {
+    margin-left: auto;
+  }
+  .conflict-ver .dev {
+    padding: 0 14px;
+    font: 500 12px/16px var(--l8-font-mono);
+    color: var(--l8-ink-faint);
+    overflow-wrap: anywhere;
+  }
+  .conflict-ver dl {
+    margin: 10px 14px 14px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 12px;
+    font: 500 12.5px/18px var(--l8-font-sans);
+  }
+  .conflict-ver dt {
+    color: var(--l8-ink-faint);
+  }
+  .conflict-ver dd {
+    margin: 0;
+    text-align: right;
+    color: var(--l8-ink);
+    font-family: var(--l8-font-mono);
+    font-size: 12px;
+  }
+  .conflict-ver .ico-local {
+    color: var(--l8-local);
+  }
+  .conflict-ver .ico-cloud {
+    color: var(--l8-cloud);
+  }
+  .conflict-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}

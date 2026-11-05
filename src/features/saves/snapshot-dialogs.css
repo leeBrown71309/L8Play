@@ -1,0 +1,150 @@
+/* Create / restore / delete snapshot dialogs (design system ScreenCreateSnapshot and ScreenRestore). */
+@layer components {
+  .sd-src {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-100);
+  }
+  .sd-src .ic {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--l8-radius-sm);
+    overflow: hidden;
+    flex: none;
+  }
+  .sd-src b {
+    display: block;
+    font: 600 13.5px/18px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .sd-src span.m {
+    font: 500 11.5px/16px var(--l8-font-mono);
+    color: var(--l8-ink-faint);
+  }
+  .sd-src .l8-status {
+    margin-left: auto;
+  }
+  .sd-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sd-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  /* Three storage choices plus the note must still fit a 768px window: tighter option cards. */
+  .sd-opts .l8-opt {
+    padding-block: 6px;
+  }
+  .sd-opts .l8-opt-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .sd-opts .l8-opt-desc {
+    font-size: 12.5px;
+    line-height: 17px;
+  }
+  .sd-hint {
+    margin: 2px 2px 0;
+    font: 400 12.5px/18px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .sd-hint a {
+    color: var(--l8-flare-text);
+    font-weight: 600;
+  }
+  .sd-lbl {
+    font: 600 13px/18px var(--l8-font-sans);
+    color: var(--l8-ink);
+    margin-bottom: 8px;
+  }
+
+  /* Restore */
+  .sd-flow {
+    display: grid;
+    grid-template-columns: 1fr 32px 1fr;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .sd-box {
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-100);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: inset 0 0 0 1px var(--l8-line);
+    min-width: 0;
+  }
+  .sd-box .l8-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sd-box b {
+    font: 600 14px/19px var(--l8-font-sans);
+    color: var(--l8-ink);
+    overflow-wrap: anywhere;
+  }
+  .sd-box .m {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font: 500 12px/17px var(--l8-font-mono);
+    color: var(--l8-ink-muted);
+  }
+  .sd-box .w {
+    color: var(--l8-warning);
+  }
+  .sd-box .path {
+    font: 500 11px/16px var(--l8-font-mono);
+    color: var(--l8-ink-faint);
+    word-break: break-all;
+  }
+  .sd-arrow {
+    display: grid;
+    place-items: center;
+    color: var(--l8-ink-faint);
+  }
+  .sd-loss {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    font: 400 13px/19px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .sd-loss .l8-icon {
+    color: var(--l8-warning);
+    margin-top: 1px;
+  }
+  .sd-loss b {
+    color: var(--l8-ink);
+    font-weight: 600;
+  }
+  .sd-checks {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font: 500 12.5px/18px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .sd-checks div {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .sd-checks .ok {
+    color: var(--l8-success);
+  }
+  .sd-checks .warn {
+    color: var(--l8-warning);
+  }
+  .sd-checks .inf {
+    color: var(--l8-ink-faint);
+  }
+}

@@ -1,0 +1,133 @@
+/*
+ * App-wide motion. Page changes cross-fade through the View Transitions API (the router asks for one on
+ * every navigation); content then rises in with a short stagger. Only opacity and the individual
+ * `translate` property are animated, so the hover tilt and lift (which use `transform`) are never fought.
+ * Everything is switched off under prefers-reduced-motion (see globals.css).
+ */
+
+@keyframes l8-page-out {
+  to {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+
+@keyframes l8-page-in {
+  from {
+    opacity: 0;
+    translate: 0 14px;
+  }
+}
+
+@keyframes l8-rise {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+}
+
+@keyframes l8-pop {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@layer components {
+  /* The page body is its own transition group so the rails and the top bar never flash. */
+  .l8-page {
+    view-transition-name: l8-page;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(l8-page) {
+    animation: l8-page-out 160ms var(--ease-out) both;
+  }
+
+  ::view-transition-new(l8-page) {
+    animation: l8-page-in 340ms var(--ease-out) both;
+  }
+
+  /* Sections of a page rise one after the other. */
+  .l8-page > * > * {
+    animation: l8-rise 460ms var(--ease-out) backwards;
+  }
+
+  .l8-page > * > :nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  .l8-page > * > :nth-child(3) {
+    animation-delay: 140ms;
+  }
+
+  .l8-page > * > :nth-child(n + 4) {
+    animation-delay: 210ms;
+  }
+
+  /* Repeated items (cards, tiles, rows, snapshots, transfers) stagger within their container. */
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame) {
+    animation: l8-rise 420ms var(--ease-out) backwards;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(1) {
+    animation-delay: 0ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(2) {
+    animation-delay: 35ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(3) {
+    animation-delay: 70ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(4) {
+    animation-delay: 105ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(5) {
+    animation-delay: 140ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(6) {
+    animation-delay: 175ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(7) {
+    animation-delay: 210ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(8) {
+    animation-delay: 245ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(9) {
+    animation-delay: 280ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(10) {
+    animation-delay: 315ms;
+  }
+
+  :is(.l8-card, .l8-tile, .l8-grow, .l8-arow, .l8-snap, .l8-snapcard, .l8-xfer, .l8-folder, .l8-qgame):nth-child(
+    n + 11
+  ) {
+    animation-delay: 350ms;
+  }
+
+  /* Small things that appear: toasts, banners, menus, the orb. */
+  :is(.l8-banner, .l8-menu, .l8-orb-stage) {
+    animation: l8-pop 280ms var(--ease-spring) backwards;
+  }
+
+  /* Progress bars grow in from the left when they mount. */
+  .l8-progress-fill:not(.is-indeterminate) {
+    transition: width 600ms var(--ease-out);
+  }
+}

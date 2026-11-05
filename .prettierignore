@@ -1,0 +1,8 @@
+dist
+target
+src-tauri
+crates
+src/lib/bindings
+src/locales
+bun.lock
+docs
