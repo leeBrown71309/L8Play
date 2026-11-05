@@ -17,6 +17,7 @@ import { ArtworkSection } from "@/features/settings/ArtworkSection";
 import { BackupSection } from "@/features/settings/BackupSection";
 import { SettingGroup, SettingRow, ToggleSetting } from "@/features/settings/setting-blocks";
 import { useSettings, useUpdateSettings } from "@/features/settings/use-settings";
+import { UpdatesSection } from "@/features/updates/UpdatesSection";
 import type { Locale } from "@/lib/bindings/Locale";
 import type { Theme } from "@/lib/bindings/Theme";
 import { cn } from "@/lib/cn";
@@ -24,7 +25,8 @@ import { queryKeys } from "@/lib/query-keys";
 import { getAppInfo } from "@/lib/tauri/commands";
 import "@/features/settings/settings-page.css";
 
-type SectionId = "general" | "libraries" | "artwork" | "detection" | "backup" | "cloud" | "appearance" | "about";
+type SectionId =
+  "general" | "libraries" | "artwork" | "detection" | "backup" | "cloud" | "updates" | "appearance" | "about";
 
 const SECTION_IDS: readonly string[] = [
   "general",
@@ -33,6 +35,7 @@ const SECTION_IDS: readonly string[] = [
   "detection",
   "backup",
   "cloud",
+  "updates",
   "appearance",
   "about",
 ];
@@ -257,6 +260,7 @@ export function SettingsPage() {
     { id: "detection", label: t`Save Detection`, icon: "scan" },
     { id: "backup", label: t`Backup`, icon: "snapshot" },
     { id: "cloud", label: t`Cloud`, icon: "cloud" },
+    { id: "updates", label: t`Updates`, icon: "download" },
     { id: "appearance", label: t`Appearance`, icon: "palette" },
     { id: "about", label: t`About`, icon: "info" },
   ];
@@ -287,6 +291,7 @@ export function SettingsPage() {
           {active === "backup" && <BackupSection />}
           {active === "artwork" && <ArtworkSection />}
           {active === "cloud" && <CloudSection />}
+          {active === "updates" && <UpdatesSection />}
           {active === "general" && <GeneralSection />}
           {active === "libraries" && <LibrariesSection />}
           {active === "detection" && <DetectionSection />}

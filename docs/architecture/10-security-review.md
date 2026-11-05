@@ -1,16 +1,17 @@
-# 10 — Security review (phase 7)
+# 10 — Security review (phase 8)
 
-Scope: the whole application as of phase 7. This is a review of the design and the code, not a third-party audit.
+Scope: the whole application as of phase 8. This is a review of the design and the code, not a third-party audit.
 
 ## Trust boundaries
 
 | Boundary | Rule | Where it is enforced |
 | --- | --- | --- |
-| WebView → Rust | The WebView holds no secrets and no file-system access. It can only call the commands registered in `src-tauri/src/lib.rs`; the capability file grants window controls and the native file picker, nothing else (no `fs`, `shell`, `http` or `opener` permission). | `src-tauri/capabilities/default.json` |
+| WebView → Rust | The WebView holds no secrets and no file-system access. It can only call the commands registered in `src-tauri/src/lib.rs`; the capability file grants window controls, the native file picker, updater check/download/install and app restart, nothing else (no `fs`, `shell`, `http` or `opener` permission). | `src-tauri/capabilities/default.json` |
 | WebView content | CSP: `default-src 'self'`; images only from the app, the scoped asset protocol, Steam's CDN and SteamGridDB's CDN; no `connect-src` to the internet (every network call is made by Rust); `object-src`, `base-uri`, `form-action` and `frame-ancestors` are `'none'`. | `tauri.conf.json` |
 | Asset protocol | Enabled only for `$LOCALAPPDATA/com.l8play.app/artwork/**`. | `tauri.conf.json` |
-| Network | Rust only. Allow-listed hosts: artwork providers, PCGamingWiki, and Google's OAuth/Drive hosts. HTTPS only, redirects disabled for Google calls, bounded response sizes, one request at a time with a 1 s pace for artwork and wiki. | `artwork/http.rs`, `cloud/transport.rs` |
-| Secrets | SteamGridDB key, the user's Steam Web API key (`steam-web-api`, 32 hex characters, validated before it is stored), Google client id/secret and refresh token live in the Windows Credential Manager (`L8Play`/`<name>`). Access tokens stay in memory. Nothing is stored in SQLite or logged; the log writer redacts bearer tokens, `key=` values and every registered secret. The Steam key travels as a query parameter, so: transport failures are scrubbed at the HTTP layer before they become messages, owned-library code logs only the kind of failure (never a URL or text), the key goes from the WebView to Rust once and only a boolean comes back, and a test proves a failing request leaves the key out of logs and errors. | `artwork/secrets.rs`, `artwork/http.rs`, `platforms/steam_owned.rs`, `cloud/oauth.rs`, `redact.rs` |
+| Network | Rust only. Allow-listed hosts: artwork providers, PCGamingWiki, Google's OAuth/Drive hosts, and the GitHub Releases updater endpoint. HTTPS only, redirects disabled for Google calls, bounded response sizes, one request at a time with a 1 s pace for artwork and wiki. | `artwork/http.rs`, `cloud/transport.rs`, `tauri.conf.json` (`plugins.updater.endpoints`) |
+| Update channel | The updater runs from Rust, contacts only the fixed `https://github.com/leeBrown71309/L8Play/releases/latest/download/latest.json` endpoint, verifies the installer with minisign against the public key embedded in `tauri.conf.json`, and only accepts a higher version. The private signing key never leaves the maintainer's machine and is never in the repository or the binary. | `tauri.conf.json`, `src-tauri/src/lib.rs`, `src/features/updates/update-service.ts` |
+| Secrets | SteamGridDB key, the user's Steam Web API key (`steam-web-api`, 32 hex characters, validated before it is stored), Google client id/secret and refresh token live in the Windows Credential Manager (`L8Play`/`<name>`). Access tokens stay in memory. Nothing is stored in SQLite or logged; the log writer redacts bearer tokens, `key=` values and every registered secret. The Steam key travels as a query parameter, so: transport failures are scrubbed at the HTTP layer before they become messages, owned-library code logs only the kind of failure (never a URL or text), the key goes from the WebView to Rust once and only a boolean comes back, and a test proves a failing request leaves the key out of logs and errors. The updater private key is not an app secret: it exists only on the maintainer's machine for signing builds and is never compiled in. | `artwork/secrets.rs`, `artwork/http.rs`, `platforms/steam_owned.rs`, `cloud/oauth.rs`, `redact.rs`, `docs/release-and-signing.md` |
 | Child process | Ludusavi runs read-only (`--preview`, `find --api`), with a pinned SHA-256 checked at fetch time, no console window, and a config folder inside the app data folder. | `saves/ludusavi.rs`, `scripts/fetch-ludusavi.ts` |
 | Privileges | No administrator rights anywhere: per-user NSIS install, per-user startup entry, loopback OAuth redirect on `127.0.0.1` only. | `tauri.conf.json`, `cloud/oauth.rs` |
 
@@ -32,6 +33,7 @@ Scope: the whole application as of phase 7. This is a review of the design and t
 | Google/Drive metadata | Snapshot and device ids must be UUIDs, checksums 64 hex characters; the local game is matched by slug and file names come from the local database, never from remote text. |
 | OAuth redirect | `state` must match; requests without it are ignored; PKCE S256 with a 64-byte verifier. |
 | Settings | Absolute snapshot folder, bounded retention count, validated metadata lengths. |
+| Update manifest | Version must be higher, the `.sig` must match the embedded public key, the installer URL must use HTTPS, and release notes are treated as plain text (tags stripped, escaped by React, never rendered as HTML). |
 
 ## Findings
 
@@ -42,6 +44,8 @@ Scope: the whole application as of phase 7. This is a review of the design and t
 | 3 | Conflict resolution marks the losing snapshot as a conflict copy locally only; the Drive copy keeps its original `kind` property, so another device may raise its own conflict | Low | Documented limitation |
 | 4 | Tray menu labels are fixed at start-up in the language chosen at that time | Cosmetic | Documented limitation |
 | 5 | `cargo audit` was not run (not installed in the build environment) | — | Run `cargo install cargo-audit && cargo audit` before a public release |
+| 6 | The updater's private signing key lives outside the repository; losing it or its password makes future signed updates impossible for already-installed copies. Version 0.1.2 has no updater, so 0.1.3 must be installed manually once. | Operational | Key and password backed up by the maintainer; documented in `release-and-signing.md` |
+| 7 | A compromised GitHub account or release could publish a malicious installer, but it would still need the private key to produce a valid minisign signature; without it the update is rejected. | Low | By design: signature verification and no downgrade |
 
 ## Performance notes
 

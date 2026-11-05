@@ -9,6 +9,7 @@ import { useCloudSummary } from "@/components/shell/use-cloud-summary";
 import { useAddGameFlow } from "@/features/library/use-library-flows";
 import { useGames } from "@/features/library/use-library";
 import { useSaveStatuses } from "@/features/saves/use-saves";
+import { useAppUpdatePhase } from "@/features/updates/use-app-update";
 import { cn } from "@/lib/cn";
 
 interface NavItem {
@@ -56,6 +57,7 @@ export function NavRail({ expanded, onToggle }: NavRailProps) {
   const gameCount = useGames().data?.length;
   const snapshotCount = useSaveStatuses().data?.reduce((sum, status) => sum + status.snapshotCount, 0);
   const cloud = useCloudSummary();
+  const updatePhase = useAppUpdatePhase();
   const addGame = useAddGameFlow();
   const addLabel = t`Add a game`;
   const toggleLabel = expanded ? t`Collapse the menu` : t`Expand the menu`;
@@ -75,7 +77,13 @@ export function NavRail({ expanded, onToggle }: NavRailProps) {
     { to: ROUTES.games, label: t`My Games`, shortcut: "Ctrl+2", icon: "gamepad", count: gameCount },
     { to: ROUTES.saves, label: t`Save Manager`, shortcut: "Ctrl+3", icon: "snapshot", count: snapshotCount },
     { to: ROUTES.cloud, label: t`Cloud Storage`, shortcut: "Ctrl+4", icon: "cloud", alert: cloud.attention },
-    { to: ROUTES.settings, label: t`Settings`, shortcut: "Ctrl+5", icon: "settings" },
+    {
+      to: ROUTES.settings,
+      label: t`Settings`,
+      shortcut: "Ctrl+5",
+      icon: "settings",
+      alert: updatePhase === "available" || updatePhase === "downloading" || updatePhase === "ready",
+    },
   ];
 
   return (

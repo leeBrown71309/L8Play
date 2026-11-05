@@ -32,6 +32,7 @@
 - **Your Google Drive, optional.** Keep a second verified copy in a private "L8Play" folder in your own Drive, using the `drive.file` scope. Nothing is ever overwritten silently: conflicts pause the sync and wait for your choice.
 - **Artwork and metadata.** Steam CDN covers, optional SteamGridDB results with your own free key kept in the Windows Credential Manager, or an image of your own. Title, developer and release year are editable.
 - **Built like a desktop app.** Tray icon, native notifications, custom title bar, keyboard-first search (`Ctrl K`), English and French, and two themes (Ember and Rosé).
+- **Updates inside the app.** Settings › Updates checks GitHub Releases, shows the new version and its notes, then downloads, verifies and installs the signed installer and restarts. No paid update service.
 
 ## Screenshots
 
@@ -89,7 +90,15 @@ To build the installer:
 bun tauri build
 ```
 
-The NSIS installer is written to `target/release/bundle/nsis/`. See [docs/release-and-signing.md](docs/release-and-signing.md) for signing and GitHub Actions.
+The NSIS installer is written to `target/release/bundle/nsis/`. See [docs/release-and-signing.md](docs/release-and-signing.md) for signing, the update manifest and GitHub Actions.
+
+## Updates
+
+L8Play checks GitHub Releases shortly after it starts and every six hours, unless **Settings › Updates › Check for updates automatically** is off. The check is one HTTPS request to this repository's releases; it sends nothing about you or your library. When a newer version exists, the section shows its number, publication date and release notes. **Update now** downloads the installer, verifies its minisign signature against the public key embedded in the app, installs it and restarts L8Play. A single install is enough: the plugin only accepts a higher version, so downgrades are refused.
+
+Updates are free: GitHub Releases hosts the manifest (`latest.json`) and the installer, and the signing key pair is generated locally. The private key is never in this repository or in the app; see [release-and-signing.md](docs/release-and-signing.md).
+
+**One-time step:** version 0.1.2 does not contain the updater, so install **0.1.3** manually once. From 0.1.3 onward, every release is offered inside the app.
 
 ## Scripts
 
@@ -104,8 +113,9 @@ The NSIS installer is written to `target/release/bundle/nsis/`. See [docs/releas
 | `cargo test --workspace` | Rust tests; also regenerates `src/lib/bindings` (ts-rs) |
 | `cargo clippy --workspace --all-targets -- -D warnings` | Rust lints |
 | `bun run tokens` | Regenerate `src/styles/tokens.css` from `design/tokens.json` |
-| `bun run i18n:extract` | Extract UI strings and apply French translations from `scripts/translations/fr.json` |
+| `bun run i18n:extract` | Extract UI strings and apply the French translations from `scripts/translations/fr*.json` |
 | `bun run fetch:ludusavi` | Download and verify the Ludusavi sidecar used for save detection |
+| `bun scripts/make-update-manifest.ts --version x.y.z --notes-file notes.md` | Build `latest.json` for the in-app updater from the built `.sig` file |
 
 ## Project layout
 
@@ -138,6 +148,7 @@ docs/                architecture, guides and screenshots
 
 - Data lives in `%APPDATA%\com.l8play.app\` (SQLite database and artwork) and logs in `%LOCALAPPDATA%\com.l8play.app\logs\` (secrets redacted).
 - The WebView has no file-system or network access: every call goes through a typed Rust command, and only allow-listed hosts are contacted.
+- The update check contacts only `github.com/leeBrown71309/L8Play` over HTTPS. The installer is verified with minisign before it runs; the private signing key stays on the maintainer's machine and never ships.
 - SteamGridDB keys, Steam Web API keys, Google client credentials and refresh tokens are stored in the Windows Credential Manager, never in SQLite or logs.
 - Google Drive access uses the `drive.file` scope: L8Play can only see the files it creates in its own "L8Play" folder.
 - No administrator rights are needed: per-user installer, per-user startup entry, loopback OAuth redirect.

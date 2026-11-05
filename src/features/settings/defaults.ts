@@ -16,4 +16,5 @@ export const DEFAULT_SETTINGS: AppSettings = {
   desktopNotifications: true,
   onboardingDone: false,
   showOwnedNotInstalled: true,
+  updatesAutoCheck: true,
 };
