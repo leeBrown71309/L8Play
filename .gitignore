@@ -27,3 +27,4 @@ src-tauri/binaries/ludusavi-*.exe
 
 # Local assistant/tooling state
 .claude/
+.playwright-mcp/
