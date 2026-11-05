@@ -20,7 +20,7 @@ export function Tooltip({ content, side = "right", children }: TooltipProps) {
         <TooltipPrimitive.Content
           side={side}
           sideOffset={12}
-          className="z-50 flex h-[30px] items-center rounded-pill bg-ink px-3 text-[12.5px] font-semibold text-surface-100 shadow-2"
+          className="z-[80] flex h-[30px] items-center rounded-pill bg-ink px-3 text-[12.5px] font-semibold text-surface-100 shadow-2"
         >
           {content}
         </TooltipPrimitive.Content>

@@ -151,3 +151,19 @@
     opacity: 0;
   }
 }
+
+/*
+ * Tooltips of the rails are drawn by the rail buttons themselves, so they can only be as high as the rail.
+ * The rails sit above the page (whose top bar has its own z-index) and below dialogs, so a rail tooltip is never
+ * hidden by the round top-bar buttons. Radix tooltips (portal, z-80) sit above everything but console mode.
+ */
+.l8-window > .l8-rail,
+.l8-window > .l8-qrail {
+  position: relative;
+  z-index: 20;
+}
+
+.l8-window > .l8-main {
+  position: relative;
+  z-index: 0;
+}

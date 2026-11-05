@@ -1,0 +1,417 @@
+/*
+ * Console mode: shell, top bar, backdrop, hint bar, toasts and dialogs.
+ * Sizes are in em from one root font size that grows with the window, so a TV reads as well as a laptop.
+ * Everything that moves animates transform and opacity only.
+ */
+@layer components {
+  .cs-root {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    padding: 0 4vw;
+    overflow: hidden;
+    font-size: clamp(18px, 1.3vw, 32px);
+    /* Room a focused item needs inside any scrolling container: its ring, its 1.03 scale and its glow. */
+    --cs-pad-x: clamp(28px, 2.4vw, 64px);
+    --cs-pad-y: clamp(20px, 1.8vw, 48px);
+    background: var(--l8-bg-000);
+    color: var(--l8-ink);
+    animation: cs-enter 520ms var(--ease-out) backwards;
+  }
+  .cs-root.is-leaving {
+    animation: cs-leave 360ms cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+  .cs-root > :not(.cs-backdrop):not(.cs-modal-layer):not(.cs-toasts) {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Backdrop: the selected game's artwork, blurred and darkened. */
+  .cs-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .cs-backdrop-stage {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+    animation: cs-drift 46s ease-in-out infinite alternate;
+  }
+  .cs-backdrop-layer {
+    position: absolute;
+    inset: -6%;
+    background-position: center;
+    background-size: cover;
+    filter: blur(16px) saturate(1.2) brightness(0.85);
+    will-change: opacity;
+    animation: cs-fade-in 620ms var(--ease-out) backwards;
+  }
+  .cs-backdrop-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--l8-bg-000) 92%, transparent) 0%,
+        color-mix(in srgb, var(--l8-bg-000) 55%, transparent) 48%,
+        color-mix(in srgb, var(--l8-bg-000) 18%, transparent) 100%
+      ),
+      linear-gradient(0deg, var(--l8-bg-000) 0%, transparent 52%),
+      linear-gradient(180deg, color-mix(in srgb, var(--l8-bg-000) 70%, transparent) 0%, transparent 24%);
+  }
+
+  /* Top bar */
+  .cs-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.6em 0 0.6em;
+  }
+  .cs-tabs {
+    position: relative;
+    display: flex;
+    gap: 2.4em;
+    padding-bottom: 0.7em;
+  }
+  .cs-tab {
+    border: 0;
+    background: none;
+    padding: 0.2em 0;
+    font: 700 1.05em/1.2 var(--l8-font-sans);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--l8-ink-muted);
+    cursor: pointer;
+    transition: color 200ms var(--ease-out);
+  }
+  .cs-tab.is-on,
+  .cs-tab:hover {
+    color: var(--l8-ink);
+  }
+  .cs-tab-line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 0.22em;
+    width: var(--tab-w, 0);
+    border-radius: 999px;
+    background: var(--l8-flare);
+    box-shadow: 0 0 1em var(--l8-flare);
+    transform: translateX(var(--tab-x, 0));
+    transition:
+      transform 360ms var(--ease-spring),
+      width 360ms var(--ease-spring);
+  }
+  .cs-status {
+    display: flex;
+    align-items: center;
+    gap: 1.6em;
+    color: var(--l8-ink-muted);
+  }
+  .cs-pad,
+  .cs-sync {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    opacity: 0.6;
+    transition: opacity 240ms var(--ease-out);
+  }
+  .cs-pad.is-on,
+  .cs-sync {
+    opacity: 1;
+  }
+  .cs-pad.is-on {
+    color: var(--l8-success);
+  }
+  .cs-pad-name {
+    max-width: 14em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.85em;
+  }
+  .cs-clock {
+    font: 600 1.3em/1 var(--l8-font-sans);
+    font-variant-numeric: tabular-nums;
+    color: var(--l8-ink);
+    animation: cs-fade-in 400ms var(--ease-out) backwards;
+  }
+
+  /* Views */
+  .cs-main {
+    position: relative;
+    min-height: 0;
+  }
+  .cs-view {
+    height: 100%;
+    transition:
+      transform 420ms var(--ease-out),
+      opacity 420ms var(--ease-out);
+    animation: cs-view-in 440ms var(--ease-out) backwards;
+  }
+  .cs-main.has-panel .cs-view {
+    transform: translateX(-3%) scale(0.97);
+    opacity: 0.4;
+  }
+  .cs-main.is-panel-closing .cs-view {
+    transform: none;
+    opacity: 1;
+  }
+
+  /* Hint bar */
+  .cs-hints {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em 2.2em;
+    padding: 1em 0 1.6em;
+  }
+  .cs-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    font: 600 0.9em/1 var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .cs-hint kbd {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.1em;
+    height: 2.1em;
+    padding: 0 0.7em;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--l8-ink) 92%, transparent);
+    color: var(--l8-bg-000);
+    font: 800 0.85em/1 var(--l8-font-sans);
+    transition: transform 160ms var(--ease-spring);
+  }
+
+  /* Toasts */
+  .cs-toasts {
+    position: absolute;
+    top: 5.4em;
+    right: 4vw;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7em;
+    width: min(26em, 40vw);
+    pointer-events: none;
+  }
+  .cs-toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9em;
+    padding: 1em 1.2em;
+    border-radius: 1em;
+    background: color-mix(in srgb, var(--l8-bg-200) 94%, transparent);
+    box-shadow: var(--l8-shadow-2);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    color: var(--tone, var(--l8-ink-muted));
+    animation: cs-toast-in 360ms var(--ease-spring) backwards;
+  }
+  .cs-toast b,
+  .cs-toast span {
+    display: block;
+  }
+  .cs-toast b {
+    color: var(--l8-ink);
+    font-size: 1.02em;
+  }
+  .cs-toast span {
+    margin-top: 0.15em;
+    font-size: 0.86em;
+    color: var(--l8-ink-muted);
+  }
+
+  /* Dialogs */
+  .cs-modal-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+  }
+  .cs-modal-scrim {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgba(20, 8, 10, 0.66);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    animation: cs-fade-in 260ms var(--ease-out) backwards;
+    transition: background-color 240ms;
+  }
+  .cs-modal {
+    width: min(34em, 82vw);
+    max-height: calc(100vh - 8vh);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2em;
+    padding: 1.8em max(1.8em, var(--cs-pad-x));
+    border-radius: 1.4em;
+    background: var(--l8-bg-200);
+    box-shadow: var(--l8-shadow-3);
+    animation: cs-modal-in 340ms var(--ease-spring) backwards;
+    transition:
+      transform 260ms var(--ease-out),
+      opacity 260ms var(--ease-out);
+  }
+  .cs-modal.is-wide {
+    width: min(50em, 88vw);
+  }
+  .cs-modal-layer.is-under .cs-modal-scrim {
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .cs-modal-layer.is-under .cs-modal {
+    transform: scale(0.94) translateY(-2%);
+    opacity: 0.3;
+  }
+  .cs-modal-head {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+  }
+  .cs-modal-head h2 {
+    margin: 0;
+    font: 700 1.5em/1.15 var(--l8-font-sans);
+  }
+  .cs-modal-head p {
+    margin: 0.2em 0 0;
+    color: var(--l8-ink-muted);
+    font-size: 0.95em;
+  }
+  .cs-modal-icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 2.6em;
+    height: 2.6em;
+    border-radius: 0.9em;
+    background: var(--tone-soft);
+    color: var(--tone);
+  }
+  .cs-modal-head {
+    flex: none;
+  }
+  /* The body scrolls inside the modal; the footer (actions) never leaves the screen. */
+  .cs-modal-body,
+  .cs-modal-foot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6em;
+    padding: var(--cs-pad-y) var(--cs-pad-x);
+    margin-inline: calc(var(--cs-pad-x) * -1);
+    scroll-padding: var(--cs-pad-y) var(--cs-pad-x);
+  }
+  .cs-modal-body {
+    flex: 0 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .cs-modal-foot {
+    flex: none;
+  }
+  .cs-modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55em;
+  }
+
+  /* Launch button in the desktop quick rail */
+  .cs-launch {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--l8-flare);
+    color: var(--l8-on-flare);
+    cursor: pointer;
+    animation: cs-breathe 2.8s ease-in-out infinite;
+    transition: transform 180ms var(--ease-spring);
+  }
+  .cs-launch:hover {
+    transform: scale(1.08);
+  }
+  .cs-launch:active {
+    transform: scale(0.94);
+  }
+
+  @keyframes cs-enter {
+    from {
+      opacity: 0;
+      scale: 1.04;
+    }
+  }
+  @keyframes cs-leave {
+    to {
+      opacity: 0;
+      scale: 0.97;
+    }
+  }
+  @keyframes cs-fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes cs-view-in {
+    from {
+      opacity: 0;
+      translate: 0 24px;
+    }
+  }
+  @keyframes cs-modal-in {
+    from {
+      opacity: 0;
+      scale: 0.92;
+      translate: 0 12px;
+    }
+  }
+  @keyframes cs-toast-in {
+    from {
+      opacity: 0;
+      translate: 40px 0;
+    }
+  }
+  @keyframes cs-drift {
+    from {
+      transform: scale(1.02) translate3d(-1.2%, 0, 0);
+    }
+    to {
+      transform: scale(1.06) translate3d(1.2%, -0.8%, 0);
+    }
+  }
+  @keyframes cs-breathe {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 color-mix(in srgb, var(--l8-flare-glow) 55%, transparent);
+    }
+    50% {
+      box-shadow: 0 0 0 9px transparent;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cs-backdrop-stage {
+      animation: none;
+    }
+    .cs-backdrop-layer {
+      animation-duration: 200ms;
+    }
+    .cs-launch {
+      animation: none;
+    }
+    .cs-main.has-panel .cs-view {
+      transform: none;
+    }
+  }
+}

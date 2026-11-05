@@ -5,6 +5,7 @@ import { ROUTES } from "@/app/routes";
 import { DsIcon } from "@/components/ds/ds-icon";
 import { GameArt } from "@/components/game/GameArt";
 import { useCloudSummary } from "@/components/shell/use-cloud-summary";
+import { useConsoleMode } from "@/features/console/console-mode-store";
 import { useArtworkLoading } from "@/features/library/artwork-loading-store";
 import { recentlyPlayed } from "@/features/library/filter-games";
 import type { GameProtection } from "@/features/library/game-protection";
@@ -77,9 +78,15 @@ export function QuickRail() {
   return (
     <aside aria-label={t`Quick launch`} className="l8-qrail">
       <div className="l8-qrail-panel">
-        <span aria-hidden="true" className="l8-avatar">
-          L8
-        </span>
+        <button
+          type="button"
+          className="cs-launch"
+          aria-label={t`Console mode`}
+          data-tip={t`Console mode (Ctrl+Shift+Enter)`}
+          onClick={() => useConsoleMode.getState().enter()}
+        >
+          <DsIcon name="gamepad" size={22} />
+        </button>
         <div className="l8-qrail-sep" />
         {quick.length === 0 ? (
           <span

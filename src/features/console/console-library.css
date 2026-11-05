@@ -1,0 +1,184 @@
+/* Console library: filter chips, the facts about the selected game, and the coverflow. */
+@layer components {
+  .cs-library {
+    height: 100%;
+    display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .cs-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6em;
+    padding: 0.6em var(--cs-pad-x) 0.6em;
+    margin: -0.2em calc(var(--cs-pad-x) * -1) -0.2em;
+  }
+  .cs-chip {
+    display: inline-flex;
+    align-items: center;
+    height: 2.5em;
+    padding: 0 1.3em;
+    border: 0;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--l8-bg-200) 78%, transparent);
+    color: var(--l8-ink-muted);
+    font: 600 0.92em/1 var(--l8-font-sans);
+    cursor: pointer;
+    transition:
+      transform 160ms var(--ease-out),
+      background-color 160ms var(--ease-out),
+      box-shadow 160ms var(--ease-out),
+      color 160ms;
+  }
+  .cs-chip.is-on {
+    background: var(--l8-ink);
+    color: var(--l8-bg-000);
+  }
+  .cs-chip.is-letter {
+    background: var(--l8-flare-soft);
+    color: var(--l8-flare-text);
+  }
+  .cs-chip.is-focused {
+    transform: scale(1.06);
+    box-shadow:
+      0 0 0 3px var(--l8-flare),
+      0 0 1.4em color-mix(in srgb, var(--l8-flare) 60%, transparent);
+  }
+
+  /* Facts about the selected game */
+  .cs-info {
+    padding: 1.1em 0 0.6em;
+    max-width: min(46em, 62%);
+  }
+  .cs-title {
+    margin: 0;
+    font: 700 3.5em/1.02 var(--l8-font-sans);
+    letter-spacing: -0.025em;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-shadow: 0 0.06em 0.6em rgba(0, 0, 0, 0.45);
+  }
+  .cs-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4em 1.6em;
+    margin-top: 0.7em;
+    font: 500 1em/1.3 var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .cs-meta-platform {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--l8-ink);
+  }
+  .cs-protection {
+    margin: 0.5em 0 0;
+    font-size: 0.95em;
+    color: var(--l8-ink-muted);
+  }
+  .cs-cta {
+    margin-top: 1em;
+    animation: cs-cta 2.6s ease-in-out infinite;
+  }
+
+  /* Coverflow */
+  .cs-flow {
+    position: relative;
+    min-height: 0;
+    --card-w: clamp(9em, min(17vw, 27vh), 28em);
+    perspective: 1500px;
+    perspective-origin: 50% 40%;
+    overflow: visible;
+  }
+  .cs-card {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--card-w);
+    aspect-ratio: 2 / 3;
+    margin-left: calc(var(--card-w) / -2);
+    margin-top: calc(var(--card-w) * -0.75);
+    padding: 0;
+    border: 0;
+    border-radius: 1.1em;
+    overflow: hidden;
+    background: #000;
+    cursor: pointer;
+    transform: translate3d(calc(var(--x) * var(--card-w)), 0, var(--z)) rotateY(var(--ry)) scale(var(--s));
+    opacity: var(--op);
+    box-shadow: 0 1.2em 2.4em rgba(0, 0, 0, 0.5);
+    transition:
+      transform 440ms var(--ease-spring),
+      opacity 320ms linear,
+      box-shadow 320ms var(--ease-out);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+  .cs-card.is-centre {
+    box-shadow:
+      0 0 0 0.2em var(--l8-flare),
+      0 0 2.6em color-mix(in srgb, var(--l8-flare) 55%, transparent),
+      0 1.8em 3.6em rgba(0, 0, 0, 0.55);
+  }
+  .cs-card .l8-art {
+    transition: filter 320ms var(--ease-out);
+  }
+  .cs-card.is-uninstalled .l8-art {
+    filter: saturate(0.3) brightness(0.85);
+  }
+  .cs-card-dim {
+    position: absolute;
+    inset: 0;
+    background: #000;
+    opacity: var(--dim);
+    transition: opacity 440ms var(--ease-out);
+    pointer-events: none;
+  }
+  .cs-card-platform {
+    position: absolute;
+    left: 0.7em;
+    bottom: 0.7em;
+    display: grid;
+    place-items: center;
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: 999px;
+    background: rgba(30, 13, 16, 0.7);
+    color: var(--l8-on-stage);
+    opacity: 0;
+    transition: opacity 280ms var(--ease-out);
+  }
+  .cs-card.is-centre .cs-card-platform {
+    opacity: 1;
+  }
+
+  .cs-library.is-dimmed .cs-cta {
+    animation: none;
+  }
+
+  @keyframes cs-cta {
+    0%,
+    100% {
+      box-shadow: var(--l8-shadow-glow);
+    }
+    50% {
+      box-shadow:
+        var(--l8-shadow-glow),
+        0 0 0 0.45em color-mix(in srgb, var(--l8-flare) 22%, transparent);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cs-card {
+      transform: translate3d(calc(var(--x) * var(--card-w)), 0, 0) scale(var(--s));
+      transition: opacity 200ms linear;
+    }
+    .cs-cta {
+      animation: none;
+    }
+  }
+}

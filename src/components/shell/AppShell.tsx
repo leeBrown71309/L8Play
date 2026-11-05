@@ -9,6 +9,8 @@ import { Greeting } from "@/components/shell/Greeting";
 import { NavRail } from "@/components/shell/NavRail";
 import { QuickRail } from "@/components/shell/QuickRail";
 import { TopBar } from "@/components/shell/TopBar";
+import { ConsoleHost } from "@/features/console/ConsoleHost";
+import { useConsoleShortcut } from "@/features/console/use-console-shortcut";
 import { useSettings, useUpdateSettings } from "@/features/settings/use-settings";
 import { AddGameDialogs } from "@/features/library/AddGameDialogs";
 import { OnboardingDialog } from "@/features/onboarding/OnboardingDialog";
@@ -26,6 +28,7 @@ export function AppShell() {
   const updateSettings = useUpdateSettings();
   useBackendEvents();
   useAppUpdateWatcher();
+  useConsoleShortcut();
   const { pathname } = useLocation();
   return (
     <div className={cn("l8-window h-full w-full rounded-none", navExpanded && "is-nav-expanded")}>
@@ -43,6 +46,7 @@ export function AppShell() {
       <QuickRail />
       <AddGameDialogs />
       <OnboardingDialog />
+      <ConsoleHost />
       <Toaster />
     </div>
   );

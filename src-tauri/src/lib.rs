@@ -94,6 +94,7 @@ pub fn run() {
             commands::saves::find_saves,
             commands::saves::open_wiki_page,
             commands::artwork::get_artwork_key_status,
+            commands::artwork::get_artwork_pending,
             commands::artwork::save_artwork_key,
             commands::artwork::clear_artwork_key,
             commands::artwork::verify_artwork_key,

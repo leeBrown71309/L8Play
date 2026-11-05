@@ -377,6 +377,7 @@ const handlers: Handlers = {
   }),
   open_wiki_page: () => null,
   get_artwork_key_status: () => artworkKeySaved,
+  get_artwork_pending: () => [],
   save_artwork_key: ({ key }) => {
     if (key.trim().length < 16)
       throw new AppError("validation", "A SteamGridDB API key is 16 to 128 letters and digits");

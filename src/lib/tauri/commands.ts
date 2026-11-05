@@ -73,6 +73,7 @@ export interface CommandMap {
   find_saves: { args: { gameId: number }; result: FindSavesOutcome };
   open_wiki_page: { args: { url: string }; result: null };
   get_artwork_key_status: { args: undefined; result: boolean };
+  get_artwork_pending: { args: undefined; result: number[] };
   save_artwork_key: { args: { key: string }; result: null };
   clear_artwork_key: { args: undefined; result: null };
   verify_artwork_key: { args: undefined; result: null };
@@ -163,6 +164,8 @@ export const findSaves = (gameId: number) => call("find_saves", { gameId });
 export const openWikiPage = (url: string) => call("open_wiki_page", { url });
 
 export const getArtworkKeyStatus = () => call("get_artwork_key_status");
+/** Ids of the games whose automatic artwork lookup is still queued or running. */
+export const getArtworkPending = () => call("get_artwork_pending");
 export const saveArtworkKey = (key: string) => call("save_artwork_key", { key });
 export const clearArtworkKey = () => call("clear_artwork_key");
 export const verifyArtworkKey = () => call("verify_artwork_key");
