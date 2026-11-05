@@ -53,7 +53,7 @@ Prerequisites per phase are marked **Needs**.
 
 ## Launching the app for testing
 
-Start `target\release\l8-play.exe` (or the installed app) **yourself, from Explorer or the Start menu**. Do not rely on an app started from inside another sandboxed program (for example by an assistant running in the Claude desktop app): Windows can redirect such a process's `AppData` writes into that program's private package folder, so it sees a different, separate copy of your database and artwork. Data written that way does not appear when you start the app normally.
+Start `target\release\l8-play.exe` (or the installed app) **yourself, from Explorer or the Start menu**. Do not rely on an app started from inside another sandboxed program (for example a packaged automation tool): Windows can redirect such a process's `AppData` writes into that program's private package folder, so it sees a different, separate copy of your database and artwork. Data written that way does not appear when you start the app normally.
 
 ## Phase 6 — Google Drive (most setup)
 
