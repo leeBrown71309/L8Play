@@ -1,0 +1,285 @@
+/* Game details screens: Overview, Saves and the hero extras. Values come from the design system previews. */
+@layer components {
+  /* ---- Overview */
+  .gd-ov {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 40px;
+    padding: 8px 32px 40px;
+  }
+  .gd-prot {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 28px;
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-200);
+  }
+  .gd-prot > div {
+    padding: 16px 18px;
+  }
+  .gd-prot > div + div {
+    box-shadow: inset 1px 0 0 var(--l8-line);
+  }
+  .gd-prot .v {
+    margin-top: 6px;
+    font: 600 16px/22px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .gd-prot .s {
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font: 500 12.5px/18px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .gd-prot .ok {
+    color: var(--l8-success);
+  }
+  .gd-prot .warn {
+    color: var(--l8-warning);
+  }
+  .gd-dl {
+    margin: 0;
+  }
+  .gd-dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--l8-line);
+    font: 500 13px/18px var(--l8-font-sans);
+  }
+  .gd-dl dt {
+    color: var(--l8-ink-faint);
+  }
+  .gd-dl dd {
+    margin: 0;
+    color: var(--l8-ink);
+    text-align: right;
+    user-select: text;
+  }
+  .gd-path {
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: var(--l8-radius-sm);
+    background: var(--l8-bg-200);
+    font: 500 11.5px/17px var(--l8-font-mono);
+    color: var(--l8-ink-muted);
+    word-break: break-all;
+    user-select: text;
+  }
+  .gd-artstrip {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    grid-template-rows: 38px 38px;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .gd-artstrip > div {
+    border-radius: var(--l8-radius-xs);
+    overflow: hidden;
+    background: var(--l8-bg-300);
+  }
+  .gd-artstrip .cv {
+    grid-row: 1 / 3;
+  }
+  .gd-artstrip .lg {
+    background: #08090c;
+    padding: 4px 10px;
+  }
+  .gd-side h2 {
+    margin: 28px 0 8px;
+    font: 700 11px/16px var(--l8-font-sans);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--l8-ink-faint);
+  }
+  .gd-side h2:first-child {
+    margin-top: 0;
+  }
+  .gd-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    align-items: center;
+  }
+
+  /* ---- Saves */
+  .gd-sv {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 336px;
+    gap: 36px;
+    padding: 6px 32px 40px;
+  }
+  .gd-tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .gd-tools .push {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+  }
+  .gd-sidecol {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .gd-card {
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-200);
+    padding: 16px;
+  }
+  .gd-card h3 {
+    margin: 0 0 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 20px;
+    font: 700 11px/16px var(--l8-font-sans);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--l8-ink-faint);
+  }
+  .gd-cur {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .gd-cur .ic {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--l8-radius-sm);
+    background: var(--l8-local-soft);
+    color: var(--l8-local);
+    flex: none;
+  }
+  .gd-cur b {
+    display: block;
+    font: 600 14px/20px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .gd-cur span {
+    font: 500 12px/16px var(--l8-font-mono);
+    color: var(--l8-ink-faint);
+  }
+  .gd-ok {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 8px 10px;
+    border-radius: var(--l8-radius-sm);
+    background: var(--l8-success-soft);
+    color: var(--l8-success);
+    font: 600 12.5px/18px var(--l8-font-sans);
+  }
+  .gd-ok.is-warn {
+    background: var(--l8-warning-soft);
+    color: var(--l8-warning);
+  }
+  .gd-loc {
+    padding: 10px 0;
+    border-top: 1px solid var(--l8-line);
+  }
+  .gd-loc:first-of-type {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .gd-loc-h {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font: 600 13px/18px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .gd-loc-p {
+    margin-top: 4px;
+    font: 500 11px/16px var(--l8-font-mono);
+    color: var(--l8-ink-muted);
+    word-break: break-all;
+    user-select: text;
+  }
+  .gd-loc-p.is-missing {
+    color: var(--l8-ink-faint);
+    text-decoration: line-through;
+  }
+  .gd-loc-n {
+    margin-top: 4px;
+    font: 400 12px/17px var(--l8-font-sans);
+    color: var(--l8-ink-faint);
+  }
+  .gd-cl {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font: 500 13px/18px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .gd-cl b {
+    color: var(--l8-ink);
+    font-weight: 600;
+  }
+  .gd-acts {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  /* ---- Hero extras: the game icon beside the logo */
+  .gd-hero-idrow {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+  }
+  .gd-hero-icon {
+    flex: none;
+    width: 88px;
+    height: 88px;
+    border-radius: var(--l8-radius-md);
+    overflow: hidden;
+    box-shadow:
+      var(--l8-shadow-3),
+      0 0 0 2px rgba(255, 244, 241, 0.25);
+  }
+  .gd-hero-logo {
+    display: block;
+    object-fit: contain;
+    object-position: left bottom;
+    filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.55));
+  }
+  .gd-hero-playing {
+    padding-left: 24px;
+  }
+  .gd-hero-playing i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--l8-on-flare);
+    animation: l8-pulse-dot 1.2s ease-in-out infinite;
+  }
+  @keyframes l8-pulse-dot {
+    50% {
+      opacity: 0.35;
+    }
+  }
+
+  /* ---- Properties */
+  .gd-props {
+    max-width: 640px;
+    padding: 8px 32px 40px;
+  }
+  .gd-props form {
+    display: grid;
+    gap: 16px;
+    margin-top: 16px;
+  }
+}

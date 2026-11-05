@@ -1,0 +1,10 @@
+{
+  "Connect Google Drive to also keep snapshots there, or only there.": "Connectez Google Drive pour y garder aussi vos snapshots, ou uniquement là.",
+  "Frees this PC once the upload is confirmed.": "Libère ce PC dès que l’envoi est confirmé.",
+  "In Google Drive only": "Dans Google Drive uniquement",
+  "On this PC only": "Sur ce PC uniquement",
+  "Recommended": "Recommandé",
+  "Retention keeps the last {0} automatic snapshots per game. Pinned ones are always kept.": "La rétention garde les {0} derniers snapshots automatiques par jeu. Les snapshots épinglés sont toujours conservés.",
+  "on this PC only": "sur ce PC uniquement",
+  "queued for Google Drive only": "en attente d’envoi vers Google Drive uniquement"
+}

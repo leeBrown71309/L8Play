@@ -1,0 +1,174 @@
+/* Settings layout, ported from the design system's ScreenSettings preview. */
+@layer components {
+  .st {
+    display: grid;
+    grid-template-columns: 236px minmax(0, 1fr);
+    gap: 24px;
+  }
+  .st-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+    border-radius: var(--l8-radius-lg);
+    background: var(--l8-bg-200);
+    align-self: start;
+  }
+  .st-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 44px;
+    padding: 0 12px 0 6px;
+    border: 0;
+    border-radius: var(--l8-radius-pill);
+    background: transparent;
+    font: 500 14px/1 var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+    text-align: left;
+    cursor: pointer;
+  }
+  .st-item .ic {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--l8-bg-300);
+  }
+  .st-item:hover {
+    background: var(--l8-bg-300);
+    color: var(--l8-ink);
+  }
+  .st-item.on {
+    background: var(--l8-flare);
+    color: var(--l8-on-flare);
+    font-weight: 600;
+  }
+  .st-item.on .ic {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .st-body {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 760px;
+    min-width: 0;
+  }
+  .st-grp h2 {
+    margin: 0 0 10px;
+    font: 600 16px/22px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .st-grp > * + * {
+    margin-top: 8px;
+  }
+  .st-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 18px;
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-200);
+  }
+  .st-row .t {
+    font: 600 14px/20px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .st-row .d {
+    font: 400 13px/18px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+    overflow-wrap: anywhere;
+  }
+  .st-row .grow {
+    min-width: 0;
+  }
+  .st-row .controls {
+    display: flex;
+    gap: 6px;
+    flex: none;
+    align-items: center;
+  }
+  .st-lock {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font: 600 12px/1 var(--l8-font-sans);
+    color: var(--l8-ink-faint);
+    white-space: nowrap;
+  }
+  .st-path {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .st-path .l8-field {
+    flex: 1;
+  }
+  .st-card {
+    padding: 16px 18px;
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-200);
+  }
+  .st-card .head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    font: 600 14px/20px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .st-card p {
+    margin: 0 0 12px;
+    font: 400 13px/19px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .st-card ol {
+    margin: 0;
+    padding-left: 20px;
+    font: 400 13px/21px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .st-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .st-card .keyrow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .st-card .keyrow .l8-field {
+    flex: 1;
+    min-width: 260px;
+  }
+  .st-about dl {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 24px;
+    font: 500 13px/18px var(--l8-font-sans);
+  }
+  .st-about dt {
+    color: var(--l8-ink-faint);
+  }
+  .st-about dd {
+    margin: 0;
+    color: var(--l8-ink);
+    font: 500 12px/18px var(--l8-font-mono);
+    overflow-wrap: anywhere;
+    user-select: text;
+  }
+  .st-about .small {
+    margin: 14px 0 0;
+    font: 400 12px/18px var(--l8-font-sans);
+    color: var(--l8-ink-faint);
+  }
+}
+
+.st-note {
+  color: var(--l8-warning);
+}

@@ -1,0 +1,208 @@
+/* Cloud Storage layout, ported from the design system's ScreenCloud preview. */
+@layer components {
+  .cloud-cols {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 20px;
+  }
+  .cloud-single {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 860px;
+  }
+  .cloud-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+  .cloud-banners {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .cloud-acct {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border-radius: var(--l8-radius-lg);
+    background: linear-gradient(110deg, #2b3c5c 0%, var(--l8-bg-200) 70%);
+    overflow: hidden;
+  }
+  .cloud-acct.is-idle {
+    background: var(--l8-bg-200);
+  }
+  .cloud-acct .av {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--l8-cloud);
+    color: #10233a;
+    flex: none;
+  }
+  .cloud-acct.is-idle .av {
+    background: var(--l8-bg-300);
+    color: var(--l8-ink-muted);
+  }
+  .cloud-acct .who {
+    min-width: 0;
+  }
+  .cloud-acct b {
+    display: block;
+    font: 600 17px/22px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .cloud-acct .sub {
+    font: 400 13px/18px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+    overflow-wrap: anywhere;
+  }
+  .cloud-acct .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .cloud-acct .push {
+    margin-left: auto;
+    display: flex;
+    gap: 8px;
+    flex: none;
+  }
+  .cloud-note {
+    margin: 0;
+    padding: 14px 16px;
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-200);
+    font: 400 13px/19px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .cloud-note p {
+    margin: 0;
+  }
+  .cloud-note p + p {
+    margin-top: 6px;
+    color: var(--l8-ink-faint);
+  }
+  .cloud-card {
+    padding: 4px 6px;
+    border-radius: var(--l8-radius-lg);
+    background: var(--l8-bg-200);
+  }
+  .cloud-xfers {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cloud-store {
+    padding: 20px 22px;
+    border-radius: var(--l8-radius-lg);
+    background: var(--l8-bg-200);
+  }
+  .cloud-store .big {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 6px 0 14px;
+  }
+  .cloud-store .big b {
+    font: 600 30px/34px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .cloud-store .big span {
+    font: 400 14px/20px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .cloud-browser {
+    border-radius: var(--l8-radius-lg);
+    background: var(--l8-bg-200);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .cloud-folder {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: var(--l8-radius-sm);
+  }
+  .cloud-folder:hover,
+  .cloud-folder.on {
+    background: var(--l8-bg-300);
+  }
+  .cloud-folder .ic {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex: none;
+  }
+  .cloud-folder .t {
+    flex: 1;
+    min-width: 0;
+    font: 600 13.5px/18px var(--l8-font-sans);
+    color: var(--l8-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cloud-folder .t span {
+    display: block;
+    font: 400 12px/16px var(--l8-font-sans);
+    color: var(--l8-ink-faint);
+  }
+  .cloud-folder .s {
+    font: 500 11.5px/16px var(--l8-font-mono);
+    color: var(--l8-ink-faint);
+  }
+  .cloud-empty {
+    margin: 0;
+    padding: 8px;
+    font: 400 13px/19px var(--l8-font-sans);
+    color: var(--l8-ink-faint);
+  }
+  .cloud-advanced {
+    margin-top: 20px;
+    max-width: 860px;
+    padding: 18px 22px;
+    border-radius: var(--l8-radius-lg);
+    background: var(--l8-bg-200);
+  }
+  .cloud-advanced summary {
+    cursor: pointer;
+    list-style: none;
+    font: 600 14px/20px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .cloud-advanced summary::-webkit-details-marker {
+    display: none;
+  }
+  .cloud-advanced[open] summary {
+    color: var(--l8-ink);
+  }
+  .cloud-advanced .body {
+    display: grid;
+    gap: 14px;
+    max-width: 560px;
+    margin-top: 12px;
+  }
+  .cloud-advanced .help {
+    margin: 0;
+    max-width: 640px;
+    font: 400 13px/19px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .cloud-advanced .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}

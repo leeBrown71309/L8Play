@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="L8Play"><defs>
+  <linearGradient id="tile" x1="0.15" y1="0" x2="0.85" y2="1">
+    <stop offset="0" stop-color="#f0695c"/><stop offset="0.55" stop-color="#cf4239"/><stop offset="1" stop-color="#a02d26"/>
+  </linearGradient>
+  <radialGradient id="glow" cx="0.28" cy="0.18" r="0.8">
+    <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+  </radialGradient>
+</defs><rect width="512" height="512" rx="116" fill="url(#tile)"/><rect width="512" height="512" rx="116" fill="url(#glow)"/>
+  <path d="M256 78 400 128v136c0 82-64 140-144 172C176 404 112 346 112 264V128z" fill="#fff"/>
+  <path d="M222 188v136l118-68z" fill="#cf4239" stroke="#cf4239" stroke-width="22" stroke-linejoin="round"/></svg>

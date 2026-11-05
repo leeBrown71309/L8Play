@@ -1,0 +1,3173 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-11-04 16:29+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: en\n"
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:51
+msgid "“{name}” is back in place. Your previous save was already in a snapshot."
+msgstr "“{name}” is back in place. Your previous save was already in a snapshot."
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:50
+msgid "“{name}” is back in place. Your previous save was kept as a safety copy."
+msgstr "“{name}” is back in place. Your previous save was kept as a safety copy."
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:56
+msgid "“{name}” was removed from Google Drive."
+msgstr "“{name}” was removed from Google Drive."
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:54
+msgid "“{name}” was removed from this PC and from Google Drive."
+msgstr "“{name}” was removed from this PC and from Google Drive."
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:57
+msgid "“{name}” was removed from this PC."
+msgstr "“{name}” was removed from this PC."
+
+#. placeholder {0}: game.title
+#: src/components/shell/QuickRail.tsx:101
+msgid "{0} — running"
+msgstr "{0} — running"
+
+#. placeholder {0}: game.title
+#. placeholder {1}: formatBytes(result.snapshot.totalBytes, i18n.locale)
+#: src/features/saves/CreateSnapshotDialog.tsx:95
+msgid "{0} · “{trimmed}” · {1} · {where}"
+msgstr "{0} · “{trimmed}” · {1} · {where}"
+
+#. placeholder {0}: item.snapshotName ?? ""
+#. placeholder {1}: formatBytes(item.bytesDone, i18n.locale)
+#. placeholder {2}: formatBytes(item.bytesTotal, i18n.locale)
+#: src/features/dashboard/dashboard-sections.tsx:35
+msgid "{0} · {1} of {2}"
+msgstr "{0} · {1} of {2}"
+
+#. placeholder {0}: account.email
+#. placeholder {1}: formatDay(account.connectedAt, i18n.locale)
+#: src/features/cloud/CloudPage.tsx:97
+msgid "{0} · connected since {1}"
+msgstr "{0} · connected since {1}"
+
+#. placeholder {0}: name.length
+#: src/features/saves/CreateSnapshotDialog.tsx:182
+msgid "{0} / {MAX_NAME}"
+msgstr "{0} / {MAX_NAME}"
+
+#. placeholder {0}: report.fetched
+#. placeholder {1}: report.notFound
+#. placeholder {2}: report.failed
+#: src/features/settings/ArtworkSection.tsx:130
+msgid "{0} added · {1} not found · {2} failed"
+msgstr "{0} added · {1} not found · {2} failed"
+
+#. placeholder {0}: game.title
+#: src/features/library/use-library-flows.ts:83
+msgid "{0} added to your library"
+msgstr "{0} added to your library"
+
+#. placeholder {0}: result.skipped
+#. placeholder {1}: result.failed
+#: src/features/library/AddGameDialogs.tsx:116
+msgid "{0} already in your library · {1} could not be added"
+msgstr "{0} already in your library · {1} could not be added"
+
+#. placeholder {0}: data.openConflicts
+#: src/features/cloud/CloudPage.tsx:110
+msgid "{0} conflicts"
+msgstr "{0} conflicts"
+
+#. placeholder {0}: game.title
+#: src/features/library/use-game-actions.ts:38
+msgid "{0} could not be started"
+msgstr "{0} could not be started"
+
+#. placeholder {0}: data.failed
+#: src/features/cloud/CloudPage.tsx:107
+msgid "{0} failed"
+msgstr "{0} failed"
+
+#. placeholder {0}: side.totalFiles
+#: src/features/cloud/ConflictDialog.tsx:41
+msgid "{0} files"
+msgstr "{0} files"
+
+#. placeholder {0}: result.added.length
+#: src/features/library/AddGameDialogs.tsx:113
+msgid "{0} games added"
+msgstr "{0} games added"
+
+#. placeholder {0}: library.length
+#: src/features/onboarding/OnboardingDialog.tsx:143
+msgid "{0} games in your library"
+msgstr "{0} games in your library"
+
+#. placeholder {0}: report.alreadyAdded
+#: src/features/library/AddGameDialogs.tsx:188
+msgid "{0} games were hidden because they are already in your library."
+msgstr "{0} games were hidden because they are already in your library."
+
+#. placeholder {0}: conflict.gameTitle
+#: src/features/cloud/CloudPage.tsx:200
+msgid "{0} has two different saves."
+msgstr "{0} has two different saves."
+
+#. placeholder {0}: data.running
+#: src/features/cloud/CloudPage.tsx:105
+msgid "{0} in progress"
+msgstr "{0} in progress"
+
+#. placeholder {0}: game.title
+#: src/features/saves/SaveLocationsCard.tsx:45
+msgid "{0} is not in the save database"
+msgstr "{0} is not in the save database"
+
+#. placeholder {0}: snapshot.gameTitle
+#: src/features/saves/RestoreSnapshotDialog.tsx:150
+msgid "{0} is not running"
+msgstr "{0} is not running"
+
+#. placeholder {0}: formatBytes(operation.bytesDone, i18n.locale)
+#. placeholder {1}: formatBytes(operation.bytesTotal, i18n.locale)
+#: src/features/cloud/TransferList.tsx:35
+msgid "{0} of {1}"
+msgstr "{0} of {1}"
+
+#. placeholder {0}: formatBytes(used, locale)
+#. placeholder {1}: formatBytes(limit, locale)
+#: src/features/cloud/StoragePanels.tsx:71
+msgid "{0} of {1} used"
+msgstr "{0} of {1} used"
+
+#. placeholder {0}: copies.onPc
+#. placeholder {1}: copies.inDrive
+#: src/features/game-details/GameOverview.tsx:97
+msgid "{0} on PC · {1} in Drive"
+msgstr "{0} on PC · {1} in Drive"
+
+#. placeholder {0}: formatPlaytime(game.playtimeSeconds)
+#. placeholder {0}: formatPlaytime(snapshot.playtimeSeconds)
+#: src/features/game-details/GameHero.tsx:104
+#: src/features/saves/RestoreSnapshotDialog.tsx:120
+#: src/features/saves/SnapshotTimeline.tsx:197
+msgid "{0} played"
+msgstr "{0} played"
+
+#. placeholder {0}: formatPlaytime(snapshot.playtimeSeconds)
+#: src/features/saves/RestoreSnapshotDialog.tsx:97
+msgid "{0} played · "
+msgstr "{0} played · "
+
+#. placeholder {0}: formatPlaytime(game.playtimeSeconds)
+#: src/features/dashboard/HeroCard.tsx:113
+msgid "{0} played so far."
+msgstr "{0} played so far."
+
+#. placeholder {0}: copies.total
+#. placeholder {0}: folder.snapshots
+#. placeholder {0}: group.items.length
+#: src/features/cloud/StoragePanels.tsx:112
+#: src/features/game-details/GameOverview.tsx:96
+#: src/features/saves/SnapshotTimeline.tsx:274
+msgid "{0} snapshots"
+msgstr "{0} snapshots"
+
+#. placeholder {0}: protection.snapshotCount
+#: src/features/dashboard/HeroCard.tsx:67
+msgid "{0} snapshots · protected"
+msgstr "{0} snapshots · protected"
+
+#. placeholder {0}: report.uploaded
+#. placeholder {1}: report.imported
+#. placeholder {2}: report.failed
+#: src/features/cloud/CloudPage.tsx:164
+msgid "{0} uploaded · {1} found in Drive · {2} failed"
+msgstr "{0} uploaded · {1} found in Drive · {2} failed"
+
+#. placeholder {0}: formatBytes(used, locale)
+#: src/features/cloud/StoragePanels.tsx:72
+msgid "{0} used"
+msgstr "{0} used"
+
+#. placeholder {0}: formatBytes(usedBytes, i18n.locale)
+#: src/features/settings/BackupSection.tsx:114
+msgid "{0} used · existing snapshots stay where they are"
+msgstr "{0} used · existing snapshots stay where they are"
+
+#. placeholder {0}: data.queued
+#: src/features/cloud/CloudPage.tsx:106
+msgid "{0} waiting"
+msgstr "{0} waiting"
+
+#: src/features/library/use-library-flows.ts:30
+msgid "{added} new, {uninstalled} no longer installed — {total} games in total."
+msgstr "{added} new, {uninstalled} no longer installed — {total} games in total."
+
+#: src/features/onboarding/OnboardingParts.tsx:98
+msgid "{count} games"
+msgstr "{count} games"
+
+#: src/features/saves/SaveLocationsCard.tsx:39
+msgid "{count} save locations found"
+msgstr "{count} save locations found"
+
+#: src/features/saves/snapshot-labels.ts:53
+msgid "{files} files · {size}"
+msgstr "{files} files · {size}"
+
+#: src/features/dashboard/dashboard-sections.tsx:130
+msgid "{protectedGames} of {totalGames} games"
+msgstr "{protectedGames} of {totalGames} games"
+
+#: src/features/onboarding/OnboardingDialog.tsx:242
+msgid "{saveFolders} save folders found."
+msgstr "{saveFolders} save folders found."
+
+#: src/features/onboarding/OnboardingDialog.tsx:144
+msgid "{saveFolders} save folders protected"
+msgstr "{saveFolders} save folders protected"
+
+#: src/features/onboarding/OnboardingParts.tsx:106
+msgid "{standalone} games"
+msgstr "{standalone} games"
+
+#. placeholder {0}: formatPlaytime(event.durationSeconds)
+#: src/app/use-backend-events.ts:74
+msgid "{title} · {0} played"
+msgstr "{title} · {0} played"
+
+#: src/app/use-backend-events.ts:61
+msgid "{title}: check the log file for details."
+msgstr "{title}: check the log file for details."
+
+#: src/app/use-backend-events.ts:55
+msgid "{title}: the save files were still in use. Create a snapshot from the game page."
+msgstr "{title}: the save files were still in use. Create a snapshot from the game page."
+
+#. placeholder {0}: copies.inDrive
+#. placeholder {1}: copies.total
+#: src/features/saves/GameSavesPanel.tsx:177
+msgid "<0>{0} of {1}</0> snapshots uploaded"
+msgstr "<0>{0} of {1}</0> snapshots uploaded"
+
+#: src/features/cloud/CloudPage.tsx:110
+msgid "1 conflict"
+msgstr "1 conflict"
+
+#: src/features/cloud/ConflictDialog.tsx:41
+msgid "1 file"
+msgstr "1 file"
+
+#: src/features/saves/snapshot-labels.ts:53
+msgid "1 file · {size}"
+msgstr "1 file · {size}"
+
+#: src/features/onboarding/OnboardingParts.tsx:98
+#: src/features/onboarding/OnboardingParts.tsx:106
+msgid "1 game"
+msgstr "1 game"
+
+#: src/features/library/AddGameDialogs.tsx:113
+msgid "1 game added"
+msgstr "1 game added"
+
+#: src/features/onboarding/OnboardingDialog.tsx:143
+msgid "1 game in your library"
+msgstr "1 game in your library"
+
+#: src/features/library/AddGameDialogs.tsx:187
+msgid "1 game was hidden because it is already in your library."
+msgstr "1 game was hidden because it is already in your library."
+
+#: src/features/onboarding/OnboardingDialog.tsx:144
+msgid "1 save folder protected"
+msgstr "1 save folder protected"
+
+#: src/features/saves/SaveLocationsCard.tsx:39
+msgid "1 save location found"
+msgstr "1 save location found"
+
+#: src/features/cloud/StoragePanels.tsx:112
+#: src/features/game-details/GameOverview.tsx:96
+#: src/features/saves/SnapshotTimeline.tsx:274
+msgid "1 snapshot"
+msgstr "1 snapshot"
+
+#: src/features/dashboard/HeroCard.tsx:66
+msgid "1 snapshot · protected"
+msgstr "1 snapshot · protected"
+
+#: src/features/onboarding/OnboardingDialog.tsx:274
+msgid "15 GB free with any Google account"
+msgstr "15 GB free with any Google account"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:118
+msgid "A full copy of your current save, kept until you delete it or retention removes it."
+msgstr "A full copy of your current save, kept until you delete it or retention removes it."
+
+#: src/app/use-backend-events.ts:38
+msgid "A game was played on two devices. Open Cloud Storage to choose which save to keep."
+msgstr "A game was played on two devices. Open Cloud Storage to choose which save to keep."
+
+#: src/features/settings/SteamKeyBlock.tsx:71
+msgid "A key is needed"
+msgstr "A key is needed"
+
+#: src/features/settings/SteamKeyBlock.tsx:38
+msgid "A key is saved."
+msgstr "A key is saved."
+
+#: src/features/saves/GameSavesPanel.tsx:118
+msgid "A snapshot is taken automatically each time you stop playing. You can also create one now."
+msgstr "A snapshot is taken automatically each time you stop playing. You can also create one now."
+
+#: src/features/settings/SettingsPage.tsx:261
+msgid "About"
+msgstr "About"
+
+#: src/features/saves/SaveLocationsCard.tsx:83
+msgid "Add"
+msgstr "Add"
+
+#. placeholder {0}: chosen.length
+#: src/features/library/AddGameDialogs.tsx:152
+msgid "Add {0} games"
+msgstr "Add {0} games"
+
+#. placeholder {0}: game.title
+#: src/components/game/GameCard.tsx:58
+msgid "Add {0} to favourites"
+msgstr "Add {0} to favourites"
+
+#: src/features/library/AddGameDialogs.tsx:152
+msgid "Add 1 game"
+msgstr "Add 1 game"
+
+#: src/components/shell/NavRail.tsx:60
+#: src/features/library/AddGameDialogs.tsx:223
+#: src/features/onboarding/OnboardingDialog.tsx:230
+#: src/features/settings/SettingsPage.tsx:156
+msgid "Add a game"
+msgstr "Add a game"
+
+#: src/features/game-details/GameOverview.tsx:149
+msgid "Add a save folder"
+msgstr "Add a save folder"
+
+#: src/features/settings/SettingsPage.tsx:153
+msgid "Add a whole folder of games, or any game by choosing its .exe file."
+msgstr "Add a whole folder of games, or any game by choosing its .exe file."
+
+#: src/features/dashboard/DashboardPage.tsx:60
+#: src/features/library/LibraryPage.tsx:61
+#: src/features/library/LibraryPage.tsx:121
+msgid "Add game"
+msgstr "Add game"
+
+#: src/features/saves/SaveLocationsCard.tsx:46
+msgid "Add its save folder yourself to protect it."
+msgstr "Add its save folder yourself to protect it."
+
+#: src/features/game-details/GameHero.tsx:145
+msgid "Add to favourites"
+msgstr "Add to favourites"
+
+#: src/features/game-details/PropertiesPanel.tsx:41
+msgid "Added"
+msgstr "Added"
+
+#: src/features/onboarding/OnboardingParts.tsx:105
+msgid "Added by hand"
+msgstr "Added by hand"
+
+#: src/features/game-details/GameOverview.tsx:140
+#: src/features/saves/SaveLocationsCard.tsx:103
+msgid "Added by you"
+msgstr "Added by you"
+
+#: src/features/library/use-library-flows.ts:64
+msgid "Adding games needs the desktop app"
+msgstr "Adding games needs the desktop app"
+
+#: src/features/cloud/AdvancedClient.tsx:45
+msgid "Advanced: use my own Google project"
+msgstr "Advanced: use my own Google project"
+
+#: src/features/library/LibraryToolbar.tsx:45
+#: src/features/save-manager/SaveManagerPage.tsx:131
+#: src/features/saves/GameSavesPanel.tsx:81
+msgid "All"
+msgstr "All"
+
+#: src/features/library/LibraryToolbar.tsx:54
+#: src/features/save-manager/SaveManagerPage.tsx:83
+msgid "All games"
+msgstr "All games"
+
+#: src/components/shell/use-cloud-summary.ts:76
+msgid "All saves in sync"
+msgstr "All saves in sync"
+
+#: src/features/onboarding/OnboardingDialog.tsx:131
+msgid "All set"
+msgstr "All set"
+
+#: src/features/artwork/ArtworkDialog.tsx:229
+msgid "All styles"
+msgstr "All styles"
+
+#: src/features/save-manager/SaveManagerPage.tsx:154
+msgid "All time"
+msgstr "All time"
+
+#: src/features/saves/SnapshotTimeline.tsx:126
+msgid "Allow automatic deletion"
+msgstr "Allow automatic deletion"
+
+#: src/features/settings/BackupSection.tsx:100
+msgid "Always kept"
+msgstr "Always kept"
+
+#: src/features/settings/BackupSection.tsx:68
+#: src/features/settings/BackupSection.tsx:128
+msgid "Always on"
+msgstr "Always on"
+
+#: src/features/save-manager/SaveManagerPage.tsx:142
+msgid "Anywhere"
+msgstr "Anywhere"
+
+#: src/features/settings/ArtworkSection.tsx:73
+msgid "API key removed"
+msgstr "API key removed"
+
+#: src/features/settings/ArtworkSection.tsx:36
+msgid "API key saved"
+msgstr "API key saved"
+
+#: src/features/settings/SettingsPage.tsx:260
+msgid "Appearance"
+msgstr "Appearance"
+
+#: src/features/settings/SettingsPage.tsx:228
+msgid "Application details could not be read."
+msgstr "Application details could not be read."
+
+#: src/features/game-details/GameDetailsPage.tsx:77
+#: src/features/game-details/GameOverview.tsx:152
+#: src/features/settings/SettingsPage.tsx:256
+msgid "Artwork"
+msgstr "Artwork"
+
+#. placeholder {0}: game.title
+#: src/features/artwork/ArtworkDialog.tsx:155
+msgid "Artwork — {0}"
+msgstr "Artwork — {0}"
+
+#: src/features/settings/ArtworkSection.tsx:129
+msgid "Artwork found"
+msgstr "Artwork found"
+
+#: src/features/onboarding/OnboardingParts.tsx:61
+msgid "artwork sets"
+msgstr "artwork sets"
+
+#: src/features/artwork/ArtworkDialog.tsx:92
+#: src/features/artwork/ArtworkDialog.tsx:124
+msgid "Artwork updated"
+msgstr "Artwork updated"
+
+#: src/components/shell/QuickRail.tsx:74
+msgid "Attention"
+msgstr "Attention"
+
+#: src/components/ds/status-badge.tsx:63
+#: src/features/saves/GameSavesPanel.tsx:87
+#: src/features/saves/snapshot-labels.ts:13
+#: src/features/saves/snapshot-labels.ts:14
+msgid "Auto"
+msgstr "Auto"
+
+#: src/features/onboarding/OnboardingDialog.tsx:145
+msgid "Auto snapshots when a game closes"
+msgstr "Auto snapshots when a game closes"
+
+#: src/features/save-manager/SaveManagerPage.tsx:133
+msgid "Automatic"
+msgstr "Automatic"
+
+#: src/features/cloud/TransferList.tsx:81
+msgid "Automatic snapshot"
+msgstr "Automatic snapshot"
+
+#: src/app/use-backend-events.ts:60
+msgid "Automatic snapshot failed"
+msgstr "Automatic snapshot failed"
+
+#: src/app/use-backend-events.ts:54
+msgid "Automatic snapshot skipped"
+msgstr "Automatic snapshot skipped"
+
+#: src/features/settings/BackupSection.tsx:52
+msgid "Automatic snapshots"
+msgstr "Automatic snapshots"
+
+#: src/features/settings/SettingsPage.tsx:174
+msgid "Available"
+msgstr "Available"
+
+#: src/features/onboarding/OnboardingDialog.tsx:294
+msgid "Back"
+msgstr "Back"
+
+#: src/features/artwork/ArtworkDialog.tsx:136
+msgid "Back to automatic artwork"
+msgstr "Back to automatic artwork"
+
+#: src/features/game-details/GameDetailsPage.tsx:49
+msgid "Back to My Games"
+msgstr "Back to My Games"
+
+#: src/features/cloud/AdvancedClient.tsx:94
+msgid "Back to the default Google client"
+msgstr "Back to the default Google client"
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:85
+msgid "Back up current save & restore"
+msgstr "Back up current save & restore"
+
+#: src/features/onboarding/OnboardingDialog.tsx:251
+msgid "Back up when a game closes"
+msgstr "Back up when a game closes"
+
+#: src/features/dashboard/dashboard-sections.tsx:70
+msgid "Backing up now"
+msgstr "Backing up now"
+
+#: src/features/settings/SettingsPage.tsx:258
+msgid "Backup"
+msgstr "Backup"
+
+#: src/features/settings/BackupSection.tsx:66
+msgid "Before every restore"
+msgstr "Before every restore"
+
+#: src/features/saves/snapshot-labels.ts:26
+msgid "Before launch"
+msgstr "Before launch"
+
+#: src/features/settings/BackupSection.tsx:60
+msgid "Before launching a game"
+msgstr "Before launching a game"
+
+#: src/features/cloud/CloudPage.tsx:275
+#: src/features/library/AddGameDialogs.tsx:136
+#: src/features/library/AddGameDialogs.tsx:227
+#: src/features/saves/CreateSnapshotDialog.tsx:122
+#: src/features/saves/DeleteSnapshotDialog.tsx:83
+#: src/features/saves/RestoreSnapshotDialog.tsx:69
+msgid "cancel"
+msgstr "cancel"
+
+#: src/features/dashboard/dashboard-sections.tsx:93
+#: src/features/library/AddGameDialogs.tsx:142
+#: src/features/library/AddGameDialogs.tsx:232
+#: src/features/saves/CreateSnapshotDialog.tsx:128
+#: src/features/saves/RestoreSnapshotDialog.tsx:75
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/features/artwork/ArtworkDialog.tsx:276
+msgid "Candidates"
+msgstr "Candidates"
+
+#: src/features/game-details/GameOverview.tsx:149
+msgid "Change"
+msgstr "Change"
+
+#: src/features/game-details/GameOverview.tsx:166
+msgid "Change artwork"
+msgstr "Change artwork"
+
+#: src/features/settings/BackupSection.tsx:122
+msgid "Change…"
+msgstr "Change…"
+
+#. placeholder {0}: formatRelative(candidate.newestModifiedAt, i18n.locale)
+#: src/features/saves/FindSavesDialog.tsx:113
+msgid "changed {0}"
+msgstr "changed {0}"
+
+#: src/features/game-details/GameOverview.tsx:52
+msgid "Changed since the last snapshot"
+msgstr "Changed since the last snapshot"
+
+#: src/features/saves/GameSavesPanel.tsx:73
+msgid "Changed since the latest snapshot"
+msgstr "Changed since the latest snapshot"
+
+#: src/features/saves/SnapshotTimeline.tsx:130
+msgid "Check integrity"
+msgstr "Check integrity"
+
+#: src/features/library/use-library-flows.ts:42
+#: src/features/onboarding/OnboardingDialog.tsx:65
+msgid "Check the log file for details, then try again."
+msgstr "Check the log file for details, then try again."
+
+#: src/features/library/AddGameDialogs.tsx:122
+msgid "Check the log file for details."
+msgstr "Check the log file for details."
+
+#: src/features/settings/BackupSection.tsx:127
+msgid "Checks a SHA-256 hash after writing, so a damaged copy is caught immediately."
+msgstr "Checks a SHA-256 hash after writing, so a damaged copy is caught immediately."
+
+#: src/features/settings/BackupSection.tsx:45
+msgid "Choose a folder on a local drive."
+msgstr "Choose a folder on a local drive."
+
+#: src/features/artwork/ArtworkDialog.tsx:112
+msgid "Choose an image"
+msgstr "Choose an image"
+
+#: src/features/library/AddGameDialogs.tsx:250
+msgid "Choose one program"
+msgstr "Choose one program"
+
+#: src/features/library/AddGameDialogs.tsx:207
+msgid "Choose the folder that contains your games"
+msgstr "Choose the folder that contains your games"
+
+#. placeholder {0}: game.title
+#: src/features/saves/SaveLocationsCard.tsx:54
+msgid "Choose the folder where {0} keeps its saves"
+msgstr "Choose the folder where {0} keeps its saves"
+
+#: src/features/library/use-library-flows.ts:72
+msgid "Choose the game's executable"
+msgstr "Choose the game's executable"
+
+#: src/features/settings/BackupSection.tsx:35
+msgid "Choose where snapshots are stored"
+msgstr "Choose where snapshots are stored"
+
+#: src/features/saves/use-folder-picker.ts:16
+msgid "Choosing a folder needs the desktop app"
+msgstr "Choosing a folder needs the desktop app"
+
+#: src/features/artwork/ArtworkDialog.tsx:104
+msgid "Choosing an image needs the desktop app"
+msgstr "Choosing an image needs the desktop app"
+
+#: src/features/library/LibraryPage.tsx:144
+msgid "Clear filters"
+msgstr "Clear filters"
+
+#: src/features/cloud/AdvancedClient.tsx:73
+msgid "Client id (….apps.googleusercontent.com)"
+msgstr "Client id (….apps.googleusercontent.com)"
+
+#: src/features/cloud/AdvancedClient.tsx:82
+msgid "Client secret"
+msgstr "Client secret"
+
+#: src/features/saves/FindSavesDialog.tsx:68
+msgid "close"
+msgstr "close"
+
+#: src/components/shell/CaptionBar.tsx:56
+#: src/components/shell/CaptionBar.tsx:57
+#: src/components/ui/dialog.tsx:64
+msgid "Close"
+msgstr "Close"
+
+#: src/components/ui/dialog.tsx:65
+msgid "Close (Esc)"
+msgstr "Close (Esc)"
+
+#. placeholder {0}: snapshot.gameTitle
+#: src/features/saves/RestoreSnapshotDialog.tsx:150
+msgid "Close {0} before restoring"
+msgstr "Close {0} before restoring"
+
+#: src/features/cloud/ConflictDialog.tsx:134
+msgid "Close the game before using the Drive version."
+msgstr "Close the game before using the Drive version."
+
+#: src/features/game-details/GameHero.tsx:139
+#: src/features/saves/CreateSnapshotDialog.tsx:167
+#: src/features/saves/GameSavesPanel.tsx:105
+msgid "Close the game first"
+msgstr "Close the game first"
+
+#: src/features/settings/SettingsPage.tsx:92
+msgid "Closing the window hides it instead of quitting, so automatic backups and Drive sync keep working. Quit from the tray icon."
+msgstr "Closing the window hides it instead of quitting, so automatic backups and Drive sync keep working. Quit from the tray icon."
+
+#: src/features/onboarding/OnboardingDialog.tsx:258
+msgid "Closing the window keeps L8Play running so automatic backups still happen."
+msgstr "Closing the window keeps L8Play running so automatic backups still happen."
+
+#: src/features/settings/SettingsPage.tsx:259
+msgid "Cloud"
+msgstr "Cloud"
+
+#: src/components/shell/NavRail.tsx:77
+#: src/features/cloud/CloudPage.tsx:172
+msgid "Cloud Storage"
+msgstr "Cloud Storage"
+
+#: src/components/shell/NavRail.tsx:61
+msgid "Collapse the menu"
+msgstr "Collapse the menu"
+
+#: src/features/saves/snapshot-labels.ts:17
+#: src/features/saves/snapshot-labels.ts:29
+msgid "Conflict copy"
+msgstr "Conflict copy"
+
+#: src/features/cloud/ConflictDialog.tsx:90
+msgid "Conflict resolved"
+msgstr "Conflict resolved"
+
+#: src/features/cloud/CloudPage.tsx:60
+#: src/features/onboarding/OnboardingDialog.tsx:170
+#: src/features/saves/GameSavesPanel.tsx:191
+msgid "Connect Google Drive"
+msgstr "Connect Google Drive"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:243
+msgid "Connect Google Drive to also keep snapshots there, or only there."
+msgstr "Connect Google Drive to also keep snapshots there, or only there."
+
+#: src/features/cloud/CloudPage.tsx:101
+msgid "Connected"
+msgstr "Connected"
+
+#: src/features/onboarding/OnboardingDialog.tsx:166
+#: src/features/onboarding/OnboardingDialog.tsx:190
+msgid "Continue"
+msgstr "Continue"
+
+#: src/features/dashboard/HeroCard.tsx:55
+msgid "Continue playing"
+msgstr "Continue playing"
+
+#: src/features/game-details/GameOverview.tsx:95
+msgid "Copies"
+msgstr "Copies"
+
+#: src/features/settings/SettingsPage.tsx:197
+msgid "Copies new snapshots to Google Drive in the background while an account is connected."
+msgstr "Copies new snapshots to Google Drive in the background while an account is connected."
+
+#: src/features/onboarding/OnboardingDialog.tsx:252
+#: src/features/settings/BackupSection.tsx:55
+msgid "Copies the save a few seconds after you stop playing, if it changed."
+msgstr "Copies the save a few seconds after you stop playing, if it changed."
+
+#: src/features/settings/BackupSection.tsx:61
+msgid "Copies the save just before L8Play starts a game. Launching takes a moment longer."
+msgstr "Copies the save just before L8Play starts a game. Launching takes a moment longer."
+
+#: src/features/game-details/PropertiesPanel.tsx:50
+msgid "Correct a name that was read wrongly. Your edits are kept when libraries are scanned again."
+msgstr "Correct a name that was read wrongly. Your edits are kept when libraries are scanned again."
+
+#: src/features/artwork/ArtworkDialog.tsx:143
+msgid "Cover"
+msgstr "Cover"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:122
+msgid "create"
+msgstr "create"
+
+#: src/features/settings/ArtworkSection.tsx:90
+msgid "Create a free account on steamgriddb.com."
+msgstr "Create a free account on steamgriddb.com."
+
+#: src/features/game-details/GameHero.tsx:141
+#: src/features/save-manager/SaveManagerPage.tsx:120
+#: src/features/saves/CreateSnapshotDialog.tsx:117
+#: src/features/saves/CreateSnapshotDialog.tsx:138
+#: src/features/saves/GameSavesPanel.tsx:107
+msgid "Create snapshot"
+msgstr "Create snapshot"
+
+#: src/components/ds/status-badge.tsx:51
+#: src/features/save-manager/SnapshotDetailPanel.tsx:50
+msgid "Created"
+msgstr "Created"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:138
+msgid "Creating…"
+msgstr "Creating…"
+
+#: src/features/saves/SnapshotTimeline.tsx:178
+msgid "Current"
+msgstr "Current"
+
+#: src/features/game-details/GameOverview.tsx:76
+#: src/features/saves/GameSavesPanel.tsx:140
+msgid "Current save"
+msgstr "Current save"
+
+#: src/features/saves/SnapshotTimeline.tsx:183
+msgid "Damaged"
+msgstr "Damaged"
+
+#: src/components/shell/NavRail.tsx:74
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: src/features/settings/SettingsPage.tsx:221
+msgid "Database"
+msgstr "Database"
+
+#: src/features/save-manager/SaveManagerPage.tsx:150
+msgid "Date"
+msgstr "Date"
+
+#: src/features/library/LibraryToolbar.tsx:63
+msgid "Date added"
+msgstr "Date added"
+
+#: src/features/cloud/ConflictDialog.tsx:119
+msgid "Decide later"
+msgstr "Decide later"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:79
+msgid "Delete “{name}”?"
+msgstr "Delete “{name}”?"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:42
+msgid "Delete from Drive"
+msgstr "Delete from Drive"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:41
+#: src/features/saves/DeleteSnapshotDialog.tsx:112
+msgid "Delete from PC and Drive"
+msgstr "Delete from PC and Drive"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:39
+#: src/features/saves/DeleteSnapshotDialog.tsx:104
+msgid "Delete from this PC"
+msgstr "Delete from this PC"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:129
+#: src/features/saves/SnapshotTimeline.tsx:141
+msgid "Delete…"
+msgstr "Delete…"
+
+#: src/features/game-details/GameOverview.tsx:127
+msgid "Details"
+msgstr "Details"
+
+#: src/features/saves/SaveLocationsCard.tsx:72
+msgid "Detect again"
+msgstr "Detect again"
+
+#: src/features/saves/SaveLocationsCard.tsx:107
+msgid "Detected"
+msgstr "Detected"
+
+#. placeholder {0}: formatDateTime(conflict.detectedAt, i18n.locale)
+#: src/features/cloud/ConflictDialog.tsx:109
+msgid "Detected {0}. Nothing has been overwritten."
+msgstr "Detected {0}. Nothing has been overwritten."
+
+#: src/features/game-details/GameOverview.tsx:140
+msgid "Detected automatically"
+msgstr "Detected automatically"
+
+#: src/features/game-details/GameOverview.tsx:60
+#: src/features/game-details/PropertiesPanel.tsx:65
+msgid "Developer"
+msgstr "Developer"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:53
+msgid "Device"
+msgstr "Device"
+
+#: src/features/library/use-game-actions.ts:27
+msgid "directly"
+msgstr "directly"
+
+#: src/features/game-details/PropertiesPanel.tsx:91
+msgid "Discard changes"
+msgstr "Discard changes"
+
+#: src/features/cloud/CloudPage.tsx:123
+#: src/features/cloud/CloudPage.tsx:297
+msgid "Disconnect"
+msgstr "Disconnect"
+
+#: src/features/onboarding/OnboardingDialog.tsx:275
+msgid "Disconnect any time; local snapshots stay"
+msgstr "Disconnect any time; local snapshots stay"
+
+#: src/features/cloud/CloudPage.tsx:293
+msgid "Disconnect failed"
+msgstr "Disconnect failed"
+
+#: src/features/cloud/AdvancedClient.tsx:56
+msgid "Disconnect Google Drive first to change the client. Your snapshots and Drive files are not touched."
+msgstr "Disconnect Google Drive first to change the client. Your snapshots and Drive files are not touched."
+
+#: src/features/cloud/CloudPage.tsx:271
+msgid "Disconnect Google Drive?"
+msgstr "Disconnect Google Drive?"
+
+#: src/components/feedback/Toaster.tsx:37
+msgid "Dismiss"
+msgstr "Dismiss"
+
+#: src/features/artwork/ArtworkDialog.tsx:169
+#: src/features/saves/FindSavesDialog.tsx:73
+msgid "Done"
+msgstr "Done"
+
+#: src/features/saves/SnapshotTimeline.tsx:222
+msgid "Download"
+msgstr "Download"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:119
+msgid "Download and restore…"
+msgstr "Download and restore…"
+
+#: src/features/saves/SnapshotTimeline.tsx:116
+msgid "Downloaded to this PC"
+msgstr "Downloaded to this PC"
+
+#: src/components/ds/status-badge.tsx:54
+msgid "Downloading"
+msgstr "Downloading"
+
+#: src/features/cloud/TransferList.tsx:34
+msgid "Downloading · {percent}%"
+msgstr "Downloading · {percent}%"
+
+#: src/components/ds/storage-tags.tsx:29
+#: src/components/shell/QuickRail.tsx:73
+#: src/features/dashboard/dashboard-sections.tsx:133
+msgid "Drive"
+msgstr "Drive"
+
+#. placeholder {0}: item.remoteDevice ?? ""
+#: src/features/dashboard/dashboard-sections.tsx:34
+msgid "Drive has a different save from {0}"
+msgstr "Drive has a different save from {0}"
+
+#: src/features/cloud/StoragePanels.tsx:61
+msgid "Drive storage"
+msgstr "Drive storage"
+
+#: src/features/settings/SettingsPage.tsx:52
+msgid "Ember is the dark theme; Rosé is its light counterpart."
+msgstr "Ember is the dark theme; Rosé is its light counterpart."
+
+#: src/features/game-details/PropertiesPanel.tsx:75
+msgid "Enter a year between 1970 and 2100."
+msgstr "Enter a year between 1970 and 2100."
+
+#: src/features/saves/SnapshotTimeline.tsx:110
+msgid "Every file matches its checksum."
+msgstr "Every file matches its checksum."
+
+#: src/features/library/AddGameDialogs.tsx:160
+msgid "Every game found in this folder is already in your library."
+msgstr "Every game found in this folder is already in your library."
+
+#: src/features/onboarding/OnboardingDialog.tsx:105
+msgid "Every save protected."
+msgstr "Every save protected."
+
+#: src/features/cloud/CloudPage.tsx:55
+msgid "Everything works on this PC without it. Connecting keeps a second, verified copy of your snapshots and lets you continue on another PC."
+msgstr "Everything works on this PC without it. Connecting keeps a second, verified copy of your snapshots and lets you continue on another PC."
+
+#: src/features/saves/FindSavesDialog.tsx:117
+msgid "Evidence:"
+msgstr "Evidence:"
+
+#: src/features/game-details/PropertiesPanel.tsx:43
+msgid "Executable"
+msgstr "Executable"
+
+#: src/features/settings/BackupSection.tsx:115
+msgid "Existing snapshots stay where they are."
+msgstr "Existing snapshots stay where they are."
+
+#: src/components/shell/NavRail.tsx:61
+msgid "Expand the menu"
+msgstr "Expand the menu"
+
+#: src/components/ds/status-badge.tsx:58
+#: src/features/cloud/TransferList.tsx:48
+#: src/features/save-manager/SnapshotDetailPanel.tsx:59
+msgid "Failed"
+msgstr "Failed"
+
+#: src/components/game/GameRow.tsx:46
+msgid "Favourite"
+msgstr "Favourite"
+
+#: src/features/library/LibraryToolbar.tsx:107
+msgid "Favourites"
+msgstr "Favourites"
+
+#: src/features/saves/SnapshotTimeline.tsx:188
+msgid "File missing"
+msgstr "File missing"
+
+#: src/features/library/LibraryToolbar.tsx:69
+msgid "Filter by title"
+msgstr "Filter by title"
+
+#: src/features/settings/ArtworkSection.tsx:117
+msgid "Find missing artwork"
+msgstr "Find missing artwork"
+
+#: src/features/artwork/ArtworkDialog.tsx:239
+msgid "Find more images on SteamGridDB"
+msgstr "Find more images on SteamGridDB"
+
+#: src/features/settings/ArtworkSection.tsx:136
+msgid "Find now"
+msgstr "Find now"
+
+#: src/features/saves/FindSavesDialog.tsx:64
+#: src/features/saves/SaveLocationsCard.tsx:80
+msgid "Find saves"
+msgstr "Find saves"
+
+#: src/features/onboarding/OnboardingDialog.tsx:118
+msgid "Finding games, their save folders and their artwork. You can keep going — this finishes in the background."
+msgstr "Finding games, their save folders and their artwork. You can keep going — this finishes in the background."
+
+#: src/features/saves/FindSavesDialog.tsx:40
+msgid "Folder named like the game"
+msgstr "Folder named like the game"
+
+#: src/features/saves/FindSavesDialog.tsx:41
+msgid "Folder named like the install folder"
+msgstr "Folder named like the install folder"
+
+#: src/features/settings/SettingsPage.tsx:182
+msgid "For games the database does not know, “Find saves” on a game’s page asks PCGamingWiki and searches your PC. Nothing is backed up until you confirm a folder."
+msgstr "For games the database does not know, “Find saves” on a game’s page asks PCGamingWiki and searches your PC. Nothing is backed up until you confirm a folder."
+
+#: src/features/onboarding/OnboardingParts.tsx:45
+msgid "Found {games} games"
+msgstr "Found {games} games"
+
+#. placeholder {0}: count("steam")
+#. placeholder {1}: count("epic")
+#. placeholder {2}: count("xbox")
+#. placeholder {3}: count("gog")
+#. placeholder {4}: count("standalone")
+#: src/features/settings/SettingsPage.tsx:125
+msgid "Found automatically from their launchers. {0} Steam · {1} Epic · {2} Xbox · {3} GOG · {4} added by hand."
+msgstr "Found automatically from their launchers. {0} Steam · {1} Epic · {2} Xbox · {3} GOG · {4} added by hand."
+
+#: src/features/cloud/StoragePanels.tsx:74
+msgid "Free"
+msgstr "Free"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:223
+msgid "Frees this PC once the upload is confirmed."
+msgstr "Frees this PC once the upload is confirmed."
+
+#: src/features/saves/snapshot-labels.ts:25
+msgid "Game closed"
+msgstr "Game closed"
+
+#: src/features/settings/SteamKeyBlock.tsx:74
+msgid "Game details are private"
+msgstr "Game details are private"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:169
+msgid "Game is closed"
+msgstr "Game is closed"
+
+#: src/features/settings/SettingsPage.tsx:124
+msgid "Game launchers"
+msgstr "Game launchers"
+
+#: src/features/settings/SettingsPage.tsx:255
+msgid "Game Libraries"
+msgstr "Game Libraries"
+
+#. placeholder {0}: game.title
+#: src/features/artwork/ArtworkDialog.tsx:258
+msgid "Game name (default: {0})"
+msgstr "Game name (default: {0})"
+
+#: src/features/saves/SaveLocationsCard.tsx:99
+msgid "Game save folder"
+msgstr "Game save folder"
+
+#: src/features/onboarding/OnboardingParts.tsx:51
+msgid "games"
+msgstr "games"
+
+#: src/features/save-manager/SaveManagerPage.tsx:73
+#: src/features/save-manager/SaveManagerPage.tsx:74
+msgid "Games"
+msgstr "Games"
+
+#: src/features/library/AddGameDialogs.tsx:132
+msgid "Games found"
+msgstr "Games found"
+
+#: src/features/settings/SteamKeyBlock.tsx:72
+msgid "Games listed"
+msgstr "Games listed"
+
+#: src/features/library/LibraryPager.tsx:70
+msgid "Games per page"
+msgstr "Games per page"
+
+#: src/features/onboarding/OnboardingDialog.tsx:243
+msgid "Games without a known save folder can be completed later from their page."
+msgstr "Games without a known save folder can be completed later from their page."
+
+#: src/features/dashboard/DashboardPage.tsx:167
+msgid "Games you play will show up here, most recent first."
+msgstr "Games you play will show up here, most recent first."
+
+#: src/features/settings/SettingsPage.tsx:254
+msgid "General"
+msgstr "General"
+
+#: src/features/artwork/ArtworkDialog.tsx:77
+msgid "Generated placeholder"
+msgstr "Generated placeholder"
+
+#: src/features/onboarding/OnboardingDialog.tsx:154
+msgid "Get started"
+msgstr "Get started"
+
+#: src/features/save-manager/SaveManagerPage.tsx:175
+msgid "Go to My Games"
+msgstr "Go to My Games"
+
+#: src/components/shell/Greeting.tsx:16
+msgid "Good afternoon"
+msgstr "Good afternoon"
+
+#: src/components/shell/Greeting.tsx:16
+msgid "Good evening"
+msgstr "Good evening"
+
+#: src/components/shell/Greeting.tsx:16
+msgid "Good morning"
+msgstr "Good morning"
+
+#: src/features/cloud/AdvancedClient.tsx:35
+msgid "Google client saved"
+msgstr "Google client saved"
+
+#: src/features/cloud/use-cloud.ts:83
+msgid "Google could not be reached. Check your connection and try again."
+msgstr "Google could not be reached. Check your connection and try again."
+
+#: src/components/ds/status-badge.tsx:61
+#: src/features/save-manager/SnapshotDetailPanel.tsx:110
+#: src/features/saves/GameSavesPanel.tsx:170
+msgid "Google Drive"
+msgstr "Google Drive"
+
+#: src/features/settings/SettingsPage.tsx:202
+msgid "Google Drive account"
+msgstr "Google Drive account"
+
+#: src/features/cloud/CloudPage.tsx:154
+#: src/features/onboarding/OnboardingDialog.tsx:78
+msgid "Google Drive connected"
+msgstr "Google Drive connected"
+
+#. placeholder {0}: account.email
+#: src/features/onboarding/OnboardingDialog.tsx:146
+msgid "Google Drive connected · {0}"
+msgstr "Google Drive connected · {0}"
+
+#: src/features/cloud/CloudPage.tsx:291
+msgid "Google Drive disconnected"
+msgstr "Google Drive disconnected"
+
+#: src/components/shell/QuickRail.tsx:75
+msgid "Google Drive is not connected"
+msgstr "Google Drive is not connected"
+
+#: src/features/cloud/CloudPage.tsx:53
+msgid "Google Drive isn’t connected"
+msgstr "Google Drive isn’t connected"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:236
+msgid "Google Drive uploads are switched off in Settings."
+msgstr "Google Drive uploads are switched off in Settings."
+
+#: src/features/cloud/CloudPage.tsx:155
+#: src/features/onboarding/OnboardingDialog.tsx:81
+msgid "Google Drive was not connected"
+msgstr "Google Drive was not connected"
+
+#: src/features/cloud/CloudPage.tsx:69
+msgid "Google may show an “unverified app” warning while the app is not yet verified: choose “Advanced”, then “Continue”."
+msgstr "Google may show an “unverified app” warning while the app is not yet verified: choose “Advanced”, then “Continue”."
+
+#: src/features/cloud/use-cloud.ts:81
+msgid "Google or the game is busy right now. Try again in a moment."
+msgstr "Google or the game is busy right now. Try again in a moment."
+
+#: src/features/cloud/use-cloud.ts:79
+msgid "Google refused the sign-in. Check the OAuth client, or sign in again."
+msgstr "Google refused the sign-in. Check the OAuth client, or sign in again."
+
+#: src/features/library/LibraryToolbar.tsx:122
+msgid "Grid view (Ctrl+G)"
+msgstr "Grid view (Ctrl+G)"
+
+#: src/features/artwork/ArtworkDialog.tsx:144
+msgid "Hero"
+msgstr "Hero"
+
+#: src/features/artwork/ArtworkDialog.tsx:146
+#: src/features/artwork/ArtworkDialog.tsx:187
+msgid "Icon"
+msgstr "Icon"
+
+#. placeholder {0}: labels.name(latest)
+#: src/features/saves/GameSavesPanel.tsx:70
+msgid "Identical to “{0}”, {when}"
+msgstr "Identical to “{0}”, {when}"
+
+#: src/features/saves/GameSavesPanel.tsx:70
+msgid "Identical to the latest snapshot"
+msgstr "Identical to the latest snapshot"
+
+#: src/features/artwork/ArtworkDialog.tsx:113
+msgid "Images"
+msgstr "Images"
+
+#: src/features/artwork/ArtworkDialog.tsx:160
+msgid "Images are cropped to fit, never stretched."
+msgstr "Images are cropped to fit, never stretched."
+
+#: src/components/ds/storage-tags.tsx:64
+#: src/features/cloud/ConflictDialog.tsx:50
+#: src/features/save-manager/SaveManagerPage.tsx:144
+msgid "In Google Drive"
+msgstr "In Google Drive"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:222
+msgid "In Google Drive only"
+msgstr "In Google Drive only"
+
+#: src/components/ds/status-badge.tsx:50
+msgid "In sync"
+msgstr "In sync"
+
+#: src/features/cloud/StoragePanels.tsx:101
+msgid "In your Drive"
+msgstr "In your Drive"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:215
+#: src/features/saves/CreateSnapshotDialog.tsx:237
+msgid "In your snapshot folder"
+msgstr "In your snapshot folder"
+
+#: src/components/ds/status-badge.tsx:65
+msgid "Info"
+msgstr "Info"
+
+#: src/components/game/GameRow.tsx:76
+#: src/features/game-details/GameHero.tsx:130
+msgid "Install"
+msgstr "Install"
+
+#. placeholder {0}: game.title
+#: src/components/game/GameCard.tsx:49
+#: src/components/game/GameTile.tsx:41
+msgid "Install {0}"
+msgstr "Install {0}"
+
+#: src/features/game-details/PropertiesPanel.tsx:42
+msgid "Install folder"
+msgstr "Install folder"
+
+#: src/features/game-details/GameOverview.tsx:59
+#: src/features/library/LibraryToolbar.tsx:62
+msgid "Install size"
+msgstr "Install size"
+
+#: src/features/library/LibraryToolbar.tsx:89
+msgid "Installation"
+msgstr "Installation"
+
+#: src/features/library/LibraryToolbar.tsx:55
+msgid "Installed"
+msgstr "Installed"
+
+#. placeholder {0}: formatBytes(game.sizeBytes, i18n.locale)
+#: src/features/game-details/GameHero.tsx:89
+msgid "Installed · {0}"
+msgstr "Installed · {0}"
+
+#: src/features/settings/SettingsPage.tsx:67
+msgid "Interface language."
+msgstr "Interface language."
+
+#: src/features/cloud/TransferList.tsx:49
+msgid "It will be tried again"
+msgstr "It will be tried again"
+
+#: src/features/artwork/ArtworkDialog.tsx:241
+msgid "It’s free: add your own SteamGridDB API key once and thousands of community covers, heroes and logos become available."
+msgstr "It’s free: add your own SteamGridDB API key once and thousands of community covers, heroes and logos become available."
+
+#: src/features/onboarding/OnboardingDialog.tsx:127
+msgid "Keep a copy in Google Drive?"
+msgstr "Keep a copy in Google Drive?"
+
+#: src/features/cloud/ConflictDialog.tsx:99
+msgid "Keep both apart"
+msgstr "Keep both apart"
+
+#: src/features/cloud/ConflictDialog.tsx:160
+msgid "Keep both, change nothing yet"
+msgstr "Keep both, change nothing yet"
+
+#: src/features/settings/BackupSection.tsx:86
+#: src/features/settings/BackupSection.tsx:90
+msgid "Keep in Google Drive"
+msgstr "Keep in Google Drive"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:195
+#: src/features/saves/DeleteSnapshotDialog.tsx:89
+msgid "Keep it"
+msgstr "Keep it"
+
+#: src/features/settings/BackupSection.tsx:74
+#: src/features/settings/BackupSection.tsx:78
+msgid "Keep on this PC"
+msgstr "Keep on this PC"
+
+#: src/features/onboarding/OnboardingDialog.tsx:257
+#: src/features/settings/SettingsPage.tsx:91
+msgid "Keep running in the notification area"
+msgstr "Keep running in the notification area"
+
+#: src/features/cloud/ConflictDialog.tsx:161
+msgid "Keeps this PC’s save and downloads the other one as a conflict copy you can restore later."
+msgstr "Keeps this PC’s save and downloads the other one as a conflict copy you can restore later."
+
+#: src/features/settings/ArtworkSection.tsx:46
+#: src/features/settings/SteamKeyBlock.tsx:67
+msgid "Key saved"
+msgstr "Key saved"
+
+#: src/features/save-manager/SaveManagerPage.tsx:127
+msgid "Kind"
+msgstr "Kind"
+
+#: src/features/onboarding/OnboardingDialog.tsx:108
+msgid "L8Play finds your games, launches them from one place and keeps a copy of every save — on this PC and, if you like, in your own Google Drive."
+msgstr "L8Play finds your games, launches them from one place and keeps a copy of every save — on this PC and, if you like, in your own Google Drive."
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:144
+msgid "L8Play keeps “Safety copy before restore” on this PC, so you can undo this by restoring it from Saves."
+msgstr "L8Play keeps “Safety copy before restore” on this PC, so you can undo this by restoring it from Saves."
+
+#: src/features/cloud/CloudPage.tsx:66
+msgid "L8Play only accesses the files it creates, in a folder named “L8Play” in your Drive. It cannot see anything else."
+msgstr "L8Play only accesses the files it creates, in a folder named “L8Play” in your Drive. It cannot see anything else."
+
+#: src/features/settings/SettingsPage.tsx:66
+#: src/features/settings/SettingsPage.tsx:70
+msgid "Language"
+msgstr "Language"
+
+#: src/features/settings/BackupSection.tsx:26
+msgid "Last {count} per game"
+msgstr "Last {count} per game"
+
+#: src/features/save-manager/SaveManagerPage.tsx:156
+msgid "Last 30 days"
+msgstr "Last 30 days"
+
+#: src/features/save-manager/SaveManagerPage.tsx:155
+msgid "Last 7 days"
+msgstr "Last 7 days"
+
+#: src/components/game/GameRow.tsx:88
+#: src/features/game-details/GameOverview.tsx:58
+msgid "Last played"
+msgstr "Last played"
+
+#. placeholder {0}: formatDateTime(game.lastPlayedAt, i18n.locale)
+#: src/features/game-details/GameHero.tsx:101
+msgid "Last played {0}"
+msgstr "Last played {0}"
+
+#: src/features/game-details/GameOverview.tsx:69
+msgid "Last snapshot"
+msgstr "Last snapshot"
+
+#: src/features/library/use-game-actions.ts:33
+msgid "Launching {via}. Play time is recorded automatically."
+msgstr "Launching {via}. Play time is recorded automatically."
+
+#: src/features/library/use-library-flows.ts:31
+msgid "Libraries scanned"
+msgstr "Libraries scanned"
+
+#: src/features/library/LibraryToolbar.tsx:123
+msgid "List view (Ctrl+L)"
+msgstr "List view (Ctrl+L)"
+
+#: src/features/saves/FindSavesDialog.tsx:39
+msgid "Listed on PCGamingWiki"
+msgstr "Listed on PCGamingWiki"
+
+#: src/features/settings/SettingsPage.tsx:134
+msgid "Lists the games your Steam account owns, read from Steam with your own free Steam Web API key or from your public profile. Nothing is sent about you except the request itself. Epic and other stores don’t offer this without signing in, so only Steam is listed."
+msgstr "Lists the games your Steam account owns, read from Steam with your own free Steam Web API key or from your public profile. Nothing is sent about you except the request itself. Epic and other stores don’t offer this without signing in, so only Steam is listed."
+
+#: src/features/settings/SettingsPage.tsx:227
+msgid "Loading…"
+msgstr "Loading…"
+
+#: src/components/shell/QuickRail.tsx:74
+msgid "Local"
+msgstr "Local"
+
+#: src/features/artwork/ArtworkDialog.tsx:145
+msgid "Logo"
+msgstr "Logo"
+
+#: src/features/onboarding/OnboardingParts.tsx:45
+msgid "Looking for games…"
+msgstr "Looking for games…"
+
+#: src/features/settings/ArtworkSection.tsx:118
+msgid "Looks up cover, hero and logo for Epic and standalone games. This also runs when the app starts."
+msgstr "Looks up cover, hero and logo for Epic and standalone games. This also runs when the app starts."
+
+#: src/features/settings/SettingsPage.tsx:170
+msgid "Ludusavi save database"
+msgstr "Ludusavi save database"
+
+#: src/components/shell/NavRail.tsx:82
+msgid "Main"
+msgstr "Main"
+
+#: src/features/settings/SteamKeyBlock.tsx:43
+msgid "Manage the key"
+msgstr "Manage the key"
+
+#: src/components/ds/status-badge.tsx:62
+#: src/features/save-manager/SaveManagerPage.tsx:132
+#: src/features/saves/GameSavesPanel.tsx:84
+#: src/features/saves/snapshot-labels.ts:12
+msgid "Manual"
+msgstr "Manual"
+
+#: src/features/settings/BackupSection.tsx:98
+msgid "Manual, pinned and safety snapshots"
+msgstr "Manual, pinned and safety snapshots"
+
+#. placeholder {0}: outcome.manifestTitle
+#: src/features/saves/SaveLocationsCard.tsx:40
+msgid "Matched “{0}” in the save database."
+msgstr "Matched “{0}” in the save database."
+
+#: src/features/artwork/ArtworkDialog.tsx:156
+msgid "Matched automatically on SteamGridDB. Pick another set if this one is wrong."
+msgstr "Matched automatically on SteamGridDB. Pick another set if this one is wrong."
+
+#: src/features/game-details/GameOverview.tsx:51
+msgid "Matches the last snapshot"
+msgstr "Matches the last snapshot"
+
+#: src/features/onboarding/OnboardingParts.tsx:46
+msgid "Matching artwork from SteamGridDB…"
+msgstr "Matching artwork from SteamGridDB…"
+
+#: src/components/shell/CaptionBar.tsx:46
+#: src/components/shell/CaptionBar.tsx:47
+msgid "Maximize"
+msgstr "Maximize"
+
+#: src/components/shell/CaptionBar.tsx:36
+#: src/components/shell/CaptionBar.tsx:37
+msgid "Minimize"
+msgstr "Minimize"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:103
+msgid "Missing"
+msgstr "Missing"
+
+#. placeholder {0}: formatRelative(current.data.lastModifiedAt, i18n.locale)
+#. placeholder {0}: formatRelative(state.lastModifiedAt, i18n.locale)
+#: src/features/saves/CreateSnapshotDialog.tsx:160
+#: src/features/saves/GameSavesPanel.tsx:154
+msgid "modified {0}"
+msgstr "modified {0}"
+
+#: src/features/dashboard/DashboardPage.tsx:157
+msgid "More games"
+msgstr "More games"
+
+#: src/features/cloud/ConflictDialog.tsx:144
+msgid "More progress"
+msgstr "More progress"
+
+#: src/features/saves/snapshot-menu.tsx:43
+msgid "More snapshot actions"
+msgstr "More snapshot actions"
+
+#: src/components/shell/NavRail.tsx:75
+#: src/features/game-details/GameHero.tsx:74
+#: src/features/library/LibraryPage.tsx:48
+#: src/features/library/LibraryPage.tsx:164
+msgid "My Games"
+msgstr "My Games"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:174
+msgid "Name"
+msgstr "Name"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:257
+#: src/features/saves/SnapshotTimeline.tsx:126
+msgid "Never delete automatically"
+msgstr "Never delete automatically"
+
+#: src/features/saves/SnapshotTimeline.tsx:174
+msgid "Never deleted automatically"
+msgstr "Never deleted automatically"
+
+#: src/components/game/GameCard.tsx:36
+#: src/components/game/GameTile.tsx:28
+msgid "Never played"
+msgstr "Never played"
+
+#: src/features/cloud/CloudPage.tsx:238
+msgid "New snapshots are copied to Drive in the background. Safety copies stay on this PC."
+msgstr "New snapshots are copied to Drive in the background. Safety copies stay on this PC."
+
+#: src/features/settings/BackupSection.tsx:42
+msgid "New snapshots go to {picked}."
+msgstr "New snapshots go to {picked}."
+
+#: src/features/cloud/ConflictDialog.tsx:51
+msgid "Newer"
+msgstr "Newer"
+
+#: src/features/onboarding/OnboardingDialog.tsx:190
+msgid "Next"
+msgstr "Next"
+
+#: src/features/library/LibraryPager.tsx:58
+msgid "Next page"
+msgstr "Next page"
+
+#: src/features/library/use-library-flows.ts:29
+msgid "No changes — {total} games in your library."
+msgstr "No changes — {total} games in your library."
+
+#: src/features/library/AddGameDialogs.tsx:161
+msgid "No game found. Choose the folder that contains your games, one folder per game."
+msgstr "No game found. Choose the folder that contains your games, one folder per game."
+
+#: src/features/library/LibraryPage.tsx:139
+msgid "No game matches these filters"
+msgstr "No game matches these filters"
+
+#: src/features/dashboard/DashboardPage.tsx:53
+msgid "No game was found automatically. Scan again after installing games, or add a folder or an .exe file."
+msgstr "No game was found automatically. Scan again after installing games, or add a folder or an .exe file."
+
+#: src/features/library/LibraryPage.tsx:113
+msgid "No games found yet"
+msgstr "No games found yet"
+
+#: src/features/artwork/ArtworkDialog.tsx:293
+msgid "No image found. Try another spelling of the game’s name."
+msgstr "No image found. Try another spelling of the game’s name."
+
+#: src/features/saves/GameSavesPanel.tsx:151
+msgid "No save found yet"
+msgstr "No save found yet"
+
+#: src/features/saves/SaveLocationsCard.tsx:89
+msgid "No save location yet"
+msgstr "No save location yet"
+
+#: src/features/cloud/StoragePanels.tsx:103
+msgid "No snapshot is in Drive yet."
+msgstr "No snapshot is in Drive yet."
+
+#: src/features/save-manager/SaveManagerPage.tsx:166
+msgid "No snapshot matches these filters"
+msgstr "No snapshot matches these filters"
+
+#: src/features/saves/GameSavesPanel.tsx:124
+msgid "No snapshot matches this filter."
+msgstr "No snapshot matches this filter."
+
+#: src/features/dashboard/dashboard-sections.tsx:30
+#: src/features/dashboard/HeroCard.tsx:64
+#: src/features/game-details/GameOverview.tsx:50
+#: src/features/game-details/GameOverview.tsx:72
+#: src/features/saves/GameSavesPanel.tsx:61
+msgid "No snapshot yet"
+msgstr "No snapshot yet"
+
+#: src/features/dashboard/HeroCard.tsx:61
+msgid "No snapshot yet. Your save is copied each time you stop playing."
+msgstr "No snapshot yet. Your save is copied each time you stop playing."
+
+#: src/features/save-manager/SaveManagerPage.tsx:166
+#: src/features/saves/GameSavesPanel.tsx:117
+msgid "No snapshots yet"
+msgstr "No snapshots yet"
+
+#: src/features/game-details/GameOverview.tsx:121
+msgid "No snapshots yet. A snapshot is taken automatically each time you stop playing."
+msgstr "No snapshots yet. A snapshot is taken automatically each time you stop playing."
+
+#: src/features/saves/GameSavesPanel.tsx:189
+msgid "Not connected."
+msgstr "Not connected."
+
+#: src/features/onboarding/OnboardingParts.tsx:98
+#: src/features/settings/SettingsPage.tsx:176
+msgid "Not found"
+msgstr "Not found"
+
+#: src/components/ds/storage-tags.tsx:69
+msgid "Not in Google Drive"
+msgstr "Not in Google Drive"
+
+#: src/components/game/GameCard.tsx:33
+#: src/components/game/GameCard.tsx:73
+#: src/features/game-details/GameHero.tsx:94
+#: src/features/library/LibraryToolbar.tsx:56
+msgid "Not installed"
+msgstr "Not installed"
+
+#: src/components/ds/storage-tags.tsx:62
+msgid "Not on this PC"
+msgstr "Not on this PC"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:97
+msgid "Not on this PC: download it to restore"
+msgstr "Not on this PC: download it to restore"
+
+#: src/components/ds/status-badge.tsx:57
+#: src/features/dashboard/dashboard-sections.tsx:29
+msgid "Not protected"
+msgstr "Not protected"
+
+#: src/features/dashboard/HeroCard.tsx:102
+#: src/features/game-details/GameOverview.tsx:90
+#: src/features/saves/GameSavesPanel.tsx:59
+msgid "Not protected yet"
+msgstr "Not protected yet"
+
+#: src/features/onboarding/OnboardingParts.tsx:98
+msgid "Not scanned yet"
+msgstr "Not scanned yet"
+
+#: src/features/cloud/CloudPage.tsx:114
+msgid "Not synced yet"
+msgstr "Not synced yet"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:186
+msgid "Note"
+msgstr "Note"
+
+#: src/features/saves/FindSavesDialog.tsx:99
+msgid "Nothing found. Add the save folder yourself if you know where the game keeps it."
+msgstr "Nothing found. Add the save folder yourself if you know where the game keeps it."
+
+#: src/features/cloud/TransferList.tsx:68
+msgid "Nothing is waiting to upload. New snapshots appear here while they are copied to Drive."
+msgstr "Nothing is waiting to upload. New snapshots appear here while they are copied to Drive."
+
+#: src/features/settings/ArtworkSection.tsx:129
+msgid "Nothing new found"
+msgstr "Nothing new found"
+
+#: src/features/dashboard/DashboardPage.tsx:166
+msgid "Nothing played recently"
+msgstr "Nothing played recently"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:101
+msgid "Nothing to back up yet"
+msgstr "Nothing to back up yet"
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:55
+msgid "Nothing was restored"
+msgstr "Nothing was restored"
+
+#: src/components/shell/TopBar.tsx:57
+#: src/components/shell/TopBar.tsx:60
+msgid "Notifications"
+msgstr "Notifications"
+
+#: src/features/cloud/AdvancedClient.tsx:67
+msgid "OAuth client id"
+msgstr "OAuth client id"
+
+#: src/features/cloud/AdvancedClient.tsx:76
+msgid "OAuth client secret"
+msgstr "OAuth client secret"
+
+#. placeholder {0}: formatBytes(limit, locale)
+#: src/features/cloud/StoragePanels.tsx:64
+msgid "of {0}"
+msgstr "of {0}"
+
+#: src/components/ds/status-badge.tsx:59
+msgid "Offline"
+msgstr "Offline"
+
+#: src/features/cloud/ConflictDialog.tsx:52
+msgid "Older"
+msgstr "Older"
+
+#: src/features/settings/BackupSection.tsx:87
+msgid "Older automatic snapshots are removed from Google Drive too, so it never piles up."
+msgstr "Older automatic snapshots are removed from Google Drive too, so it never piles up."
+
+#: src/features/settings/BackupSection.tsx:75
+msgid "Oldest auto snapshots are removed first."
+msgstr "Oldest auto snapshots are removed first."
+
+#: src/features/settings/SettingsPage.tsx:183
+msgid "On demand"
+msgstr "On demand"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:86
+msgid "on this PC"
+msgstr "on this PC"
+
+#: src/components/ds/storage-tags.tsx:62
+#: src/features/cloud/ConflictDialog.tsx:50
+#: src/features/save-manager/SaveManagerPage.tsx:143
+#: src/features/saves/CreateSnapshotDialog.tsx:233
+msgid "On this PC"
+msgstr "On this PC"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:204
+msgid "On this PC and in Google Drive"
+msgstr "On this PC and in Google Drive"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:91
+msgid "on this PC and queued for Google Drive"
+msgstr "on this PC and queued for Google Drive"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:90
+msgid "on this PC only"
+msgstr "on this PC only"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:214
+msgid "On this PC only"
+msgstr "On this PC only"
+
+#: src/features/save-manager/SaveManagerPage.tsx:146
+msgid "Only in Drive"
+msgstr "Only in Drive"
+
+#: src/features/onboarding/OnboardingDialog.tsx:300
+#: src/features/save-manager/SaveManagerPage.tsx:145
+msgid "Only on this PC"
+msgstr "Only on this PC"
+
+#: src/features/settings/BackupSection.tsx:99
+msgid "Only you can remove a snapshot you named or pinned yourself."
+msgstr "Only you can remove a snapshot you named or pinned yourself."
+
+#: src/features/settings/BackupSection.tsx:119
+msgid "Open"
+msgstr "Open"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:245
+#: src/features/settings/SettingsPage.tsx:206
+msgid "Open Cloud Storage"
+msgstr "Open Cloud Storage"
+
+#: src/features/save-manager/SaveManagerPage.tsx:110
+msgid "Open game page"
+msgstr "Open game page"
+
+#: src/features/game-details/GameHero.tsx:154
+msgid "Open install folder"
+msgstr "Open install folder"
+
+#: src/features/onboarding/OnboardingDialog.tsx:184
+msgid "Open my library"
+msgstr "Open my library"
+
+#: src/features/settings/ArtworkSection.tsx:91
+msgid "Open Preferences › API and copy your key."
+msgstr "Open Preferences › API and copy your key."
+
+#: src/features/dashboard/dashboard-sections.tsx:120
+msgid "Open Save Manager"
+msgstr "Open Save Manager"
+
+#: src/features/game-details/GameOverview.tsx:108
+msgid "Open Saves"
+msgstr "Open Saves"
+
+#: src/features/saves/GameSavesPanel.tsx:200
+msgid "Open snapshot folder"
+msgstr "Open snapshot folder"
+
+#: src/features/settings/ArtworkSection.tsx:109
+#: src/features/settings/SteamKeyBlock.tsx:119
+msgid "Open the key page"
+msgstr "Open the key page"
+
+#. placeholder {0}: game.title
+#: src/features/library/use-game-actions.ts:31
+msgid "Opening the installer for {0}"
+msgstr "Opening the installer for {0}"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:187
+msgid "Optional"
+msgstr "Optional"
+
+#: src/features/settings/ArtworkSection.tsx:49
+msgid "Optional and free. It adds covers, heroes and logos for Epic and standalone games, and lets you replace any image. Without a key, Steam games keep Steam’s artwork and other games get generated placeholders."
+msgstr "Optional and free. It adds covers, heroes and logos for Epic and standalone games, and lets you replace any image. Without a key, Steam games keep Steam’s artwork and other games get generated placeholders."
+
+#: src/features/settings/SteamKeyBlock.tsx:38
+msgid "Optional: lets Steam list your games to this app."
+msgstr "Optional: lets Steam list your games to this app."
+
+#: src/features/cloud/StoragePanels.tsx:78
+msgid "Other files"
+msgstr "Other files"
+
+#: src/features/settings/SettingsPage.tsx:152
+msgid "Other games"
+msgstr "Other games"
+
+#: src/features/game-details/GameDetailsPage.tsx:75
+msgid "Overview"
+msgstr "Overview"
+
+#: src/features/library/LibraryPager.tsx:46
+msgid "Page {item}"
+msgstr "Page {item}"
+
+#: src/features/library/LibraryPager.tsx:23
+msgid "Pages"
+msgstr "Pages"
+
+#: src/features/settings/ArtworkSection.tsx:92
+msgid "Paste it here. It never leaves this PC except to ask SteamGridDB for images."
+msgstr "Paste it here. It never leaves this PC except to ask SteamGridDB for images."
+
+#: src/features/settings/ArtworkSection.tsx:103
+msgid "Paste your API key"
+msgstr "Paste your API key"
+
+#: src/features/settings/SteamKeyBlock.tsx:95
+msgid "Paste your Steam Web API key"
+msgstr "Paste your Steam Web API key"
+
+#: src/features/dashboard/dashboard-sections.tsx:92
+msgid "Pause"
+msgstr "Pause"
+
+#: src/features/cloud/TransferList.tsx:44
+msgid "Paused"
+msgstr "Paused"
+
+#: src/components/ds/storage-tags.tsx:23
+msgid "PC"
+msgstr "PC"
+
+#: src/features/settings/SettingsPage.tsx:181
+msgid "PCGamingWiki and local search"
+msgstr "PCGamingWiki and local search"
+
+#: src/features/saves/FindSavesDialog.tsx:91
+msgid "PCGamingWiki could not be reached, so only this PC was searched."
+msgstr "PCGamingWiki could not be reached, so only this PC was searched."
+
+#: src/features/saves/FindSavesDialog.tsx:98
+msgid "PCGamingWiki lists save folders for this game, but none exists on this PC yet. Play the game once, then search again."
+msgstr "PCGamingWiki lists save folders for this game, but none exists on this PC yet. Play the game once, then search again."
+
+#: src/features/library/LibraryPager.tsx:69
+msgid "Per page"
+msgstr "Per page"
+
+#: src/features/save-manager/SaveManagerPage.tsx:117
+msgid "Pick a game on the left first"
+msgstr "Pick a game on the left first"
+
+#: src/features/library/AddGameDialogs.tsx:243
+msgid "Pick the folder that holds your games. L8Play lists each game’s programs so you choose which one to launch."
+msgstr "Pick the folder that holds your games. L8Play lists each game’s programs so you choose which one to launch."
+
+#: src/components/game/GameRow.tsx:88
+#: src/features/game-details/GameOverview.tsx:56
+msgid "Platform"
+msgstr "Platform"
+
+#: src/components/game/GameRow.tsx:76
+#: src/features/dashboard/HeroCard.tsx:117
+#: src/features/game-details/GameHero.tsx:126
+msgid "Play"
+msgstr "Play"
+
+#. placeholder {0}: game.title
+#: src/components/game/GameCard.tsx:49
+#: src/components/game/GameTile.tsx:41
+#: src/components/shell/QuickRail.tsx:100
+msgid "Play {0}"
+msgstr "Play {0}"
+
+#: src/features/save-manager/SaveManagerPage.tsx:169
+msgid "Play a game and quit it: L8Play copies its saves automatically. You can also create a snapshot from a game’s page."
+msgstr "Play a game and quit it: L8Play copies its saves automatically. You can also create a snapshot from a game’s page."
+
+#. placeholder {0}: formatRelative(game.lastPlayedAt, i18n.locale)
+#: src/features/dashboard/HeroCard.tsx:54
+msgid "Played {0}"
+msgstr "Played {0}"
+
+#: src/components/game/GameCard.tsx:31
+#: src/components/game/GameRow.tsx:55
+#: src/components/game/GameTile.tsx:27
+#: src/features/dashboard/HeroCard.tsx:52
+#: src/features/game-details/GameHero.tsx:111
+msgid "Playing now"
+msgstr "Playing now"
+
+#: src/components/game/GameRow.tsx:88
+#: src/features/cloud/ConflictDialog.tsx:60
+#: src/features/game-details/GameOverview.tsx:57
+#: src/features/library/LibraryToolbar.tsx:61
+#: src/features/save-manager/SnapshotDetailPanel.tsx:51
+msgid "Playtime"
+msgstr "Playtime"
+
+#: src/features/artwork/ArtworkDialog.tsx:288
+msgid "PNG · JPG · WebP"
+msgstr "PNG · JPG · WebP"
+
+#: src/features/artwork/ArtworkDialog.tsx:176
+msgid "Preview"
+msgstr "Preview"
+
+#: src/features/library/LibraryPager.tsx:30
+msgid "Previous page"
+msgstr "Previous page"
+
+#: src/features/library/AddGameDialogs.tsx:64
+msgid "Program to launch"
+msgstr "Program to launch"
+
+#: src/features/library/use-library-flows.ts:73
+msgid "Programs"
+msgstr "Programs"
+
+#: src/features/game-details/GameDetailsPage.tsx:78
+#: src/features/game-details/PropertiesPanel.tsx:49
+msgid "Properties"
+msgstr "Properties"
+
+#: src/features/game-details/PropertiesPanel.tsx:34
+msgid "Properties saved"
+msgstr "Properties saved"
+
+#: src/features/game-details/PropertiesPanel.tsx:35
+msgid "Properties were not saved"
+msgstr "Properties were not saved"
+
+#: src/features/onboarding/OnboardingDialog.tsx:122
+msgid "Protect your saves"
+msgstr "Protect your saves"
+
+#: src/features/dashboard/HeroCard.tsx:102
+msgid "Protected by snapshots"
+msgstr "Protected by snapshots"
+
+#: src/features/onboarding/OnboardingDialog.tsx:134
+msgid "protected."
+msgstr "protected."
+
+#: src/components/ds/storage-tags.tsx:41
+#: src/features/dashboard/dashboard-sections.tsx:28
+#: src/features/dashboard/dashboard-sections.tsx:134
+#: src/features/save-manager/SnapshotDetailPanel.tsx:58
+msgid "Queued"
+msgstr "Queued"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:88
+msgid "queued for Google Drive only"
+msgstr "queued for Google Drive only"
+
+#: src/components/shell/QuickRail.tsx:78
+msgid "Quick launch"
+msgstr "Quick launch"
+
+#: src/features/saves/FindSavesDialog.tsx:126
+msgid "Read the wiki page"
+msgstr "Read the wiki page"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:163
+#: src/features/saves/RestoreSnapshotDialog.tsx:114
+msgid "Reading the current save…"
+msgstr "Reading the current save…"
+
+#: src/features/dashboard/dashboard-sections.tsx:158
+msgid "Recent backups"
+msgstr "Recent backups"
+
+#: src/features/game-details/GameOverview.tsx:104
+msgid "Recent snapshots"
+msgstr "Recent snapshots"
+
+#: src/features/dashboard/DashboardPage.tsx:135
+#: src/features/dashboard/HeroCard.tsx:73
+#: src/features/library/LibraryToolbar.tsx:59
+msgid "Recently played"
+msgstr "Recently played"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:205
+msgid "Recommended"
+msgstr "Recommended"
+
+#: src/features/game-details/PropertiesPanel.tsx:71
+msgid "Release year"
+msgstr "Release year"
+
+#: src/features/game-details/GameOverview.tsx:61
+msgid "Released"
+msgstr "Released"
+
+#. placeholder {0}: game.title
+#: src/components/game/GameCard.tsx:58
+msgid "Remove {0} from favourites"
+msgstr "Remove {0} from favourites"
+
+#: src/features/game-details/GameHero.tsx:145
+msgid "Remove from favourites"
+msgstr "Remove from favourites"
+
+#: src/features/settings/ArtworkSection.tsx:79
+#: src/features/settings/SteamKeyBlock.tsx:115
+msgid "Remove the key"
+msgstr "Remove the key"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:113
+msgid "Removes both copies. Nothing is kept anywhere."
+msgstr "Removes both copies. Nothing is kept anywhere."
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:110
+msgid "Replaces your current save"
+msgstr "Replaces your current save"
+
+#: src/features/artwork/ArtworkDialog.tsx:138
+msgid "Reset failed"
+msgstr "Reset failed"
+
+#: src/features/artwork/ArtworkDialog.tsx:166
+msgid "Reset to automatic"
+msgstr "Reset to automatic"
+
+#: src/features/cloud/CloudPage.tsx:203
+msgid "Resolve"
+msgstr "Resolve"
+
+#: src/features/saves/SnapshotTimeline.tsx:235
+msgid "Restore"
+msgstr "Restore"
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:65
+msgid "Restore “{name}”?"
+msgstr "Restore “{name}”?"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:119
+#: src/features/saves/SnapshotTimeline.tsx:122
+msgid "Restore…"
+msgstr "Restore…"
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:85
+msgid "Restoring…"
+msgstr "Restoring…"
+
+#: src/features/settings/BackupSection.tsx:72
+msgid "Retention"
+msgstr "Retention"
+
+#. placeholder {0}: settings.keepAutomatic
+#: src/features/saves/CreateSnapshotDialog.tsx:258
+msgid "Retention keeps the last {0} automatic snapshots per game. Pinned ones are always kept."
+msgstr "Retention keeps the last {0} automatic snapshots per game. Pinned ones are always kept."
+
+#: src/features/cloud/CloudPage.tsx:230
+#: src/features/cloud/TransferList.tsx:62
+msgid "Retry failed"
+msgstr "Retry failed"
+
+#: src/features/saves/SaveLocationsCard.tsx:92
+msgid "Run detection or add the folder yourself."
+msgstr "Run detection or add the folder yourself."
+
+#: src/components/game/GameCard.tsx:77
+#: src/components/shell/QuickRail.tsx:108
+msgid "Running"
+msgstr "Running"
+
+#: src/features/save-manager/SaveManagerPage.tsx:134
+#: src/features/saves/GameSavesPanel.tsx:90
+msgid "Safety copies"
+msgstr "Safety copies"
+
+#: src/components/ds/status-badge.tsx:64
+#: src/features/saves/snapshot-labels.ts:16
+msgid "Safety copy"
+msgstr "Safety copy"
+
+#: src/features/saves/snapshot-labels.ts:28
+msgid "Safety copy before restore"
+msgstr "Safety copy before restore"
+
+#: src/features/settings/BackupSection.tsx:29
+msgid "Same as this PC"
+msgstr "Same as this PC"
+
+#: src/features/game-details/PropertiesPanel.tsx:80
+msgid "Save"
+msgstr "Save"
+
+#: src/app/use-backend-events.ts:48
+msgid "Save backed up"
+msgstr "Save backed up"
+
+#: src/app/use-backend-events.ts:48
+msgid "Save backed up before launch"
+msgstr "Save backed up before launch"
+
+#: src/features/settings/SettingsPage.tsx:257
+msgid "Save Detection"
+msgstr "Save Detection"
+
+#: src/features/saves/SaveLocationsCard.tsx:50
+msgid "Save detection failed"
+msgstr "Save detection failed"
+
+#: src/features/saves/SaveLocationsCard.tsx:99
+msgid "Save file"
+msgstr "Save file"
+
+#: src/features/saves/FindSavesDialog.tsx:50
+#: src/features/saves/SaveLocationsCard.tsx:59
+msgid "Save folder added"
+msgstr "Save folder added"
+
+#: src/features/dashboard/dashboard-sections.tsx:38
+msgid "Save folder found, no snapshot yet · {played} played"
+msgstr "Save folder found, no snapshot yet · {played} played"
+
+#: src/features/saves/FindSavesDialog.tsx:42
+msgid "Save folder inside the install folder"
+msgstr "Save folder inside the install folder"
+
+#: src/features/dashboard/dashboard-sections.tsx:37
+msgid "Save folder not found · {played} played"
+msgstr "Save folder not found · {played} played"
+
+#: src/features/onboarding/OnboardingParts.tsx:56
+msgid "save folders"
+msgstr "save folders"
+
+#: src/features/settings/ArtworkSection.tsx:106
+#: src/features/settings/SteamKeyBlock.tsx:98
+msgid "Save key"
+msgstr "Save key"
+
+#: src/features/game-details/GameOverview.tsx:136
+msgid "Save location"
+msgstr "Save location"
+
+#: src/features/saves/SaveLocationsCard.tsx:69
+msgid "Save locations"
+msgstr "Save locations"
+
+#: src/components/shell/NavRail.tsx:76
+#: src/features/dashboard/dashboard-sections.tsx:73
+#: src/features/dashboard/dashboard-sections.tsx:161
+#: src/features/save-manager/SaveManagerPage.tsx:104
+msgid "Save Manager"
+msgstr "Save Manager"
+
+#: src/features/cloud/AdvancedClient.tsx:86
+msgid "Save my client"
+msgstr "Save my client"
+
+#: src/features/dashboard/dashboard-sections.tsx:116
+msgid "Save protection"
+msgstr "Save protection"
+
+#: src/features/settings/SettingsPage.tsx:242
+msgid "Save-location knowledge comes from the Ludusavi manifest and PCGamingWiki (CC BY-NC-SA 3.0)."
+msgstr "Save-location knowledge comes from the Ludusavi manifest and PCGamingWiki (CC BY-NC-SA 3.0)."
+
+#: src/features/cloud/ConflictDialog.tsx:56
+msgid "Saved"
+msgstr "Saved"
+
+#: src/components/game/GameRow.tsx:88
+#: src/features/game-details/GameDetailsPage.tsx:76
+msgid "Saves"
+msgstr "Saves"
+
+#: src/components/shell/use-cloud-summary.ts:36
+msgid "Saves are kept on this PC only"
+msgstr "Saves are kept on this PC only"
+
+#: src/features/game-details/PropertiesPanel.tsx:80
+msgid "Saving…"
+msgstr "Saving…"
+
+#: src/features/library/AddGameDialogs.tsx:242
+msgid "Scan a folder"
+msgstr "Scan a folder"
+
+#: src/features/onboarding/OnboardingDialog.tsx:238
+msgid "Scan finished"
+msgstr "Scan finished"
+
+#: src/features/library/LibraryPage.tsx:58
+#: src/features/library/LibraryPage.tsx:118
+#: src/features/settings/SettingsPage.tsx:128
+msgid "Scan libraries"
+msgstr "Scan libraries"
+
+#: src/features/dashboard/DashboardPage.tsx:57
+#: src/features/onboarding/OnboardingDialog.tsx:160
+msgid "Scan my libraries"
+msgstr "Scan my libraries"
+
+#: src/features/onboarding/OnboardingDialog.tsx:238
+msgid "Scanning your launchers"
+msgstr "Scanning your launchers"
+
+#: src/features/onboarding/OnboardingDialog.tsx:117
+msgid "Scanning your library"
+msgstr "Scanning your library"
+
+#: src/features/library/LibraryPage.tsx:58
+msgid "Scanning…"
+msgstr "Scanning…"
+
+#: src/features/saves/snapshot-labels.ts:15
+msgid "Scheduled"
+msgstr "Scheduled"
+
+#: src/features/settings/SettingsPage.tsx:222
+msgid "Schema version"
+msgstr "Schema version"
+
+#: src/features/artwork/ArtworkDialog.tsx:263
+msgid "Search"
+msgstr "Search"
+
+#: src/features/saves/GameSavesPanel.tsx:96
+msgid "Search names and notes"
+msgstr "Search names and notes"
+
+#: src/components/shell/TopBar.tsx:45
+msgid "Search your games…"
+msgstr "Search your games…"
+
+#: src/features/dashboard/DashboardPage.tsx:138
+msgid "See all"
+msgstr "See all"
+
+#: src/features/cloud/AdvancedClient.tsx:53
+msgid "See docs/google-drive-setup.md for the steps. No billing account is ever needed."
+msgstr "See docs/google-drive-setup.md for the steps. No billing account is ever needed."
+
+#: src/features/library/AddGameDialogs.tsx:251
+msgid "Select a game’s .exe file directly."
+msgstr "Select a game’s .exe file directly."
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:43
+msgid "Select a snapshot to see where it is stored and what it contains."
+msgstr "Select a snapshot to see where it is stored and what it contains."
+
+#: src/app/use-backend-events.ts:73
+msgid "Session ended"
+msgstr "Session ended"
+
+#: src/features/game-details/PropertiesPanel.tsx:40
+msgid "Sessions recorded"
+msgstr "Sessions recorded"
+
+#: src/features/onboarding/OnboardingDialog.tsx:170
+msgid "Set up Google Drive"
+msgstr "Set up Google Drive"
+
+#: src/features/artwork/ArtworkDialog.tsx:244
+msgid "Set up SteamGridDB"
+msgstr "Set up SteamGridDB"
+
+#: src/components/shell/NavRail.tsx:78
+#: src/features/settings/SettingsPage.tsx:266
+msgid "Settings"
+msgstr "Settings"
+
+#: src/features/settings/SettingsPage.tsx:268
+msgid "Settings sections"
+msgstr "Settings sections"
+
+#: src/features/onboarding/OnboardingDialog.tsx:206
+msgid "Setup steps"
+msgstr "Setup steps"
+
+#. placeholder {0}: index + 1
+#: src/features/dashboard/HeroCard.tsx:131
+msgid "Show game {0} of {pages}"
+msgstr "Show game {0} of {pages}"
+
+#: src/features/settings/SettingsPage.tsx:133
+msgid "Show games I own but haven’t installed"
+msgstr "Show games I own but haven’t installed"
+
+#: src/features/saves/SnapshotTimeline.tsx:135
+msgid "Show in Explorer"
+msgstr "Show in Explorer"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:124
+msgid "Show in folder"
+msgstr "Show in folder"
+
+#: src/features/settings/SettingsPage.tsx:239
+msgid "Show the welcome tour again"
+msgstr "Show the welcome tour again"
+
+#: src/features/library/LibraryPager.tsx:25
+msgid "Showing {from}–{to} of {total}"
+msgstr "Showing {from}–{to} of {total}"
+
+#: src/features/cloud/CloudPage.tsx:119
+msgid "Sign in again"
+msgstr "Sign in again"
+
+#: src/components/shell/use-cloud-summary.ts:46
+msgid "Sign in to Google Drive again"
+msgstr "Sign in to Google Drive again"
+
+#: src/features/cloud/AdvancedClient.tsx:51
+msgid "Sign-in currently uses the Google client built into L8Play. You only need your own if you prefer to keep everything in a Google Cloud project you control."
+msgstr "Sign-in currently uses the Google client built into L8Play. You only need your own if you prefer to keep everything in a Google Cloud project you control."
+
+#: src/features/cloud/AdvancedClient.tsx:49
+msgid "Sign-in currently uses your own Google client."
+msgstr "Sign-in currently uses your own Google client."
+
+#: src/features/cloud/CloudPage.tsx:103
+#: src/features/cloud/TransferList.tsx:44
+msgid "Sign-in needed"
+msgstr "Sign-in needed"
+
+#: src/features/settings/SettingsPage.tsx:203
+msgid "Sign-in, storage, the sync queue and conflicts are on the Cloud Storage page."
+msgstr "Sign-in, storage, the sync queue and conflicts are on the Cloud Storage page."
+
+#: src/components/game/GameRow.tsx:88
+#: src/features/cloud/ConflictDialog.tsx:64
+#: src/features/save-manager/SnapshotDetailPanel.tsx:52
+msgid "Size"
+msgstr "Size"
+
+#: src/features/onboarding/OnboardingDialog.tsx:305
+msgid "Skip"
+msgstr "Skip"
+
+#: src/features/onboarding/OnboardingDialog.tsx:310
+msgid "skip the tour"
+msgstr "skip the tour"
+
+#: src/features/saves/snapshot-labels.ts:24
+msgid "Snapshot"
+msgstr "Snapshot"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:94
+msgid "Snapshot created"
+msgstr "Snapshot created"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:51
+msgid "Snapshot deleted"
+msgstr "Snapshot deleted"
+
+#: src/features/settings/BackupSection.tsx:107
+msgid "Snapshot folder"
+msgstr "Snapshot folder"
+
+#: src/features/settings/BackupSection.tsx:42
+msgid "Snapshot folder changed"
+msgstr "Snapshot folder changed"
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:48
+msgid "Snapshot restored"
+msgstr "Snapshot restored"
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:92
+msgid "Snapshot to restore"
+msgstr "Snapshot to restore"
+
+#: src/features/saves/SnapshotTimeline.tsx:110
+msgid "Snapshot verified"
+msgstr "Snapshot verified"
+
+#. placeholder {0}: shortHash(snapshot.archiveSha256)
+#: src/features/saves/RestoreSnapshotDialog.tsx:156
+msgid "Snapshot verified (SHA-256 {0})"
+msgstr "Snapshot verified (SHA-256 {0})"
+
+#: src/features/dashboard/dashboard-sections.tsx:129
+msgid "Snapshots"
+msgstr "Snapshots"
+
+#: src/features/onboarding/OnboardingDialog.tsx:145
+msgid "Snapshots are made on demand"
+msgstr "Snapshots are made on demand"
+
+#: src/features/onboarding/OnboardingDialog.tsx:123
+msgid "Snapshots are verified copies of your saves. Choose when L8Play makes them."
+msgstr "Snapshots are verified copies of your saves. Choose when L8Play makes them."
+
+#: src/features/onboarding/OnboardingDialog.tsx:137
+msgid "Snapshots happen on their own when a game closes. You can change anything later in Settings."
+msgstr "Snapshots happen on their own when a game closes. You can change anything later in Settings."
+
+#: src/features/cloud/CloudPage.tsx:173
+msgid "Snapshots live in a private “L8Play” folder in your own Google Drive. Free, and only this app can see it."
+msgstr "Snapshots live in a private “L8Play” folder in your own Google Drive. Free, and only this app can see it."
+
+#: src/features/onboarding/OnboardingDialog.tsx:146
+msgid "Snapshots stay on this PC"
+msgstr "Snapshots stay on this PC"
+
+#: src/features/onboarding/OnboardingDialog.tsx:273
+msgid "Snapshots upload after they are created on this PC"
+msgstr "Snapshots upload after they are created on this PC"
+
+#. placeholder {0}: item.operations
+#: src/features/dashboard/dashboard-sections.tsx:36
+msgid "Snapshots waiting to upload: {0}"
+msgstr "Snapshots waiting to upload: {0}"
+
+#: src/features/library/use-library-flows.ts:22
+msgid "Some libraries could not be read"
+msgstr "Some libraries could not be read"
+
+#: src/features/artwork/use-artwork.ts:78
+#: src/features/artwork/use-artwork.ts:89
+#: src/features/cloud/use-cloud.ts:76
+#: src/features/cloud/use-cloud.ts:90
+#: src/features/saves/snapshot-labels.ts:35
+#: src/features/saves/snapshot-labels.ts:47
+msgid "Something went wrong. Check the log file for details."
+msgstr "Something went wrong. Check the log file for details."
+
+#: src/features/library/LibraryToolbar.tsx:111
+#: src/features/library/LibraryToolbar.tsx:112
+msgid "Sort"
+msgstr "Sort"
+
+#: src/features/artwork/ArtworkDialog.tsx:195
+msgid "Source"
+msgstr "Source"
+
+#: src/components/game/PlatformTag.tsx:18
+msgid "Standalone"
+msgstr "Standalone"
+
+#: src/features/onboarding/OnboardingDialog.tsx:263
+#: src/features/settings/SettingsPage.tsx:97
+msgid "Start with Windows"
+msgstr "Start with Windows"
+
+#. placeholder {0}: game.title
+#: src/features/library/use-game-actions.ts:31
+msgid "Starting {0}"
+msgstr "Starting {0}"
+
+#: src/features/onboarding/OnboardingDialog.tsx:264
+msgid "Starts hidden in the notification area when you sign in."
+msgstr "Starts hidden in the notification area when you sign in."
+
+#: src/features/settings/SettingsPage.tsx:98
+msgid "Starts hidden in the notification area when you sign in. No administrator rights needed."
+msgstr "Starts hidden in the notification area when you sign in. No administrator rights needed."
+
+#: src/features/cloud/CloudPage.tsx:281
+msgid "Stay connected"
+msgstr "Stay connected"
+
+#: src/features/artwork/ArtworkDialog.tsx:76
+msgid "Steam"
+msgstr "Steam"
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:161
+msgid "Steam Cloud may upload the restored save the next time the game starts"
+msgstr "Steam Cloud may upload the restored save the next time the game starts"
+
+#: src/features/settings/SteamKeyBlock.tsx:107
+msgid "Steam key removed"
+msgstr "Steam key removed"
+
+#: src/features/settings/SteamKeyBlock.tsx:55
+msgid "Steam key saved"
+msgstr "Steam key saved"
+
+#: src/features/settings/SteamKeyBlock.tsx:78
+msgid "Steam no longer lists your games to apps without a key. Create a free key at steamcommunity.com/dev/apikey (any domain name works, no payment) and paste it here. It is stored in the Windows Credential Manager."
+msgstr "Steam no longer lists your games to apps without a key. Create a free key at steamcommunity.com/dev/apikey (any domain name works, no payment) and paste it here. It is stored in the Windows Credential Manager."
+
+#: src/features/settings/SteamKeyBlock.tsx:70
+msgid "Steam refused the key"
+msgstr "Steam refused the key"
+
+#: src/features/settings/SteamKeyBlock.tsx:36
+#: src/features/settings/SteamKeyBlock.tsx:64
+#: src/features/settings/SteamKeyBlock.tsx:94
+msgid "Steam Web API key"
+msgstr "Steam Web API key"
+
+#: src/features/library/LibraryPage.tsx:114
+msgid "Steam, Epic Games, Xbox and GOG installations are detected automatically. Add other games with a folder or an .exe file."
+msgstr "Steam, Epic Games, Xbox and GOG installations are detected automatically. Add other games with a folder or an .exe file."
+
+#: src/features/library/AddGameDialogs.tsx:224
+msgid "Steam, Epic, Xbox and GOG games are found automatically. Use this for any other game."
+msgstr "Steam, Epic, Xbox and GOG games are found automatically. Use this for any other game."
+
+#: src/features/settings/SettingsPage.tsx:139
+msgid "Steam’s profile page could not be read just now. Scan again later."
+msgstr "Steam’s profile page could not be read just now. Scan again later."
+
+#: src/features/artwork/ArtworkDialog.tsx:74
+msgid "SteamGridDB · automatic"
+msgstr "SteamGridDB · automatic"
+
+#: src/features/artwork/ArtworkDialog.tsx:73
+msgid "SteamGridDB · your choice"
+msgstr "SteamGridDB · your choice"
+
+#: src/features/settings/ArtworkSection.tsx:102
+msgid "SteamGridDB API key"
+msgstr "SteamGridDB API key"
+
+#: src/features/artwork/use-artwork.ts:85
+msgid "SteamGridDB could not be reached. Check your connection and try again."
+msgstr "SteamGridDB could not be reached. Check your connection and try again."
+
+#: src/features/artwork/use-artwork.ts:83
+msgid "SteamGridDB is limiting requests right now. Try again in a minute."
+msgstr "SteamGridDB is limiting requests right now. Try again in a minute."
+
+#: src/features/artwork/use-artwork.ts:81
+msgid "SteamGridDB refused the API key. Check it in Settings › Artwork."
+msgstr "SteamGridDB refused the API key. Check it in Settings › Artwork."
+
+#: src/features/onboarding/OnboardingDialog.tsx:111
+msgid "Step 1 of 4 · Launchers"
+msgstr "Step 1 of 4 · Launchers"
+
+#: src/features/onboarding/OnboardingDialog.tsx:116
+msgid "Step 2 of 4 · Library"
+msgstr "Step 2 of 4 · Library"
+
+#: src/features/onboarding/OnboardingDialog.tsx:121
+msgid "Step 3 of 4 · Backup"
+msgstr "Step 3 of 4 · Backup"
+
+#: src/features/onboarding/OnboardingDialog.tsx:126
+msgid "Step 4 of 4 · Google Drive"
+msgstr "Step 4 of 4 · Google Drive"
+
+#: src/features/saves/SaveLocationsCard.tsx:112
+msgid "Stop backing up this location"
+msgstr "Stop backing up this location"
+
+#: src/features/settings/BackupSection.tsx:104
+msgid "Storage"
+msgstr "Storage"
+
+#: src/features/cloud/StoragePanels.tsx:83
+msgid "Storage figures appear once Google answers."
+msgstr "Storage figures appear once Google answers."
+
+#: src/features/save-manager/SaveManagerPage.tsx:138
+#: src/features/save-manager/SnapshotDetailPanel.tsx:101
+msgid "Stored"
+msgstr "Stored"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:91
+msgid "Stored in"
+msgstr "Stored in"
+
+#: src/components/ds/storage-tags.tsx:27
+msgid "Stored in Google Drive"
+msgstr "Stored in Google Drive"
+
+#: src/features/cloud/AdvancedClient.tsx:36
+#: src/features/settings/ArtworkSection.tsx:36
+#: src/features/settings/SteamKeyBlock.tsx:55
+msgid "Stored in the Windows Credential Manager."
+msgstr "Stored in the Windows Credential Manager."
+
+#: src/components/ds/storage-tags.tsx:21
+msgid "Stored on this PC"
+msgstr "Stored on this PC"
+
+#: src/features/artwork/ArtworkDialog.tsx:225
+msgid "Style"
+msgstr "Style"
+
+#: src/features/library/AddGameDialogs.tsx:76
+msgid "suggested"
+msgstr "suggested"
+
+#. placeholder {0}: name.length
+#: src/features/saves/CreateSnapshotDialog.tsx:181
+msgid "Suggested from the date. {0} / {MAX_NAME}"
+msgstr "Suggested from the date. {0} / {MAX_NAME}"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:206
+msgid "Survives a broken drive or a new PC."
+msgstr "Survives a broken drive or a new PC."
+
+#: src/components/ds/status-badge.tsx:56
+#: src/components/ds/storage-tags.tsx:68
+#: src/features/dashboard/dashboard-sections.tsx:26
+msgid "Sync conflict"
+msgstr "Sync conflict"
+
+#: src/components/shell/use-cloud-summary.ts:57
+msgid "Sync conflicts: {conflicts}"
+msgstr "Sync conflicts: {conflicts}"
+
+#: src/features/cloud/CloudPage.tsx:163
+msgid "Sync finished"
+msgstr "Sync finished"
+
+#: src/features/cloud/CloudPage.tsx:207
+msgid "Sync is paused for this game until you choose."
+msgstr "Sync is paused for this game until you choose."
+
+#: src/features/cloud/CloudPage.tsx:177
+msgid "Sync now"
+msgstr "Sync now"
+
+#: src/features/cloud/CloudPage.tsx:166
+msgid "Sync stopped"
+msgstr "Sync stopped"
+
+#: src/components/shell/use-cloud-summary.ts:74
+msgid "Syncing {active}"
+msgstr "Syncing {active}"
+
+#: src/features/settings/SettingsPage.tsx:104
+msgid "Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden."
+msgstr "Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden."
+
+#: src/features/settings/ArtworkSection.tsx:65
+msgid "Test the key"
+msgstr "Test the key"
+
+#: src/features/cloud/AdvancedClient.tsx:96
+msgid "The client was not removed"
+msgstr "The client was not removed"
+
+#: src/features/cloud/AdvancedClient.tsx:39
+msgid "The client was not saved"
+msgstr "The client was not saved"
+
+#: src/features/cloud/ConflictDialog.tsx:94
+msgid "The conflict was not resolved"
+msgstr "The conflict was not resolved"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:105
+msgid "The copy in Google Drive stays, so you can still restore it later."
+msgstr "The copy in Google Drive stays, so you can still restore it later."
+
+#: src/features/saves/SnapshotTimeline.tsx:117
+msgid "The download failed"
+msgstr "The download failed"
+
+#: src/features/cloud/use-cloud.ts:85
+msgid "The downloaded copy did not match its checksum and was discarded."
+msgstr "The downloaded copy did not match its checksum and was discarded."
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:155
+msgid "The Drive copy is downloaded and checked against its checksum first"
+msgstr "The Drive copy is downloaded and checked against its checksum first"
+
+#: src/features/cloud/ConflictDialog.tsx:153
+msgid "The Drive save stays in your Drive as a conflict copy you can restore later."
+msgstr "The Drive save stays in your Drive as a conflict copy you can restore later."
+
+#: src/features/library/use-game-actions.ts:44
+msgid "The favourite could not be saved"
+msgstr "The favourite could not be saved"
+
+#: src/features/artwork/ArtworkDialog.tsx:117
+#: src/features/library/use-library-flows.ts:77
+msgid "The file picker could not be opened"
+msgstr "The file picker could not be opened"
+
+#: src/features/settings/SettingsPage.tsx:171
+msgid "The first place L8Play looks for where a game keeps its saves. It runs from the bundled Ludusavi tool and downloads the free community manifest."
+msgstr "The first place L8Play looks for where a game keeps its saves. It runs from the bundled Ludusavi tool and downloads the free community manifest."
+
+#: src/features/library/AddGameDialogs.tsx:211
+msgid "The folder could not be scanned"
+msgstr "The folder could not be scanned"
+
+#: src/features/saves/use-folder-picker.ts:24
+msgid "The folder picker could not be opened"
+msgstr "The folder picker could not be opened"
+
+#: src/features/saves/snapshot-labels.ts:38
+msgid "The game or another program is still using its save files. Close it and try again."
+msgstr "The game or another program is still using its save files. Close it and try again."
+
+#. placeholder {0}: formatPlaytime(rolledBack)
+#. placeholder {1}: formatDateTime(snapshot.createdAt, i18n.locale)
+#: src/features/saves/RestoreSnapshotDialog.tsx:134
+msgid "The game will go back <0>{0} of play</0>, to {1}. Anything you did after that is only in your current save."
+msgstr "The game will go back <0>{0} of play</0>, to {1}. Anything you did after that is only in your current save."
+
+#: src/features/library/AddGameDialogs.tsx:122
+msgid "The games were not added"
+msgstr "The games were not added"
+
+#: src/features/artwork/ArtworkDialog.tsx:95
+msgid "The image was not applied"
+msgstr "The image was not applied"
+
+#: src/features/artwork/ArtworkDialog.tsx:125
+msgid "The image was not used"
+msgstr "The image was not used"
+
+#: src/features/library/use-game-actions.ts:50
+msgid "The install folder could not be opened"
+msgstr "The install folder could not be opened"
+
+#: src/features/library/use-game-actions.ts:34
+msgid "The installation continues {via}."
+msgstr "The installation continues {via}."
+
+#: src/features/settings/ArtworkSection.tsx:75
+#: src/features/settings/SteamKeyBlock.tsx:111
+msgid "The key was not removed"
+msgstr "The key was not removed"
+
+#: src/features/settings/ArtworkSection.tsx:38
+#: src/features/settings/SteamKeyBlock.tsx:58
+msgid "The key was not saved"
+msgstr "The key was not saved"
+
+#: src/features/settings/ArtworkSection.tsx:61
+msgid "The key was refused"
+msgstr "The key was refused"
+
+#: src/features/settings/ArtworkSection.tsx:60
+msgid "The key works"
+msgstr "The key works"
+
+#: src/features/saves/SaveLocationsCard.tsx:120
+msgid "The location was not removed"
+msgstr "The location was not removed"
+
+#: src/features/settings/ArtworkSection.tsx:132
+msgid "The lookup stopped"
+msgstr "The lookup stopped"
+
+#: src/features/saves/SaveLocationsCard.tsx:91
+msgid "The save database doesn’t know this game. Add its save folder so L8Play can protect it."
+msgstr "The save database doesn’t know this game. Add its save folder so L8Play can protect it."
+
+#: src/features/saves/snapshot-labels.ts:42
+msgid "The save detector could not run. Reinstall L8Play if this keeps happening."
+msgstr "The save detector could not run. Reinstall L8Play if this keeps happening."
+
+#. placeholder {0}: game.title
+#: src/features/saves/CreateSnapshotDialog.tsx:102
+msgid "The save folder of {0} is empty."
+msgstr "The save folder of {0} is empty."
+
+#: src/features/library/use-library-flows.ts:41
+#: src/features/onboarding/OnboardingDialog.tsx:65
+msgid "The scan failed"
+msgstr "The scan failed"
+
+#: src/features/saves/FindSavesDialog.tsx:85
+msgid "The search could not run. Check the log file for details."
+msgstr "The search could not run. Check the log file for details."
+
+#: src/features/saves/CreateSnapshotDialog.tsx:107
+msgid "The snapshot was not created"
+msgstr "The snapshot was not created"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:63
+msgid "The snapshot was not deleted"
+msgstr "The snapshot was not deleted"
+
+#: src/features/cloud/ConflictDialog.tsx:113
+msgid "The version you don’t use is kept as a snapshot."
+msgstr "The version you don’t use is kept as a snapshot."
+
+#: src/features/settings/SettingsPage.tsx:51
+#: src/features/settings/SettingsPage.tsx:55
+msgid "Theme"
+msgstr "Theme"
+
+#: src/features/saves/FindSavesDialog.tsx:78
+msgid "These folders exist on this PC and look like this game’s saves. Check the evidence, then add the ones that are right. Nothing is backed up until you do."
+msgstr "These folders exist on this PC and look like this game’s saves. Check the evidence, then add the ones that are right. Nothing is backed up until you do."
+
+#: src/features/cloud/AdvancedClient.tsx:52
+msgid "This build of L8Play has no built-in Google client: create your own free Google Cloud project and add its client below."
+msgstr "This build of L8Play has no built-in Google client: create your own free Google Cloud project and add its client below."
+
+#: src/features/settings/BackupSection.tsx:45
+msgid "This folder can’t be used"
+msgstr "This folder can’t be used"
+
+#: src/features/saves/FindSavesDialog.tsx:53
+#: src/features/saves/SaveLocationsCard.tsx:60
+msgid "This folder was not added"
+msgstr "This folder was not added"
+
+#: src/features/library/use-library-flows.ts:89
+msgid "This game could not be added"
+msgstr "This game could not be added"
+
+#: src/features/game-details/GameDetailsPage.tsx:46
+msgid "This game is no longer in your library"
+msgstr "This game is no longer in your library"
+
+#: src/features/saves/SaveLocationsCard.tsx:129
+msgid "This path doesn’t exist right now"
+msgstr "This path doesn’t exist right now"
+
+#: src/components/ds/status-badge.tsx:60
+#: src/features/dashboard/dashboard-sections.tsx:132
+#: src/features/save-manager/SnapshotDetailPanel.tsx:95
+msgid "This PC"
+msgstr "This PC"
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:120
+msgid "This removes the snapshot archive from this PC."
+msgstr "This removes the snapshot archive from this PC."
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:119
+msgid "This removes the snapshot from Google Drive. It is not on this PC."
+msgstr "This removes the snapshot from Google Drive. It is not on this PC."
+
+#: src/features/saves/snapshot-labels.ts:40
+msgid "This snapshot is damaged and was not used. Your current save is untouched."
+msgstr "This snapshot is damaged and was not used. Your current save is untouched."
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:127
+msgid "This snapshot is marked “never delete automatically”."
+msgstr "This snapshot is marked “never delete automatically”."
+
+#: src/features/library/use-game-actions.ts:26
+msgid "through GOG Galaxy"
+msgstr "through GOG Galaxy"
+
+#: src/features/library/use-game-actions.ts:23
+msgid "through Steam"
+msgstr "through Steam"
+
+#: src/features/library/use-game-actions.ts:24
+msgid "through the Epic Games Launcher"
+msgstr "through the Epic Games Launcher"
+
+#: src/features/library/use-game-actions.ts:25
+msgid "through the Xbox app"
+msgstr "through the Xbox app"
+
+#: src/components/game/GameRow.tsx:88
+#: src/features/game-details/PropertiesPanel.tsx:59
+#: src/features/library/AddGameDialogs.tsx:57
+msgid "Title"
+msgstr "Title"
+
+#: src/features/library/LibraryToolbar.tsx:60
+msgid "Title A–Z"
+msgstr "Title A–Z"
+
+#: src/features/saves/SnapshotTimeline.tsx:265
+msgid "Today"
+msgstr "Today"
+
+#: src/features/cloud/TransferList.tsx:57
+msgid "Transfers"
+msgstr "Transfers"
+
+#: src/features/library/LibraryPage.tsx:99
+msgid "Try again"
+msgstr "Try again"
+
+#. placeholder {0}: conflict.gameTitle
+#: src/features/cloud/ConflictDialog.tsx:108
+msgid "Two different saves for {0}"
+msgstr "Two different saves for {0}"
+
+#: src/app/use-backend-events.ts:37
+msgid "Two different saves found"
+msgstr "Two different saves found"
+
+#: src/features/library/AddGameDialogs.tsx:166
+msgid "Untick the ones you don’t want, and choose which program starts each game. Games already in your library are not listed."
+msgstr "Untick the ones you don’t want, and choose which program starts each game. Games already in your library are not listed."
+
+#: src/features/cloud/CloudPage.tsx:236
+#: src/features/cloud/CloudPage.tsx:242
+#: src/features/onboarding/OnboardingDialog.tsx:284
+msgid "Upload automatically"
+msgstr "Upload automatically"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:59
+#: src/features/saves/SnapshotTimeline.tsx:206
+msgid "Upload failed"
+msgstr "Upload failed"
+
+#: src/components/ds/storage-tags.tsx:66
+msgid "Upload pending"
+msgstr "Upload pending"
+
+#: src/features/settings/SettingsPage.tsx:196
+msgid "Upload snapshots automatically"
+msgstr "Upload snapshots automatically"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:56
+msgid "Uploaded"
+msgstr "Uploaded"
+
+#: src/components/ds/status-badge.tsx:53
+#: src/components/ds/storage-tags.tsx:35
+#: src/features/dashboard/dashboard-sections.tsx:27
+#: src/features/save-manager/SnapshotDetailPanel.tsx:57
+msgid "Uploading"
+msgstr "Uploading"
+
+#: src/features/cloud/TransferList.tsx:34
+msgid "Uploading · {percent}%"
+msgstr "Uploading · {percent}%"
+
+#: src/features/dashboard/dashboard-sections.tsx:88
+msgid "Uploading to Drive · {percent}%"
+msgstr "Uploading to Drive · {percent}%"
+
+#: src/components/ds/storage-tags.tsx:33
+msgid "Uploading to Google Drive"
+msgstr "Uploading to Google Drive"
+
+#: src/features/save-manager/SnapshotDetailPanel.tsx:57
+msgid "Uploading…"
+msgstr "Uploading…"
+
+#: src/components/shell/use-cloud-summary.ts:68
+msgid "Uploads failed: {failed}"
+msgstr "Uploads failed: {failed}"
+
+#: src/features/cloud/CloudPage.tsx:303
+msgid "Uploads stop and L8Play’s access to your Drive is revoked. Your snapshots on this PC and the files already in Drive are not deleted."
+msgstr "Uploads stop and L8Play’s access to your Drive is revoked. Your snapshots on this PC and the files already in Drive are not deleted."
+
+#: src/features/cloud/ConflictDialog.tsx:99
+msgid "Use Drive version"
+msgstr "Use Drive version"
+
+#: src/features/settings/SteamKeyBlock.tsx:43
+msgid "Use my Steam Web API key"
+msgstr "Use my Steam Web API key"
+
+#: src/features/cloud/ConflictDialog.tsx:99
+msgid "Use PC version"
+msgstr "Use PC version"
+
+#: src/features/cloud/AdvancedClient.tsx:100
+msgid "Use the default client"
+msgstr "Use the default client"
+
+#: src/features/cloud/ConflictDialog.tsx:143
+msgid "Use the Drive version"
+msgstr "Use the Drive version"
+
+#: src/features/cloud/ConflictDialog.tsx:152
+msgid "Use the version on this PC"
+msgstr "Use the version on this PC"
+
+#: src/features/saves/FindSavesDialog.tsx:139
+msgid "Use this folder"
+msgstr "Use this folder"
+
+#: src/features/artwork/ArtworkDialog.tsx:280
+#: src/features/artwork/ArtworkDialog.tsx:281
+#: src/features/artwork/ArtworkDialog.tsx:287
+msgid "Use your own image"
+msgstr "Use your own image"
+
+#: src/features/cloud/StoragePanels.tsx:64
+msgid "used"
+msgstr "used"
+
+#: src/features/onboarding/OnboardingDialog.tsx:128
+msgid "Uses your free Google storage. L8Play gets its own private folder and cannot see your other files."
+msgstr "Uses your free Google storage. L8Play gets its own private folder and cannot see your other files."
+
+#: src/features/saves/SnapshotTimeline.tsx:111
+msgid "Verification failed"
+msgstr "Verification failed"
+
+#: src/components/ds/status-badge.tsx:52
+#: src/features/save-manager/SnapshotDetailPanel.tsx:101
+msgid "Verified"
+msgstr "Verified"
+
+#: src/features/settings/BackupSection.tsx:126
+msgid "Verify every snapshot"
+msgstr "Verify every snapshot"
+
+#: src/features/settings/SettingsPage.tsx:220
+msgid "Version"
+msgstr "Version"
+
+#: src/features/library/LibraryToolbar.tsx:118
+msgid "View"
+msgstr "View"
+
+#: src/features/cloud/CloudPage.tsx:60
+#: src/features/cloud/CloudPage.tsx:119
+msgid "Waiting for Google…"
+msgstr "Waiting for Google…"
+
+#: src/features/cloud/TransferList.tsx:40
+msgid "Waiting to download"
+msgstr "Waiting to download"
+
+#: src/components/ds/status-badge.tsx:55
+#: src/components/ds/storage-tags.tsx:39
+#: src/features/cloud/TransferList.tsx:40
+#: src/features/dashboard/dashboard-sections.tsx:88
+#: src/features/save-manager/SnapshotDetailPanel.tsx:58
+msgid "Waiting to upload"
+msgstr "Waiting to upload"
+
+#: src/features/onboarding/OnboardingDialog.tsx:113
+msgid "We look for game launchers on this PC. Scan again any time from My Games, or add any game by hand."
+msgstr "We look for game launchers on this PC. Scan again any time from My Games, or add any game by hand."
+
+#: src/features/onboarding/OnboardingDialog.tsx:102
+msgid "Welcome"
+msgstr "Welcome"
+
+#: src/features/dashboard/DashboardPage.tsx:48
+#: src/features/onboarding/OnboardingDialog.tsx:197
+msgid "Welcome to L8Play"
+msgstr "Welcome to L8Play"
+
+#: src/features/saves/CreateSnapshotDialog.tsx:191
+msgid "What makes this save worth keeping? Build, route, items…"
+msgstr "What makes this save worth keeping? Build, route, items…"
+
+#: src/features/settings/BackupSection.tsx:54
+msgid "When a game closes"
+msgstr "When a game closes"
+
+#: src/features/onboarding/OnboardingDialog.tsx:112
+msgid "Where are your games?"
+msgstr "Where are your games?"
+
+#: src/features/saves/snapshot-labels.ts:27
+msgid "While playing"
+msgstr "While playing"
+
+#: src/features/settings/SettingsPage.tsx:103
+msgid "Windows notifications"
+msgstr "Windows notifications"
+
+#: src/features/artwork/ArtworkDialog.tsx:204
+msgid "Wrong game? Search another title"
+msgstr "Wrong game? Search another title"
+
+#: src/features/saves/SnapshotTimeline.tsx:265
+msgid "Yesterday"
+msgstr "Yesterday"
+
+#: src/features/onboarding/OnboardingDialog.tsx:134
+msgid "You’re"
+msgstr "You’re"
+
+#: src/features/settings/BackupSection.tsx:67
+msgid "Your current save is always copied first, so a restore can be undone."
+msgstr "Your current save is always copied first, so a restore can be undone."
+
+#: src/features/saves/RestoreSnapshotDialog.tsx:143
+msgid "Your current save is backed up first."
+msgstr "Your current save is backed up first."
+
+#: src/features/saves/DeleteSnapshotDialog.tsx:124
+msgid "Your current save is not affected. This can’t be undone."
+msgstr "Your current save is not affected. This can’t be undone."
+
+#: src/features/onboarding/OnboardingDialog.tsx:105
+msgid "Your entire gaming world."
+msgstr "Your entire gaming world."
+
+#: src/features/dashboard/DashboardPage.tsx:51
+msgid "Your entire gaming world. One place."
+msgstr "Your entire gaming world. One place."
+
+#: src/components/shell/QuickRail.tsx:87
+msgid "Your favourite games will appear here"
+msgstr "Your favourite games will appear here"
+
+#: src/features/artwork/ArtworkDialog.tsx:71
+msgid "Your image"
+msgstr "Your image"
+
+#: src/features/dashboard/HeroCard.tsx:58
+msgid "Your latest save is backed up on this PC and in Google Drive."
+msgstr "Your latest save is backed up on this PC and in Google Drive."
+
+#: src/features/dashboard/HeroCard.tsx:60
+msgid "Your latest save is backed up on this PC."
+msgstr "Your latest save is backed up on this PC."
+
+#: src/features/library/LibraryPage.tsx:98
+msgid "Your library could not be loaded"
+msgstr "Your library could not be loaded"
+
+#: src/features/cloud/ConflictDialog.tsx:145
+msgid "Your PC save is backed up first, then replaced by the Drive version."
+msgstr "Your PC save is backed up first, then replaced by the Drive version."
+
+#: src/features/settings/SettingsPage.tsx:137
+msgid "Your Steam profile’s game details are private: set them to public to list owned games."
+msgstr "Your Steam profile’s game details are private: set them to public to list owned games."

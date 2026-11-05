@@ -1,0 +1,153 @@
+/*
+ * Motion of the application shell: the navigation rail opening and closing, and the dashboard's
+ * ambient backdrop. Everything honours prefers-reduced-motion through the global rule in globals.css.
+ *
+ * Rail: the window's grid column, the rail's own width and its labels all use the same duration and
+ * easing, so the page content follows the rail instead of jumping when it settles.
+ */
+.l8-window {
+  transition: grid-template-columns 240ms var(--ease-out);
+}
+
+.l8-window .l8-rail {
+  align-items: stretch;
+  padding: 18px 16px 16px;
+  transition: width 240ms var(--ease-out);
+}
+
+/* Labels clip against the rail only while it moves, so hover tooltips are never cut off. */
+.l8-window .l8-rail.is-animating {
+  overflow: hidden;
+}
+
+.l8-window .l8-rail-brand {
+  min-width: 0;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+.l8-window .l8-railbtn {
+  border-radius: var(--l8-radius-pill);
+  padding-right: 0;
+  transition:
+    padding-right 240ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.l8-window .l8-rail.is-expanded .l8-railbtn {
+  padding-right: 12px;
+}
+
+/* Collapsed: labels, counts and the wordmark wait just left of their place, invisible. */
+.l8-window .l8-railbtn-label,
+.l8-window .l8-railbtn-count,
+.l8-window .l8-wordmark {
+  opacity: 0;
+  transform: translateX(-8px);
+  pointer-events: none;
+  white-space: nowrap;
+  transition:
+    opacity 110ms var(--ease-out),
+    transform 240ms var(--ease-out);
+}
+
+/* Expanded: they slide in once the rail has opened a little. */
+.l8-window .l8-rail.is-expanded .l8-railbtn-label,
+.l8-window .l8-rail.is-expanded .l8-railbtn-count,
+.l8-window .l8-rail.is-expanded .l8-wordmark {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition:
+    opacity 180ms var(--ease-out) 80ms,
+    transform 240ms var(--ease-out) 40ms;
+}
+
+/* Dashboard backdrop sits under the top bar and the page, inside the main area. */
+.l8-main {
+  position: relative;
+}
+
+.l8-main > .l8-topbar,
+.l8-main > .l8-main-body {
+  position: relative;
+  z-index: 1;
+}
+
+.l8-ambient {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  /* Fade out on all four sides so the artwork melts into the page instead of ending in visible edges. */
+  --l8-fade-x: 160px;
+  --l8-fade-y: 140px;
+  mask-image:
+    linear-gradient(to bottom, transparent 0, #000 var(--l8-fade-y), #000 40%, transparent 100%),
+    linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--l8-fade-x),
+      #000 calc(100% - var(--l8-fade-x)),
+      transparent 100%
+    );
+  mask-composite: intersect;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0, #000 var(--l8-fade-y), #000 40%, transparent 100%),
+    linear-gradient(
+      to right,
+      transparent 0,
+      #000 var(--l8-fade-x),
+      #000 calc(100% - var(--l8-fade-x)),
+      transparent 100%
+    );
+  -webkit-mask-composite: source-in;
+}
+
+.l8-ambient-layer {
+  position: absolute;
+  inset: -80px;
+  background-position: center;
+  background-size: cover;
+  /* Dimmed too, so even a pale cover cannot wash out the text that sits directly on the page. */
+  filter: blur(40px) saturate(1.25) brightness(0.8);
+  opacity: 0.85;
+  will-change: opacity;
+}
+
+/* The previous layer stays fully opaque underneath, so the cross-fade never dips to the page colour. */
+.l8-ambient-layer.is-entering {
+  animation: l8-ambient-in 700ms var(--ease-out) both;
+}
+
+.l8-ambient-layer.is-fading {
+  animation: l8-ambient-out 700ms var(--ease-out) both;
+}
+
+/* A strong maroon scrim keeps text on the page at its documented contrast. */
+.l8-ambient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--l8-bg-100) 55%, transparent) 0%,
+      color-mix(in srgb, var(--l8-bg-100) 72%, transparent) 55%,
+      var(--l8-bg-100) 100%
+    ),
+    linear-gradient(90deg, color-mix(in srgb, var(--l8-bg-100) 45%, transparent) 0%, transparent 45%);
+}
+
+@keyframes l8-ambient-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes l8-ambient-out {
+  to {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "./tokens.css";
+@import "./typography.css";
+@import "./design-system.css";
+@import "./motion.css";
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/jetbrains-mono";
+
+/*
+ * Tailwind theme = the L8Play design tokens only. Default palettes are cleared so every colour,
+ * radius and shadow in the app comes from design/tokens.json. Token `bg-NNN` is exposed as
+ * `surface-NNN` to avoid `bg-bg-100`; every other token keeps its design-system name.
+ */
+@theme inline {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-surface-000: var(--l8-bg-000);
+  --color-surface-100: var(--l8-bg-100);
+  --color-surface-200: var(--l8-bg-200);
+  --color-surface-300: var(--l8-bg-300);
+  --color-surface-400: var(--l8-bg-400);
+  --color-line: var(--l8-line);
+  --color-line-strong: var(--l8-line-strong);
+  --color-control-border: var(--l8-control-border);
+  --color-ink: var(--l8-ink);
+  --color-ink-muted: var(--l8-ink-muted);
+  --color-ink-faint: var(--l8-ink-faint);
+  --color-flare: var(--l8-flare);
+  --color-flare-hover: var(--l8-flare-hover);
+  --color-flare-press: var(--l8-flare-press);
+  --color-flare-glow: var(--l8-flare-glow);
+  --color-on-flare: var(--l8-on-flare);
+  --color-flare-text: var(--l8-flare-text);
+  --color-flare-soft: var(--l8-flare-soft);
+  --color-cream: var(--l8-cream);
+  --color-on-cream: var(--l8-on-cream);
+  --color-cloud: var(--l8-cloud);
+  --color-cloud-soft: var(--l8-cloud-soft);
+  --color-local: var(--l8-local);
+  --color-local-soft: var(--l8-local-soft);
+  --color-success: var(--l8-success);
+  --color-success-soft: var(--l8-success-soft);
+  --color-warning: var(--l8-warning);
+  --color-warning-soft: var(--l8-warning-soft);
+  --color-danger: var(--l8-danger);
+  --color-danger-soft: var(--l8-danger-soft);
+  --color-danger-fill: var(--l8-danger-fill);
+  --color-on-danger: var(--l8-on-danger);
+  --color-focus: var(--l8-focus);
+  --color-stage: var(--l8-stage);
+  --color-on-stage: var(--l8-on-stage);
+  --color-on-stage-muted: var(--l8-on-stage-muted);
+  --color-scrim: var(--l8-scrim);
+
+  --font-sans: var(--l8-font-sans);
+  --font-mono: var(--l8-font-mono);
+
+  --radius-*: initial;
+  --radius-xs: var(--l8-radius-xs);
+  --radius-sm: var(--l8-radius-sm);
+  --radius-md: var(--l8-radius-md);
+  --radius-lg: var(--l8-radius-lg);
+  --radius-xl: var(--l8-radius-xl);
+  --radius-pill: var(--l8-radius-pill);
+
+  --shadow-*: initial;
+  --shadow-1: var(--l8-shadow-1);
+  --shadow-2: var(--l8-shadow-2);
+  --shadow-3: var(--l8-shadow-3);
+  --shadow-glow: var(--l8-shadow-glow);
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.5, 1);
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: var(--l8-bg-100);
+    color: var(--l8-ink);
+    font-family: var(--l8-font-sans);
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--l8-focus);
+    outline-offset: 2px;
+  }
+  button {
+    cursor: pointer;
+  }
+  input,
+  textarea {
+    user-select: text;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0s !important;
+    transition-duration: 0s !important;
+  }
+}
+
+@keyframes l8-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes l8-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* Play button motion: always on. A ring ripples outward and the glyph nudges forward; both speed up on hover. */
+/* A box-shadow ripple (not a scaled element) so it never adds scrollable overflow to lists. */
+@keyframes l8-play-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--l8-flare-glow) 70%, transparent);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 11px transparent;
+  }
+}
+
+@keyframes l8-play-nudge {
+  0%,
+  60%,
+  100% {
+    transform: translateX(0);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+
+/* In the components layer so Tailwind utilities (absolute, relative…) on the same element still win. */
+@layer components {
+  .l8-play {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .l8-play::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    animation: l8-play-ring 2.4s ease-out infinite;
+  }
+
+  .l8-play .l8-play-glyph {
+    animation: l8-play-nudge 2.4s ease-in-out infinite;
+  }
+
+  .l8-play:is(:hover, :focus-visible)::after {
+    animation-duration: 1.1s;
+  }
+
+  .l8-play:is(:hover, :focus-visible) .l8-play-glyph {
+    animation-duration: 1.1s;
+  }
+
+  .l8-play:disabled::after,
+  .l8-play:disabled .l8-play-glyph {
+    animation: none;
+  }
+}

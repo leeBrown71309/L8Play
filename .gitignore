@@ -1,0 +1,29 @@
+# Dependencies and build output
+node_modules/
+dist/
+target/
+src-tauri/gen/
+
+# Logs and local tooling
+*.log
+.vite/
+coverage/
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local secrets (never commit API keys or OAuth client files)
+.env
+.env.*
+!.env.example
+client_secret*.json
+
+# Ludusavi sidecar (downloaded and verified by `bun run fetch:ludusavi`)
+src-tauri/binaries/ludusavi-*.exe
+
+# Local assistant/tooling state
+.claude/
