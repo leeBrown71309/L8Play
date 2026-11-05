@@ -36,4 +36,8 @@ finally {
   Remove-Item Env:TAURI_SIGNING_PRIVATE_KEY -ErrorAction SilentlyContinue
 }
 
+# The raw build output is not the installed app. Removing it keeps Windows search, Start and file finders
+# from offering a second "l8-play.exe" that is not the installed release.
+Remove-Item "targetelease\l8-play.exe" -Force -ErrorAction SilentlyContinue
+
 Write-Host "Done: target/release/bundle/nsis/L8Play_${Version}_x64-setup.exe(.sig) and latest.json"

@@ -74,7 +74,7 @@ Nothing is paid: GitHub Releases hosts the manifest and the installer, and the s
 
 ### Build a signed release
 
-Shortcut: `pwsh -File scripts/release-build.ps1 -Version <x.y.z> -NotesFile release-notes.md` asks for the key password (kept in memory only), builds, and writes `latest.json`. The manual steps it performs are listed below.
+Shortcut: `pwsh -File scripts/release-build.ps1 -Version <x.y.z> -NotesFile release-notes.md` asks for the key password (kept in memory only), builds, and writes `latest.json`. It also deletes the raw `targetelease\l8-play.exe` afterwards, so search tools only find the installed app (`%LOCALAPPDATA%\L8Play`). The manual steps it performs are listed below.
 
 1. Bump the version in `package.json`, `src-tauri/tauri.conf.json`, the root `Cargo.toml` and the `l8-core` dependency line in `src-tauri/Cargo.toml`.
 2. Make sure the Google client variables are available (`.env`, see above).
