@@ -12,6 +12,7 @@ import { TopBar } from "@/components/shell/TopBar";
 import { useSettings, useUpdateSettings } from "@/features/settings/use-settings";
 import { AddGameDialogs } from "@/features/library/AddGameDialogs";
 import { OnboardingDialog } from "@/features/onboarding/OnboardingDialog";
+import { useAppUpdateWatcher } from "@/features/updates/use-app-update-watcher";
 import { cn } from "@/lib/cn";
 
 import "@/components/shell/shell-motion.css";
@@ -24,6 +25,7 @@ export function AppShell() {
   const { navExpanded } = useSettings();
   const updateSettings = useUpdateSettings();
   useBackendEvents();
+  useAppUpdateWatcher();
   const { pathname } = useLocation();
   return (
     <div className={cn("l8-window h-full w-full rounded-none", navExpanded && "is-nav-expanded")}>

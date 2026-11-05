@@ -1,4 +1,4 @@
-# Hands-on testing guide (phases 1 to 7)
+# Hands-on testing guide (phases 1 to 8)
 
 What was verified by automated tests is listed in each phase's notes in `architecture/08-roadmap.md`. This guide is what only a person on a real PC can check. **Back up important saves yourself before the first restore test, and test restore on a game you do not care about.**
 
@@ -81,3 +81,16 @@ Start `target\release\l8-play.exe` (or the installed app) **yourself, from Explo
 - With the window hidden, quit a game: an automatic snapshot is still taken. Windows notifications appear for a failed backup, a conflict or a Drive sign-in problem (and not when the window is focused).
 - Welcome tour: appears on a fresh profile (delete `%APPDATA%\com.l8play.app\l8.db` to simulate), can be skipped with Esc, and is replayable from Settings › About.
 - Installer: run `bun tauri build`, install the generated `*-setup.exe` (per-user, no admin prompt), start from the Start menu, then uninstall; check `%APPDATA%\com.l8play.app` is kept (your data) and that SmartScreen warns only because the installer is unsigned (see `release-and-signing.md`).
+
+## Phase 8 — In-app updates
+
+- **Needs** an installed build that contains the updater (0.1.3 or later) and internet access.
+- **First updater release (one time):** install `L8Play_0.1.3_x64-setup.exe` by hand. Version 0.1.2 has no updater and cannot update itself; every later release is offered inside the app.
+- Open **Settings › Updates**. The current version is shown and the status reads **Up to date** or **Update available**. **Check for updates** works even when automatic checks are off.
+- **End-to-end:** publish a newer release (for example 0.1.4) with its installer, `.sig` and `latest.json` (see `release-and-signing.md`). Within six hours, or immediately with **Check for updates**, the section shows the new version, its publication date and notes. The Settings button in the navigation rail gets a dot and a non-blocking toast appears once per version.
+- Press **Update now**: the progress bar streams the download, then L8Play restarts on the new version. Check the version in **Settings › About**. Nothing is downloaded or installed until you press the button.
+- **Errors:** disconnect the network and check: the section shows "GitHub could not be reached" with **Retry**. Publish a manifest with a bad signature (or tamper with the installer) and press **Update now**: the download is rejected with "The update signature is invalid" and nothing is installed.
+- **Busy warning:** start a game (or leave a Drive upload in the queue) and press **Update now**: a dialog warns that the restart may interrupt it, with **Later** and **Update anyway**.
+- **Automatic checks:** turn **Check for updates automatically** off, restart the app and confirm the status stays **Not checked yet** (no request is made). Manual checks still work; turn it back on afterwards.
+- **Browser preview:** run `bun run dev`, then open `http://localhost:1420/?update=available#/settings?section=updates`. Use `?update=uptodate`, `?update=checking`, `?update=downloading`, `?update=ready`, `?update=error` or `?update=idle` to force the other states; the data is simulated and nothing is downloaded.
+- **Key safety:** the private updater key and its password live outside the repository (see `release-and-signing.md`). Confirm neither appears in the repository, the installer, `%LOCALAPPDATA%\com.l8play.app\logs`, or the app window.

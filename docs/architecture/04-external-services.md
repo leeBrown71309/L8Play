@@ -16,6 +16,7 @@ Every service is optional except the local file system. "Fallback" is what the a
 | Steam Web API (`api.steampowered.com`) | Owned but not installed Steam games (read-only, optional setting) | The user's **own free Steam Web API key**, typed in the app and kept in the Windows Credential Manager; the SteamID64 comes from the local `loginusers.vdf`. Steam passwords are never requested. | Free | Anonymous Steam Community pages, then the list is simply not shown |
 | Steam Community public profile | Same list without a key (best effort; Steam often answers with its sign-in page) | None | Free | The list is not shown |
 | Google Drive API v3 | Cloud copies of snapshots | User's Google account; the OAuth client is defined in a Google Cloud project **with no billing account** | Free | Local-only snapshots (fully functional) |
+| GitHub Releases (`github.com/leeBrown71309/L8Play`) | In-app update check, manifest and installer download | None | Free | Manual installer download; the rest of the app is unaffected |
 | Ollama (localhost) | Optional AI extraction | None | Free (local hardware) | Detection without AI |
 | Gemini API (free tier) | Optional AI extraction | User's own AI Studio key | Free tier only; never billed | Ollama, or no AI |
 
@@ -29,6 +30,15 @@ Every service is optional except the local file system. "Fallback" is what the a
 - **Storage:** the user's own Google storage (15 GB free, shared with Gmail and Photos). The app reads `about.get(storageQuota)` and warns before an upload would exceed it. Upload limit: 750 GB/day (irrelevant at save sizes).
 - **OAuth for a desktop app:** installed-app flow, PKCE, loopback redirect `http://127.0.0.1:<random-port>`. The desktop client secret is not confidential by design. Tokens live in Credential Manager.
 - **Publishing status:** refresh tokens of apps in "Testing" are reported to expire after 7 days (community reports; not yet confirmed in Google's docs), and Testing is capped at 100 test users. The plan is to publish the OAuth app "In production" with `drive.file` only. **Phase 6 spike** confirms token lifetime before Drive ships.
+
+### GitHub Releases (in-app updates)
+
+- **Endpoint:** one fixed URL, `https://github.com/leeBrown71309/L8Play/releases/latest/download/latest.json`. The repository is public, so no token, account or billing is involved.
+- **What is sent:** a single HTTPS GET. The URL contains no user identifier, current version or machine data; the plugin may send its standard `User-Agent`, and GitHub's standard access logs apply. No telemetry, no usage data.
+- **Manifest:** `latest.json` with `version`, `notes`, `pub_date` and a `windows-x86_64` entry containing the installer URL and its minisign signature. The signature is verified against the public key embedded in the app; the version in the signature's trusted comment must match the announced version.
+- **Downgrades:** the updater compares versions and only accepts a **higher** one. An older or equal manifest is ignored.
+- **Installer host:** GitHub redirects the release asset to `objects.githubusercontent.com`; the updater follows that HTTPS redirect. The installer is the NSIS per-user build already used for manual installs, and `installMode: passive` shows a small progress window.
+- **Fallback:** if GitHub is unreachable, the app shows an error with Retry and keeps working; the user can still download the installer from the releases page.
 
 ### SteamGridDB API v2
 

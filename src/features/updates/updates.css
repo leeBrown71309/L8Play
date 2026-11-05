@@ -1,0 +1,66 @@
+/* Settings › Updates, on the same cards and tokens as the other settings sections. */
+@layer components {
+  .upd-card .head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font: 600 14px/20px var(--l8-font-sans);
+    color: var(--l8-ink);
+  }
+  .upd-card .head .l8-status {
+    margin-left: auto;
+  }
+  .upd-meta {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 8px 24px;
+    margin: 0 0 12px;
+    font: 500 13px/18px var(--l8-font-sans);
+  }
+  .upd-meta dt {
+    color: var(--l8-ink-faint);
+  }
+  .upd-meta dd {
+    margin: 0;
+    color: var(--l8-ink);
+    font: 500 12px/18px var(--l8-font-mono);
+    overflow-wrap: anywhere;
+    user-select: text;
+  }
+  .upd-notes {
+    margin: 0 0 12px;
+    padding: 12px 14px;
+    max-height: 220px;
+    overflow: auto;
+    border-radius: var(--l8-radius-md);
+    background: var(--l8-bg-300);
+    color: var(--l8-ink-muted);
+    font: 400 13px/19px var(--l8-font-sans);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .upd-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-top: 14px;
+  }
+  .upd-progress {
+    margin-top: 14px;
+  }
+  .upd-hint {
+    margin: 10px 0 0;
+    font: 400 12.5px/18px var(--l8-font-sans);
+    color: var(--l8-ink-faint);
+  }
+  .upd-card .l8-banner {
+    margin-top: 12px;
+  }
+  .upd-dialog-text {
+    margin: 0;
+    font: 400 13.5px/20px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+}
