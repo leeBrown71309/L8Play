@@ -313,7 +313,7 @@ export function OnboardingDialog() {
       </div>
 
       <div className="ob-right">
-        <CoverWall games={library} dimmed={step === 2} />
+        <CoverWall dimmed={step === 2} />
         {step === 2 && (
           <ScanGlass
             games={library.length}

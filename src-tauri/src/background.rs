@@ -24,7 +24,12 @@ const SAMPLE_INTERVAL: Duration = Duration::from_secs(3);
 
 /// Fills in cover, hero and logo for Epic and standalone games once a SteamGridDB key is saved.
 fn fetch_missing_artwork(app: &AppHandle, state: &AppState) {
-    match state.artwork().fetch_missing() {
+    let progressive = state.artwork().fetch_missing_with(|game, outcome| {
+        if outcome.fetched > 0 {
+            events::artwork_fetched(app, game.id);
+        }
+    });
+    match progressive {
         Ok(report) => {
             if report.fetched > 0 {
                 events::library_changed(app);
