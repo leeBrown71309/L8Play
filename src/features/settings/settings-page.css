@@ -172,3 +172,39 @@
 .st-note {
   color: var(--l8-warning);
 }
+
+@layer components {
+  .st-store-intro {
+    margin: 0 0 4px;
+    font: 400 13px/19px var(--l8-font-sans);
+    color: var(--l8-ink-muted);
+  }
+  .st-store {
+    gap: 16px;
+  }
+  .st-store-mark {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: var(--l8-radius-sm);
+    background: var(--l8-bg-300);
+    color: var(--l8-ink);
+  }
+  .st-store-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .st-store .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .st-store-foot {
+    margin: 2px 0 0;
+    font: 400 12px/18px var(--l8-font-sans);
+    color: var(--l8-ink-faint);
+  }
+}

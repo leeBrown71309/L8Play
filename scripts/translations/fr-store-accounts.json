@@ -1,0 +1,15 @@
+{
+  "Store accounts": "Comptes de boutiques",
+  "Connect a store to list every game you own, installed or not, and open its install page from L8Play. Sign-in always happens on the store’s own page: L8Play never sees or stores your password.": "Connectez une boutique pour lister tous les jeux que vous possédez, installés ou non, et ouvrir leur page d’installation depuis L8Play. La connexion se fait toujours sur la page de la boutique : L8Play ne voit ni ne stocke jamais votre mot de passe.",
+  "Available with an API key": "Disponible avec une clé API",
+  "Not connected": "Non connecté",
+  "Set up": "Configurer",
+  "Coming soon": "Bientôt disponible",
+  "Connect": "Connecter",
+  "Lists your whole Steam library. Works today with your Steam Web API key or public profile (see above).": "Liste toute votre bibliothèque Steam. Fonctionne dès aujourd’hui avec votre clé API Web Steam ou votre profil public (voir ci-dessus).",
+  "Lists the games in your Epic library and opens the Epic Games Launcher to install them.": "Liste les jeux de votre bibliothèque Epic et ouvre l’Epic Games Launcher pour les installer.",
+  "Xbox (Microsoft account)": "Xbox (compte Microsoft)",
+  "Lists your Xbox and Microsoft Store games and opens the Xbox app to install them.": "Liste vos jeux Xbox et Microsoft Store et ouvre l’application Xbox pour les installer.",
+  "Lists your GOG library and opens GOG Galaxy to install games.": "Liste votre bibliothèque GOG et ouvre GOG Galaxy pour installer les jeux.",
+  "Free: no paid service is involved. Not available yet.": "Gratuit : aucun service payant n’est utilisé. Pas encore disponible."
+}

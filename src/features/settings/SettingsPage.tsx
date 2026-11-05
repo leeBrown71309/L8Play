@@ -12,6 +12,7 @@ import { Segmented } from "@/components/ui/segmented";
 import { useGames } from "@/features/library/use-library";
 import { useAddGameFlow, useScanFlow } from "@/features/library/use-library-flows";
 import { SteamKeyBlock } from "@/features/settings/SteamKeyBlock";
+import { StoreAccountsBlock } from "@/features/settings/StoreAccountsBlock";
 import { useOwnedLibraryStatus } from "@/features/settings/use-owned-library";
 import { ArtworkSection } from "@/features/settings/ArtworkSection";
 import { BackupSection } from "@/features/settings/BackupSection";
@@ -35,8 +36,8 @@ const SECTION_IDS: readonly string[] = [
   "detection",
   "backup",
   "cloud",
-  "updates",
   "appearance",
+  "updates",
   "about",
 ];
 
@@ -121,46 +122,58 @@ function LibrariesSection() {
   const ownedStatus = useOwnedLibraryStatus();
   const games = useGames().data ?? [];
   const count = (platform: string) => games.filter((game) => game.platform === platform).length;
+  const showSteamSetup = () => {
+    const anchor = document.getElementById("steam-key-anchor");
+    anchor?.scrollIntoView({ behavior: "smooth", block: "center" });
+    anchor?.querySelector<HTMLElement>("button, input")?.focus({ preventScroll: true });
+  };
   return (
-    <SettingGroup>
-      <SettingRow
-        title={t`Game launchers`}
-        description={t`Found automatically from their launchers. ${count("steam")} Steam · ${count("epic")} Epic · ${count("xbox")} Xbox · ${count("gog")} GOG · ${count("standalone")} added by hand.`}
-        control={
-          <Button size="sm" icon="sync" loading={scan.isScanning} onClick={scan.start}>
-            {t`Scan libraries`}
-          </Button>
-        }
-      />
-      <ToggleSetting
-        title={t`Show games I own but haven’t installed`}
-        description={t`Lists the games your Steam account owns, read from Steam with your own free Steam Web API key or from your public profile. Nothing is sent about you except the request itself. Epic and other stores don’t offer this without signing in, so only Steam is listed.`}
-        note={
-          settings.showOwnedNotInstalled && ownedStatus === "private"
-            ? t`Your Steam profile’s game details are private: set them to public to list owned games.`
-            : settings.showOwnedNotInstalled && ownedStatus === "unavailable"
-              ? t`Steam’s profile page could not be read just now. Scan again later.`
-              : undefined
-        }
-        checked={settings.showOwnedNotInstalled}
-        onChange={(checked) =>
-          updateSettings.mutate(
-            { showOwnedNotInstalled: checked },
-            { onSuccess: () => (checked ? scan.start() : undefined) },
-          )
-        }
-      />
-      {settings.showOwnedNotInstalled && <SteamKeyBlock status={ownedStatus} onChanged={scan.start} />}
-      <SettingRow
-        title={t`Other games`}
-        description={t`Add a whole folder of games, or any game by choosing its .exe file.`}
-        control={
-          <Button size="sm" icon="plus" onClick={() => void addGame.start()}>
-            {t`Add a game`}
-          </Button>
-        }
-      />
-    </SettingGroup>
+    <>
+      <SettingGroup>
+        <SettingRow
+          title={t`Game launchers`}
+          description={t`Found automatically from their launchers. ${count("steam")} Steam · ${count("epic")} Epic · ${count("xbox")} Xbox · ${count("gog")} GOG · ${count("standalone")} added by hand.`}
+          control={
+            <Button size="sm" icon="sync" loading={scan.isScanning} onClick={scan.start}>
+              {t`Scan libraries`}
+            </Button>
+          }
+        />
+        <ToggleSetting
+          title={t`Show games I own but haven’t installed`}
+          description={t`Lists the games your Steam account owns, read from Steam with your own free Steam Web API key or from your public profile. Nothing is sent about you except the request itself. Epic and other stores don’t offer this without signing in, so only Steam is listed.`}
+          note={
+            settings.showOwnedNotInstalled && ownedStatus === "private"
+              ? t`Your Steam profile’s game details are private: set them to public to list owned games.`
+              : settings.showOwnedNotInstalled && ownedStatus === "unavailable"
+                ? t`Steam’s profile page could not be read just now. Scan again later.`
+                : undefined
+          }
+          checked={settings.showOwnedNotInstalled}
+          onChange={(checked) =>
+            updateSettings.mutate(
+              { showOwnedNotInstalled: checked },
+              { onSuccess: () => (checked ? scan.start() : undefined) },
+            )
+          }
+        />
+        {settings.showOwnedNotInstalled && (
+          <div id="steam-key-anchor">
+            <SteamKeyBlock status={ownedStatus} onChanged={scan.start} />
+          </div>
+        )}
+        <SettingRow
+          title={t`Other games`}
+          description={t`Add a whole folder of games, or any game by choosing its .exe file.`}
+          control={
+            <Button size="sm" icon="plus" onClick={() => void addGame.start()}>
+              {t`Add a game`}
+            </Button>
+          }
+        />
+      </SettingGroup>
+      <StoreAccountsBlock onSetUpSteam={showSteamSetup} />
+    </>
   );
 }
 
@@ -252,7 +265,7 @@ export function SettingsPage() {
   const { t } = useLingui();
   // `?section=artwork` lets other pages deep-link to a section.
   const requested = useSearchParams()[0].get("section");
-  const [active, setActive] = useState<SectionId>(isSectionId(requested) ? requested : "appearance");
+  const [active, setActive] = useState<SectionId>(isSectionId(requested) ? requested : "general");
   const sections: { id: SectionId; label: string; icon: DsIconName }[] = [
     { id: "general", label: t`General`, icon: "settings" },
     { id: "libraries", label: t`Game Libraries`, icon: "layers" },
@@ -260,8 +273,8 @@ export function SettingsPage() {
     { id: "detection", label: t`Save Detection`, icon: "scan" },
     { id: "backup", label: t`Backup`, icon: "snapshot" },
     { id: "cloud", label: t`Cloud`, icon: "cloud" },
-    { id: "updates", label: t`Updates`, icon: "download" },
     { id: "appearance", label: t`Appearance`, icon: "palette" },
+    { id: "updates", label: t`Updates`, icon: "download" },
     { id: "about", label: t`About`, icon: "info" },
   ];
 

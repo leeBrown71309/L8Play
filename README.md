@@ -20,10 +20,6 @@
   <img alt="Status: feature complete" src="https://img.shields.io/badge/status-feature%20complete-cf4239" />
 </p>
 
-<p align="center">
-  <img src="docs/screenshots/02-dashboard.png" alt="The L8Play dashboard, with the last played game, recently played titles, snapshot progress and sync attention list" width="100%" />
-</p>
-
 ## What it does
 
 - **One library, every store.** L8Play finds games installed through Steam, Epic, the Xbox app and GOG, and adds any standalone game from its `.exe`. Launch everything from one place, with playtime, favourites, search and recently played.
@@ -33,18 +29,6 @@
 - **Artwork and metadata.** Steam CDN covers, optional SteamGridDB results with your own free key kept in the Windows Credential Manager, or an image of your own. Title, developer and release year are editable.
 - **Built like a desktop app.** Tray icon, native notifications, custom title bar, keyboard-first search (`Ctrl K`), English and French, and two themes (Ember and Rosé).
 - **Updates inside the app.** Settings › Updates checks GitHub Releases, shows the new version and its notes, then downloads, verifies and installs the signed installer and restarts. No paid update service.
-
-## Screenshots
-
-| First run | My Games |
-| --- | --- |
-| [<img src="docs/screenshots/01-welcome.png" alt="The welcome tour introducing L8Play" />](docs/screenshots/01-welcome.png) | [<img src="docs/screenshots/03-library.png" alt="The game library with platform filters, installed and favourite views" />](docs/screenshots/03-library.png) |
-| **Game details** | **Save Manager** |
-| [<img src="docs/screenshots/04-game-details.png" alt="A game page with hero art, snapshot status and save locations" />](docs/screenshots/04-game-details.png) | [<img src="docs/screenshots/05-save-manager.png" alt="Snapshot timeline grouped by day, with the selected snapshot detail and restore action" />](docs/screenshots/05-save-manager.png) |
-| **Cloud Storage** | **Sync conflict** |
-| [<img src="docs/screenshots/06-cloud-sync.png" alt="Google Drive connected, with transfers, quota and automatic upload" />](docs/screenshots/06-cloud-sync.png) | [<img src="docs/screenshots/07-sync-conflict.png" alt="Conflict dialog showing the PC save and the Drive save side by side" />](docs/screenshots/07-sync-conflict.png) |
-| **Settings: game libraries** | **Settings: snapshots** |
-| [<img src="docs/screenshots/08-settings-libraries.png" alt="Settings for store scanning, owned games and the Steam Web API key" />](docs/screenshots/08-settings-libraries.png) | [<img src="docs/screenshots/09-settings-backup.png" alt="Settings for automatic snapshots and retention on PC and Drive" />](docs/screenshots/09-settings-backup.png) |
 
 ## Project status
 
@@ -131,7 +115,7 @@ src/                 React app
   lib/tauri/         typed command wrappers + browser preview backend
   locales/           Lingui catalogues (en, fr)
 design/              design-system tokens, brand and app icon
-docs/                architecture, guides and screenshots
+docs/                architecture and guides
 ```
 
 ## Documentation

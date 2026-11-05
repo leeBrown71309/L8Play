@@ -68,20 +68,21 @@ Nothing is paid: GitHub Releases hosts the manifest and the installer, and the s
 
 ### The signing key (back it up)
 
-- The key pair was generated once with `bun tauri signer generate -w "%USERPROFILE%\.tauri\l8play-updater.key"`. The private key and its password live **outside the repository**:
-  - `%USERPROFILE%\.tauri\l8play-updater.key`
-  - `%USERPROFILE%\.tauri\l8play-updater-password.txt`
-- **Back up both files somewhere safe** (password manager, encrypted backup). Losing either one means you can never sign an update that installed copies will accept. Generate a new pair only if you accept that every user must install a build manually again.
+- The key pair was generated once with `bun tauri signer generate -w "%USERPROFILE%\.tauri\l8play-updater.key"`. The private key lives **outside the repository** in `%USERPROFILE%\.tauri\l8play-updater.key`; its password is kept only in a password manager (never in a file on disk).
+- **Back up the key file and keep its password in the password manager.** Losing either one means you can never sign an update that installed copies will accept. Generate a new pair only if you accept that every user must install a build manually again.
 - The private key is never committed, printed, logged, put in `.env` or compiled into the app. The public key is not secret and is in `src-tauri/tauri.conf.json` under `plugins.updater.pubkey`.
 
 ### Build a signed release
+
+Shortcut: `pwsh -File scripts/release-build.ps1 -Version <x.y.z> -NotesFile release-notes.md` asks for the key password (kept in memory only), builds, and writes `latest.json`. The manual steps it performs are listed below.
 
 1. Bump the version in `package.json`, `src-tauri/tauri.conf.json`, the root `Cargo.toml` and the `l8-core` dependency line in `src-tauri/Cargo.toml`.
 2. Make sure the Google client variables are available (`.env`, see above).
 3. Set the signing variables **in the shell only** (never in a file inside the repo):
    ```powershell
    $env:TAURI_SIGNING_PRIVATE_KEY = "$env:USERPROFILE\.tauri\l8play-updater.key"
-   $env:TAURI_SIGNING_PRIVATE_KEY_PASSWORD = (Get-Content "$env:USERPROFILE\.tauri\l8play-updater-password.txt" -Raw).Trim()
+   $secure = Read-Host "Signing key password" -AsSecureString
+   $env:TAURI_SIGNING_PRIVATE_KEY_PASSWORD = [System.Net.NetworkCredential]::new("", $secure).Password
    ```
 4. Stop any running `l8-play.exe`, then:
    ```bash

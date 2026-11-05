@@ -20,7 +20,7 @@ Versions are pinned at implementation time to the current stable release. Licenc
 
 | Crate | Purpose | Licence |
 | --- | --- | --- |
-| `tauri`, `tauri-plugin-{dialog,opener,notification,shell,single-instance,log,updater}` | App, sidecar, native dialogs, notifications | MIT / Apache-2.0 |
+| `tauri`, `tauri-plugin-{dialog,opener,notification,shell,single-instance,log,updater,process}` | App, sidecar, native dialogs, notifications, signed updates and restart | MIT / Apache-2.0 |
 | `rusqlite` (`bundled`) | SQLite access | MIT (SQLite itself: public domain) |
 | `rusqlite_migration` | Versioned migrations | Apache-2.0 |
 | `serde`, `serde_json`, `serde_yaml_ng` | Serialization (manifest is YAML) | MIT / Apache-2.0 |

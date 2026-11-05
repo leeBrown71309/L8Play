@@ -335,7 +335,7 @@ msgstr "Une clé est enregistrée."
 msgid "A snapshot is taken automatically each time you stop playing. You can also create one now."
 msgstr "Une snapshot est prise automatiquement chaque fois que vous arrêtez de jouer. Vous pouvez aussi en créer une maintenant."
 
-#: src/features/settings/SettingsPage.tsx:273
+#: src/features/settings/SettingsPage.tsx:278
 msgid "About"
 msgstr "À propos"
 
@@ -360,7 +360,7 @@ msgstr "Ajouter 1 jeu"
 #: src/components/shell/NavRail.tsx:62
 #: src/features/library/AddGameDialogs.tsx:223
 #: src/features/onboarding/OnboardingDialog.tsx:230
-#: src/features/settings/SettingsPage.tsx:167
+#: src/features/settings/SettingsPage.tsx:170
 msgid "Add a game"
 msgstr "Ajouter un jeu"
 
@@ -368,7 +368,7 @@ msgstr "Ajouter un jeu"
 msgid "Add a save folder"
 msgstr "Ajouter un dossier de sauvegardes"
 
-#: src/features/settings/SettingsPage.tsx:164
+#: src/features/settings/SettingsPage.tsx:167
 msgid "Add a whole folder of games, or any game by choosing its .exe file."
 msgstr "Ajoutez un dossier entier de jeux, ou n’importe quel jeu en choisissant son fichier .exe."
 
@@ -459,17 +459,17 @@ msgstr "Clé d’API supprimée"
 msgid "API key saved"
 msgstr "Clé d’API enregistrée"
 
-#: src/features/settings/SettingsPage.tsx:272
+#: src/features/settings/SettingsPage.tsx:276
 msgid "Appearance"
 msgstr "Apparence"
 
-#: src/features/settings/SettingsPage.tsx:239
+#: src/features/settings/SettingsPage.tsx:244
 msgid "Application details could not be read."
 msgstr "Impossible de lire les informations de l’application."
 
 #: src/features/game-details/GameDetailsPage.tsx:77
 #: src/features/game-details/GameOverview.tsx:152
-#: src/features/settings/SettingsPage.tsx:267
+#: src/features/settings/SettingsPage.tsx:272
 msgid "Artwork"
 msgstr "Illustrations"
 
@@ -526,9 +526,13 @@ msgstr "Snapshot automatique ignorée"
 msgid "Automatic snapshots"
 msgstr "Snapshots automatiques"
 
-#: src/features/settings/SettingsPage.tsx:185
+#: src/features/settings/SettingsPage.tsx:190
 msgid "Available"
 msgstr "Disponible"
+
+#: src/features/settings/StoreAccountsBlock.tsx:32
+msgid "Available with an API key"
+msgstr "Disponible avec une clé API"
 
 #: src/features/onboarding/OnboardingDialog.tsx:294
 msgid "Back"
@@ -558,7 +562,7 @@ msgstr "Sauvegarder à la fermeture d’un jeu"
 msgid "Backing up now"
 msgstr "Sauvegarde en cours"
 
-#: src/features/settings/SettingsPage.tsx:269
+#: src/features/settings/SettingsPage.tsx:274
 msgid "Backup"
 msgstr "Sauvegarde"
 
@@ -624,11 +628,11 @@ msgstr "Modifiée depuis la dernière snapshot"
 msgid "Check failed"
 msgstr "Échec de la vérification"
 
-#: src/features/updates/UpdatesSection.tsx:178
+#: src/features/updates/UpdatesSection.tsx:176
 msgid "Check for updates"
 msgstr "Rechercher des mises à jour"
 
-#: src/features/updates/UpdatesSection.tsx:190
+#: src/features/updates/UpdatesSection.tsx:186
 msgid "Check for updates automatically"
 msgstr "Rechercher les mises à jour automatiquement"
 
@@ -739,7 +743,7 @@ msgstr "Fermez le jeu avant d’utiliser la version Drive."
 msgid "Close the game first"
 msgstr "Fermez d’abord le jeu"
 
-#: src/features/settings/SettingsPage.tsx:103
+#: src/features/settings/SettingsPage.tsx:96
 msgid "Closing the window hides it instead of quitting, so automatic backups and Drive sync keep working. Quit from the tray icon."
 msgstr "Fermer la fenêtre la masque au lieu de quitter, pour que les sauvegardes automatiques et la synchro Drive continuent. Quittez depuis l’icône de la zone de notification."
 
@@ -747,7 +751,7 @@ msgstr "Fermer la fenêtre la masque au lieu de quitter, pour que les sauvegarde
 msgid "Closing the window keeps L8Play running so automatic backups still happen."
 msgstr "Fermer la fenêtre laisse L8Play actif pour que les sauvegardes automatiques continuent."
 
-#: src/features/settings/SettingsPage.tsx:270
+#: src/features/settings/SettingsPage.tsx:275
 msgid "Cloud"
 msgstr "Cloud"
 
@@ -760,6 +764,10 @@ msgstr "Stockage cloud"
 msgid "Collapse the menu"
 msgstr "Réduire le menu"
 
+#: src/features/settings/StoreAccountsBlock.tsx:47
+msgid "Coming soon"
+msgstr "Bientôt disponible"
+
 #: src/features/saves/snapshot-labels.ts:17
 #: src/features/saves/snapshot-labels.ts:29
 msgid "Conflict copy"
@@ -768,6 +776,14 @@ msgstr "Copie de conflit"
 #: src/features/cloud/ConflictDialog.tsx:90
 msgid "Conflict resolved"
 msgstr "Conflit résolu"
+
+#: src/features/settings/StoreAccountsBlock.tsx:50
+msgid "Connect"
+msgstr "Connecter"
+
+#: src/features/settings/StoreAccountsBlock.tsx:66
+msgid "Connect a store to list every game you own, installed or not, and open its install page from L8Play. Sign-in always happens on the store’s own page: L8Play never sees or stores your password."
+msgstr "Connectez une boutique pour lister tous les jeux que vous possédez, installés ou non, et ouvrir leur page d’installation depuis L8Play. La connexion se fait toujours sur la page de la boutique : L8Play ne voit ni ne stocke jamais votre mot de passe."
 
 #: src/features/cloud/CloudPage.tsx:60
 #: src/features/onboarding/OnboardingDialog.tsx:170
@@ -796,7 +812,7 @@ msgstr "Reprendre"
 msgid "Copies"
 msgstr "Copies"
 
-#: src/features/settings/SettingsPage.tsx:208
+#: src/features/settings/SettingsPage.tsx:213
 msgid "Copies new snapshots to Google Drive in the background while an account is connected."
 msgstr "Copie les nouvelles snapshots vers Google Drive en arrière-plan tant qu’un compte est connecté."
 
@@ -863,7 +879,7 @@ msgstr "Endommagée"
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: src/features/settings/SettingsPage.tsx:232
+#: src/features/settings/SettingsPage.tsx:237
 msgid "Database"
 msgstr "Base de données"
 
@@ -991,7 +1007,7 @@ msgstr "Téléchargement"
 msgid "Downloading · {percent}%"
 msgstr "Téléchargement · {percent} %"
 
-#: src/features/updates/UpdatesSection.tsx:150
+#: src/features/updates/UpdatesSection.tsx:148
 msgid "Downloading the update"
 msgstr "Téléchargement de la mise à jour"
 
@@ -1010,7 +1026,7 @@ msgstr "Drive contient une sauvegarde différente de {0}"
 msgid "Drive storage"
 msgstr "Stockage Drive"
 
-#: src/features/settings/SettingsPage.tsx:63
+#: src/features/settings/SettingsPage.tsx:56
 msgid "Ember is the dark theme; Rosé is its light counterpart."
 msgstr "Ember est le thème sombre ; Rosé est sa version claire."
 
@@ -1018,7 +1034,7 @@ msgstr "Ember est le thème sombre ; Rosé est sa version claire."
 msgid "Enter a year between 1970 and 2100."
 msgstr "Saisissez une année entre 1970 et 2100."
 
-#: src/features/updates/UpdatesSection.tsx:205
+#: src/features/updates/UpdatesSection.tsx:201
 msgid "Esc cancels"
 msgstr "Échap annule"
 
@@ -1105,7 +1121,7 @@ msgstr "Dossier nommé comme le jeu"
 msgid "Folder named like the install folder"
 msgstr "Dossier nommé comme le dossier d’installation"
 
-#: src/features/settings/SettingsPage.tsx:193
+#: src/features/settings/SettingsPage.tsx:198
 msgid "For games the database does not know, “Find saves” on a game’s page asks PCGamingWiki and searches your PC. Nothing is backed up until you confirm a folder."
 msgstr "Pour les jeux que la base ne connaît pas, « Trouver les sauvegardes » sur la page d’un jeu interroge PCGamingWiki et cherche sur votre PC. Rien n’est sauvegardé tant que vous n’avez pas confirmé un dossier."
 
@@ -1118,13 +1134,17 @@ msgstr "{games} jeux trouvés"
 #. placeholder {2}: count("xbox")
 #. placeholder {3}: count("gog")
 #. placeholder {4}: count("standalone")
-#: src/features/settings/SettingsPage.tsx:136
+#: src/features/settings/SettingsPage.tsx:135
 msgid "Found automatically from their launchers. {0} Steam · {1} Epic · {2} Xbox · {3} GOG · {4} added by hand."
 msgstr "Trouvés automatiquement depuis leurs lanceurs. {0} Steam · {1} Epic · {2} Xbox · {3} GOG · {4} ajoutés à la main."
 
 #: src/features/cloud/StoragePanels.tsx:74
 msgid "Free"
 msgstr "Libre"
+
+#: src/features/settings/StoreAccountsBlock.tsx:92
+msgid "Free: no paid service is involved. Not available yet."
+msgstr "Gratuit : aucun service payant n’est utilisé. Pas encore disponible."
 
 #: src/features/saves/CreateSnapshotDialog.tsx:223
 msgid "Frees this PC once the upload is confirmed."
@@ -1142,11 +1162,11 @@ msgstr "Les détails de jeux sont privés"
 msgid "Game is closed"
 msgstr "Le jeu est fermé"
 
-#: src/features/settings/SettingsPage.tsx:135
+#: src/features/settings/SettingsPage.tsx:134
 msgid "Game launchers"
 msgstr "Lanceurs de jeux"
 
-#: src/features/settings/SettingsPage.tsx:266
+#: src/features/settings/SettingsPage.tsx:271
 msgid "Game Libraries"
 msgstr "Bibliothèques de jeux"
 
@@ -1188,7 +1208,7 @@ msgstr "Les jeux sans dossier de sauvegarde connu pourront être complétés plu
 msgid "Games you play will show up here, most recent first."
 msgstr "Les jeux auxquels vous jouez apparaîtront ici, du plus récent au plus ancien."
 
-#: src/features/settings/SettingsPage.tsx:265
+#: src/features/settings/SettingsPage.tsx:270
 msgid "General"
 msgstr "Général"
 
@@ -1234,7 +1254,7 @@ msgstr "Impossible de joindre Google. Vérifiez votre connexion et réessayez."
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: src/features/settings/SettingsPage.tsx:213
+#: src/features/settings/SettingsPage.tsx:218
 msgid "Google Drive account"
 msgstr "Compte Google Drive"
 
@@ -1358,7 +1378,7 @@ msgstr "Dossier d’installation"
 msgid "Install size"
 msgstr "Taille installée"
 
-#: src/features/updates/UpdatesSection.tsx:200
+#: src/features/updates/UpdatesSection.tsx:196
 msgid "Install the update now?"
 msgstr "Installer la mise à jour maintenant ?"
 
@@ -1375,7 +1395,7 @@ msgstr "Installés"
 msgid "Installed · {0}"
 msgstr "Installé · {0}"
 
-#: src/features/settings/SettingsPage.tsx:78
+#: src/features/settings/SettingsPage.tsx:71
 msgid "Interface language."
 msgstr "Langue de l’interface."
 
@@ -1415,7 +1435,7 @@ msgid "Keep on this PC"
 msgstr "Conserver sur ce PC"
 
 #: src/features/onboarding/OnboardingDialog.tsx:257
-#: src/features/settings/SettingsPage.tsx:102
+#: src/features/settings/SettingsPage.tsx:95
 msgid "Keep running in the notification area"
 msgstr "Rester actif dans la zone de notification"
 
@@ -1433,7 +1453,7 @@ msgid "Kind"
 msgstr "Type"
 
 #. placeholder {0}: update.version
-#: src/features/updates/use-app-update-watcher.ts:70
+#: src/features/updates/use-app-update-watcher.ts:78
 msgid "L8Play {0} is ready to download. Open Settings to install it."
 msgstr "L8Play {0} est prêt à être téléchargé. Ouvrez les Paramètres pour l’installer."
 
@@ -1453,21 +1473,21 @@ msgstr "L8Play n’accède qu’aux fichiers qu’il crée, dans un dossier « L
 msgid "L8Play updates"
 msgstr "Mises à jour de L8Play"
 
-#: src/features/updates/UpdatesSection.tsx:201
+#: src/features/updates/UpdatesSection.tsx:197
 msgid "L8Play will close and restart to finish."
 msgstr "L8Play va se fermer et redémarrer pour terminer."
 
 #. placeholder {0}: update.update.version
-#: src/features/updates/UpdatesSection.tsx:184
+#: src/features/updates/UpdatesSection.tsx:181
 msgid "L8Play will close, install version {0} and restart."
 msgstr "L8Play va se fermer, installer la version {0} et redémarrer."
 
-#: src/features/updates/UpdatesSection.tsx:157
+#: src/features/updates/UpdatesSection.tsx:155
 msgid "L8Play will restart to finish."
 msgstr "L8Play va redémarrer pour terminer."
 
-#: src/features/settings/SettingsPage.tsx:77
-#: src/features/settings/SettingsPage.tsx:81
+#: src/features/settings/SettingsPage.tsx:70
+#: src/features/settings/SettingsPage.tsx:74
 msgid "Language"
 msgstr "Langue"
 
@@ -1497,7 +1517,7 @@ msgstr "Dernière partie : {0}"
 msgid "Last snapshot"
 msgstr "Dernier snapshot"
 
-#: src/features/updates/UpdatesSection.tsx:209
+#: src/features/updates/UpdatesSection.tsx:205
 msgid "Later"
 msgstr "Plus tard"
 
@@ -1517,11 +1537,27 @@ msgstr "Vue liste (Ctrl+L)"
 msgid "Listed on PCGamingWiki"
 msgstr "Listé sur PCGamingWiki"
 
-#: src/features/settings/SettingsPage.tsx:145
+#: src/features/settings/StoreAccountsBlock.tsx:77
+msgid "Lists the games in your Epic library and opens the Epic Games Launcher to install them."
+msgstr "Liste les jeux de votre bibliothèque Epic et ouvre l’Epic Games Launcher pour les installer."
+
+#: src/features/settings/SettingsPage.tsx:144
 msgid "Lists the games your Steam account owns, read from Steam with your own free Steam Web API key or from your public profile. Nothing is sent about you except the request itself. Epic and other stores don’t offer this without signing in, so only Steam is listed."
 msgstr "Liste les jeux que votre compte Steam possède, lus depuis Steam avec votre propre clé d’API Web Steam gratuite ou depuis votre profil public. Rien n’est envoyé à votre sujet, hormis la requête elle-même. Epic et les autres boutiques ne le permettent pas sans connexion, donc seul Steam est listé."
 
-#: src/features/settings/SettingsPage.tsx:238
+#: src/features/settings/StoreAccountsBlock.tsx:89
+msgid "Lists your GOG library and opens GOG Galaxy to install games."
+msgstr "Liste votre bibliothèque GOG et ouvre GOG Galaxy pour installer les jeux."
+
+#: src/features/settings/StoreAccountsBlock.tsx:71
+msgid "Lists your whole Steam library. Works today with your Steam Web API key or public profile (see above)."
+msgstr "Liste toute votre bibliothèque Steam. Fonctionne dès aujourd’hui avec votre clé API Web Steam ou votre profil public (voir ci-dessus)."
+
+#: src/features/settings/StoreAccountsBlock.tsx:83
+msgid "Lists your Xbox and Microsoft Store games and opens the Xbox app to install them."
+msgstr "Liste vos jeux Xbox et Microsoft Store et ouvre l’application Xbox pour les installer."
+
+#: src/features/settings/SettingsPage.tsx:243
 msgid "Loading…"
 msgstr "Chargement…"
 
@@ -1537,7 +1573,7 @@ msgstr "Logo"
 msgid "Looking for games…"
 msgstr "Recherche de jeux…"
 
-#: src/features/updates/UpdatesSection.tsx:191
+#: src/features/updates/UpdatesSection.tsx:187
 msgid "Looks for a newer version when L8Play starts and every 6 hours. Nothing is downloaded or installed until you ask."
 msgstr "Recherche une version plus récente au démarrage de L8Play et toutes les 6 heures. Rien n’est téléchargé ni installé sans votre accord."
 
@@ -1545,7 +1581,7 @@ msgstr "Recherche une version plus récente au démarrage de L8Play et toutes le
 msgid "Looks up cover, hero and logo for Epic and standalone games. This also runs when the app starts."
 msgstr "Cherche jaquette, bannière et logo pour les jeux Epic et indépendants. Cette recherche s’exécute aussi au démarrage de l’appli."
 
-#: src/features/settings/SettingsPage.tsx:181
+#: src/features/settings/SettingsPage.tsx:186
 msgid "Ludusavi save database"
 msgstr "Base de sauvegardes Ludusavi"
 
@@ -1736,12 +1772,16 @@ msgstr "Aucun snapshot pour l’instant. Un snapshot est créé automatiquement 
 msgid "Not checked yet"
 msgstr "Pas encore vérifié"
 
+#: src/features/settings/StoreAccountsBlock.tsx:34
+msgid "Not connected"
+msgstr "Non connecté"
+
 #: src/features/saves/GameSavesPanel.tsx:189
 msgid "Not connected."
 msgstr "Non connecté."
 
 #: src/features/onboarding/OnboardingParts.tsx:139
-#: src/features/settings/SettingsPage.tsx:187
+#: src/features/settings/SettingsPage.tsx:192
 msgid "Not found"
 msgstr "Introuvable"
 
@@ -1845,7 +1885,7 @@ msgstr "Les anciennes snapshots automatiques sont aussi supprimées de Google Dr
 msgid "Oldest auto snapshots are removed first."
 msgstr "Les plus anciennes snapshots automatiques sont supprimées en premier."
 
-#: src/features/settings/SettingsPage.tsx:194
+#: src/features/settings/SettingsPage.tsx:199
 msgid "On demand"
 msgstr "À la demande"
 
@@ -1894,7 +1934,7 @@ msgid "Open"
 msgstr "Ouvrir"
 
 #: src/features/saves/CreateSnapshotDialog.tsx:245
-#: src/features/settings/SettingsPage.tsx:217
+#: src/features/settings/SettingsPage.tsx:222
 msgid "Open Cloud Storage"
 msgstr "Ouvrir Stockage cloud"
 
@@ -1952,7 +1992,7 @@ msgstr "Facultatif : permet à Steam de lister vos jeux à cette application."
 msgid "Other files"
 msgstr "Autres fichiers"
 
-#: src/features/settings/SettingsPage.tsx:163
+#: src/features/settings/SettingsPage.tsx:166
 msgid "Other games"
 msgstr "Autres jeux"
 
@@ -1992,7 +2032,7 @@ msgstr "En pause"
 msgid "PC"
 msgstr "PC"
 
-#: src/features/settings/SettingsPage.tsx:192
+#: src/features/settings/SettingsPage.tsx:197
 msgid "PCGamingWiki and local search"
 msgstr "PCGamingWiki et recherche locale"
 
@@ -2196,7 +2236,7 @@ msgstr "Revenir à l’automatique"
 msgid "Resolve"
 msgstr "Résoudre"
 
-#: src/features/updates/UpdatesSection.tsx:169
+#: src/features/updates/UpdatesSection.tsx:167
 msgid "Restart now"
 msgstr "Redémarrer maintenant"
 
@@ -2226,7 +2266,7 @@ msgstr "Conservation"
 msgid "Retention keeps the last {0} automatic snapshots per game. Pinned ones are always kept."
 msgstr "La rétention garde les {0} derniers snapshots automatiques par jeu. Les snapshots épinglés sont toujours conservés."
 
-#: src/features/updates/UpdatesSection.tsx:137
+#: src/features/updates/UpdatesSection.tsx:135
 msgid "Retry"
 msgstr "Réessayer"
 
@@ -2274,7 +2314,7 @@ msgstr "Sauvegarde copiée"
 msgid "Save backed up before launch"
 msgstr "Sauvegarde copiée avant le lancement"
 
-#: src/features/settings/SettingsPage.tsx:268
+#: src/features/settings/SettingsPage.tsx:273
 msgid "Save Detection"
 msgstr "Détection des sauvegardes"
 
@@ -2335,7 +2375,7 @@ msgstr "Enregistrer mon client"
 msgid "Save protection"
 msgstr "Protection des sauvegardes"
 
-#: src/features/settings/SettingsPage.tsx:253
+#: src/features/settings/SettingsPage.tsx:258
 msgid "Save-location knowledge comes from the Ludusavi manifest and PCGamingWiki (CC BY-NC-SA 3.0)."
 msgstr "Les emplacements de sauvegarde proviennent du manifeste Ludusavi et de PCGamingWiki (CC BY-NC-SA 3.0)."
 
@@ -2366,7 +2406,7 @@ msgstr "Analyse terminée"
 
 #: src/features/library/LibraryPage.tsx:58
 #: src/features/library/LibraryPage.tsx:118
-#: src/features/settings/SettingsPage.tsx:139
+#: src/features/settings/SettingsPage.tsx:138
 msgid "Scan libraries"
 msgstr "Analyser les bibliothèques"
 
@@ -2391,7 +2431,7 @@ msgstr "Analyse…"
 msgid "Scheduled"
 msgstr "Planifiée"
 
-#: src/features/settings/SettingsPage.tsx:233
+#: src/features/settings/SettingsPage.tsx:238
 msgid "Schema version"
 msgstr "Version du schéma"
 
@@ -2431,6 +2471,10 @@ msgstr "Session terminée"
 msgid "Sessions recorded"
 msgstr "Sessions enregistrées"
 
+#: src/features/settings/StoreAccountsBlock.tsx:42
+msgid "Set up"
+msgstr "Configurer"
+
 #: src/features/onboarding/OnboardingDialog.tsx:170
 msgid "Set up Google Drive"
 msgstr "Configurer Google Drive"
@@ -2440,11 +2484,11 @@ msgid "Set up SteamGridDB"
 msgstr "Configurer SteamGridDB"
 
 #: src/components/shell/NavRail.tsx:82
-#: src/features/settings/SettingsPage.tsx:278
+#: src/features/settings/SettingsPage.tsx:283
 msgid "Settings"
 msgstr "Paramètres"
 
-#: src/features/settings/SettingsPage.tsx:280
+#: src/features/settings/SettingsPage.tsx:285
 msgid "Settings sections"
 msgstr "Sections des paramètres"
 
@@ -2457,7 +2501,7 @@ msgstr "Étapes de configuration"
 msgid "Show game {0} of {pages}"
 msgstr "Afficher le jeu {0} sur {pages}"
 
-#: src/features/settings/SettingsPage.tsx:144
+#: src/features/settings/SettingsPage.tsx:143
 msgid "Show games I own but haven’t installed"
 msgstr "Afficher les jeux que je possède mais n’ai pas installés"
 
@@ -2469,7 +2513,7 @@ msgstr "Afficher dans l’Explorateur"
 msgid "Show in folder"
 msgstr "Afficher dans le dossier"
 
-#: src/features/settings/SettingsPage.tsx:250
+#: src/features/settings/SettingsPage.tsx:255
 msgid "Show the welcome tour again"
 msgstr "Revoir la visite de bienvenue"
 
@@ -2498,7 +2542,7 @@ msgstr "La connexion utilise actuellement votre propre client Google."
 msgid "Sign-in needed"
 msgstr "Connexion requise"
 
-#: src/features/settings/SettingsPage.tsx:214
+#: src/features/settings/SettingsPage.tsx:219
 msgid "Sign-in, storage, the sync queue and conflicts are on the Cloud Storage page."
 msgstr "La connexion, le stockage, la file de synchro et les conflits sont sur la page Stockage cloud."
 
@@ -2613,7 +2657,7 @@ msgid "Standalone"
 msgstr "Autonome"
 
 #: src/features/onboarding/OnboardingDialog.tsx:263
-#: src/features/settings/SettingsPage.tsx:108
+#: src/features/settings/SettingsPage.tsx:101
 msgid "Start with Windows"
 msgstr "Démarrer avec Windows"
 
@@ -2626,7 +2670,7 @@ msgstr "Lancement de {0}"
 msgid "Starts hidden in the notification area when you sign in."
 msgstr "Démarre masqué dans la zone de notification à l’ouverture de session."
 
-#: src/features/settings/SettingsPage.tsx:109
+#: src/features/settings/SettingsPage.tsx:102
 msgid "Starts hidden in the notification area when you sign in. No administrator rights needed."
 msgstr "Démarre masqué dans la zone de notification à l’ouverture de session. Aucun droit administrateur requis."
 
@@ -2672,7 +2716,7 @@ msgstr "Les installations Steam, Epic Games, Xbox et GOG sont détectées automa
 msgid "Steam, Epic, Xbox and GOG games are found automatically. Use this for any other game."
 msgstr "Les jeux Steam, Epic, Xbox et GOG sont trouvés automatiquement. Utilisez ceci pour tout autre jeu."
 
-#: src/features/settings/SettingsPage.tsx:150
+#: src/features/settings/SettingsPage.tsx:149
 msgid "Steam’s profile page could not be read just now. Scan again later."
 msgstr "La page de profil Steam n’a pas pu être lue pour l’instant. Relancez un scan plus tard."
 
@@ -2727,6 +2771,10 @@ msgstr "Stockage"
 #: src/features/cloud/StoragePanels.tsx:83
 msgid "Storage figures appear once Google answers."
 msgstr "Les chiffres de stockage apparaissent dès que Google répond."
+
+#: src/features/settings/StoreAccountsBlock.tsx:64
+msgid "Store accounts"
+msgstr "Comptes de boutiques"
 
 #: src/features/save-manager/SaveManagerPage.tsx:138
 #: src/features/save-manager/SnapshotDetailPanel.tsx:101
@@ -2798,7 +2846,7 @@ msgstr "Synchro interrompue"
 msgid "Syncing {active}"
 msgstr "Synchronisation de {active}"
 
-#: src/features/settings/SettingsPage.tsx:115
+#: src/features/settings/SettingsPage.tsx:108
 msgid "Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden."
 msgstr "Vous prévient des problèmes à traiter (sauvegarde échouée, conflit de sauvegardes, connexion Drive) pendant que la fenêtre est masquée."
 
@@ -2851,7 +2899,7 @@ msgstr "Le favori n’a pas pu être enregistré"
 msgid "The file picker could not be opened"
 msgstr "Le sélecteur de fichiers n’a pas pu s’ouvrir"
 
-#: src/features/settings/SettingsPage.tsx:182
+#: src/features/settings/SettingsPage.tsx:187
 msgid "The first place L8Play looks for where a game keeps its saves. It runs from the bundled Ludusavi tool and downloads the free community manifest."
 msgstr "Le premier endroit où L8Play cherche où un jeu range ses sauvegardes. Il utilise l’outil Ludusavi fourni et télécharge le manifeste communautaire gratuit."
 
@@ -2953,7 +3001,7 @@ msgstr "La snapshot n’a pas été supprimée"
 msgid "The update check failed"
 msgstr "La vérification des mises à jour a échoué"
 
-#: src/features/updates/UpdatesSection.tsx:156
+#: src/features/updates/UpdatesSection.tsx:154
 msgid "The update is installed"
 msgstr "La mise à jour est installée"
 
@@ -2965,8 +3013,8 @@ msgstr "La signature de la mise à jour est invalide"
 msgid "The version you don’t use is kept as a snapshot."
 msgstr "La version que vous n’utilisez pas est gardée comme snapshot."
 
-#: src/features/settings/SettingsPage.tsx:62
-#: src/features/settings/SettingsPage.tsx:66
+#: src/features/settings/SettingsPage.tsx:55
+#: src/features/settings/SettingsPage.tsx:59
 msgid "Theme"
 msgstr "Thème"
 
@@ -3080,20 +3128,20 @@ msgstr "Décochez ceux que vous ne voulez pas, et choisissez quel programme lanc
 msgid "Up to date"
 msgstr "À jour"
 
-#: src/features/updates/UpdatesSection.tsx:212
+#: src/features/updates/UpdatesSection.tsx:208
 msgid "Update anyway"
 msgstr "Mettre à jour quand même"
 
 #: src/features/updates/UpdatesSection.tsx:54
-#: src/features/updates/use-app-update-watcher.ts:69
+#: src/features/updates/use-app-update-watcher.ts:77
 msgid "Update available"
 msgstr "Mise à jour disponible"
 
-#: src/features/updates/UpdatesSection.tsx:164
+#: src/features/updates/UpdatesSection.tsx:162
 msgid "Update now"
 msgstr "Mettre à jour maintenant"
 
-#: src/features/settings/SettingsPage.tsx:271
+#: src/features/settings/SettingsPage.tsx:277
 msgid "Updates"
 msgstr "Mises à jour"
 
@@ -3112,7 +3160,7 @@ msgstr "Envoi échoué"
 msgid "Upload pending"
 msgstr "Envoi en attente"
 
-#: src/features/settings/SettingsPage.tsx:207
+#: src/features/settings/SettingsPage.tsx:212
 msgid "Upload snapshots automatically"
 msgstr "Envoyer les snapshots automatiquement"
 
@@ -3206,7 +3254,7 @@ msgstr "Vérifiée"
 msgid "Verify every snapshot"
 msgstr "Vérifier chaque snapshot"
 
-#: src/features/settings/SettingsPage.tsx:231
+#: src/features/settings/SettingsPage.tsx:236
 msgid "Version"
 msgstr "Version"
 
@@ -3260,13 +3308,17 @@ msgstr "Où sont vos jeux ?"
 msgid "While playing"
 msgstr "Pendant la partie"
 
-#: src/features/settings/SettingsPage.tsx:114
+#: src/features/settings/SettingsPage.tsx:107
 msgid "Windows notifications"
 msgstr "Notifications Windows"
 
 #: src/features/artwork/ArtworkDialog.tsx:204
 msgid "Wrong game? Search another title"
 msgstr "Mauvais jeu ? Cherchez un autre titre"
+
+#: src/features/settings/StoreAccountsBlock.tsx:82
+msgid "Xbox (Microsoft account)"
+msgstr "Xbox (compte Microsoft)"
 
 #: src/features/saves/SnapshotTimeline.tsx:265
 msgid "Yesterday"
@@ -3276,7 +3328,7 @@ msgstr "Hier"
 msgid "You are offline"
 msgstr "Vous êtes hors ligne"
 
-#: src/features/updates/UpdatesSection.tsx:128
+#: src/features/updates/UpdatesSection.tsx:127
 msgid "You are running the latest version."
 msgstr "Vous utilisez la dernière version."
 
@@ -3328,6 +3380,6 @@ msgstr "Votre bibliothèque n’a pas pu être chargée"
 msgid "Your PC save is backed up first, then replaced by the Drive version."
 msgstr "Votre sauvegarde du PC est d’abord copiée, puis remplacée par la version Drive."
 
-#: src/features/settings/SettingsPage.tsx:148
+#: src/features/settings/SettingsPage.tsx:147
 msgid "Your Steam profile’s game details are private: set them to public to list owned games."
 msgstr "Les détails de jeux de votre profil Steam sont privés : passez-les en public pour lister les jeux possédés."
