@@ -27,4 +27,14 @@ describe("artwork loading store", () => {
     useArtworkLoading.getState().markPending([21]);
     expect(useArtworkLoading.getState().pending.has(21)).toBe(false);
   });
+
+  it("follows the list the backend reports", () => {
+    const store = useArtworkLoading.getState();
+    store.syncPending([31, 32, 33]);
+    expect([...useArtworkLoading.getState().pending].sort()).toEqual([31, 32, 33]);
+    useArtworkLoading.getState().syncPending([33]);
+    expect([...useArtworkLoading.getState().pending]).toEqual([33]);
+    useArtworkLoading.getState().syncPending([]);
+    expect(useArtworkLoading.getState().pending.size).toBe(0);
+  });
 });

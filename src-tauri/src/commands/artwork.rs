@@ -30,6 +30,12 @@ pub async fn get_artwork_key_status(app: AppHandle) -> CommandResult<bool> {
     blocking(&app, |state| state.artwork().has_key()).await
 }
 
+/// Games whose automatic artwork lookup is still queued or running (empty when idle).
+#[tauri::command]
+pub fn get_artwork_pending(app: AppHandle) -> Vec<i64> {
+    app.state::<AppState>().artwork_pending()
+}
+
 #[tauri::command]
 pub async fn save_artwork_key(app: AppHandle, key: String) -> CommandResult<()> {
     blocking(&app, move |state| state.artwork().save_key(&key)).await

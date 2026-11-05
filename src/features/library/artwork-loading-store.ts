@@ -10,7 +10,12 @@ interface ArtworkLoadingState {
   pending: ReadonlySet<number>;
   markPending: (gameIds: readonly number[]) => void;
   finish: (gameId: number) => void;
+  /** Makes the pending set match what the backend reports (it is the source of truth at startup). */
+  syncPending: (gameIds: readonly number[]) => void;
 }
+
+/** Startup lookups take a while (one game every few seconds); the backend keeps the set accurate. */
+const SYNC_TIMEOUT_MS = 180_000;
 
 const timers = new Map<number, ReturnType<typeof setTimeout>>();
 const finishedAt = new Map<number, number>();
@@ -31,6 +36,20 @@ export const useArtworkLoading = create<ArtworkLoadingState>((set, get) => ({
       timers.set(
         id,
         setTimeout(() => get().finish(id), ARTWORK_LOADING_TIMEOUT_MS),
+      );
+    }
+  },
+  syncPending: (gameIds) => {
+    const wanted = new Set(gameIds);
+    for (const id of get().pending) if (!wanted.has(id)) get().finish(id);
+    const fresh = gameIds.filter((id) => !get().pending.has(id));
+    if (fresh.length === 0) return;
+    set((state) => ({ pending: new Set([...state.pending, ...fresh]) }));
+    for (const id of fresh) {
+      clearTimeout(timers.get(id));
+      timers.set(
+        id,
+        setTimeout(() => get().finish(id), SYNC_TIMEOUT_MS),
       );
     }
   },

@@ -172,6 +172,7 @@ impl<'a> ArtworkService<'a> {
         if !self.has_key()? {
             return Ok(report);
         }
+        self.repair_cache()?;
         for game in LibraryRepository::new(self.db).list()? {
             if game.platform == Platform::Steam {
                 continue;
@@ -192,14 +193,39 @@ impl<'a> ArtworkService<'a> {
         self.fetch_game(&self.game(game_id)?)
     }
 
-    fn fetch_game(&self, game: &GameSummary) -> CoreResult<ArtworkFetchReport> {
-        let mut report = ArtworkFetchReport::default();
-        let have: Vec<ArtworkKind> = self.store.selections(game.id)?.into_iter().map(|s| s.kind).collect();
-        let wanted: Vec<ArtworkKind> = ArtworkKind::AUTOMATIC
+    /// Automatic kinds a game still lacks and whose lookup is due (not found recently, not failed recently).
+    fn wanted_kinds(&self, game_id: i64) -> CoreResult<Vec<ArtworkKind>> {
+        let have: Vec<ArtworkKind> = self.store.selections(game_id)?.into_iter().map(|s| s.kind).collect();
+        Ok(ArtworkKind::AUTOMATIC
             .into_iter()
             .filter(|kind| !have.contains(kind))
-            .filter(|kind| self.store.lookup_due(game.id, PROVIDER_STEAMGRIDDB, *kind).unwrap_or(false))
-            .collect();
+            .filter(|kind| self.store.lookup_due(game_id, PROVIDER_STEAMGRIDDB, *kind).unwrap_or(false))
+            .collect())
+    }
+
+    /// Drops records whose cached image was deleted (cache wiped by an uninstall or by hand) so the next
+    /// lookup downloads them again; without this a "found" record would hide the missing file for good.
+    pub fn repair_cache(&self) -> CoreResult<u32> {
+        self.store.prune_missing_files()
+    }
+
+    /// Non-Steam games that the next `fetch_missing` will look up (the UI shows a loading state for them).
+    pub fn games_needing_artwork(&self) -> CoreResult<Vec<i64>> {
+        if !self.has_key()? {
+            return Ok(Vec::new());
+        }
+        let mut ids = Vec::new();
+        for game in LibraryRepository::new(self.db).list()? {
+            if game.platform != Platform::Steam && !self.wanted_kinds(game.id)?.is_empty() {
+                ids.push(game.id);
+            }
+        }
+        Ok(ids)
+    }
+
+    fn fetch_game(&self, game: &GameSummary) -> CoreResult<ArtworkFetchReport> {
+        let mut report = ArtworkFetchReport::default();
+        let wanted = self.wanted_kinds(game.id)?;
         if wanted.is_empty() {
             return Ok(report);
         }

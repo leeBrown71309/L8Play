@@ -42,6 +42,8 @@ pub struct AppState {
     owned_library: Mutex<OwnedLibraryStatus>,
     /// Serializes snapshot work: a restore never runs alongside a snapshot of the same files.
     snapshot_lock: Mutex<()>,
+    /// Games whose artwork the startup lookup has yet to fetch (the UI shows a loading state for them).
+    artwork_pending: Mutex<Vec<i64>>,
 }
 
 impl AppState {
@@ -92,7 +94,25 @@ impl AppState {
             scan_lock: Mutex::new(()),
             owned_library: Mutex::new(OwnedLibraryStatus::default()),
             snapshot_lock: Mutex::new(()),
+            artwork_pending: Mutex::new(Vec::new()),
         })
+    }
+
+    /// Games still waiting for their artwork lookup.
+    pub fn artwork_pending(&self) -> Vec<i64> {
+        self.artwork_pending.lock().map(|ids| ids.clone()).unwrap_or_default()
+    }
+
+    pub fn set_artwork_pending(&self, ids: Vec<i64>) {
+        if let Ok(mut current) = self.artwork_pending.lock() {
+            *current = ids;
+        }
+    }
+
+    pub fn finish_artwork_pending(&self, game_id: i64) {
+        if let Ok(mut current) = self.artwork_pending.lock() {
+            current.retain(|id| *id != game_id);
+        }
     }
 
     /// What the last owned-games lookup found (`Disabled` until a scan has run).

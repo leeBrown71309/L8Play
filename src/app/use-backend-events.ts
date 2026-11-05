@@ -7,6 +7,7 @@ import { useArtworkLoading } from "@/features/library/artwork-loading-store";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
 import { formatPlaytime } from "@/lib/format";
 import { queryKeys } from "@/lib/query-keys";
+import { getArtworkPending } from "@/lib/tauri/commands";
 import { EVENTS, onBackendEvent } from "@/lib/tauri/events";
 
 /** Keeps cached data in sync with backend events and reports finished play sessions. */
@@ -17,9 +18,20 @@ export function useBackendEvents(): void {
   useEffect(() => {
     const titleOf = (gameId: number): string =>
       client.getQueryData<GameSummary[]>(queryKeys.games)?.find((game) => game.id === gameId)?.title ?? "";
+    // The startup lookup may start before this window listens, so the backend's own list is asked for too.
+    const syncPendingArtwork = () => {
+      getArtworkPending()
+        .then((ids) => useArtworkLoading.getState().syncPending(ids))
+        .catch((error: unknown) => console.warn("Could not read the pending artwork list.", error));
+    };
+    syncPendingArtwork();
+    const pendingPoll = window.setInterval(() => {
+      if (useArtworkLoading.getState().pending.size > 0) syncPendingArtwork();
+    }, 4000);
     const subscriptions = [
       onBackendEvent(EVENTS.libraryChanged, () => {
         void client.invalidateQueries({ queryKey: queryKeys.games });
+        syncPendingArtwork();
       }),
       onBackendEvent(EVENTS.artworkFetched, (gameId) => {
         useArtworkLoading.getState().finish(gameId);
@@ -77,6 +89,7 @@ export function useBackendEvents(): void {
       }),
     ];
     return () => {
+      window.clearInterval(pendingPoll);
       for (const subscription of subscriptions) void subscription.then((unlisten) => unlisten());
     };
   }, [client, t]);

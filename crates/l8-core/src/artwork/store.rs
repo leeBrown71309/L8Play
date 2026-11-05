@@ -148,6 +148,40 @@ impl<'db> ArtworkStore<'db> {
         Ok(selections)
     }
 
+    /// Removes the rows of images whose file no longer exists, plus the "found" lookup that would stop them
+    /// from being fetched again. Returns how many images were forgotten.
+    pub fn prune_missing_files(&self) -> CoreResult<u32> {
+        let connection = self.db.connection()?;
+        let rows = {
+            let mut statement =
+                connection.prepare("SELECT id, game_id, kind, provider, local_path FROM artwork_assets")?;
+            statement
+                .query_map([], |row| {
+                    Ok((
+                        row.get::<_, i64>(0)?,
+                        row.get::<_, i64>(1)?,
+                        row.get::<_, String>(2)?,
+                        row.get::<_, String>(3)?,
+                        row.get::<_, String>(4)?,
+                    ))
+                })?
+                .collect::<Result<Vec<_>, _>>()?
+        };
+        let mut forgotten = 0;
+        for (id, game_id, kind, provider, path) in rows {
+            if Path::new(&path).exists() {
+                continue;
+            }
+            connection.execute("DELETE FROM artwork_assets WHERE id = ?1", [id])?;
+            connection.execute(
+                "DELETE FROM artwork_lookups WHERE game_id = ?1 AND provider = ?2 AND kind = ?3",
+                params![game_id, provider, kind],
+            )?;
+            forgotten += 1;
+        }
+        Ok(forgotten)
+    }
+
     /// Whether a lookup for this game, provider and kind may run now (never tried, or its retry
     /// date has passed). "Nothing found" is cached too, so the provider is not asked again daily.
     pub fn lookup_due(&self, game_id: i64, provider: &str, kind: ArtworkKind) -> CoreResult<bool> {
@@ -314,6 +348,24 @@ mod tests {
             height: None,
             user_selected,
         }
+    }
+
+    #[test]
+    fn images_deleted_from_the_cache_are_forgotten_so_they_are_fetched_again() -> CoreResult<()> {
+        let db = Database::open_in_memory()?;
+        let id = game(&db)?;
+        let dir = tempfile::tempdir()?;
+        let store = ArtworkStore::new(&db, dir.path());
+        let path = store.save(id, ArtworkKind::Cover, &asset(PNG, false))?;
+        store.record_lookup(id, PROVIDER_USER, ArtworkKind::Cover, "found", None)?;
+        assert_eq!(store.prune_missing_files()?, 0, "present files are kept");
+        assert!(!store.lookup_due(id, PROVIDER_USER, ArtworkKind::Cover)?);
+
+        std::fs::remove_file(&path)?;
+        assert_eq!(store.prune_missing_files()?, 1);
+        assert!(store.selections(id)?.is_empty());
+        assert!(store.lookup_due(id, PROVIDER_USER, ArtworkKind::Cover)?, "the lookup is due again");
+        Ok(())
     }
 
     #[test]

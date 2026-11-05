@@ -22,14 +22,27 @@ const EXIT_SNAPSHOT_DELAY: Duration = Duration::from_secs(5);
 /// One process sample every 3 s: responsive enough for start/exit detection, negligible CPU.
 const SAMPLE_INTERVAL: Duration = Duration::from_secs(3);
 
-/// Fills in cover, hero and logo for Epic and standalone games once a SteamGridDB key is saved.
+/// Fills in cover, hero and logo for Epic, Xbox, GOG and standalone games once a SteamGridDB key is saved.
+/// Games still waiting are published through the state so the window can show a loading state for them,
+/// and each one is released as soon as its lookup ends (found or not).
 fn fetch_missing_artwork(app: &AppHandle, state: &AppState) {
-    let progressive = state.artwork().fetch_missing_with(|game, outcome| {
-        if outcome.fetched > 0 {
-            events::artwork_fetched(app, game.id);
-        }
+    let artwork = state.artwork();
+    match artwork.repair_cache() {
+        Ok(0) => {}
+        Ok(forgotten) => tracing::info!(forgotten, "artwork cache repaired: missing images will be downloaded again"),
+        Err(error) => tracing::warn!(%error, "artwork cache check failed"),
+    }
+    match artwork.games_needing_artwork() {
+        Ok(ids) => state.set_artwork_pending(ids),
+        Err(error) => tracing::warn!(%error, "could not list the games waiting for artwork"),
+    }
+    events::library_changed(app);
+    let outcome = artwork.fetch_missing_with(|game, _| {
+        state.finish_artwork_pending(game.id);
+        events::artwork_fetched(app, game.id);
     });
-    match progressive {
+    state.set_artwork_pending(Vec::new());
+    match outcome {
         Ok(report) => {
             if report.fetched > 0 {
                 events::library_changed(app);
