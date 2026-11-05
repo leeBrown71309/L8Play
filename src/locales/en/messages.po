@@ -205,7 +205,7 @@ msgstr "{0} waiting"
 msgid "{added} new, {uninstalled} no longer installed — {total} games in total."
 msgstr "{added} new, {uninstalled} no longer installed — {total} games in total."
 
-#: src/features/onboarding/OnboardingParts.tsx:98
+#: src/features/onboarding/OnboardingParts.tsx:108
 msgid "{count} games"
 msgstr "{count} games"
 
@@ -229,7 +229,7 @@ msgstr "{saveFolders} save folders found."
 msgid "{saveFolders} save folders protected"
 msgstr "{saveFolders} save folders protected"
 
-#: src/features/onboarding/OnboardingParts.tsx:106
+#: src/features/onboarding/OnboardingParts.tsx:116
 msgid "{standalone} games"
 msgstr "{standalone} games"
 
@@ -264,8 +264,8 @@ msgstr "1 file"
 msgid "1 file · {size}"
 msgstr "1 file · {size}"
 
-#: src/features/onboarding/OnboardingParts.tsx:98
-#: src/features/onboarding/OnboardingParts.tsx:106
+#: src/features/onboarding/OnboardingParts.tsx:108
+#: src/features/onboarding/OnboardingParts.tsx:116
 msgid "1 game"
 msgstr "1 game"
 
@@ -378,7 +378,7 @@ msgstr "Add to favourites"
 msgid "Added"
 msgstr "Added"
 
-#: src/features/onboarding/OnboardingParts.tsx:105
+#: src/features/onboarding/OnboardingParts.tsx:115
 msgid "Added by hand"
 msgstr "Added by hand"
 
@@ -470,7 +470,7 @@ msgstr "Artwork — {0}"
 msgid "Artwork found"
 msgstr "Artwork found"
 
-#: src/features/onboarding/OnboardingParts.tsx:61
+#: src/features/onboarding/OnboardingParts.tsx:71
 msgid "artwork sets"
 msgstr "artwork sets"
 
@@ -1060,7 +1060,7 @@ msgstr "Folder named like the install folder"
 msgid "For games the database does not know, “Find saves” on a game’s page asks PCGamingWiki and searches your PC. Nothing is backed up until you confirm a folder."
 msgstr "For games the database does not know, “Find saves” on a game’s page asks PCGamingWiki and searches your PC. Nothing is backed up until you confirm a folder."
 
-#: src/features/onboarding/OnboardingParts.tsx:45
+#: src/features/onboarding/OnboardingParts.tsx:55
 msgid "Found {games} games"
 msgstr "Found {games} games"
 
@@ -1110,7 +1110,7 @@ msgstr "Game name (default: {0})"
 msgid "Game save folder"
 msgstr "Game save folder"
 
-#: src/features/onboarding/OnboardingParts.tsx:51
+#: src/features/onboarding/OnboardingParts.tsx:61
 msgid "games"
 msgstr "games"
 
@@ -1450,7 +1450,7 @@ msgstr "Local"
 msgid "Logo"
 msgstr "Logo"
 
-#: src/features/onboarding/OnboardingParts.tsx:45
+#: src/features/onboarding/OnboardingParts.tsx:55
 msgid "Looking for games…"
 msgstr "Looking for games…"
 
@@ -1494,7 +1494,7 @@ msgstr "Matched automatically on SteamGridDB. Pick another set if this one is wr
 msgid "Matches the last snapshot"
 msgstr "Matches the last snapshot"
 
-#: src/features/onboarding/OnboardingParts.tsx:46
+#: src/features/onboarding/OnboardingParts.tsx:56
 msgid "Matching artwork from SteamGridDB…"
 msgstr "Matching artwork from SteamGridDB…"
 
@@ -1645,7 +1645,7 @@ msgstr "No snapshots yet. A snapshot is taken automatically each time you stop p
 msgid "Not connected."
 msgstr "Not connected."
 
-#: src/features/onboarding/OnboardingParts.tsx:98
+#: src/features/onboarding/OnboardingParts.tsx:108
 #: src/features/settings/SettingsPage.tsx:176
 msgid "Not found"
 msgstr "Not found"
@@ -1680,7 +1680,7 @@ msgstr "Not protected"
 msgid "Not protected yet"
 msgstr "Not protected yet"
 
-#: src/features/onboarding/OnboardingParts.tsx:98
+#: src/features/onboarding/OnboardingParts.tsx:108
 msgid "Not scanned yet"
 msgstr "Not scanned yet"
 
@@ -2192,7 +2192,7 @@ msgstr "Save folder inside the install folder"
 msgid "Save folder not found · {played} played"
 msgstr "Save folder not found · {played} played"
 
-#: src/features/onboarding/OnboardingParts.tsx:56
+#: src/features/onboarding/OnboardingParts.tsx:66
 msgid "save folders"
 msgstr "save folders"
 

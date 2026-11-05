@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" preserveAspectRatio="xMidYMid slice">
+<defs>
+<linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10242f"/><stop offset="0.62" stop-color="#3a7ca5"/><stop offset="1" stop-color="#f4f1de" stop-opacity="0.85"/></linearGradient>
+<radialGradient id="g" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#f4f1de" stop-opacity="0.55"/><stop offset="1" stop-color="#f4f1de" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="400" height="600" fill="url(#s)"/>
+<circle cx="98.3" cy="231.7" r="224.4" fill="url(#g)"/>
+<circle cx="98.3" cy="231.7" r="74.8" fill="#f4f1de"/>
+<path d="M0 600 L0.0 349.7 L28.6 337.8 L57.1 340.1 L85.7 339.2 L114.3 330.9 L142.9 313.3 L171.4 310.6 L200.0 328.3 L228.6 356.2 L257.1 356.9 L285.7 351.4 L314.3 351.0 L342.9 360.3 L371.4 362.2 L400.0 340.4 L400 600 Z" fill="#183644" fill-opacity="0.35"/>
+<path d="M0 600 L0.0 391.4 L28.6 396.7 L57.1 386.0 L85.7 372.6 L114.3 394.0 L142.9 426.9 L171.4 447.9 L200.0 433.5 L228.6 413.6 L257.1 415.3 L285.7 421.6 L314.3 415.2 L342.9 377.9 L371.4 368.5 L400.0 380.4 L400 600 Z" fill="#183644" fill-opacity="0.55"/>
+<path d="M0 600 L0.0 512.6 L28.6 486.8 L57.1 463.6 L85.7 465.0 L114.3 467.0 L142.9 445.6 L171.4 424.8 L200.0 421.8 L228.6 452.1 L257.1 494.5 L285.7 492.4 L314.3 474.6 L342.9 483.5 L371.4 503.2 L400.0 499.1 L400 600 Z" fill="#183644" fill-opacity="0.78"/>
+<path d="M0 600 L0.0 489.3 L28.6 490.4 L57.1 531.3 L85.7 566.4 L114.3 566.1 L142.9 521.9 L171.4 507.6 L200.0 510.2 L228.6 506.7 L257.1 487.2 L285.7 456.2 L314.3 465.7 L342.9 519.2 L371.4 549.4 L400.0 551.3 L400 600 Z" fill="#183644" fill-opacity="1"/>
+</svg>

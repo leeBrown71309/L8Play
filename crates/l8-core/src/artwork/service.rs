@@ -160,6 +160,14 @@ impl<'a> ArtworkService<'a> {
     /// (Epic and standalone). Steam games keep Steam's CDN art unless the user picks another image.
     /// Does nothing without a saved key; stops at the first rejected key or rate limit.
     pub fn fetch_missing(&self) -> CoreResult<ArtworkFetchReport> {
+        self.fetch_missing_with(|_, _| {})
+    }
+
+    /// Like [`Self::fetch_missing`], calling `on_game` after each game so the UI can show covers as they arrive.
+    pub fn fetch_missing_with(
+        &self,
+        mut on_game: impl FnMut(&GameSummary, &ArtworkFetchReport),
+    ) -> CoreResult<ArtworkFetchReport> {
         let mut report = ArtworkFetchReport::default();
         if !self.has_key()? {
             return Ok(report);
@@ -172,6 +180,7 @@ impl<'a> ArtworkService<'a> {
             report.fetched += outcome.fetched;
             report.not_found += outcome.not_found;
             report.failed += outcome.failed;
+            on_game(&game, &outcome);
         }
         Ok(report)
     }
