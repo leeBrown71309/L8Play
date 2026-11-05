@@ -47,4 +47,8 @@ onboardingDone: boolean,
 /**
  * List the Steam games the account owns but has not installed (read from the public Steam profile).
  */
-showOwnedNotInstalled: boolean, };
+showOwnedNotInstalled: boolean, 
+/**
+ * Check GitHub Releases for a newer version in the background; manual checks always work.
+ */
+updatesAutoCheck: boolean, };

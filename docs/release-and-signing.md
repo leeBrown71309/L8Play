@@ -9,8 +9,10 @@ bun install
 bun run fetch:ludusavi        # downloads the pinned Ludusavi release and verifies its SHA-256
 bun run check                 # typecheck, lint, format check, tests
 cargo test --workspace && cargo clippy --workspace --all-targets -- -D warnings
-bun tauri build               # produces src-tauri/target/release/bundle/nsis/L8Play_<version>_x64-setup.exe
+bun tauri build               # produces target/release/bundle/nsis/L8Play_<version>_x64-setup.exe (+ .sig when signing is configured)
 ```
+
+A release that installed copies can update also needs `TAURI_SIGNING_PRIVATE_KEY` and `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` (see "In-app updates" below). Without them the build still works, but it emits no updater signature.
 
 The installer is per-user (`installMode: currentUser`): it needs no administrator rights and installs under `%LOCALAPPDATA%`.
 
@@ -58,6 +60,97 @@ SignPath Foundation signs open-source projects at no cost. Requirements and flow
 3. Once approved, connect the repository's GitHub Actions workflow to SignPath (their GitHub integration signs the artifact produced by the build job), and publish the signed `*-setup.exe` as a GitHub Release asset.
 4. Until the project is approved, the unsigned installer triggers Windows SmartScreen ("unknown publisher"). That is expected: users can choose "More info → Run anyway".
 
-## Updates (deliberately not automatic yet)
+## In-app updates (Tauri updater + GitHub Releases)
 
-An in-app updater needs a project-owned signing key pair and a place to host the update manifest (GitHub Releases is free). That decision, and keeping the private key safe, belongs to the maintainer, so the updater plugin is not enabled. Until then, updates are a new installer download; the per-user installer upgrades in place and keeps `%APPDATA%\com.l8play.app` (database) untouched.
+L8Play uses `tauri-plugin-updater` with a fixed endpoint:
+`https://github.com/leeBrown71309/L8Play/releases/latest/download/latest.json`.
+Nothing is paid: GitHub Releases hosts the manifest and the installer, and the signing key pair is generated locally.
+
+### The signing key (back it up)
+
+- The key pair was generated once with `bun tauri signer generate -w "%USERPROFILE%\.tauri\l8play-updater.key"`. The private key and its password live **outside the repository**:
+  - `%USERPROFILE%\.tauri\l8play-updater.key`
+  - `%USERPROFILE%\.tauri\l8play-updater-password.txt`
+- **Back up both files somewhere safe** (password manager, encrypted backup). Losing either one means you can never sign an update that installed copies will accept. Generate a new pair only if you accept that every user must install a build manually again.
+- The private key is never committed, printed, logged, put in `.env` or compiled into the app. The public key is not secret and is in `src-tauri/tauri.conf.json` under `plugins.updater.pubkey`.
+
+### Build a signed release
+
+1. Bump the version in `package.json`, `src-tauri/tauri.conf.json`, the root `Cargo.toml` and the `l8-core` dependency line in `src-tauri/Cargo.toml`.
+2. Make sure the Google client variables are available (`.env`, see above).
+3. Set the signing variables **in the shell only** (never in a file inside the repo):
+   ```powershell
+   $env:TAURI_SIGNING_PRIVATE_KEY = "$env:USERPROFILE\.tauri\l8play-updater.key"
+   $env:TAURI_SIGNING_PRIVATE_KEY_PASSWORD = (Get-Content "$env:USERPROFILE\.tauri\l8play-updater-password.txt" -Raw).Trim()
+   ```
+4. Stop any running `l8-play.exe`, then:
+   ```bash
+   bun tauri build
+   ```
+5. `bundle.createUpdaterArtifacts` makes Tauri write both:
+   - `target/release/bundle/nsis/L8Play_<version>_x64-setup.exe`
+   - `target/release/bundle/nsis/L8Play_<version>_x64-setup.exe.sig`
+
+### Build `latest.json`
+
+```bash
+bun scripts/make-update-manifest.ts --version 0.1.3 --notes-file release-notes.md
+```
+
+The script reads the `.sig` file, uses the matching GitHub asset URL and writes `latest.json`:
+
+```json
+{
+  "version": "0.1.3",
+  "notes": "…",
+  "pub_date": "2026-11-05T12:00:00.000Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "<contents of the .sig file>",
+      "url": "https://github.com/leeBrown71309/L8Play/releases/download/v0.1.3/L8Play_0.1.3_x64-setup.exe"
+    }
+  }
+}
+```
+
+`notes` is plain text; the app strips tags and escapes it. Use the same neutral notes as the GitHub release. The script refuses an empty signature, an invalid version, insecure URLs and empty notes, so a broken manifest is not published.
+
+### Publish
+
+1. Create a **published** GitHub release tagged `v<version>` (not a draft, not a pre-release: `releases/latest` ignores both).
+2. Attach the installer, its `.sig` and `latest.json`.
+3. `releases/latest/download/latest.json` then points to the manifest. Keep older releases: installed copies keep working, and users can still download an installer.
+4. Ask before deleting an older release.
+
+### GitHub Actions secrets
+
+If a release is built in CI, add these repository secrets (Settings → Secrets and variables → Actions):
+
+| Secret | Value |
+| --- | --- |
+| `TAURI_SIGNING_PRIVATE_KEY` | the **content** of the private key file |
+| `TAURI_SIGNING_PRIVATE_KEY_PASSWORD` | its password |
+| `L8_GOOGLE_CLIENT_ID` | the OAuth client id |
+| `L8_GOOGLE_CLIENT_SECRET` | its client secret |
+
+Pass them to the build step only:
+
+```yaml
+- run: bun tauri build
+  env:
+    TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+    TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+    L8_GOOGLE_CLIENT_ID: ${{ secrets.L8_GOOGLE_CLIENT_ID }}
+    L8_GOOGLE_CLIENT_SECRET: ${{ secrets.L8_GOOGLE_CLIENT_SECRET }}
+```
+
+### What the updater enforces
+
+- HTTPS only, one fixed GitHub endpoint; no telemetry and no user data beyond the request itself.
+- The installer's minisign signature must match the embedded public key; the signature's trusted comment also carries the version.
+- The plugin only accepts a **higher** version: a manifest with an older or equal version is ignored, so a compromised manifest cannot downgrade an install.
+- On Windows the NSIS installer runs in `passive` mode and restarts the app when done.
+
+### First updater-enabled version
+
+Version 0.1.2 has no updater. Users must install **0.1.3** manually once; from then on, updates are offered in the app. Do not delete the 0.1.3 assets until every tester has installed it.

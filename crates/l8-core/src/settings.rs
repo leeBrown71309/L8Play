@@ -21,6 +21,7 @@ const KEY_LAUNCH_AT_STARTUP: &str = "shell.launchAtStartup";
 const KEY_DESKTOP_NOTIFICATIONS: &str = "shell.desktopNotifications";
 const KEY_ONBOARDING_DONE: &str = "shell.onboardingDone";
 const KEY_SHOW_OWNED_NOT_INSTALLED: &str = "libraries.showOwnedNotInstalled";
+const KEY_UPDATES_AUTO_CHECK: &str = "updates.autoCheck";
 
 /// Bounds for automatic-snapshot retention per game.
 pub const KEEP_AUTOMATIC_RANGE: std::ops::RangeInclusive<u32> = 1..=100;
@@ -76,6 +77,8 @@ pub struct AppSettings {
     pub onboarding_done: bool,
     /// List the Steam games the account owns but has not installed (read from the public Steam profile).
     pub show_owned_not_installed: bool,
+    /// Check GitHub Releases for a newer version in the background; manual checks always work.
+    pub updates_auto_check: bool,
 }
 
 impl Default for AppSettings {
@@ -95,6 +98,7 @@ impl Default for AppSettings {
             desktop_notifications: true,
             onboarding_done: false,
             show_owned_not_installed: true,
+            updates_auto_check: true,
         }
     }
 }
@@ -118,6 +122,7 @@ pub struct SettingsPatch {
     pub desktop_notifications: Option<bool>,
     pub onboarding_done: Option<bool>,
     pub show_owned_not_installed: Option<bool>,
+    pub updates_auto_check: Option<bool>,
 }
 
 /// Reads and writes [`AppSettings`].
@@ -153,6 +158,7 @@ impl<'db> SettingsRepository<'db> {
             desktop_notifications: self.read_or(KEY_DESKTOP_NOTIFICATIONS, defaults.desktop_notifications)?,
             onboarding_done: self.read_or(KEY_ONBOARDING_DONE, defaults.onboarding_done)?,
             show_owned_not_installed: self.read_or(KEY_SHOW_OWNED_NOT_INSTALLED, defaults.show_owned_not_installed)?,
+            updates_auto_check: self.read_or(KEY_UPDATES_AUTO_CHECK, defaults.updates_auto_check)?,
         })
     }
 
@@ -225,6 +231,9 @@ impl<'db> SettingsRepository<'db> {
             }
             if let Some(value) = patch.show_owned_not_installed {
                 write(&transaction, KEY_SHOW_OWNED_NOT_INSTALLED, &value)?;
+            }
+            if let Some(value) = patch.updates_auto_check {
+                write(&transaction, KEY_UPDATES_AUTO_CHECK, &value)?;
             }
             transaction.commit()?;
         }
@@ -307,6 +316,19 @@ mod tests {
     }
 
     #[test]
+    fn update_checks_default_on_and_can_be_switched_off() -> CoreResult<()> {
+        let db = Database::open_in_memory()?;
+        let repo = SettingsRepository::new(&db);
+        assert!(repo.load()?.updates_auto_check);
+        let off = repo.update(&SettingsPatch { updates_auto_check: Some(false), ..Default::default() })?;
+        assert!(!off.updates_auto_check);
+        assert!(!repo.load()?.updates_auto_check);
+        let on = repo.update(&SettingsPatch { updates_auto_check: Some(true), ..Default::default() })?;
+        assert!(on.updates_auto_check);
+        Ok(())
+    }
+
+    #[test]
     fn corrupt_value_falls_back_to_default() -> CoreResult<()> {
         let db = Database::open_in_memory()?;
         db.connection()?
@@ -319,6 +341,7 @@ mod tests {
     fn serializes_with_frontend_casing() -> Result<(), serde_json::Error> {
         let json = serde_json::to_string(&AppSettings::default())?;
         assert!(json.starts_with(r#"{"theme":"ember","locale":"en","navExpanded":false,"snapshotOnExit":true"#));
+        assert!(json.ends_with(r#""showOwnedNotInstalled":true,"updatesAutoCheck":true}"#));
         Ok(())
     }
 }
