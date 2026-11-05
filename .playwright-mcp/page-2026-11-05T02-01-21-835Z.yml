@@ -1,0 +1,134 @@
+- generic [ref=f3e3]:
+  - navigation "Main" [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - generic [aria-hidden]: L8PLAY
+    - generic [ref=f3e13]:
+      - link "Dashboard" [ref=f3e14] [cursor=pointer]:
+        - /url: "#/"
+        - generic [aria-hidden]: Dashboard
+      - link "My Games" [ref=f3e19] [cursor=pointer]:
+        - /url: "#/games"
+        - generic [aria-hidden]: My Games
+        - generic [aria-hidden]: "18"
+      - link "Save Manager" [ref=f3e23] [cursor=pointer]:
+        - /url: "#/saves"
+        - generic [aria-hidden]: Save Manager
+        - generic [aria-hidden]: "5"
+      - link "Cloud Storage" [ref=f3e28] [cursor=pointer]:
+        - /url: "#/cloud"
+        - generic [aria-hidden]: Cloud Storage
+      - link "Settings" [ref=f3e32] [cursor=pointer]:
+        - /url: "#/settings"
+        - generic [aria-hidden]: Settings
+    - generic [ref=f3e37]:
+      - button "Expand the menu" [ref=f3e38] [cursor=pointer]:
+        - generic [aria-hidden]: Expand the menu
+      - button "Add a game" [ref=f3e42] [cursor=pointer]:
+        - generic [aria-hidden]: Add a game
+  - generic [ref=f3e46]:
+    - button "Minimize" [ref=f3e47]
+    - button "Maximize" [ref=f3e49]
+    - button "Close" [ref=f3e52]
+  - main [ref=f3e55]:
+    - generic [ref=f3e56]:
+      - generic [ref=f3e59]:
+        - searchbox "Search your games…" [ref=f3e63]
+        - generic [ref=f3e64]:
+          - generic [ref=f3e65]: Ctrl
+          - generic [ref=f3e66]: K
+      - generic [ref=f3e67]:
+        - 'link "Sync conflicts: 1" [ref=f3e295] [cursor=pointer]':
+          - /url: "#/cloud"
+        - link "Notifications" [ref=f3e73] [cursor=pointer]:
+          - /url: "#/cloud"
+    - generic [ref=f3e78]:
+      - generic [ref=f3e302]:
+        - generic [ref=f3e303]:
+          - heading "Cloud Storage" [level=1] [ref=f3e304]
+          - paragraph [ref=f3e305]: Snapshots live in a private “L8Play” folder in your own Google Drive. Free, and only this app can see it.
+        - button "Sync now" [ref=f3e307] [cursor=pointer]
+      - status [ref=f3e315]:
+        - generic [ref=f3e321]:
+          - generic [ref=f3e322]: "Sekiro: Shadows Die Twice has two different saves."
+          - generic [ref=f3e323]: Sync is paused for this game until you choose.
+        - button "Resolve" [ref=f3e325] [cursor=pointer]
+      - generic [ref=f3e327]:
+        - generic [ref=f3e328]:
+          - generic [ref=f3e329]:
+            - generic [ref=f3e334]:
+              - generic [ref=f3e335]: Google Drive
+              - generic [ref=f3e336]: ryu@example.com · connected since Nov 5, 2026
+              - generic [ref=f3e337]:
+                - generic [ref=f3e338]: Connected
+                - generic [ref=f3e343]: 2 waiting
+                - generic [ref=f3e348]: 1 conflict
+            - button "Disconnect" [ref=f3e355] [cursor=pointer]
+          - generic [ref=f3e357]:
+            - heading "Transfers 2" [level=2] [ref=f3e359]:
+              - text: Transfers
+              - generic [ref=f3e360]: "2"
+            - generic [ref=f3e361]:
+              - generic [ref=f3e362]:
+                - generic [ref=f3e364]:
+                  - generic [ref=f3e365]: "Sekiro: Shadows Die Twice"
+                  - generic [ref=f3e366]: Game closed
+                - generic [ref=f3e367]:
+                  - generic [ref=f3e368]:
+                    - generic [ref=f3e369]: Uploading · 43%
+                    - generic [ref=f3e370]: 4 MB of 9.3 MB
+                  - progressbar [ref=f3e372]
+              - generic [ref=f3e374]:
+                - generic [ref=f3e376]:
+                  - generic [ref=f3e377]: "Sekiro: Shadows Die Twice"
+                  - generic [ref=f3e378]: Before Isshin
+                - generic [ref=f3e380]:
+                  - generic [ref=f3e381]: Failed
+                  - generic [ref=f3e382]: "network error: connection reset"
+          - generic [ref=f3e383] [cursor=pointer]:
+            - generic [ref=f3e384]:
+              - generic [ref=f3e385]: Upload automatically
+              - generic [ref=f3e386]: New snapshots are copied to Drive in the background. Safety copies stay on this PC.
+            - switch "Upload automatically" [checked] [ref=f3e387]
+        - generic [ref=f3e389]:
+          - generic [ref=f3e390]:
+            - generic [ref=f3e391]: Drive storage
+            - generic [ref=f3e392]:
+              - generic [ref=f3e393]: 3 GB
+              - generic [ref=f3e394]: of 15 GB
+            - generic [ref=f3e395]:
+              - img "3 GB of 15 GB used" [ref=f3e396]
+              - generic [ref=f3e399]:
+                - generic [ref=f3e400]:
+                  - text: L8Play
+                  - generic [ref=f3e402]: 5.9 MB
+                - generic [ref=f3e403]:
+                  - text: Other files
+                  - generic [ref=f3e405]: 3 GB
+                - generic [ref=f3e406]:
+                  - text: Free
+                  - generic [ref=f3e408]: 12 GB
+          - generic [ref=f3e409]:
+            - heading "In your Drive" [level=2] [ref=f3e411]
+            - generic [ref=f3e412]:
+              - generic [ref=f3e414]:
+                - text: "Sekiro: Shadows Die Twice"
+                - generic [ref=f3e415]: 2 snapshots
+              - generic [ref=f3e416]: 5.9 MB
+      - group [ref=f3e417]:
+        - 'generic "Advanced: use my own Google project" [ref=f3e418] [cursor=pointer]'
+  - complementary "Quick launch" [ref=f3e218]:
+    - generic [ref=f3e219]:
+      - generic [aria-hidden] [ref=f3e220] [cursor=pointer]: L8
+      - 'button "Play Sekiro: Shadows Die Twice" [ref=f3e222] [cursor=pointer]'
+      - 'button "Play Monster Hunter: World" [ref=f3e225] [cursor=pointer]'
+      - button "Play Stardew Valley" [ref=f3e228] [cursor=pointer]
+      - button "Play Minecraft Dungeons II" [ref=f3e231] [cursor=pointer]
+      - button "Play Hades II" [ref=f3e236] [cursor=pointer]
+      - button "Play Alan Wake 2" [ref=f3e239] [cursor=pointer]
+    - generic [ref=f3e244]:
+      - 'link "Sync conflicts: 1" [ref=f3e419] [cursor=pointer]':
+        - /url: "#/cloud"
+      - generic [ref=f3e248]: Attention
+  - status [ref=f3e422]:
+    - generic [ref=f3e427]: Google Drive connected
+    - button "Dismiss" [ref=f3e429] [cursor=pointer]

@@ -1,0 +1,195 @@
+- generic:
+  - generic:
+    - generic:
+      - navigation [aria-hidden]:
+        - generic:
+          - generic [aria-hidden]: L8PLAY
+        - generic:
+          - link:
+            - /url: "#/"
+            - generic [aria-hidden]: Dashboard
+          - link:
+            - /url: "#/games"
+            - generic [aria-hidden]: My Games
+            - generic [aria-hidden]: "18"
+          - link:
+            - /url: "#/saves"
+            - generic [aria-hidden]: Save Manager
+            - generic [aria-hidden]: "5"
+          - link:
+            - /url: "#/cloud"
+            - generic [aria-hidden]: Cloud Storage
+          - link:
+            - /url: "#/settings"
+            - generic [aria-hidden]: Settings
+        - generic:
+          - button:
+            - generic [aria-hidden]: Expand the menu
+          - button:
+            - generic [aria-hidden]: Add a game
+      - generic [aria-hidden]:
+        - generic:
+          - button
+          - button
+          - button
+      - main [aria-hidden]:
+        - generic:
+          - generic:
+            - searchbox
+            - generic:
+              - generic: Ctrl
+              - generic: K
+          - generic:
+            - link:
+              - /url: "#/cloud"
+            - link:
+              - /url: "#/cloud"
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=1]: Cloud Storage
+                - paragraph: Snapshots live in a private “L8Play” folder in your own Google Drive. Free, and only this app can see it.
+              - generic:
+                - button:
+                  - generic: Sync now
+            - generic:
+              - status:
+                - generic:
+                  - generic: "Sekiro: Shadows Die Twice has two different saves."
+                  - generic: Sync is paused for this game until you choose.
+                - generic:
+                  - button:
+                    - generic: Resolve
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Google Drive
+                    - generic: ryu@example.com · connected since Nov 5, 2026
+                    - generic:
+                      - generic: Connected
+                      - generic: 2 waiting
+                      - generic: 1 conflict
+                  - generic:
+                    - button:
+                      - generic: Disconnect
+                - generic:
+                  - generic:
+                    - heading [level=2]:
+                      - text: Transfers
+                      - generic: "2"
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic: "Sekiro: Shadows Die Twice"
+                        - generic: Game closed
+                      - generic:
+                        - generic:
+                          - generic: Uploading · 43%
+                          - generic: 4 MB of 9.3 MB
+                        - generic:
+                          - progressbar
+                    - generic:
+                      - generic:
+                        - generic: "Sekiro: Shadows Die Twice"
+                        - generic: Before Isshin
+                      - generic:
+                        - generic:
+                          - generic: Failed
+                          - generic: "network error: connection reset"
+                - generic:
+                  - generic:
+                    - generic: Upload automatically
+                    - generic: New snapshots are copied to Drive in the background. Safety copies stay on this PC.
+                  - switch [checked]
+              - generic:
+                - generic:
+                  - generic: Drive storage
+                  - generic:
+                    - generic: 3 GB
+                    - generic: of 15 GB
+                  - generic:
+                    - generic:
+                      - generic:
+                        - text: L8Play
+                        - generic: 5.9 MB
+                      - generic:
+                        - text: Other files
+                        - generic: 3 GB
+                      - generic:
+                        - text: Free
+                        - generic: 12 GB
+                - generic:
+                  - generic:
+                    - heading [level=2]: In your Drive
+                  - generic:
+                    - generic:
+                      - text: "Sekiro: Shadows Die Twice"
+                      - generic: 2 snapshots
+                    - generic: 5.9 MB
+            - group:
+              - generic: "Advanced: use my own Google project"
+      - complementary [aria-hidden]:
+        - generic:
+          - generic [aria-hidden]: L8
+          - button
+          - button
+          - button
+          - button
+          - button
+          - button
+        - generic:
+          - link:
+            - /url: "#/cloud"
+          - generic: Attention
+  - dialog [ref=f2e903]:
+    - banner [ref=f2e904]:
+      - generic [ref=f2e910]:
+        - 'heading "Two different saves for Sekiro: Shadows Die Twice" [level=2] [ref=f2e911]'
+        - paragraph [ref=f2e912]: Detected Thu, Nov 5, 2026, 01:55 AM. Nothing has been overwritten.
+      - button "Close" [active] [ref=f2e913] [cursor=pointer]
+    - generic [ref=f2e917]:
+      - generic [ref=f2e918]:
+        - generic [ref=f2e919]:
+          - generic [ref=f2e920]:
+            - generic [ref=f2e923]: On this PC
+            - generic [ref=f2e924]: Newer
+          - generic [ref=f2e929]: DESKTOP-RYU · Game closed
+          - generic [ref=f2e930]:
+            - term [ref=f2e931]: Saved
+            - definition [ref=f2e932]: Thu, Nov 5, 2026, 01:24 AM
+            - term [ref=f2e933]: Playtime
+            - definition [ref=f2e934]: 64 h
+            - term [ref=f2e935]: Size
+            - definition [ref=f2e936]: 9.8 MB · 1 file
+        - generic [ref=f2e937]:
+          - generic [ref=f2e938]:
+            - generic [ref=f2e941]: In Google Drive
+            - generic [ref=f2e942]: Older
+          - generic [ref=f2e946]: LAPTOP-RYU · Before Isshin, the Sword Saint
+          - generic [ref=f2e947]:
+            - term [ref=f2e948]: Saved
+            - definition [ref=f2e949]: Thu, Nov 5, 2026, 12:42 AM
+            - term [ref=f2e950]: Playtime
+            - definition [ref=f2e951]: 64 h
+            - term [ref=f2e952]: Size
+            - definition [ref=f2e953]: 9.8 MB · 1 file
+      - radiogroup [ref=f2e954]:
+        - radio "Use the Drive version Your PC save is backed up first, then replaced by the Drive version." [ref=f2e955] [cursor=pointer]:
+          - generic [ref=f2e962]:
+            - generic [ref=f2e963]: Use the Drive version
+            - generic [ref=f2e964]: Your PC save is backed up first, then replaced by the Drive version.
+        - radio "Use the version on this PC The Drive save stays in your Drive as a conflict copy you can restore later." [checked] [ref=f2e965] [cursor=pointer]:
+          - generic [ref=f2e970]:
+            - generic [ref=f2e971]: Use the version on this PC
+            - generic [ref=f2e972]: The Drive save stays in your Drive as a conflict copy you can restore later.
+        - radio "Keep both, change nothing yet Keeps this PC’s save and downloads the other one as a conflict copy you can restore later." [ref=f2e973] [cursor=pointer]:
+          - generic [ref=f2e979]:
+            - generic [ref=f2e980]: Keep both, change nothing yet
+            - generic [ref=f2e981]: Keeps this PC’s save and downloads the other one as a conflict copy you can restore later.
+    - contentinfo [ref=f2e982]:
+      - generic [ref=f2e983]: The version you don’t use is kept as a snapshot.
+      - generic [ref=f2e986]:
+        - button "Decide later" [ref=f2e987] [cursor=pointer]
+        - button "Use PC version" [ref=f2e989] [cursor=pointer]
