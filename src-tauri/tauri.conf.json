@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "L8Play",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "identifier": "com.l8play.app",
   "build": {
     "beforeDevCommand": "bun run dev",

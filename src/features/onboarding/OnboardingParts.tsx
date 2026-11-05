@@ -1,8 +1,8 @@
 import { useLingui } from "@lingui/react/macro";
+import { useMemo } from "react";
 
 import { DsIcon } from "@/components/ds/ds-icon";
 import { ProgressBar } from "@/components/ds/progress-bar";
-import { GameArt } from "@/components/game/GameArt";
 import { PlatformIcon, usePlatformNames } from "@/components/game/PlatformTag";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
 import type { Platform } from "@/lib/bindings/Platform";
@@ -11,21 +11,31 @@ import type { PlatformScan } from "@/lib/bindings/PlatformScan";
 const WALL_SIZE = 15;
 const LAUNCHERS: readonly Platform[] = ["steam", "epic", "xbox", "gog"];
 
-/** The rotated cover wall behind the right panel. Missing covers become soft empty tiles. */
-export function CoverWall({ games, dimmed }: { games: readonly GameSummary[]; dimmed: boolean }) {
-  const tiles = Math.max(WALL_SIZE, Math.min(games.length, 20));
+/** Original abstract covers shipped with the app: the wall never depends on the user's library or the network. */
+const WALL_COVERS = Object.values(
+  import.meta.glob<string>("@/assets/onboarding/cover-*.svg", { eager: true, query: "?url", import: "default" }),
+);
+
+/** Fisher-Yates shuffle on a copy; the order is picked once per mount so the wall does not flicker. */
+function shuffled<T>(items: readonly T[]): T[] {
+  const copy = [...items];
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const other = Math.floor(Math.random() * (index + 1));
+    [copy[index], copy[other]] = [copy[other] as T, copy[index] as T];
+  }
+  return copy;
+}
+
+/** The rotated cover wall behind the right panel, built from bundled artwork in random order. */
+export function CoverWall({ dimmed }: { dimmed: boolean }) {
+  const covers = useMemo(() => shuffled(WALL_COVERS).slice(0, WALL_SIZE + 5), []);
   return (
     <div className="ob-wall" aria-hidden="true">
-      {Array.from({ length: tiles }, (_, index) => {
-        const game = games[index];
-        return game ? (
-          <div key={game.id} style={dimmed && index > 12 ? { opacity: 0.35 } : undefined}>
-            <GameArt game={game} kind="cover" />
-          </div>
-        ) : (
-          <div key={`empty-${index}`} className="empty" />
-        );
-      })}
+      {covers.map((source, index) => (
+        <div key={source} style={dimmed && index > 12 ? { opacity: 0.35 } : undefined}>
+          <img src={source} alt="" draggable={false} className="size-full object-cover" />
+        </div>
+      ))}
     </div>
   );
 }
