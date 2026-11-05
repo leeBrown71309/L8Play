@@ -155,7 +155,7 @@ docs/                architecture, guides and screenshots
 
 ## Conventions
 
-- Every user-facing string goes through Lingui (`t` / `<Trans>`) and must exist in English and French. Run `bun run i18n:extract` after adding text, then add the French text to `scripts/translations/fr.json`.
+- Every user-facing string goes through Lingui (`t` / `<Trans>`) and must exist in English and French. Run `bun run i18n:extract` after adding text, then add the French text to `scripts/translations/fr.json` or a `scripts/translations/fr-<area>.json` file.
 - Colours, radii, shadows and type come only from the design tokens. Tailwind's default palette is disabled.
 - Rust types shared with the UI derive `ts_rs::TS` and are exported with `cargo test`.
 - `unsafe` code is forbidden and Clippy warnings fail the build.
