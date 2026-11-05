@@ -1,8 +1,66 @@
-# L8Play
+<p align="center">
+  <img src="design/brand/l8play-mark.svg" alt="L8Play" width="96" />
+</p>
 
-A free Windows gaming hub: one library for Steam, Epic and standalone games, automatic save snapshots, and optional Google Drive backup. Built with Tauri 2, Rust, React and TypeScript.
+<h1 align="center">L8Play</h1>
 
-> **Status:** Phases 1–7 are implemented (feature complete, awaiting your hands-on testing): game library, local snapshots with safe restore, artwork and metadata, extended save detection (PCGamingWiki and local search), Google Drive sync with conflict handling, tray, notifications, welcome tour and an installer. Steam and Epic games are found automatically, standalone games can be added by their `.exe`, and games launch through their launcher. Save locations are detected with the bundled Ludusavi (or added by hand), verified zip snapshots are taken when a game closes (optionally before launch), and any snapshot can be restored with an automatic safety copy and full rollback on failure. Phase 4 adds artwork (Steam CDN, optional SteamGridDB with your own free key kept in the Windows Credential Manager, your own images) and metadata editing. Phase 5 adds "Find saves" for games the Ludusavi database does not know, phase 6 optional Google Drive sync (your own free Google project, see [docs/google-drive-setup.md](docs/google-drive-setup.md)), and phase 7 the tray icon, notifications, first-run tour, security review ([docs/architecture/10-security-review.md](docs/architecture/10-security-review.md)) and release notes ([docs/release-and-signing.md](docs/release-and-signing.md)). See [docs/architecture](docs/architecture/README.md) for the full plan.
+<p align="center">
+  <strong>Your entire gaming world. Every save protected.</strong><br />
+  A free Windows gaming hub: one library for your PC games, verified save snapshots,
+  and optional Google Drive backup.
+</p>
+
+<p align="center">
+  <a href="https://v2.tauri.app"><img alt="Tauri 2" src="https://img.shields.io/badge/Tauri-2-24C8D8?logo=tauri&logoColor=white" /></a>
+  <a href="https://www.rust-lang.org"><img alt="Rust 2024" src="https://img.shields.io/badge/Rust-2024-000000?logo=rust&logoColor=white" /></a>
+  <a href="https://react.dev"><img alt="React 19" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black" /></a>
+  <a href="https://www.typescriptlang.org"><img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-7-3178C6?logo=typescript&logoColor=white" /></a>
+  <a href="#requirements-windows-1011-x64"><img alt="Windows 10 / 11" src="https://img.shields.io/badge/Windows-10%20%2F%2011-0078D6?logo=windows&logoColor=white" /></a>
+  <a href="LICENSE"><img alt="MIT licence" src="https://img.shields.io/badge/licence-MIT-22c55e" /></a>
+  <img alt="Status: feature complete" src="https://img.shields.io/badge/status-feature%20complete-cf4239" />
+</p>
+
+<p align="center">
+  <img src="docs/screenshots/02-dashboard.png" alt="The L8Play dashboard, with the last played game, recently played titles, snapshot progress and sync attention list" width="100%" />
+</p>
+
+## What it does
+
+- **One library, every store.** L8Play finds games installed through Steam, Epic, the Xbox app and GOG, and adds any standalone game from its `.exe`. Launch everything from one place, with playtime, favourites, search and recently played.
+- **Automatic save snapshots.** Save folders are detected with the bundled [Ludusavi](https://github.com/mtkennerly/ludusavi) manifest, with PCGamingWiki and local search as fallbacks. A verified zip snapshot is taken when you stop playing (optionally before launch too).
+- **Safe restore.** Restoring a snapshot makes a safety copy first, stages files next to the target, verifies hashes, and rolls back every location if anything fails.
+- **Your Google Drive, optional.** Keep a second verified copy in a private "L8Play" folder in your own Drive, using the `drive.file` scope. Nothing is ever overwritten silently: conflicts pause the sync and wait for your choice.
+- **Artwork and metadata.** Steam CDN covers, optional SteamGridDB results with your own free key kept in the Windows Credential Manager, or an image of your own. Title, developer and release year are editable.
+- **Built like a desktop app.** Tray icon, native notifications, custom title bar, keyboard-first search (`Ctrl K`), English and French, and two themes (Ember and Rosé).
+
+## Screenshots
+
+| First run | My Games |
+| --- | --- |
+| [<img src="docs/screenshots/01-welcome.png" alt="The welcome tour introducing L8Play" />](docs/screenshots/01-welcome.png) | [<img src="docs/screenshots/03-library.png" alt="The game library with platform filters, installed and favourite views" />](docs/screenshots/03-library.png) |
+| **Game details** | **Save Manager** |
+| [<img src="docs/screenshots/04-game-details.png" alt="A game page with hero art, snapshot status and save locations" />](docs/screenshots/04-game-details.png) | [<img src="docs/screenshots/05-save-manager.png" alt="Snapshot timeline grouped by day, with the selected snapshot detail and restore action" />](docs/screenshots/05-save-manager.png) |
+| **Cloud Storage** | **Sync conflict** |
+| [<img src="docs/screenshots/06-cloud-sync.png" alt="Google Drive connected, with transfers, quota and automatic upload" />](docs/screenshots/06-cloud-sync.png) | [<img src="docs/screenshots/07-sync-conflict.png" alt="Conflict dialog showing the PC save and the Drive save side by side" />](docs/screenshots/07-sync-conflict.png) |
+| **Settings: game libraries** | **Settings: snapshots** |
+| [<img src="docs/screenshots/08-settings-libraries.png" alt="Settings for store scanning, owned games and the Steam Web API key" />](docs/screenshots/08-settings-libraries.png) | [<img src="docs/screenshots/09-settings-backup.png" alt="Settings for automatic snapshots and retention on PC and Drive" />](docs/screenshots/09-settings-backup.png) |
+
+## Project status
+
+Phases 1 to 7 are implemented: library and launching, local snapshots with safe restore, artwork and metadata, extended save detection, Google Drive sync with conflict handling, tray, notifications, welcome tour and an installer. The app is feature complete and awaiting hands-on testing on real machines; see the [hands-on testing guide](docs/testing-guide.md) and the [roadmap](docs/architecture/08-roadmap.md).
+
+## Tech stack
+
+| Layer | Choices |
+| --- | --- |
+| Desktop shell | Tauri 2, Rust 2024, WebView2 |
+| Business core | `l8-core` crate: SQLite (rusqlite + migrations), Ludusavi sidecar, zip snapshots, Google Drive transport, Windows Credential Manager |
+| Frontend | React 19, TypeScript 7, Vite 8, React Router 8 |
+| UI | Tailwind CSS 4, Radix primitives, a custom design-system layer driven by `design/tokens.json` |
+| State and data | TanStack Query, Zustand |
+| Typed bridge | Commands and events generated from Rust with `ts-rs` |
+| i18n | Lingui (English and French catalogues) |
+| Tests | Vitest and Testing Library, `cargo test`, Clippy |
 
 ## Requirements (Windows 10/11, x64)
 
@@ -23,7 +81,15 @@ bun install
 bun tauri dev
 ```
 
-`bun tauri dev` starts Vite on port 1420 and opens the native window. `bun run dev` alone opens the interface in a browser against an in-memory preview backend, with no database or file access. That mode is useful for design work.
+`bun tauri dev` starts Vite on port 1420 and opens the native window. `bun run dev` alone opens the interface in a browser against an in-memory preview backend, with no database or file access. That mode is useful for design work and is what the screenshots above were taken with.
+
+To build the installer:
+
+```bash
+bun tauri build
+```
+
+The NSIS installer is written to `target/release/bundle/nsis/`. See [docs/release-and-signing.md](docs/release-and-signing.md) for signing and GitHub Actions.
 
 ## Scripts
 
@@ -39,30 +105,50 @@ bun tauri dev
 | `cargo clippy --workspace --all-targets -- -D warnings` | Rust lints |
 | `bun run tokens` | Regenerate `src/styles/tokens.css` from `design/tokens.json` |
 | `bun run i18n:extract` | Extract UI strings and apply French translations from `scripts/translations/fr.json` |
+| `bun run fetch:ludusavi` | Download and verify the Ludusavi sidecar used for save detection |
 
 ## Project layout
 
 ```
-crates/l8-core/      Business logic (no Tauri): SQLite, settings, platforms (Steam, Epic), library, launcher, sessions
-src-tauri/           Desktop shell: window, typed commands, logging
+crates/l8-core/      Business logic (no Tauri): SQLite, settings, platforms (Steam, Epic, Xbox, GOG),
+                     library, launcher, sessions, saves, artwork, Google Drive
+src-tauri/           Desktop shell: window, tray, typed commands, logging
 src/                 React app
   app/               bootstrap, router, query client
-  components/        design-system components (shell, ui, feedback)
+  components/        design-system components (shell, ui, feedback, game)
   features/          one folder per screen
   lib/bindings/      TypeScript types generated from Rust — do not edit
   lib/tauri/         typed command wrappers + browser preview backend
   locales/           Lingui catalogues (en, fr)
-design/              design-system tokens and app icon source
-docs/architecture/   Phase 0 architecture, decisions, roadmap, risks
+design/              design-system tokens, brand and app icon
+docs/                architecture, guides and screenshots
 ```
+
+## Documentation
+
+| Document | Content |
+| --- | --- |
+| [Architecture](docs/architecture/README.md) | Feasibility, system architecture, database schema, roadmap, risks |
+| [Security review](docs/architecture/10-security-review.md) | Trust boundaries, backup integrity, input validation, findings |
+| [Google Drive setup](docs/google-drive-setup.md) | Using your own free Google project with L8Play |
+| [Release and signing](docs/release-and-signing.md) | Building, signing and publishing the installer |
+| [Hands-on testing](docs/testing-guide.md) | The checks that need a real PC and real games |
+
+## Privacy and data
+
+- Data lives in `%APPDATA%\com.l8play.app\` (SQLite database and artwork) and logs in `%LOCALAPPDATA%\com.l8play.app\logs\` (secrets redacted).
+- The WebView has no file-system or network access: every call goes through a typed Rust command, and only allow-listed hosts are contacted.
+- SteamGridDB keys, Steam Web API keys, Google client credentials and refresh tokens are stored in the Windows Credential Manager, never in SQLite or logs.
+- Google Drive access uses the `drive.file` scope: L8Play can only see the files it creates in its own "L8Play" folder.
+- No administrator rights are needed: per-user installer, per-user startup entry, loopback OAuth redirect.
 
 ## Conventions
 
 - Every user-facing string goes through Lingui (`t` / `<Trans>`) and must exist in English and French. Run `bun run i18n:extract` after adding text, then add the French text to `scripts/translations/fr.json`.
 - Colours, radii, shadows and type come only from the design tokens. Tailwind's default palette is disabled.
 - Rust types shared with the UI derive `ts_rs::TS` and are exported with `cargo test`.
-- Data lives in `%APPDATA%\com.l8play.app\` (database) and `%LOCALAPPDATA%\com.l8play.app\logs\` (logs, secrets redacted).
+- `unsafe` code is forbidden and Clippy warnings fail the build.
 
 ## Licence
 
-Free and non-commercial. The licence file will be added before the first public release (required for SignPath code signing). Save-location knowledge comes from the Ludusavi manifest and PCGamingWiki (CC BY-NC-SA 3.0).
+[MIT](LICENSE). L8Play is distributed free of charge and is not commercial. Save-location knowledge comes from the [Ludusavi manifest](https://github.com/mtkennerly/ludusavi-manifest) (MIT) and [PCGamingWiki](https://www.pcgamingwiki.com) (CC BY-NC-SA 3.0); artwork is served from Steam's CDN and, optionally, [SteamGridDB](https://www.steamgriddb.com) under their own terms.
