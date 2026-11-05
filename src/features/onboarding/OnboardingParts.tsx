@@ -1,5 +1,5 @@
 import { useLingui } from "@lingui/react/macro";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { DsIcon } from "@/components/ds/ds-icon";
 import { ProgressBar } from "@/components/ds/progress-bar";
@@ -11,10 +11,21 @@ import type { PlatformScan } from "@/lib/bindings/PlatformScan";
 const WALL_SIZE = 15;
 const LAUNCHERS: readonly Platform[] = ["steam", "epic", "xbox", "gog"];
 
-/** Original abstract covers shipped with the app: the wall never depends on the user's library or the network. */
-const WALL_COVERS = Object.values(
+/** Offline fallback: original abstract covers shipped with the app. */
+const FALLBACK_COVERS = Object.values(
   import.meta.glob<string>("@/assets/onboarding/cover-*.svg", { eager: true, query: "?url", import: "default" }),
 );
+
+/**
+ * Steam app ids of well-known games whose store cover decorates the first-launch wall. They are linked from
+ * Steam's public CDN (never copied into the app or the repository) and have nothing to do with the user's library.
+ */
+const SHOWCASE_APP_IDS = [
+  814380, 1245620, 1145360, 413150, 367520, 1091500, 1086940, 504230, 1174180, 582010, 1190460, 753640, 632470, 870780,
+  2622380, 1623730, 1145350, 2358720, 553850, 2379780, 1030300, 1627720,
+] as const;
+
+const coverUrl = (appId: number) => `https://cdn.cloudflare.steamstatic.com/steam/apps/${appId}/library_600x900.jpg`;
 
 /** Fisher-Yates shuffle on a copy; the order is picked once per mount so the wall does not flicker. */
 function shuffled<T>(items: readonly T[]): T[] {
@@ -26,15 +37,35 @@ function shuffled<T>(items: readonly T[]): T[] {
   return copy;
 }
 
-/** The rotated cover wall behind the right panel, built from bundled artwork in random order. */
+/** One wall tile: the real cover fades in once loaded; an abstract cover stands in if it cannot load. */
+function WallTile({ appId, fallback, dimmed }: { appId: number; fallback: string; dimmed: boolean }) {
+  const [state, setState] = useState<"loading" | "ready" | "failed">("loading");
+  return (
+    <div style={dimmed ? { opacity: 0.35 } : undefined}>
+      <img
+        src={state === "failed" ? fallback : coverUrl(appId)}
+        alt=""
+        draggable={false}
+        onLoad={() => setState((current) => (current === "failed" ? current : "ready"))}
+        onError={() => setState("failed")}
+        className="size-full object-cover transition-opacity duration-500"
+        style={{ opacity: state === "loading" ? 0 : 1 }}
+      />
+    </div>
+  );
+}
+
+/** The rotated cover wall behind the right panel: random well-known games, independent of the user's library. */
 export function CoverWall({ dimmed }: { dimmed: boolean }) {
-  const covers = useMemo(() => shuffled(WALL_COVERS).slice(0, WALL_SIZE + 5), []);
+  const tiles = useMemo(() => {
+    const apps = shuffled(SHOWCASE_APP_IDS).slice(0, WALL_SIZE + 5);
+    const fallbacks = shuffled(FALLBACK_COVERS);
+    return apps.map((appId, index) => ({ appId, fallback: fallbacks[index % fallbacks.length] ?? "" }));
+  }, []);
   return (
     <div className="ob-wall" aria-hidden="true">
-      {covers.map((source, index) => (
-        <div key={source} style={dimmed && index > 12 ? { opacity: 0.35 } : undefined}>
-          <img src={source} alt="" draggable={false} className="size-full object-cover" />
-        </div>
+      {tiles.map((tile, index) => (
+        <WallTile key={tile.appId} appId={tile.appId} fallback={tile.fallback} dimmed={dimmed && index > 12} />
       ))}
     </div>
   );
