@@ -1,7 +1,7 @@
 {
   "name": "l8-play",
   "private": true,
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "L8Play — a free Windows gaming hub: game launcher, save snapshots and Google Drive backup.",
   "type": "module",
   "scripts": {

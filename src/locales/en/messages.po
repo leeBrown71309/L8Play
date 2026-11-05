@@ -7,10 +7,15 @@ msgstr ""
 "X-Generator: @lingui/cli\n"
 "Language: en\n"
 
+#: src/features/console/components/modals/ConfirmRestoreModal.tsx:40
+msgid "“{name}” is back in place."
+msgstr "“{name}” is back in place."
+
 #: src/features/saves/RestoreSnapshotDialog.tsx:51
 msgid "“{name}” is back in place. Your previous save was already in a snapshot."
 msgstr "“{name}” is back in place. Your previous save was already in a snapshot."
 
+#: src/features/console/components/modals/ConfirmRestoreModal.tsx:39
 #: src/features/saves/RestoreSnapshotDialog.tsx:50
 msgid "“{name}” is back in place. Your previous save was kept as a safety copy."
 msgstr "“{name}” is back in place. Your previous save was kept as a safety copy."
@@ -28,7 +33,7 @@ msgid "“{name}” was removed from this PC."
 msgstr "“{name}” was removed from this PC."
 
 #. placeholder {0}: game.title
-#: src/components/shell/QuickRail.tsx:101
+#: src/components/shell/QuickRail.tsx:108
 msgid "{0} — running"
 msgstr "{0} — running"
 
@@ -80,6 +85,7 @@ msgid "{0} conflicts"
 msgstr "{0} conflicts"
 
 #. placeholder {0}: game.title
+#: src/features/console/core/use-console-play.ts:30
 #: src/features/library/use-game-actions.ts:38
 msgid "{0} could not be started"
 msgstr "{0} could not be started"
@@ -130,8 +136,11 @@ msgid "{0} is not running"
 msgstr "{0} is not running"
 
 #. placeholder {0}: formatBytes(operation.bytesDone, i18n.locale)
+#. placeholder {0}: formatBytes(quota.usedBytes, i18n.locale)
 #. placeholder {1}: formatBytes(operation.bytesTotal, i18n.locale)
+#. placeholder {1}: formatBytes(quota.limitBytes, i18n.locale)
 #: src/features/cloud/TransferList.tsx:35
+#: src/features/console/views/CloudView.tsx:118
 msgid "{0} of {1}"
 msgstr "{0} of {1}"
 
@@ -149,6 +158,7 @@ msgstr "{0} on PC · {1} in Drive"
 
 #. placeholder {0}: formatPlaytime(game.playtimeSeconds)
 #. placeholder {0}: formatPlaytime(snapshot.playtimeSeconds)
+#: src/features/console/views/GamePanel.tsx:71
 #: src/features/game-details/GameHero.tsx:104
 #: src/features/saves/RestoreSnapshotDialog.tsx:120
 #: src/features/saves/SnapshotTimeline.tsx:197
@@ -169,6 +179,7 @@ msgstr "{0} played so far."
 #. placeholder {0}: folder.snapshots
 #. placeholder {0}: group.items.length
 #: src/features/cloud/StoragePanels.tsx:112
+#: src/features/console/views/GamePanel.tsx:95
 #: src/features/game-details/GameOverview.tsx:96
 #: src/features/saves/SnapshotTimeline.tsx:274
 msgid "{0} snapshots"
@@ -180,11 +191,22 @@ msgid "{0} snapshots · protected"
 msgstr "{0} snapshots · protected"
 
 #. placeholder {0}: report.uploaded
+#. placeholder {1}: report.downloaded
+#: src/features/console/views/CloudView.tsx:59
+msgid "{0} uploaded · {1} downloaded"
+msgstr "{0} uploaded · {1} downloaded"
+
+#. placeholder {0}: report.uploaded
 #. placeholder {1}: report.imported
 #. placeholder {2}: report.failed
 #: src/features/cloud/CloudPage.tsx:164
 msgid "{0} uploaded · {1} found in Drive · {2} failed"
 msgstr "{0} uploaded · {1} found in Drive · {2} failed"
+
+#. placeholder {0}: status?.failed ?? 0
+#: src/features/console/views/CloudView.tsx:69
+msgid "{0} uploads failed"
+msgstr "{0} uploads failed"
 
 #. placeholder {0}: formatBytes(used, locale)
 #: src/features/cloud/StoragePanels.tsx:72
@@ -234,15 +256,15 @@ msgid "{standalone} games"
 msgstr "{standalone} games"
 
 #. placeholder {0}: formatPlaytime(event.durationSeconds)
-#: src/app/use-backend-events.ts:74
+#: src/app/use-backend-events.ts:86
 msgid "{title} · {0} played"
 msgstr "{title} · {0} played"
 
-#: src/app/use-backend-events.ts:61
+#: src/app/use-backend-events.ts:73
 msgid "{title}: check the log file for details."
 msgstr "{title}: check the log file for details."
 
-#: src/app/use-backend-events.ts:55
+#: src/app/use-backend-events.ts:67
 msgid "{title}: the save files were still in use. Create a snapshot from the game page."
 msgstr "{title}: the save files were still in use. Create a snapshot from the game page."
 
@@ -290,6 +312,7 @@ msgid "1 save location found"
 msgstr "1 save location found"
 
 #: src/features/cloud/StoragePanels.tsx:112
+#: src/features/console/views/GamePanel.tsx:95
 #: src/features/game-details/GameOverview.tsx:96
 #: src/features/saves/SnapshotTimeline.tsx:274
 msgid "1 snapshot"
@@ -319,7 +342,7 @@ msgstr "A game is running and a backup is in progress. Restarting now may interr
 msgid "A game is running. Restarting now closes L8Play and may interrupt automatic snapshots."
 msgstr "A game is running. Restarting now closes L8Play and may interrupt automatic snapshots."
 
-#: src/app/use-backend-events.ts:38
+#: src/app/use-backend-events.ts:50
 msgid "A game was played on two devices. Open Cloud Storage to choose which save to keep."
 msgstr "A game was played on two devices. Open Cloud Storage to choose which save to keep."
 
@@ -335,9 +358,17 @@ msgstr "A key is saved."
 msgid "A snapshot is taken automatically each time you stop playing. You can also create one now."
 msgstr "A snapshot is taken automatically each time you stop playing. You can also create one now."
 
+#: src/features/console/views/use-settings-rows.ts:73
+msgid "A soft background tone while console mode is open"
+msgstr "A soft background tone while console mode is open"
+
 #: src/features/settings/SettingsPage.tsx:278
 msgid "About"
 msgstr "About"
+
+#: src/features/console/views/CloudView.tsx:113
+msgid "Account"
+msgstr "Account"
 
 #: src/features/saves/SaveLocationsCard.tsx:83
 msgid "Add"
@@ -382,6 +413,7 @@ msgstr "Add game"
 msgid "Add its save folder yourself to protect it."
 msgstr "Add its save folder yourself to protect it."
 
+#: src/features/console/views/GamePanel.tsx:78
 #: src/features/game-details/GameHero.tsx:145
 msgid "Add to favourites"
 msgstr "Add to favourites"
@@ -403,16 +435,23 @@ msgstr "Added by you"
 msgid "Adding games needs the desktop app"
 msgstr "Adding games needs the desktop app"
 
+#: src/features/console/components/HintBar.tsx:36
+msgid "Adjust"
+msgstr "Adjust"
+
 #: src/features/cloud/AdvancedClient.tsx:45
 msgid "Advanced: use my own Google project"
 msgstr "Advanced: use my own Google project"
 
+#: src/features/console/components/modals/LetterPicker.tsx:61
 #: src/features/library/LibraryToolbar.tsx:45
 #: src/features/save-manager/SaveManagerPage.tsx:131
 #: src/features/saves/GameSavesPanel.tsx:81
 msgid "All"
 msgstr "All"
 
+#: src/features/console/components/FilterChips.tsx:19
+#: src/features/console/views/SavesView.tsx:84
 #: src/features/library/LibraryToolbar.tsx:54
 #: src/features/save-manager/SaveManagerPage.tsx:83
 msgid "All games"
@@ -438,6 +477,10 @@ msgstr "All time"
 msgid "Allow automatic deletion"
 msgstr "Allow automatic deletion"
 
+#: src/features/console/views/GamePanel.tsx:54
+msgid "Already protected"
+msgstr "Already protected"
+
 #: src/features/settings/BackupSection.tsx:100
 msgid "Always kept"
 msgstr "Always kept"
@@ -446,6 +489,10 @@ msgstr "Always kept"
 #: src/features/settings/BackupSection.tsx:128
 msgid "Always on"
 msgstr "Always on"
+
+#: src/features/console/views/use-settings-rows.ts:72
+msgid "Ambient sound"
+msgstr "Ambient sound"
 
 #: src/features/save-manager/SaveManagerPage.tsx:142
 msgid "Anywhere"
@@ -467,6 +514,7 @@ msgstr "Appearance"
 msgid "Application details could not be read."
 msgstr "Application details could not be read."
 
+#: src/features/console/views/GamePanel.tsx:103
 #: src/features/game-details/GameDetailsPage.tsx:77
 #: src/features/game-details/GameOverview.tsx:152
 #: src/features/settings/SettingsPage.tsx:272
@@ -491,7 +539,7 @@ msgstr "artwork sets"
 msgid "Artwork updated"
 msgstr "Artwork updated"
 
-#: src/components/shell/QuickRail.tsx:74
+#: src/components/shell/QuickRail.tsx:75
 msgid "Attention"
 msgstr "Attention"
 
@@ -514,17 +562,22 @@ msgstr "Automatic"
 msgid "Automatic snapshot"
 msgstr "Automatic snapshot"
 
-#: src/app/use-backend-events.ts:60
+#: src/app/use-backend-events.ts:72
 msgid "Automatic snapshot failed"
 msgstr "Automatic snapshot failed"
 
-#: src/app/use-backend-events.ts:54
+#: src/app/use-backend-events.ts:66
 msgid "Automatic snapshot skipped"
 msgstr "Automatic snapshot skipped"
 
 #: src/features/settings/BackupSection.tsx:52
 msgid "Automatic snapshots"
 msgstr "Automatic snapshots"
+
+#: src/features/console/views/use-settings-rows.ts:115
+#: src/features/console/views/use-settings-rows.ts:128
+msgid "Automatic snapshots per game"
+msgstr "Automatic snapshots per game"
 
 #: src/features/settings/SettingsPage.tsx:190
 msgid "Available"
@@ -534,6 +587,8 @@ msgstr "Available"
 msgid "Available with an API key"
 msgstr "Available with an API key"
 
+#: src/features/console/components/HintBar.tsx:31
+#: src/features/console/views/GamePanel.tsx:108
 #: src/features/onboarding/OnboardingDialog.tsx:294
 msgid "Back"
 msgstr "Back"
@@ -550,6 +605,7 @@ msgstr "Back to My Games"
 msgid "Back to the default Google client"
 msgstr "Back to the default Google client"
 
+#: src/features/console/components/modals/ConfirmRestoreModal.tsx:52
 #: src/features/saves/RestoreSnapshotDialog.tsx:85
 msgid "Back up current save & restore"
 msgstr "Back up current save & restore"
@@ -557,6 +613,14 @@ msgstr "Back up current save & restore"
 #: src/features/onboarding/OnboardingDialog.tsx:251
 msgid "Back up when a game closes"
 msgstr "Back up when a game closes"
+
+#: src/features/console/components/GameInfo.tsx:40
+msgid "Backed up on this PC"
+msgstr "Backed up on this PC"
+
+#: src/features/console/components/GameInfo.tsx:38
+msgid "Backed up on this PC and in Google Drive"
+msgstr "Backed up on this PC and in Google Drive"
 
 #: src/features/dashboard/dashboard-sections.tsx:70
 msgid "Backing up now"
@@ -578,6 +642,11 @@ msgstr "Before launch"
 msgid "Before launching a game"
 msgstr "Before launching a game"
 
+#. placeholder {0}: detail.developer
+#: src/features/console/components/GameInfo.tsx:51
+msgid "By {0}"
+msgstr "By {0}"
+
 #: src/features/cloud/CloudPage.tsx:275
 #: src/features/library/AddGameDialogs.tsx:136
 #: src/features/library/AddGameDialogs.tsx:227
@@ -587,6 +656,7 @@ msgstr "Before launching a game"
 msgid "cancel"
 msgstr "cancel"
 
+#: src/features/console/components/modals/ConfirmRestoreModal.tsx:53
 #: src/features/dashboard/dashboard-sections.tsx:93
 #: src/features/library/AddGameDialogs.tsx:142
 #: src/features/library/AddGameDialogs.tsx:232
@@ -606,6 +676,11 @@ msgstr "Change"
 #: src/features/game-details/GameOverview.tsx:166
 msgid "Change artwork"
 msgstr "Change artwork"
+
+#: src/features/console/views/GamePanel.tsx:104
+#: src/features/console/views/GamePanel.tsx:106
+msgid "Change artwork in the desktop interface"
+msgstr "Change artwork in the desktop interface"
 
 #: src/features/settings/BackupSection.tsx:122
 msgid "Change…"
@@ -628,6 +703,7 @@ msgstr "Changed since the latest snapshot"
 msgid "Check failed"
 msgstr "Check failed"
 
+#: src/features/console/views/use-settings-rows.ts:44
 #: src/features/updates/UpdatesSection.tsx:176
 msgid "Check for updates"
 msgstr "Check for updates"
@@ -657,6 +733,7 @@ msgstr "Check your connection or try again later."
 msgid "Check your connection, then try again."
 msgstr "Check your connection, then try again."
 
+#: src/features/console/views/use-settings-rows.ts:44
 #: src/features/updates/UpdatesSection.tsx:52
 msgid "Checking…"
 msgstr "Checking…"
@@ -702,6 +779,10 @@ msgstr "Choosing a folder needs the desktop app"
 msgid "Choosing an image needs the desktop app"
 msgstr "Choosing an image needs the desktop app"
 
+#: src/features/console/components/HintBar.tsx:37
+msgid "Clear"
+msgstr "Clear"
+
 #: src/features/library/LibraryPage.tsx:144
 msgid "Clear filters"
 msgstr "Clear filters"
@@ -721,6 +802,7 @@ msgstr "close"
 #: src/components/shell/CaptionBar.tsx:56
 #: src/components/shell/CaptionBar.tsx:57
 #: src/components/ui/dialog.tsx:64
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:26
 msgid "Close"
 msgstr "Close"
 
@@ -751,6 +833,9 @@ msgstr "Closing the window hides it instead of quitting, so automatic backups an
 msgid "Closing the window keeps L8Play running so automatic backups still happen."
 msgstr "Closing the window keeps L8Play running so automatic backups still happen."
 
+#: src/features/console/components/ConsoleTopBar.tsx:25
+#: src/features/console/views/CloudView.tsx:129
+#: src/features/console/views/CloudView.tsx:131
 #: src/features/settings/SettingsPage.tsx:275
 msgid "Cloud"
 msgstr "Cloud"
@@ -786,6 +871,7 @@ msgid "Connect a store to list every game you own, installed or not, and open it
 msgstr "Connect a store to list every game you own, installed or not, and open its install page from L8Play. Sign-in always happens on the store’s own page: L8Play never sees or stores your password."
 
 #: src/features/cloud/CloudPage.tsx:60
+#: src/features/console/views/CloudView.tsx:84
 #: src/features/onboarding/OnboardingDialog.tsx:170
 #: src/features/saves/GameSavesPanel.tsx:191
 msgid "Connect Google Drive"
@@ -799,6 +885,23 @@ msgstr "Connect Google Drive to also keep snapshots there, or only there."
 msgid "Connected"
 msgstr "Connected"
 
+#: src/components/shell/QuickRail.tsx:84
+#: src/features/console/ConsoleHost.tsx:77
+msgid "Console mode"
+msgstr "Console mode"
+
+#: src/components/shell/QuickRail.tsx:85
+msgid "Console mode (Ctrl+Shift+Enter)"
+msgstr "Console mode (Ctrl+Shift+Enter)"
+
+#: src/features/console/components/ConsoleTopBar.tsx:40
+msgid "Console sections"
+msgstr "Console sections"
+
+#: src/features/console/views/GamePanel.tsx:43
+msgid "Console snapshot"
+msgstr "Console snapshot"
+
 #: src/features/onboarding/OnboardingDialog.tsx:166
 #: src/features/onboarding/OnboardingDialog.tsx:190
 msgid "Continue"
@@ -807,6 +910,18 @@ msgstr "Continue"
 #: src/features/dashboard/HeroCard.tsx:55
 msgid "Continue playing"
 msgstr "Continue playing"
+
+#: src/features/console/components/ConsoleTopBar.tsx:61
+msgid "Controller"
+msgstr "Controller"
+
+#: src/features/console/components/ConsoleTopBar.tsx:58
+msgid "Controller connected"
+msgstr "Controller connected"
+
+#: src/features/console/components/HintBar.tsx:42
+msgid "Controls"
+msgstr "Controls"
 
 #: src/features/game-details/GameOverview.tsx:95
 msgid "Copies"
@@ -841,6 +956,7 @@ msgstr "create"
 msgid "Create a free account on steamgriddb.com."
 msgstr "Create a free account on steamgriddb.com."
 
+#: src/features/console/views/GamePanel.tsx:86
 #: src/features/game-details/GameHero.tsx:141
 #: src/features/save-manager/SaveManagerPage.tsx:120
 #: src/features/saves/CreateSnapshotDialog.tsx:117
@@ -850,10 +966,12 @@ msgid "Create snapshot"
 msgstr "Create snapshot"
 
 #: src/components/ds/status-badge.tsx:51
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:37
 #: src/features/save-manager/SnapshotDetailPanel.tsx:50
 msgid "Created"
 msgstr "Created"
 
+#: src/features/console/views/GamePanel.tsx:86
 #: src/features/saves/CreateSnapshotDialog.tsx:138
 msgid "Creating…"
 msgstr "Creating…"
@@ -918,6 +1036,10 @@ msgstr "Delete from this PC"
 msgid "Delete…"
 msgstr "Delete…"
 
+#: src/features/console/components/HintBar.tsx:32
+msgid "Desktop"
+msgstr "Desktop"
+
 #: src/features/game-details/GameOverview.tsx:127
 msgid "Details"
 msgstr "Details"
@@ -944,6 +1066,7 @@ msgstr "Detected automatically"
 msgid "Developer"
 msgstr "Developer"
 
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:43
 #: src/features/save-manager/SnapshotDetailPanel.tsx:53
 msgid "Device"
 msgstr "Device"
@@ -1011,8 +1134,12 @@ msgstr "Downloading · {percent}%"
 msgid "Downloading the update"
 msgstr "Downloading the update"
 
+#: src/features/console/views/use-settings-rows.ts:35
+msgid "Downloading update…"
+msgstr "Downloading update…"
+
 #: src/components/ds/storage-tags.tsx:29
-#: src/components/shell/QuickRail.tsx:73
+#: src/components/shell/QuickRail.tsx:74
 #: src/features/dashboard/dashboard-sections.tsx:133
 msgid "Drive"
 msgstr "Drive"
@@ -1025,6 +1152,10 @@ msgstr "Drive has a different save from {0}"
 #: src/features/cloud/StoragePanels.tsx:61
 msgid "Drive storage"
 msgstr "Drive storage"
+
+#: src/features/console/views/use-settings-rows.ts:97
+msgid "Ember (dark)"
+msgstr "Ember (dark)"
 
 #: src/features/settings/SettingsPage.tsx:56
 msgid "Ember is the dark theme; Rosé is its light counterpart."
@@ -1066,6 +1197,11 @@ msgstr "Executable"
 msgid "Existing snapshots stay where they are."
 msgstr "Existing snapshots stay where they are."
 
+#: src/features/console/components/modals/QuickMenu.tsx:19
+#: src/features/console/views/use-settings-rows.ts:138
+msgid "Exit console mode"
+msgstr "Exit console mode"
+
 #: src/components/shell/NavRail.tsx:63
 msgid "Expand the menu"
 msgstr "Expand the menu"
@@ -1076,10 +1212,15 @@ msgstr "Expand the menu"
 msgid "Failed"
 msgstr "Failed"
 
+#: src/features/console/views/CloudView.tsx:123
+msgid "Failed uploads"
+msgstr "Failed uploads"
+
 #: src/components/game/GameRow.tsx:46
 msgid "Favourite"
 msgstr "Favourite"
 
+#: src/features/console/components/FilterChips.tsx:21
 #: src/features/library/LibraryToolbar.tsx:107
 msgid "Favourites"
 msgstr "Favourites"
@@ -1091,6 +1232,22 @@ msgstr "File missing"
 #: src/features/library/LibraryToolbar.tsx:69
 msgid "Filter by title"
 msgstr "Filter by title"
+
+#: src/features/console/components/FilterChips.tsx:26
+msgid "Filter games"
+msgstr "Filter games"
+
+#: src/features/console/components/HintBar.tsx:38
+msgid "Filters"
+msgstr "Filters"
+
+#: src/features/console/components/HintBar.tsx:35
+msgid "Find"
+msgstr "Find"
+
+#: src/features/console/components/modals/LetterPicker.tsx:43
+msgid "Find a game"
+msgstr "Find a game"
 
 #: src/features/settings/ArtworkSection.tsx:117
 msgid "Find missing artwork"
@@ -1149,6 +1306,10 @@ msgstr "Free: no paid service is involved. Not available yet."
 #: src/features/saves/CreateSnapshotDialog.tsx:223
 msgid "Frees this PC once the upload is confirmed."
 msgstr "Frees this PC once the upload is confirmed."
+
+#: src/features/console/views/SavesView.tsx:83
+msgid "Game"
+msgstr "Game"
 
 #: src/features/saves/snapshot-labels.ts:25
 msgid "Game closed"
@@ -1249,6 +1410,9 @@ msgid "Google could not be reached. Check your connection and try again."
 msgstr "Google could not be reached. Check your connection and try again."
 
 #: src/components/ds/status-badge.tsx:61
+#: src/features/console/components/modals/GameSnapshotsModal.tsx:21
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:18
+#: src/features/console/views/SavesView.tsx:38
 #: src/features/save-manager/SnapshotDetailPanel.tsx:110
 #: src/features/saves/GameSavesPanel.tsx:170
 msgid "Google Drive"
@@ -1259,6 +1423,7 @@ msgid "Google Drive account"
 msgstr "Google Drive account"
 
 #: src/features/cloud/CloudPage.tsx:154
+#: src/features/console/views/CloudView.tsx:90
 #: src/features/onboarding/OnboardingDialog.tsx:78
 msgid "Google Drive connected"
 msgstr "Google Drive connected"
@@ -1272,7 +1437,7 @@ msgstr "Google Drive connected · {0}"
 msgid "Google Drive disconnected"
 msgstr "Google Drive disconnected"
 
-#: src/components/shell/QuickRail.tsx:75
+#: src/components/shell/QuickRail.tsx:76
 msgid "Google Drive is not connected"
 msgstr "Google Drive is not connected"
 
@@ -1285,6 +1450,7 @@ msgid "Google Drive uploads are switched off in Settings."
 msgstr "Google Drive uploads are switched off in Settings."
 
 #: src/features/cloud/CloudPage.tsx:155
+#: src/features/console/views/CloudView.tsx:91
 #: src/features/onboarding/OnboardingDialog.tsx:81
 msgid "Google Drive was not connected"
 msgstr "Google Drive was not connected"
@@ -1300,6 +1466,10 @@ msgstr "Google or the game is busy right now. Try again in a moment."
 #: src/features/cloud/use-cloud.ts:79
 msgid "Google refused the sign-in. Check the OAuth client, or sign in again."
 msgstr "Google refused the sign-in. Check the OAuth client, or sign in again."
+
+#: src/features/console/views/CloudView.tsx:115
+msgid "Google storage"
+msgstr "Google storage"
 
 #: src/features/library/LibraryToolbar.tsx:122
 msgid "Grid view (Ctrl+G)"
@@ -1359,6 +1529,8 @@ msgid "Info"
 msgstr "Info"
 
 #: src/components/game/GameRow.tsx:76
+#: src/features/console/components/GameInfo.tsx:68
+#: src/features/console/views/GamePanel.tsx:70
 #: src/features/game-details/GameHero.tsx:130
 msgid "Install"
 msgstr "Install"
@@ -1386,6 +1558,7 @@ msgstr "Install the update now?"
 msgid "Installation"
 msgstr "Installation"
 
+#: src/features/console/components/FilterChips.tsx:22
 #: src/features/library/LibraryToolbar.tsx:55
 msgid "Installed"
 msgstr "Installed"
@@ -1407,6 +1580,10 @@ msgstr "It will be tried again"
 msgid "It’s free: add your own SteamGridDB API key once and thousands of community covers, heroes and logos become available."
 msgstr "It’s free: add your own SteamGridDB API key once and thousands of community covers, heroes and logos become available."
 
+#: src/features/console/components/modals/LetterPicker.tsx:43
+msgid "Jump to the games starting with a letter"
+msgstr "Jump to the games starting with a letter"
+
 #: src/features/onboarding/OnboardingDialog.tsx:127
 msgid "Keep a copy in Google Drive?"
 msgstr "Keep a copy in Google Drive?"
@@ -1419,6 +1596,7 @@ msgstr "Keep both apart"
 msgid "Keep both, change nothing yet"
 msgstr "Keep both, change nothing yet"
 
+#: src/features/console/views/use-settings-rows.ts:127
 #: src/features/settings/BackupSection.tsx:86
 #: src/features/settings/BackupSection.tsx:90
 msgid "Keep in Google Drive"
@@ -1429,6 +1607,7 @@ msgstr "Keep in Google Drive"
 msgid "Keep it"
 msgstr "Keep it"
 
+#: src/features/console/views/use-settings-rows.ts:114
 #: src/features/settings/BackupSection.tsx:74
 #: src/features/settings/BackupSection.tsx:78
 msgid "Keep on this PC"
@@ -1486,6 +1665,7 @@ msgstr "L8Play will close, install version {0} and restart."
 msgid "L8Play will restart to finish."
 msgstr "L8Play will restart to finish."
 
+#: src/features/console/views/use-settings-rows.ts:82
 #: src/features/settings/SettingsPage.tsx:70
 #: src/features/settings/SettingsPage.tsx:74
 msgid "Language"
@@ -1509,6 +1689,8 @@ msgid "Last played"
 msgstr "Last played"
 
 #. placeholder {0}: formatDateTime(game.lastPlayedAt, i18n.locale)
+#. placeholder {0}: formatRelative(game.lastPlayedAt, i18n.locale)
+#: src/features/console/components/GameInfo.tsx:53
 #: src/features/game-details/GameHero.tsx:101
 msgid "Last played {0}"
 msgstr "Last played {0}"
@@ -1516,6 +1698,15 @@ msgstr "Last played {0}"
 #: src/features/game-details/GameOverview.tsx:69
 msgid "Last snapshot"
 msgstr "Last snapshot"
+
+#. placeholder {0}: formatRelative(newest, i18n.locale)
+#: src/features/console/components/GameInfo.tsx:57
+msgid "last snapshot {0}"
+msgstr "last snapshot {0}"
+
+#: src/features/console/views/CloudView.tsx:125
+msgid "Last sync"
+msgstr "Last sync"
 
 #: src/features/updates/UpdatesSection.tsx:205
 msgid "Later"
@@ -1525,9 +1716,18 @@ msgstr "Later"
 msgid "Launching {via}. Play time is recorded automatically."
 msgstr "Launching {via}. Play time is recorded automatically."
 
+#: src/features/console/components/modals/LetterPicker.tsx:44
+msgid "Letters"
+msgstr "Letters"
+
 #: src/features/library/use-library-flows.ts:31
 msgid "Libraries scanned"
 msgstr "Libraries scanned"
+
+#: src/features/console/components/ConsoleTopBar.tsx:23
+#: src/features/console/views/LibraryView.tsx:81
+msgid "Library"
+msgstr "Library"
 
 #: src/features/library/LibraryToolbar.tsx:123
 msgid "List view (Ctrl+L)"
@@ -1557,11 +1757,12 @@ msgstr "Lists your whole Steam library. Works today with your Steam Web API key 
 msgid "Lists your Xbox and Microsoft Store games and opens the Xbox app to install them."
 msgstr "Lists your Xbox and Microsoft Store games and opens the Xbox app to install them."
 
+#: src/features/console/views/LibraryView.tsx:96
 #: src/features/settings/SettingsPage.tsx:243
 msgid "Loading…"
 msgstr "Loading…"
 
-#: src/components/shell/QuickRail.tsx:74
+#: src/components/shell/QuickRail.tsx:75
 msgid "Local"
 msgstr "Local"
 
@@ -1626,6 +1827,11 @@ msgstr "Matching artwork from SteamGridDB…"
 msgid "Maximize"
 msgstr "Maximize"
 
+#: src/features/console/components/HintBar.tsx:34
+#: src/features/console/components/modals/QuickMenu.tsx:29
+msgid "Menu"
+msgstr "Menu"
+
 #: src/components/shell/CaptionBar.tsx:36
 #: src/components/shell/CaptionBar.tsx:37
 msgid "Minimize"
@@ -1676,6 +1882,7 @@ msgstr "Never deleted automatically"
 
 #: src/components/game/GameCard.tsx:36
 #: src/components/game/GameTile.tsx:28
+#: src/features/console/components/GameInfo.tsx:32
 msgid "Never played"
 msgstr "Never played"
 
@@ -1707,9 +1914,21 @@ msgstr "Next page"
 msgid "No changes — {total} games in your library."
 msgstr "No changes — {total} games in your library."
 
+#: src/features/console/components/ConsoleTopBar.tsx:61
+msgid "No controller"
+msgstr "No controller"
+
+#: src/features/console/components/ConsoleTopBar.tsx:58
+msgid "No controller connected"
+msgstr "No controller connected"
+
 #: src/features/library/AddGameDialogs.tsx:161
 msgid "No game found. Choose the folder that contains your games, one folder per game."
 msgstr "No game found. Choose the folder that contains your games, one folder per game."
+
+#: src/features/console/views/LibraryView.tsx:96
+msgid "No game here"
+msgstr "No game here"
 
 #: src/features/library/LibraryPage.tsx:139
 msgid "No game matches these filters"
@@ -1747,6 +1966,7 @@ msgstr "No snapshot matches these filters"
 msgid "No snapshot matches this filter."
 msgstr "No snapshot matches this filter."
 
+#: src/features/console/components/GameInfo.tsx:36
 #: src/features/dashboard/dashboard-sections.tsx:30
 #: src/features/dashboard/HeroCard.tsx:64
 #: src/features/game-details/GameOverview.tsx:50
@@ -1754,6 +1974,14 @@ msgstr "No snapshot matches this filter."
 #: src/features/saves/GameSavesPanel.tsx:61
 msgid "No snapshot yet"
 msgstr "No snapshot yet"
+
+#: src/features/console/components/modals/GameSnapshotsModal.tsx:34
+msgid "No snapshot yet. Create one from the game page."
+msgstr "No snapshot yet. Create one from the game page."
+
+#: src/features/console/views/SavesView.tsx:88
+msgid "No snapshot yet. Play a game, or create one from its page."
+msgstr "No snapshot yet. Play a game, or create one from its page."
 
 #: src/features/dashboard/HeroCard.tsx:61
 msgid "No snapshot yet. Your save is copied each time you stop playing."
@@ -1772,6 +2000,7 @@ msgstr "No snapshots yet. A snapshot is taken automatically each time you stop p
 msgid "Not checked yet"
 msgstr "Not checked yet"
 
+#: src/features/console/views/CloudView.tsx:113
 #: src/features/settings/StoreAccountsBlock.tsx:34
 msgid "Not connected"
 msgstr "Not connected"
@@ -1791,10 +2020,15 @@ msgstr "Not in Google Drive"
 
 #: src/components/game/GameCard.tsx:33
 #: src/components/game/GameCard.tsx:73
+#: src/features/console/components/FilterChips.tsx:23
 #: src/features/game-details/GameHero.tsx:94
 #: src/features/library/LibraryToolbar.tsx:56
 msgid "Not installed"
 msgstr "Not installed"
+
+#: src/features/console/components/GameInfo.tsx:34
+msgid "Not installed on this PC"
+msgstr "Not installed on this PC"
 
 #: src/components/ds/storage-tags.tsx:62
 msgid "Not on this PC"
@@ -1835,6 +2069,10 @@ msgstr "Nothing found. Add the save folder yourself if you know where the game k
 msgid "Nothing is waiting to upload. New snapshots appear here while they are copied to Drive."
 msgstr "Nothing is waiting to upload. New snapshots appear here while they are copied to Drive."
 
+#: src/features/console/views/LibraryView.tsx:97
+msgid "Nothing matches this filter. Press back to change it."
+msgstr "Nothing matches this filter. Press back to change it."
+
 #: src/features/settings/ArtworkSection.tsx:129
 msgid "Nothing new found"
 msgstr "Nothing new found"
@@ -1843,10 +2081,12 @@ msgstr "Nothing new found"
 msgid "Nothing played recently"
 msgstr "Nothing played recently"
 
+#: src/features/console/views/GamePanel.tsx:54
 #: src/features/saves/CreateSnapshotDialog.tsx:101
 msgid "Nothing to back up yet"
 msgstr "Nothing to back up yet"
 
+#: src/features/console/components/modals/ConfirmRestoreModal.tsx:46
 #: src/features/saves/RestoreSnapshotDialog.tsx:55
 msgid "Nothing was restored"
 msgstr "Nothing was restored"
@@ -1895,11 +2135,13 @@ msgstr "on this PC"
 
 #: src/components/ds/storage-tags.tsx:62
 #: src/features/cloud/ConflictDialog.tsx:50
+#: src/features/console/views/GamePanel.tsx:87
 #: src/features/save-manager/SaveManagerPage.tsx:143
 #: src/features/saves/CreateSnapshotDialog.tsx:233
 msgid "On this PC"
 msgstr "On this PC"
 
+#: src/features/console/views/GamePanel.tsx:87
 #: src/features/saves/CreateSnapshotDialog.tsx:204
 msgid "On this PC and in Google Drive"
 msgstr "On this PC and in Google Drive"
@@ -1929,6 +2171,7 @@ msgstr "Only on this PC"
 msgid "Only you can remove a snapshot you named or pinned yourself."
 msgstr "Only you can remove a snapshot you named or pinned yourself."
 
+#: src/features/console/components/HintBar.tsx:29
 #: src/features/settings/BackupSection.tsx:119
 msgid "Open"
 msgstr "Open"
@@ -1972,9 +2215,14 @@ msgid "Open the key page"
 msgstr "Open the key page"
 
 #. placeholder {0}: game.title
+#: src/features/console/core/use-console-play.ts:24
 #: src/features/library/use-game-actions.ts:31
 msgid "Opening the installer for {0}"
 msgstr "Opening the installer for {0}"
+
+#: src/features/console/views/CloudView.tsx:85
+msgid "Opens your browser to sign in. L8Play only sees the files it creates."
+msgstr "Opens your browser to sign in. L8Play only sees the files it creates."
 
 #: src/features/saves/CreateSnapshotDialog.tsx:187
 msgid "Optional"
@@ -2032,6 +2280,12 @@ msgstr "Paused"
 msgid "PC"
 msgstr "PC"
 
+#: src/features/console/components/modals/GameSnapshotsModal.tsx:21
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:18
+#: src/features/console/views/SavesView.tsx:38
+msgid "PC and Drive"
+msgstr "PC and Drive"
+
 #: src/features/settings/SettingsPage.tsx:197
 msgid "PCGamingWiki and local search"
 msgstr "PCGamingWiki and local search"
@@ -2062,6 +2316,9 @@ msgid "Platform"
 msgstr "Platform"
 
 #: src/components/game/GameRow.tsx:76
+#: src/features/console/components/GameInfo.tsx:68
+#: src/features/console/components/HintBar.tsx:30
+#: src/features/console/views/GamePanel.tsx:70
 #: src/features/dashboard/HeroCard.tsx:117
 #: src/features/game-details/GameHero.tsx:126
 msgid "Play"
@@ -2070,7 +2327,7 @@ msgstr "Play"
 #. placeholder {0}: game.title
 #: src/components/game/GameCard.tsx:49
 #: src/components/game/GameTile.tsx:41
-#: src/components/shell/QuickRail.tsx:100
+#: src/components/shell/QuickRail.tsx:107
 msgid "Play {0}"
 msgstr "Play {0}"
 
@@ -2082,6 +2339,11 @@ msgstr "Play a game and quit it: L8Play copies its saves automatically. You can 
 #: src/features/dashboard/HeroCard.tsx:54
 msgid "Played {0}"
 msgstr "Played {0}"
+
+#. placeholder {0}: formatPlaytime(game.playtimeSeconds)
+#: src/features/console/components/GameInfo.tsx:32
+msgid "Played for {0}"
+msgstr "Played for {0}"
 
 #: src/components/game/GameCard.tsx:31
 #: src/components/game/GameRow.tsx:55
@@ -2159,7 +2421,7 @@ msgstr "Queued"
 msgid "queued for Google Drive only"
 msgstr "queued for Google Drive only"
 
-#: src/components/shell/QuickRail.tsx:78
+#: src/components/shell/QuickRail.tsx:79
 msgid "Quick launch"
 msgstr "Quick launch"
 
@@ -2175,6 +2437,10 @@ msgstr "Reading the current save…"
 #: src/features/updates/UpdatesSection.tsx:58
 msgid "Ready to install"
 msgstr "Ready to install"
+
+#: src/features/console/components/FilterChips.tsx:20
+msgid "Recent"
+msgstr "Recent"
 
 #: src/features/dashboard/dashboard-sections.tsx:158
 msgid "Recent backups"
@@ -2207,6 +2473,7 @@ msgstr "Released"
 msgid "Remove {0} from favourites"
 msgstr "Remove {0} from favourites"
 
+#: src/features/console/views/GamePanel.tsx:78
 #: src/features/game-details/GameHero.tsx:145
 msgid "Remove from favourites"
 msgstr "Remove from favourites"
@@ -2236,6 +2503,10 @@ msgstr "Reset to automatic"
 msgid "Resolve"
 msgstr "Resolve"
 
+#: src/features/console/views/CloudView.tsx:142
+msgid "Resolve sync conflicts in the desktop interface."
+msgstr "Resolve sync conflicts in the desktop interface."
+
 #: src/features/updates/UpdatesSection.tsx:167
 msgid "Restart now"
 msgstr "Restart now"
@@ -2244,10 +2515,16 @@ msgstr "Restart now"
 msgid "Restore"
 msgstr "Restore"
 
+#. placeholder {0}: labels.name(snapshot)
+#: src/features/console/components/modals/ConfirmRestoreModal.tsx:65
+msgid "Restore “{0}”?"
+msgstr "Restore “{0}”?"
+
 #: src/features/saves/RestoreSnapshotDialog.tsx:65
 msgid "Restore “{name}”?"
 msgstr "Restore “{name}”?"
 
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:22
 #: src/features/save-manager/SnapshotDetailPanel.tsx:119
 #: src/features/saves/SnapshotTimeline.tsx:122
 msgid "Restore…"
@@ -2256,6 +2533,10 @@ msgstr "Restore…"
 #: src/features/saves/RestoreSnapshotDialog.tsx:85
 msgid "Restoring…"
 msgstr "Restoring…"
+
+#: src/features/console/components/modals/QuickMenu.tsx:17
+msgid "Resume"
+msgstr "Resume"
 
 #: src/features/settings/BackupSection.tsx:72
 msgid "Retention"
@@ -2272,15 +2553,26 @@ msgstr "Retry"
 
 #: src/features/cloud/CloudPage.tsx:230
 #: src/features/cloud/TransferList.tsx:62
+#: src/features/console/views/CloudView.tsx:75
 msgid "Retry failed"
 msgstr "Retry failed"
+
+#: src/features/console/views/CloudView.tsx:68
+msgid "Retry failed uploads"
+msgstr "Retry failed uploads"
+
+#: src/features/console/views/use-settings-rows.ts:98
+msgid "Rosé (light)"
+msgstr "Rosé (light)"
 
 #: src/features/saves/SaveLocationsCard.tsx:92
 msgid "Run detection or add the folder yourself."
 msgstr "Run detection or add the folder yourself."
 
 #: src/components/game/GameCard.tsx:77
-#: src/components/shell/QuickRail.tsx:108
+#: src/components/shell/QuickRail.tsx:115
+#: src/features/console/components/GameInfo.tsx:68
+#: src/features/console/views/GamePanel.tsx:70
 msgid "Running"
 msgstr "Running"
 
@@ -2298,6 +2590,7 @@ msgstr "Safety copy"
 msgid "Safety copy before restore"
 msgstr "Safety copy before restore"
 
+#: src/features/console/views/use-settings-rows.ts:132
 #: src/features/settings/BackupSection.tsx:29
 msgid "Same as this PC"
 msgstr "Same as this PC"
@@ -2306,11 +2599,11 @@ msgstr "Same as this PC"
 msgid "Save"
 msgstr "Save"
 
-#: src/app/use-backend-events.ts:48
+#: src/app/use-backend-events.ts:60
 msgid "Save backed up"
 msgstr "Save backed up"
 
-#: src/app/use-backend-events.ts:48
+#: src/app/use-backend-events.ts:60
 msgid "Save backed up before launch"
 msgstr "Save backed up before launch"
 
@@ -2384,6 +2677,9 @@ msgid "Saved"
 msgstr "Saved"
 
 #: src/components/game/GameRow.tsx:88
+#: src/features/console/components/ConsoleTopBar.tsx:24
+#: src/features/console/views/SavesView.tsx:75
+#: src/features/console/views/SavesView.tsx:76
 #: src/features/game-details/GameDetailsPage.tsx:76
 msgid "Saves"
 msgstr "Saves"
@@ -2447,6 +2743,10 @@ msgstr "Search names and notes"
 msgid "Search your games…"
 msgstr "Search your games…"
 
+#: src/features/console/components/HintBar.tsx:33
+msgid "Sections"
+msgstr "Sections"
+
 #: src/features/dashboard/DashboardPage.tsx:138
 msgid "See all"
 msgstr "See all"
@@ -2454,6 +2754,10 @@ msgstr "See all"
 #: src/features/cloud/AdvancedClient.tsx:53
 msgid "See docs/google-drive-setup.md for the steps. No billing account is ever needed."
 msgstr "See docs/google-drive-setup.md for the steps. No billing account is ever needed."
+
+#: src/features/console/components/HintBar.tsx:28
+msgid "Select"
+msgstr "Select"
 
 #: src/features/library/AddGameDialogs.tsx:251
 msgid "Select a game’s .exe file directly."
@@ -2463,7 +2767,7 @@ msgstr "Select a game’s .exe file directly."
 msgid "Select a snapshot to see where it is stored and what it contains."
 msgstr "Select a snapshot to see where it is stored and what it contains."
 
-#: src/app/use-backend-events.ts:73
+#: src/app/use-backend-events.ts:85
 msgid "Session ended"
 msgstr "Session ended"
 
@@ -2484,6 +2788,10 @@ msgid "Set up SteamGridDB"
 msgstr "Set up SteamGridDB"
 
 #: src/components/shell/NavRail.tsx:82
+#: src/features/console/components/ConsoleTopBar.tsx:26
+#: src/features/console/components/modals/QuickMenu.tsx:18
+#: src/features/console/views/SettingsView.tsx:88
+#: src/features/console/views/SettingsView.tsx:89
 #: src/features/settings/SettingsPage.tsx:283
 msgid "Settings"
 msgstr "Settings"
@@ -2548,6 +2856,7 @@ msgstr "Sign-in, storage, the sync queue and conflicts are on the Cloud Storage 
 
 #: src/components/game/GameRow.tsx:88
 #: src/features/cloud/ConflictDialog.tsx:64
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:39
 #: src/features/save-manager/SnapshotDetailPanel.tsx:52
 msgid "Size"
 msgstr "Size"
@@ -2564,6 +2873,7 @@ msgstr "skip the tour"
 msgid "Snapshot"
 msgstr "Snapshot"
 
+#: src/features/console/views/GamePanel.tsx:50
 #: src/features/saves/CreateSnapshotDialog.tsx:94
 msgid "Snapshot created"
 msgstr "Snapshot created"
@@ -2580,6 +2890,7 @@ msgstr "Snapshot folder"
 msgid "Snapshot folder changed"
 msgstr "Snapshot folder changed"
 
+#: src/features/console/components/modals/ConfirmRestoreModal.tsx:37
 #: src/features/saves/RestoreSnapshotDialog.tsx:48
 msgid "Snapshot restored"
 msgstr "Snapshot restored"
@@ -2597,6 +2908,12 @@ msgstr "Snapshot verified"
 msgid "Snapshot verified (SHA-256 {0})"
 msgstr "Snapshot verified (SHA-256 {0})"
 
+#: src/features/console/views/use-settings-rows.ts:106
+msgid "Snapshot when a game closes"
+msgstr "Snapshot when a game closes"
+
+#: src/features/console/components/modals/GameSnapshotsModal.tsx:33
+#: src/features/console/views/GamePanel.tsx:94
 #: src/features/dashboard/dashboard-sections.tsx:129
 msgid "Snapshots"
 msgstr "Snapshots"
@@ -2608,6 +2925,10 @@ msgstr "Snapshots are made on demand"
 #: src/features/onboarding/OnboardingDialog.tsx:123
 msgid "Snapshots are verified copies of your saves. Choose when L8Play makes them."
 msgstr "Snapshots are verified copies of your saves. Choose when L8Play makes them."
+
+#: src/features/console/components/GameInfo.tsx:41
+msgid "Snapshots are waiting to be restored from Drive"
+msgstr "Snapshots are waiting to be restored from Drive"
 
 #: src/features/onboarding/OnboardingDialog.tsx:137
 msgid "Snapshots happen on their own when a game closes. You can change anything later in Settings."
@@ -2648,6 +2969,10 @@ msgstr "Something went wrong. Check the log file for details."
 msgid "Sort"
 msgstr "Sort"
 
+#: src/features/console/views/use-settings-rows.ts:59
+msgid "Sound effects"
+msgstr "Sound effects"
+
 #: src/features/artwork/ArtworkDialog.tsx:195
 msgid "Source"
 msgstr "Source"
@@ -2662,6 +2987,7 @@ msgid "Start with Windows"
 msgstr "Start with Windows"
 
 #. placeholder {0}: game.title
+#: src/features/console/core/use-console-play.ts:24
 #: src/features/library/use-game-actions.ts:31
 msgid "Starting {0}"
 msgstr "Starting {0}"
@@ -2673,6 +2999,10 @@ msgstr "Starts hidden in the notification area when you sign in."
 #: src/features/settings/SettingsPage.tsx:102
 msgid "Starts hidden in the notification area when you sign in. No administrator rights needed."
 msgstr "Starts hidden in the notification area when you sign in. No administrator rights needed."
+
+#: src/features/console/components/FilterChips.tsx:42
+msgid "Starts with {letter}"
+msgstr "Starts with {letter}"
 
 #: src/features/cloud/CloudPage.tsx:281
 msgid "Stay connected"
@@ -2781,6 +3111,7 @@ msgstr "Store accounts"
 msgid "Stored"
 msgstr "Stored"
 
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:42
 #: src/features/save-manager/SnapshotDetailPanel.tsx:91
 msgid "Stored in"
 msgstr "Stored in"
@@ -2822,11 +3153,20 @@ msgstr "Survives a broken drive or a new PC."
 msgid "Sync conflict"
 msgstr "Sync conflict"
 
+#: src/features/console/views/CloudView.tsx:124
+msgid "Sync conflicts"
+msgstr "Sync conflicts"
+
 #: src/components/shell/use-cloud-summary.ts:57
 msgid "Sync conflicts: {conflicts}"
 msgstr "Sync conflicts: {conflicts}"
 
+#: src/features/console/views/CloudView.tsx:61
+msgid "Sync failed"
+msgstr "Sync failed"
+
 #: src/features/cloud/CloudPage.tsx:163
+#: src/features/console/views/CloudView.tsx:58
 msgid "Sync finished"
 msgstr "Sync finished"
 
@@ -2835,6 +3175,7 @@ msgid "Sync is paused for this game until you choose."
 msgstr "Sync is paused for this game until you choose."
 
 #: src/features/cloud/CloudPage.tsx:177
+#: src/features/console/views/CloudView.tsx:49
 msgid "Sync now"
 msgstr "Sync now"
 
@@ -2846,6 +3187,10 @@ msgstr "Sync stopped"
 msgid "Syncing {active}"
 msgstr "Syncing {active}"
 
+#: src/features/console/views/CloudView.tsx:49
+msgid "Syncing…"
+msgstr "Syncing…"
+
 #: src/features/settings/SettingsPage.tsx:108
 msgid "Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden."
 msgstr "Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden."
@@ -2853,6 +3198,10 @@ msgstr "Tells you about problems that need attention (a failed backup, a save co
 #: src/features/settings/ArtworkSection.tsx:65
 msgid "Test the key"
 msgstr "Test the key"
+
+#: src/features/console/views/use-settings-rows.ts:49
+msgid "The check failed. Try again."
+msgstr "The check failed. Try again."
 
 #: src/features/cloud/AdvancedClient.tsx:96
 msgid "The client was not removed"
@@ -2890,6 +3239,7 @@ msgstr "The Drive copy is downloaded and checked against its checksum first"
 msgid "The Drive save stays in your Drive as a conflict copy you can restore later."
 msgstr "The Drive save stays in your Drive as a conflict copy you can restore later."
 
+#: src/features/console/core/use-console-play.ts:40
 #: src/features/library/use-game-actions.ts:44
 msgid "The favourite could not be saved"
 msgstr "The favourite could not be saved"
@@ -2989,6 +3339,7 @@ msgstr "The scan failed"
 msgid "The search could not run. Check the log file for details."
 msgstr "The search could not run. Check the log file for details."
 
+#: src/features/console/views/GamePanel.tsx:61
 #: src/features/saves/CreateSnapshotDialog.tsx:107
 msgid "The snapshot was not created"
 msgstr "The snapshot was not created"
@@ -3013,6 +3364,7 @@ msgstr "The update signature is invalid"
 msgid "The version you don’t use is kept as a snapshot."
 msgstr "The version you don’t use is kept as a snapshot."
 
+#: src/features/console/views/use-settings-rows.ts:94
 #: src/features/settings/SettingsPage.tsx:55
 #: src/features/settings/SettingsPage.tsx:59
 msgid "Theme"
@@ -3048,6 +3400,9 @@ msgid "This path doesn’t exist right now"
 msgstr "This path doesn’t exist right now"
 
 #: src/components/ds/status-badge.tsx:60
+#: src/features/console/components/modals/GameSnapshotsModal.tsx:21
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:18
+#: src/features/console/views/SavesView.tsx:38
 #: src/features/dashboard/dashboard-sections.tsx:132
 #: src/features/save-manager/SnapshotDetailPanel.tsx:95
 msgid "This PC"
@@ -3116,9 +3471,13 @@ msgstr "Try again. If it keeps failing, download the installer from GitHub."
 msgid "Two different saves for {0}"
 msgstr "Two different saves for {0}"
 
-#: src/app/use-backend-events.ts:37
+#: src/app/use-backend-events.ts:49
 msgid "Two different saves found"
 msgstr "Two different saves found"
+
+#: src/features/console/components/modals/SnapshotDetailModal.tsx:36
+msgid "Type"
+msgstr "Type"
 
 #: src/features/library/AddGameDialogs.tsx:166
 msgid "Untick the ones you don’t want, and choose which program starts each game. Games already in your library are not listed."
@@ -3137,6 +3496,7 @@ msgstr "Update anyway"
 msgid "Update available"
 msgstr "Update available"
 
+#: src/features/console/views/use-settings-rows.ts:26
 #: src/features/updates/UpdatesSection.tsx:162
 msgid "Update now"
 msgstr "Update now"
@@ -3155,6 +3515,10 @@ msgstr "Upload automatically"
 #: src/features/saves/SnapshotTimeline.tsx:206
 msgid "Upload failed"
 msgstr "Upload failed"
+
+#: src/features/console/views/CloudView.tsx:50
+msgid "Upload new snapshots and look for ones from other PCs"
+msgstr "Upload new snapshots and look for ones from other PCs"
 
 #: src/components/ds/storage-tags.tsx:66
 msgid "Upload pending"
@@ -3194,6 +3558,10 @@ msgstr "Uploading…"
 #: src/components/shell/use-cloud-summary.ts:68
 msgid "Uploads failed: {failed}"
 msgstr "Uploads failed: {failed}"
+
+#: src/features/console/views/CloudView.tsx:74
+msgid "Uploads queued again"
+msgstr "Uploads queued again"
 
 #: src/features/cloud/CloudPage.tsx:303
 msgid "Uploads stop and L8Play’s access to your Drive is revoked. Your snapshots on this PC and the files already in Drive are not deleted."
@@ -3258,12 +3626,27 @@ msgstr "Verify every snapshot"
 msgid "Version"
 msgstr "Version"
 
+#. placeholder {0}: updater.currentVersion
+#: src/features/console/views/use-settings-rows.ts:51
+msgid "Version {0}"
+msgstr "Version {0}"
+
+#. placeholder {0}: updater.update.version
+#: src/features/console/views/use-settings-rows.ts:27
+msgid "Version {0} is ready. L8Play will restart."
+msgstr "Version {0} is ready. L8Play will restart."
+
 #: src/features/library/LibraryToolbar.tsx:118
 msgid "View"
 msgstr "View"
 
+#: src/features/console/views/use-settings-rows.ts:63
+msgid "Volume"
+msgstr "Volume"
+
 #: src/features/cloud/CloudPage.tsx:60
 #: src/features/cloud/CloudPage.tsx:119
+#: src/features/console/views/CloudView.tsx:84
 msgid "Waiting for Google…"
 msgstr "Waiting for Google…"
 
@@ -3274,6 +3657,7 @@ msgstr "Waiting to download"
 #: src/components/ds/status-badge.tsx:55
 #: src/components/ds/storage-tags.tsx:39
 #: src/features/cloud/TransferList.tsx:40
+#: src/features/console/views/CloudView.tsx:122
 #: src/features/dashboard/dashboard-sections.tsx:88
 #: src/features/save-manager/SnapshotDetailPanel.tsx:58
 msgid "Waiting to upload"
@@ -3328,6 +3712,7 @@ msgstr "Yesterday"
 msgid "You are offline"
 msgstr "You are offline"
 
+#: src/features/console/views/use-settings-rows.ts:47
 #: src/features/updates/UpdatesSection.tsx:127
 msgid "You are running the latest version."
 msgstr "You are running the latest version."
@@ -3344,6 +3729,10 @@ msgstr "Your current save is always copied first, so a restore can be undone."
 msgid "Your current save is backed up first."
 msgstr "Your current save is backed up first."
 
+#: src/features/console/components/modals/ConfirmRestoreModal.tsx:87
+msgid "Your current save is copied to a safety snapshot first, then replaced by this one. The game must be closed."
+msgstr "Your current save is copied to a safety snapshot first, then replaced by this one. The game must be closed."
+
 #: src/features/saves/DeleteSnapshotDialog.tsx:124
 msgid "Your current save is not affected. This can’t be undone."
 msgstr "Your current save is not affected. This can’t be undone."
@@ -3356,7 +3745,7 @@ msgstr "Your entire gaming world."
 msgid "Your entire gaming world. One place."
 msgstr "Your entire gaming world. One place."
 
-#: src/components/shell/QuickRail.tsx:87
+#: src/components/shell/QuickRail.tsx:94
 msgid "Your favourite games will appear here"
 msgstr "Your favourite games will appear here"
 
@@ -3379,6 +3768,10 @@ msgstr "Your library could not be loaded"
 #: src/features/cloud/ConflictDialog.tsx:145
 msgid "Your PC save is backed up first, then replaced by the Drive version."
 msgstr "Your PC save is backed up first, then replaced by the Drive version."
+
+#: src/features/console/views/GamePanel.tsx:55
+msgid "Your save has not changed since the last snapshot."
+msgstr "Your save has not changed since the last snapshot."
 
 #: src/features/settings/SettingsPage.tsx:147
 msgid "Your Steam profile’s game details are private: set them to public to list owned games."
