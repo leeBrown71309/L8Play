@@ -1,3 +1,4 @@
+import { ConfirmExitModal } from "@/features/console/components/modals/ConfirmExitModal";
 import { ConfirmRestoreModal } from "@/features/console/components/modals/ConfirmRestoreModal";
 import { GameSnapshotsModal } from "@/features/console/components/modals/GameSnapshotsModal";
 import { LetterPicker } from "@/features/console/components/modals/LetterPicker";
@@ -19,6 +20,7 @@ export function ModalLayer() {
         return (
           <div key={`${modal.kind}-${index}`} className={cn("cs-modal-layer", !top && "is-under")} inert={!top}>
             {modal.kind === "quick-menu" ? <QuickMenu /> : null}
+            {modal.kind === "confirm-exit" ? <ConfirmExitModal /> : null}
             {modal.kind === "letters" ? <LetterPicker /> : null}
             {modal.kind === "game-snapshots" ? <GameSnapshotsModal /> : null}
             {modal.kind === "snapshot-detail" && modal.snapshotId ? (

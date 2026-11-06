@@ -5,8 +5,8 @@ import { ConsoleToasts } from "@/features/console/components/ConsoleToasts";
 import { ConsoleTopBar } from "@/features/console/components/ConsoleTopBar";
 import { HintBar } from "@/features/console/components/HintBar";
 import { ModalLayer } from "@/features/console/components/modals/ModalLayer";
-import { useConsoleMode } from "@/features/console/console-mode-store";
 import { useConsoleNav } from "@/features/console/core/nav-store";
+import { requestConsoleExit } from "@/features/console/core/use-request-exit";
 import { usePresence } from "@/features/console/core/use-presence";
 import { dispatchToViews, ViewInputProvider, type ViewRegistry } from "@/features/console/core/view-input";
 import { useConsoleInput } from "@/features/console/input";
@@ -23,7 +23,6 @@ const PANEL_EXIT_MS = 360;
 
 /** What the buttons do on every screen: switch sections, open the menu or the letter picker, go back. */
 function useRootInput(registry: ViewRegistry) {
-  const exit = useConsoleMode((state) => state.exit);
   useConsoleInput((action, source) => {
     const nav = useConsoleNav.getState();
     switch (action) {
@@ -55,8 +54,8 @@ function useRootInput(registry: ViewRegistry) {
           consoleSound.play("back");
           nav.dispatch({ type: "gotoSection", section: "library" });
         } else {
-          consoleSound.play("close");
-          exit();
+          consoleSound.play("open");
+          requestConsoleExit();
         }
         return;
       default:
