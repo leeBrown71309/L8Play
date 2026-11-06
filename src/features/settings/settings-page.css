@@ -14,6 +14,22 @@
     background: var(--l8-bg-200);
     align-self: start;
   }
+  /* Narrow page: the sections become a scrollable strip above the settings, which get the full width. */
+  @container page (max-width: 760px) {
+    .st {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 16px;
+    }
+    .st-nav {
+      flex-direction: row;
+      overflow-x: auto;
+      padding: 8px;
+      scrollbar-width: thin;
+    }
+    .st-nav .st-item {
+      flex: none;
+    }
+  }
   .st-item {
     display: flex;
     align-items: center;
@@ -44,6 +60,19 @@
     background: var(--l8-flare);
     color: var(--l8-on-flare);
     font-weight: 600;
+  }
+  /* Same orange dot as on the Settings button of the rail: it says which section asks for attention. */
+  .st-dot {
+    margin-left: auto;
+    flex: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--l8-warning);
+    box-shadow: 0 0 0 2px var(--l8-bg-100);
+  }
+  .st-item.on .st-dot {
+    box-shadow: 0 0 0 2px var(--l8-flare);
   }
   .st-item.on .ic {
     background: rgba(255, 255, 255, 0.2);

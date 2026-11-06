@@ -9,7 +9,7 @@ import { useCloudSummary } from "@/components/shell/use-cloud-summary";
 import { useAddGameFlow } from "@/features/library/use-library-flows";
 import { useGames } from "@/features/library/use-library";
 import { useSaveStatuses } from "@/features/saves/use-saves";
-import { useAppUpdatePhase } from "@/features/updates/use-app-update";
+import { isUpdatePending, useAppUpdatePhase } from "@/features/updates/use-app-update";
 import { cn } from "@/lib/cn";
 
 interface NavItem {
@@ -82,7 +82,7 @@ export function NavRail({ expanded, onToggle }: NavRailProps) {
       label: t`Settings`,
       shortcut: "Ctrl+5",
       icon: "settings",
-      alert: updatePhase === "available" || updatePhase === "downloading" || updatePhase === "ready",
+      alert: isUpdatePending(updatePhase),
     },
   ];
 
