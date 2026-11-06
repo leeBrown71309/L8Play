@@ -6,7 +6,7 @@
  */
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -55,8 +55,10 @@ try {
   if (actual !== EXPECTED_SHA256) throw new Error(`Checksum mismatch for ludusavi.exe: ${actual}`);
 
   mkdirSync(binaries, { recursive: true });
-  renameSync(exe, target);
-  renameSync(join(work, `ludusavi-v${VERSION}-legal.txt`), notices);
+  // Copy, not rename: the temporary folder can be on another drive than the repository (CI runners keep
+  // temp on C: and the checkout on D:), and a rename cannot cross drives. The folder is removed below.
+  copyFileSync(exe, target);
+  copyFileSync(join(work, `ludusavi-v${VERSION}-legal.txt`), notices);
   console.log(`Ludusavi ${VERSION} verified and installed to ${target}`);
 } finally {
   rmSync(work, { recursive: true, force: true });
