@@ -1,0 +1,76 @@
+name: Release
+
+# Builds and publishes the signed installer when work lands on main (pull request merge).
+# The version comes from src-tauri/tauri.conf.json: if a release for it already exists, the build is skipped.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build and publish
+    runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read the version and check the release does not exist yet
+        id: version
+        shell: bash
+        run: |
+          version=$(node -p "require('./src-tauri/tauri.conf.json').version" 2>/dev/null || bun -e "console.log(require('./src-tauri/tauri.conf.json').version)")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if gh release view "v$version" >/dev/null 2>&1; then
+            echo "Release v$version already exists: bump the version to publish a new one." >> "$GITHUB_STEP_SUMMARY"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: oven-sh/setup-bun@v2
+        if: steps.version.outputs.skip == 'false'
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.version.outputs.skip == 'false'
+      - uses: Swatinem/rust-cache@v2
+        if: steps.version.outputs.skip == 'false'
+
+      - name: Install dependencies and the Ludusavi sidecar
+        if: steps.version.outputs.skip == 'false'
+        run: |
+          bun install --frozen-lockfile
+          bun run fetch:ludusavi
+
+      - name: Build the signed installer
+        if: steps.version.outputs.skip == 'false'
+        run: bun tauri build
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+          L8_GOOGLE_CLIENT_ID: ${{ secrets.L8_GOOGLE_CLIENT_ID }}
+          L8_GOOGLE_CLIENT_SECRET: ${{ secrets.L8_GOOGLE_CLIENT_SECRET }}
+
+      - name: Generate the update manifest
+        if: steps.version.outputs.skip == 'false'
+        run: bun scripts/make-update-manifest.ts --version "${{ steps.version.outputs.version }}" --notes-file release-notes.md
+
+      - name: Publish the GitHub release
+        if: steps.version.outputs.skip == 'false'
+        shell: bash
+        run: |
+          v="${{ steps.version.outputs.version }}"
+          gh release create "v$v" \
+            "target/release/bundle/nsis/L8Play_${v}_x64-setup.exe" \
+            "target/release/bundle/nsis/L8Play_${v}_x64-setup.exe.sig" \
+            latest.json \
+            --title "L8Play $v" \
+            --notes-file release-notes.md \
+            --target "${{ github.sha }}"
