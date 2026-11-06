@@ -29,4 +29,3 @@ src-tauri/binaries/ludusavi-*.exe
 .claude/
 .playwright-mcp/
 latest.json
-release-notes.md

@@ -37,7 +37,9 @@ finally {
 }
 
 # The raw build output is not the installed app. Removing it keeps Windows search, Start and file finders
-# from offering a second "l8-play.exe" that is not the installed release.
-Remove-Item "target/release/l8-play.exe" -Force -ErrorAction SilentlyContinue
+# from offering any "l8-play.exe", test binary or sidecar copy that is not the installed release.
+Get-ChildItem "target" -Recurse -File -Include "*l8*.exe", "ludusavi*.exe" -ErrorAction SilentlyContinue |
+  Where-Object { $_.FullName -notmatch "[\\/]bundle[\\/]" } |
+  Remove-Item -Force -ErrorAction SilentlyContinue
 
 Write-Host "Done: target/release/bundle/nsis/L8Play_${Version}_x64-setup.exe(.sig) and latest.json"
