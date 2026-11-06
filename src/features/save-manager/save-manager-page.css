@@ -6,11 +6,26 @@
     gap: 18px;
     align-items: start;
   }
+  /* The side columns stay in place while the page scrolls: only the middle column moves. */
   .sm-games {
     padding: 16px 10px;
     border-radius: var(--l8-radius-lg);
     background: var(--l8-bg-200);
     overflow: hidden;
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 150px);
+  }
+  /* "All games" above stays put; the games below scroll in their own box. */
+  .sm-games-list {
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--l8-bg-400) transparent;
+    margin-top: 2px;
   }
   .sm-games .l8-eyebrow {
     padding: 0 8px 8px;
@@ -67,6 +82,11 @@
   }
   .sm-list {
     min-width: 0;
+    container-type: inline-size;
+  }
+  /* In a column flex box buttons shrink to fit: keep every game row (and "All games") at full height. */
+  .sm-games .sm-gi {
+    flex: none;
   }
   .sm-bar {
     display: flex;
@@ -82,9 +102,11 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: sticky;
     top: 0;
+    max-height: calc(100vh - 150px);
   }
   .sm-shot {
     border-radius: var(--l8-radius-md);
@@ -179,5 +201,88 @@
     margin: 0;
     font: 400 13px/19px var(--l8-font-sans);
     color: var(--l8-ink-faint);
+  }
+
+  /*
+   * Narrow page (window minus the rails): no room for the detail column. Clicking a snapshot then opens the
+   * same panel as a slide-over (rendered at the document root, see SaveManagerPage), so the details are
+   * always next to the snapshot, never at the bottom of a long list.
+   */
+  @container page (max-width: 1000px) {
+    .sm-grid {
+      grid-template-columns: 190px minmax(0, 1fr);
+    }
+    .sm-grid > .sm-detail {
+      display: none;
+    }
+  }
+  .sm-detail .sm-detail-close {
+    display: none;
+  }
+  .sm-drawer .sm-detail {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 36;
+    width: min(360px, calc(100vw - 24px));
+    max-height: none;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+    transform: translateX(calc(100% + 24px));
+    visibility: hidden;
+    transition:
+      transform var(--t-med) var(--ease-out),
+      visibility 0s linear var(--t-med);
+  }
+  .sm-drawer.is-open .sm-detail {
+    transform: none;
+    visibility: visible;
+    transition: transform var(--t-med) var(--ease-out);
+  }
+  .sm-drawer .sm-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    background: var(--l8-scrim);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--t-med) var(--ease-out);
+  }
+  .sm-drawer.is-open .sm-scrim {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .sm-drawer .sm-detail .sm-detail-close {
+    display: inline-flex;
+    flex: none;
+    align-self: flex-end;
+    margin-bottom: -8px;
+  }
+  @container page (max-width: 640px) {
+    .sm-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .sm-games {
+      position: static;
+      max-height: none;
+      flex-direction: row;
+      align-items: center;
+      padding: 8px;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+    .sm-games .l8-eyebrow {
+      display: none;
+    }
+    .sm-games-list {
+      display: flex;
+      flex: none;
+      margin: 0;
+      overflow: visible;
+    }
+    .sm-games .sm-gi {
+      width: auto;
+      flex: none;
+    }
   }
 }

@@ -53,13 +53,14 @@
   }
   .cs-title {
     margin: 0;
-    font: 700 3.5em/1.02 var(--l8-font-sans);
+    /* Room below the baseline: with a tight line-height the clamp's overflow cut the tail of g, y, p. */
+    font: 700 3.5em/1.12 var(--l8-font-sans);
     letter-spacing: -0.025em;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-shadow: 0 0.06em 0.6em rgba(0, 0, 0, 0.45);
+    padding-bottom: 0.1em;
   }
   .cs-meta {
     display: flex;

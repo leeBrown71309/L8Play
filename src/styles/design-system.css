@@ -1645,6 +1645,7 @@
   /* ---------- Coral hero card (dashboard) */
   .l8-herocard {
     position: relative;
+    container-type: inline-size;
     min-height: 300px;
     border-radius: var(--l8-radius-lg);
     overflow: hidden;
@@ -1708,6 +1709,9 @@
   .l8-herocard-title {
     margin: 6px 0 0;
     font: 700 34px/38px var(--l8-font-sans);
+    /* Follows the card width so a long title stays readable on a narrow card instead of being cut. */
+    font-size: clamp(22px, 5.2cqi, 34px);
+    line-height: 1.12;
     letter-spacing: -0.02em;
   }
   .l8-herocard-text {
@@ -1868,8 +1872,10 @@
   }
 
   /* ---------- Snapshot row (timeline) */
+  /* The timeline adapts to the room it is given, not to the window: it sits in wide pages and narrow columns. */
   .l8-timeline {
     position: relative;
+    container: l8-timeline / inline-size;
   }
   .l8-timeline-day {
     position: relative;
@@ -2054,6 +2060,45 @@
   }
   .l8-snap.is-compact .l8-snap-shot {
     width: 72px;
+  }
+  /* Narrow: the storage tags and the actions go under the name instead of squeezing it to nothing. */
+  @container l8-timeline (max-width: 560px) {
+    .l8-snap,
+    .l8-snap.is-compact {
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 6px 12px;
+    }
+    .l8-snap .l8-snap-shot,
+    .l8-snap.is-compact .l8-snap-shot {
+      width: 64px;
+    }
+    .l8-snap-where,
+    .l8-snap-actions {
+      grid-column: 2;
+      justify-self: start;
+    }
+    .l8-snap-where {
+      justify-content: flex-start;
+    }
+    .l8-snap-meta {
+      flex-wrap: wrap;
+      gap: 2px 12px;
+      white-space: normal;
+    }
+  }
+  @container l8-timeline (max-width: 340px) {
+    .l8-snap,
+    .l8-snap.is-compact {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .l8-snap .l8-snap-shot,
+    .l8-snap.is-compact .l8-snap-shot {
+      display: none;
+    }
+    .l8-snap-where,
+    .l8-snap-actions {
+      grid-column: 1;
+    }
   }
   .l8-snap.is-compact:not(.is-selected) .l8-snap-actions .l8-btn {
     display: none;
@@ -2493,7 +2538,7 @@
   .l8-rail-brand {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 14px;
   }
   .l8-rail.is-expanded .l8-rail-brand {
     padding: 0 6px;
@@ -2611,6 +2656,10 @@
     right: calc(100% + 14px);
   }
 
+  /*
+   * Responsive layouts follow the room the page really has (the window minus the rails, which open and
+   * close), not the window: `main` and `page` are the containers page layouts query.
+   */
   .l8-main {
     grid-column: 2;
     grid-row: 2;
@@ -2619,8 +2668,10 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    container: main / inline-size;
   }
   .l8-main-body {
+    container: page / inline-size;
     flex: 1;
     min-height: 0;
     overflow: hidden auto;
@@ -2640,6 +2691,21 @@
   }
   .l8-topbar-head {
     min-width: 0;
+    overflow: hidden;
+  }
+  .l8-topbar-head .l8-greeting {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* Narrow: the search takes the free room and the greeting gives way rather than run under it. */
+  @container main (max-width: 760px) {
+    .l8-topbar {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .l8-topbar-head {
+      display: none;
+    }
   }
   .l8-topbar-search {
     width: 100%;
@@ -2849,9 +2915,10 @@
   }
   .l8-pagehead {
     display: flex;
+    flex-wrap: wrap;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 24px;
+    gap: 12px 24px;
     margin-bottom: 20px;
   }
   .l8-pagehead-title {
@@ -2878,6 +2945,7 @@
   }
   .l8-pagehead-actions {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 8px;
   }

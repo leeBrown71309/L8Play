@@ -127,6 +127,16 @@
     flex-direction: column;
     gap: 6px;
   }
+  /* Many games: the list scrolls in its own box instead of stretching the page. */
+  .cloud-folders {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 380px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--l8-bg-400) transparent;
+  }
   .cloud-folder {
     display: flex;
     align-items: center;

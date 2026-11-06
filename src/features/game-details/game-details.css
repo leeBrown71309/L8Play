@@ -3,9 +3,23 @@
   /* ---- Overview */
   .gd-ov {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 340px;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
     gap: 40px;
     padding: 8px 32px 40px;
+  }
+  .gd-ov > * {
+    min-width: 0;
+  }
+  .gd-ov > div:first-child {
+    container: gd-overview / inline-size;
+  }
+  /* A narrow page (window minus the rails) puts the details under the snapshots instead of squeezing both. */
+  @container page (max-width: 860px) {
+    .gd-ov {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
+      padding: 8px 16px 32px;
+    }
   }
   .gd-prot {
     display: grid;
@@ -17,8 +31,20 @@
   .gd-prot > div {
     padding: 16px 18px;
   }
+  .gd-prot > div {
+    min-width: 0;
+  }
   .gd-prot > div + div {
     box-shadow: inset 1px 0 0 var(--l8-line);
+  }
+  /* Three figures side by side need room: stacked when the column is narrow. */
+  @container gd-overview (max-width: 520px) {
+    .gd-prot {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .gd-prot > div + div {
+      box-shadow: inset 0 1px 0 var(--l8-line);
+    }
   }
   .gd-prot .v {
     margin-top: 6px;
@@ -28,6 +54,7 @@
   .gd-prot .s {
     margin-top: 4px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 6px;
     font: 500 12.5px/18px var(--l8-font-sans);
@@ -108,9 +135,20 @@
   /* ---- Saves */
   .gd-sv {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 336px;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 336px);
     gap: 36px;
     padding: 6px 32px 40px;
+  }
+  .gd-sv > div {
+    min-width: 0;
+  }
+  /* A narrow page puts the cards under the timeline instead of squeezing both. */
+  @container page (max-width: 860px) {
+    .gd-sv {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      padding: 6px 16px 32px;
+    }
   }
   .gd-tools {
     display: flex;
@@ -119,10 +157,19 @@
     margin-bottom: 18px;
     flex-wrap: wrap;
   }
+  /* Filter, search and "Create snapshot" share one row; the search takes the room that is left. */
   .gd-tools .push {
-    margin-left: auto;
+    flex: 1 1 260px;
+    min-width: 0;
     display: flex;
     gap: 8px;
+  }
+  .gd-tools .gd-search {
+    flex: 1 1 140px;
+    min-width: 0;
+  }
+  .gd-tools .push .l8-btn {
+    flex: none;
   }
   .gd-sidecol {
     display: flex;
@@ -130,6 +177,8 @@
     gap: 14px;
   }
   .gd-card {
+    min-width: 0;
+    overflow: hidden;
     border-radius: var(--l8-radius-md);
     background: var(--l8-bg-200);
     padding: 16px;
@@ -139,11 +188,19 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 12px;
     min-height: 20px;
     font: 700 11px/16px var(--l8-font-sans);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--l8-ink-faint);
+  }
+  .gd-card-tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: -4px 0 12px;
   }
   .gd-cur {
     display: flex;
@@ -196,7 +253,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    min-width: 0;
     font: 600 13px/18px var(--l8-font-sans);
     color: var(--l8-ink);
   }
@@ -204,7 +263,8 @@
     margin-top: 4px;
     font: 500 11px/16px var(--l8-font-mono);
     color: var(--l8-ink-muted);
-    word-break: break-all;
+    overflow-wrap: anywhere;
+    min-width: 0;
     user-select: text;
   }
   .gd-loc-p.is-missing {

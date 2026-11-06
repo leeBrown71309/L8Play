@@ -31,15 +31,28 @@ interface SnapshotDetailPanelProps {
   onRestore: (snapshot: SnapshotSummary) => void;
   onDelete: (snapshot: SnapshotSummary) => void;
   onReveal: (snapshot: SnapshotSummary) => void;
+  /** Closes the panel when it slides over the page (narrow windows); the button is hidden otherwise. */
+  onClose: () => void;
 }
 
 /** The selected snapshot: preview, what it is, where it is stored, and what you can do with it. */
-export function SnapshotDetailPanel({ snapshot, game, onRestore, onDelete, onReveal }: SnapshotDetailPanelProps) {
+export function SnapshotDetailPanel({
+  snapshot,
+  game,
+  onRestore,
+  onDelete,
+  onReveal,
+  onClose,
+}: SnapshotDetailPanelProps) {
   const { t, i18n } = useLingui();
   const labels = useSnapshotLabels();
+  const close = (
+    <IconButton icon="x" label={t`Close`} size="sm" className="sm-detail-close" onClick={onClose} />
+  );
   if (!snapshot) {
     return (
-      <aside className="sm-detail">
+      <aside className="sm-detail" aria-label={t`Snapshot details`}>
+        {close}
         <p className="sm-empty-detail">{t`Select a snapshot to see where it is stored and what it contains.`}</p>
       </aside>
     );
@@ -61,7 +74,8 @@ export function SnapshotDetailPanel({ snapshot, game, onRestore, onDelete, onRev
   }[snapshot.cloud];
 
   return (
-    <aside className="sm-detail">
+    <aside className="sm-detail" aria-label={t`Snapshot details`}>
+      {close}
       {game && (
         <div className="sm-shot">
           <GameArt game={game} kind="hero" showTitle={false} />

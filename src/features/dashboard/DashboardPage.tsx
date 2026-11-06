@@ -110,7 +110,7 @@ export function DashboardPage() {
   const protectedGames = statuses.filter((status) => status.snapshotCount > 0).length;
 
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)_330px] gap-5 min-[1700px]:grid-cols-[minmax(0,1fr)_400px]">
+    <div className="grid grid-cols-[minmax(0,1fr)_330px] gap-5 min-[1700px]:grid-cols-[minmax(0,1fr)_400px] @max-[880px]/page:grid-cols-1">
       <div className="flex min-w-0 flex-col gap-[22px]">
         {isPending ? (
           <div className="l8-skel h-[262px] rounded-lg" />
@@ -140,24 +140,27 @@ export function DashboardPage() {
             }
           />
           {tiles.length > 0 ? (
-            <div className="relative grid grid-cols-4 gap-4 min-[1700px]:grid-cols-6 min-[1700px]:gap-[18px] [&_.l8-tile-art]:aspect-[1/0.92]">
-              {tiles.map((game, index) => (
-                <GameTile
-                  key={game.id}
-                  game={game}
-                  running={running.has(game.id)}
-                  loading={loadingArt.has(game.id)}
-                  protection={protection.of(game.id)}
-                  selected={index === 0}
-                  onPlay={actions.play}
+            // The tiles follow the width of their column, not the window: 4 across, 2 when narrow, 1 when very narrow.
+            <div className="@container">
+              <div className="relative grid grid-cols-4 gap-4 @max-[640px]:grid-cols-2 @max-[300px]:grid-cols-1 min-[1700px]:grid-cols-6 min-[1700px]:gap-[18px] [&_.l8-tile-art]:aspect-[1/0.92]">
+                {tiles.map((game, index) => (
+                  <GameTile
+                    key={game.id}
+                    game={game}
+                    running={running.has(game.id)}
+                    loading={loadingArt.has(game.id)}
+                    protection={protection.of(game.id)}
+                    selected={index === 0}
+                    onPlay={actions.play}
+                  />
+                ))}
+                <IconButton
+                  icon="chevronRight"
+                  label={t`More games`}
+                  className="absolute top-1/2 -right-3.5 z-[3] -mt-5 bg-on-stage text-[#2a1215] shadow-2 hover:bg-white hover:text-[#2a1215]"
+                  onClick={() => void navigate(ROUTES.games)}
                 />
-              ))}
-              <IconButton
-                icon="chevronRight"
-                label={t`More games`}
-                className="absolute top-1/2 -right-3.5 z-[3] -mt-5 bg-on-stage text-[#2a1215] shadow-2 hover:bg-white hover:text-[#2a1215]"
-                onClick={() => void navigate(ROUTES.games)}
-              />
+              </div>
             </div>
           ) : (
             <div className="rounded-lg bg-surface-200">

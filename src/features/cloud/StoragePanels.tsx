@@ -102,18 +102,20 @@ export function DriveFolders({ snapshots, games }: DriveFoldersProps) {
       {folders.length === 0 ? (
         <p className="cloud-empty">{t`No snapshot is in Drive yet.`}</p>
       ) : (
-        folders.map((folder) => (
-          <div key={folder.gameId} className="cloud-folder">
-            <span className="ic">
-              {folder.game ? <GameArt game={folder.game} kind="icon" showTitle={false} /> : null}
-            </span>
-            <span className="t">
-              {folder.title}
-              <span>{folder.snapshots === 1 ? t`1 snapshot` : t`${folder.snapshots} snapshots`}</span>
-            </span>
-            <span className="s">{formatBytes(folder.bytes, i18n.locale)}</span>
-          </div>
-        ))
+        <div className="cloud-folders">
+          {folders.map((folder) => (
+            <div key={folder.gameId} className="cloud-folder">
+              <span className="ic">
+                {folder.game ? <GameArt game={folder.game} kind="icon" showTitle={false} /> : null}
+              </span>
+              <span className="t">
+                {folder.title}
+                <span>{folder.snapshots === 1 ? t`1 snapshot` : t`${folder.snapshots} snapshots`}</span>
+              </span>
+              <span className="s">{formatBytes(folder.bytes, i18n.locale)}</span>
+            </div>
+          ))}
+        </div>
       )}
     </section>
   );
