@@ -18,6 +18,7 @@ import { ArtworkSection } from "@/features/settings/ArtworkSection";
 import { BackupSection } from "@/features/settings/BackupSection";
 import { SettingGroup, SettingRow, ToggleSetting } from "@/features/settings/setting-blocks";
 import { useSettings, useUpdateSettings } from "@/features/settings/use-settings";
+import { isUpdatePending, useAppUpdatePhase } from "@/features/updates/use-app-update";
 import { UpdatesSection } from "@/features/updates/UpdatesSection";
 import type { Locale } from "@/lib/bindings/Locale";
 import type { Theme } from "@/lib/bindings/Theme";
@@ -265,8 +266,10 @@ export function SettingsPage() {
   const { t } = useLingui();
   // `?section=artwork` lets other pages deep-link to a section.
   const requested = useSearchParams()[0].get("section");
+  // The orange dot on the Settings rail button comes from an update: it leads to that section.
+  const updatePending = isUpdatePending(useAppUpdatePhase());
   const [active, setActive] = useState<SectionId>(isSectionId(requested) ? requested : "general");
-  const sections: { id: SectionId; label: string; icon: DsIconName }[] = [
+  const sections: { id: SectionId; label: string; icon: DsIconName; alert?: boolean }[] = [
     { id: "general", label: t`General`, icon: "settings" },
     { id: "libraries", label: t`Game Libraries`, icon: "layers" },
     { id: "artwork", label: t`Artwork`, icon: "image" },
@@ -274,7 +277,7 @@ export function SettingsPage() {
     { id: "backup", label: t`Backup`, icon: "snapshot" },
     { id: "cloud", label: t`Cloud`, icon: "cloud" },
     { id: "appearance", label: t`Appearance`, icon: "palette" },
-    { id: "updates", label: t`Updates`, icon: "download" },
+    { id: "updates", label: t`Updates`, icon: "download", alert: updatePending },
     { id: "about", label: t`About`, icon: "info" },
   ];
 
@@ -283,7 +286,7 @@ export function SettingsPage() {
       <PageHeader title={t`Settings`} />
       <div className="st">
         <nav aria-label={t`Settings sections`} className="st-nav">
-          {sections.map(({ id, label, icon }) => (
+          {sections.map(({ id, label, icon, alert }) => (
             <button
               key={id}
               type="button"
@@ -295,6 +298,7 @@ export function SettingsPage() {
                 <DsIcon name={icon} size={16} />
               </span>
               {label}
+              {alert ? <i className="st-dot" aria-label={t`Needs your attention`} role="img" /> : null}
             </button>
           ))}
         </nav>

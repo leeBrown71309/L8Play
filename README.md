@@ -24,6 +24,7 @@
 
 - **One library, every store.** L8Play finds games installed through Steam, Epic, the Xbox app and GOG, and adds any standalone game from its `.exe`. Launch everything from one place, with playtime, favourites, search and recently played.
 - **Automatic save snapshots.** Save folders are detected with the bundled [Ludusavi](https://github.com/mtkennerly/ludusavi) manifest, with PCGamingWiki and local search as fallbacks. A verified zip snapshot is taken when you stop playing (optionally before launch too).
+- **Import your old backups.** Saves you copied by hand into a folder (even for games you no longer have installed) can be imported: each game keeps its cover and appears as "Saves only", sub-folders such as `after ending A` become named snapshots, and the originals are never touched. Install the game later and join its saves to it.
 - **Safe restore.** Restoring a snapshot makes a safety copy first, stages files next to the target, verifies hashes, and rolls back every location if anything fails.
 - **Your Google Drive, optional.** Keep a second verified copy in a private "L8Play" folder in your own Drive, using the `drive.file` scope. Nothing is ever overwritten silently: conflicts pause the sync and wait for your choice.
 - **Artwork and metadata.** Steam CDN covers, optional SteamGridDB results with your own free key kept in the Windows Credential Manager, or an image of your own. Title, developer and release year are editable.

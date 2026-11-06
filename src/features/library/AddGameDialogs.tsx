@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, Kbd } from "@/components/ui/dialog";
 import { useAddGameStore } from "@/features/library/add-game-store";
 import { useAddExecutableFlow } from "@/features/library/use-library-flows";
+import { useImportStore } from "@/features/saves-import/import-store";
 import { useAddGames, useScanGameFolder } from "@/features/library/use-library";
 import { useFolderPicker } from "@/features/saves/use-folder-picker";
 import type { FolderScanReport } from "@/lib/bindings/FolderScanReport";
@@ -252,6 +253,17 @@ export function AddGameDialogs() {
           onClick={() => {
             close();
             void addExecutable.start();
+          }}
+        />
+        <OptionCard
+          selected={false}
+          icon="snapshot"
+          tone="cloud"
+          title={t`Import saves only`}
+          description={t`For games you no longer have installed: bring in the backups you made by hand and keep them with the others.`}
+          onClick={() => {
+            close();
+            useImportStore.getState().open();
           }}
         />
         {scan.isPending && <div className="l8-skel h-2 rounded-pill" />}

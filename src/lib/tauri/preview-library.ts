@@ -164,6 +164,7 @@ export function sampleLibrary(): GameSummary[] {
     platform: sample.platform,
     platformGameId: sample.id,
     installed: sample.installed ?? true,
+    archived: false,
     favorite: sample.favorite ?? false,
     lastPlayedAt: sample.playedHoursAgo === null ? null : hoursAgo(sample.playedHoursAgo),
     playtimeSeconds: sample.playtimeHours * 3600,

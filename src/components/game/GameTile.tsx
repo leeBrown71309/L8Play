@@ -5,6 +5,7 @@ import { DsIcon } from "@/components/ds/ds-icon";
 import { Protection } from "@/components/ds/storage-tags";
 import { GameArt } from "@/components/game/GameArt";
 import { PlatformTag } from "@/components/game/PlatformTag";
+import { primaryAction } from "@/features/library/game-availability";
 import type { GameProtection } from "@/features/library/game-protection";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
 import { cn } from "@/lib/cn";
@@ -23,6 +24,7 @@ interface GameTileProps {
 /** Dashboard tile (`l8-tile`): hero art, title over it, round Play, protection corner. */
 export function GameTile({ game, running, loading = false, protection, selected = false, onPlay }: GameTileProps) {
   const { t, i18n } = useLingui();
+  const action = primaryAction(game);
   const sub = running
     ? t`Playing now`
     : `${game.lastPlayedAt ? formatRelative(game.lastPlayedAt, i18n.locale) : t`Never played`} · ${formatPlaytime(game.playtimeSeconds)}`;
@@ -38,10 +40,16 @@ export function GameTile({ game, running, loading = false, protection, selected 
         <button
           type="button"
           className="l8-tile-play"
-          aria-label={game.installed ? t`Play ${game.title}` : t`Install ${game.title}`}
+          aria-label={
+            action === "play"
+              ? t`Play ${game.title}`
+              : action === "saves"
+                ? t`Open the saves of ${game.title}`
+                : t`Install ${game.title}`
+          }
           onClick={() => onPlay(game)}
         >
-          <DsIcon name={game.installed ? "play" : "download"} size={16} />
+          <DsIcon name={action === "play" ? "play" : action === "saves" ? "snapshot" : "download"} size={16} />
         </button>
         <span className="l8-tile-corner pointer-events-none flex items-center gap-2">
           <PlatformTag platform={game.platform} tone="stage" />

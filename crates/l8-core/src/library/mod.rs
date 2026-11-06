@@ -6,6 +6,7 @@
 mod artwork;
 mod exe_scan;
 mod model;
+mod paths;
 mod repository;
 mod scan;
 mod slug;

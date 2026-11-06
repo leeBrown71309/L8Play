@@ -43,6 +43,8 @@ function snapshot(id: number, hours: number, kind: SnapshotKind, name: string, p
     pinned,
     deviceName: id === 1 ? "LAPTOP-RYU" : "DESKTOP-L8",
     cloud: id === 1 || id === 5 ? "synced" : id === 4 ? "queued" : "none",
+    label: null,
+    imported: false,
   };
 }
 

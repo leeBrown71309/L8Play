@@ -6,6 +6,7 @@ import { Protection } from "@/components/ds/storage-tags";
 import { GameArt } from "@/components/game/GameArt";
 import { PlatformIcon, usePlatformNames } from "@/components/game/PlatformTag";
 import { Button } from "@/components/ui/button";
+import { primaryAction } from "@/features/library/game-availability";
 import type { GameProtection } from "@/features/library/game-protection";
 import type { LibrarySort } from "@/features/library/library-view-store";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
@@ -26,6 +27,7 @@ export function GameRow({ game, running, loading = false, protection, onPlay }: 
   const navigate = useNavigate();
   const platformNames = usePlatformNames();
   const open = () => void navigate(`/games/${game.id}`);
+  const action = primaryAction(game);
   return (
     <div
       role="row"
@@ -45,7 +47,9 @@ export function GameRow({ game, running, loading = false, protection, onPlay }: 
           {game.title}
           {game.favorite ? <DsIcon name="starFill" size={14} className="l8-grow-fav" label={t`Favourite`} /> : null}
         </div>
-        <div className="l8-grow-sub truncate font-mono text-[11.5px]">{game.installPath ?? "—"}</div>
+        <div className="l8-grow-sub truncate font-mono text-[11.5px]">
+          {game.archived ? t`Saves only` : (game.installPath ?? "—")}
+        </div>
       </div>
       <div role="cell" className="l8-grow-cell gap-2 text-[12.5px] text-ink-muted">
         <PlatformIcon platform={game.platform} size={22} className="shrink-0 text-ink" />
@@ -66,14 +70,14 @@ export function GameRow({ game, running, loading = false, protection, onPlay }: 
       <div role="cell" className="l8-grow-action">
         <Button
           size="sm"
-          variant={game.installed ? "secondary" : "ghost"}
-          icon={game.installed ? "play" : "download"}
+          variant={action === "install" ? "ghost" : "secondary"}
+          icon={action === "play" ? "play" : action === "saves" ? "snapshot" : "download"}
           onClick={(event) => {
             event.stopPropagation();
             onPlay(game);
           }}
         >
-          {game.installed ? t`Play` : t`Install`}
+          {action === "play" ? t`Play` : action === "saves" ? t`Saves` : t`Install`}
         </Button>
       </div>
     </div>

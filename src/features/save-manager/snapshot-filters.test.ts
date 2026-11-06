@@ -25,6 +25,8 @@ function snapshot(overrides: Partial<SnapshotSummary>): SnapshotSummary {
     pinned: false,
     deviceName: "PC",
     cloud: "none",
+    label: null,
+    imported: false,
     ...overrides,
   };
 }

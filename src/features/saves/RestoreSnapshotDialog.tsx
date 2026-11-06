@@ -7,6 +7,7 @@ import { notify } from "@/components/feedback/toast-store";
 import { Button } from "@/components/ui/button";
 import { Dialog, Kbd } from "@/components/ui/dialog";
 import { useGames } from "@/features/library/use-library";
+import { RestoreImportedDialog } from "@/features/saves/RestoreImportedDialog";
 import { useSnapshotLabels } from "@/features/saves/snapshot-labels";
 import { useCurrentSave, useRestoreSnapshot, useSaveLocations } from "@/features/saves/use-saves";
 import "@/features/saves/snapshot-dialogs.css";
@@ -25,7 +26,16 @@ function shortHash(hash: string): string {
 }
 
 /** Shows what replaces what, and that the current save is protected first (design system "Restore"). */
-export function RestoreSnapshotDialog({ snapshot, running, onClose }: RestoreSnapshotDialogProps) {
+export function RestoreSnapshotDialog(props: RestoreSnapshotDialogProps) {
+  // A snapshot imported from an old backup does not know its save folder: it is restored over a folder chosen here.
+  return props.snapshot?.imported ? (
+    <RestoreImportedDialog {...props} snapshot={props.snapshot} />
+  ) : (
+    <RegularRestoreDialog {...props} />
+  );
+}
+
+function RegularRestoreDialog({ snapshot, running, onClose }: RestoreSnapshotDialogProps) {
   const { t, i18n } = useLingui();
   const labels = useSnapshotLabels();
   const gameId = snapshot?.gameId ?? -1;

@@ -72,7 +72,7 @@ export function LibraryView() {
       case "confirm":
         return openGame();
       case "secondary":
-        return game ? actions.play(game) : undefined;
+        return game ? (game.archived ? openGame() : actions.play(game)) : undefined;
       default:
     }
   });
@@ -90,7 +90,7 @@ export function LibraryView() {
         onClearLetter={() => setLetter(null)}
       />
       {game ? (
-        <GameInfo game={game} showAction={!gameOpen} onPlay={() => actions.play(game)} />
+        <GameInfo game={game} showAction={!gameOpen} onPlay={() => (game.archived ? openGame() : actions.play(game))} />
       ) : (
         <div className="cs-info">
           <h1 className="cs-title">{games ? t`No game here` : t`Loading…`}</h1>

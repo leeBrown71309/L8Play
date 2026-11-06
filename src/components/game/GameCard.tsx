@@ -5,6 +5,7 @@ import { DsIcon } from "@/components/ds/ds-icon";
 import { Protection } from "@/components/ds/storage-tags";
 import { GameArt } from "@/components/game/GameArt";
 import { PlatformTag } from "@/components/game/PlatformTag";
+import { primaryAction } from "@/features/library/game-availability";
 import type { GameProtection } from "@/features/library/game-protection";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
 import { cn } from "@/lib/cn";
@@ -27,13 +28,16 @@ interface GameCardProps {
  */
 export function GameCard({ game, running, loading = false, protection, onPlay, onToggleFavorite }: GameCardProps) {
   const { t, i18n } = useLingui();
+  const action = primaryAction(game);
   const meta = running
     ? t`Playing now`
-    : !game.installed
-      ? t`Not installed`
-      : game.lastPlayedAt
-        ? `${formatRelative(game.lastPlayedAt, i18n.locale)} · ${formatPlaytime(game.playtimeSeconds)}`
-        : t`Never played`;
+    : game.archived
+      ? t`Saves only`
+      : !game.installed
+        ? t`Not installed`
+        : game.lastPlayedAt
+          ? `${formatRelative(game.lastPlayedAt, i18n.locale)} · ${formatPlaytime(game.playtimeSeconds)}`
+          : t`Never played`;
 
   return (
     <article className={cn("l8-card", !game.installed && "is-uninstalled")} aria-label={game.title} aria-busy={loading}>
@@ -45,11 +49,17 @@ export function GameCard({ game, running, loading = false, protection, onPlay, o
           <div className="l8-card-top pointer-events-none">
             <button
               type="button"
-              className={cn("l8-card-play pointer-events-auto", !game.installed && "is-install")}
-              aria-label={game.installed ? t`Play ${game.title}` : t`Install ${game.title}`}
+              className={cn("l8-card-play pointer-events-auto", action !== "play" && "is-install")}
+              aria-label={
+                action === "play"
+                  ? t`Play ${game.title}`
+                  : action === "saves"
+                    ? t`Open the saves of ${game.title}`
+                    : t`Install ${game.title}`
+              }
               onClick={() => onPlay(game)}
             >
-              <DsIcon name={game.installed ? "play" : "download"} size={16} />
+              <DsIcon name={action === "play" ? "play" : action === "saves" ? "snapshot" : "download"} size={16} />
             </button>
             <button
               type="button"
@@ -70,7 +80,9 @@ export function GameCard({ game, running, loading = false, protection, onPlay, o
           <div className="l8-card-bottom pointer-events-none justify-end">
             <Protection local={protection.local} cloud={protection.cloud} tone="stage" />
           </div>
-          {!game.installed ? <span className="l8-card-flag left-[54px] h-[28px]">{t`Not installed`}</span> : null}
+          {!game.installed ? (
+            <span className="l8-card-flag left-[54px] h-[28px]">{game.archived ? t`Saves only` : t`Not installed`}</span>
+          ) : null}
           {running ? (
             <span className="absolute bottom-2.5 left-[54px] inline-flex h-[28px] items-center gap-1.5 rounded-pill bg-flare px-2.5 text-[11px] font-semibold text-on-flare">
               <i className="size-1.5 animate-pulse rounded-full bg-on-flare" />

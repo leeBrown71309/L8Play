@@ -64,31 +64,41 @@ export function GamePanel({ game, closing }: { game: GameSummary; closing: boole
     );
   };
 
+  const savesOnly = game.archived;
   const items: Action[] = [
-    {
-      id: "play",
-      label: running ? t`Running` : game.installed ? t`Play` : t`Install`,
-      detail: game.playtimeSeconds >= 60 ? t`${formatPlaytime(game.playtimeSeconds)} played` : undefined,
-      icon: game.installed ? "play" : "download",
-      disabled: running,
-      run: () => actions.play(game),
-    },
+    // A saves-only game has nothing to launch or install: its list starts with the saves.
+    ...(savesOnly
+      ? []
+      : [
+          {
+            id: "play",
+            label: running ? t`Running` : game.installed ? t`Play` : t`Install`,
+            detail: game.playtimeSeconds >= 60 ? t`${formatPlaytime(game.playtimeSeconds)} played` : undefined,
+            icon: game.installed ? ("play" as const) : ("download" as const),
+            disabled: running,
+            run: () => actions.play(game),
+          },
+        ]),
     {
       id: "favourite",
       label: game.favorite ? t`Remove from favourites` : t`Add to favourites`,
       icon: game.favorite ? "starFill" : "star",
       run: () => actions.toggleFavorite(game),
     },
-    ...(game.installed
+    ...(game.installed || savesOnly
       ? [
-          {
-            id: "create",
-            label: create.isPending ? t`Creating…` : t`Create snapshot`,
-            detail: connected ? t`On this PC and in Google Drive` : t`On this PC`,
-            icon: "snapshot" as const,
-            disabled: create.isPending,
-            run: createSnapshot,
-          },
+          ...(savesOnly
+            ? []
+            : [
+                {
+                  id: "create",
+                  label: create.isPending ? t`Creating…` : t`Create snapshot`,
+                  detail: connected ? t`On this PC and in Google Drive` : t`On this PC`,
+                  icon: "snapshot" as const,
+                  disabled: create.isPending,
+                  run: createSnapshot,
+                },
+              ]),
           {
             id: "snapshots",
             label: t`Snapshots`,

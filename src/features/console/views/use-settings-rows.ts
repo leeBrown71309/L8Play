@@ -1,6 +1,6 @@
 import { useLingui } from "@lingui/react/macro";
 
-import { useConsoleMode } from "@/features/console/console-mode-store";
+import { requestConsoleExit } from "@/features/console/core/use-request-exit";
 import { useSoundSettings } from "@/features/console/sound";
 import type { SettingsRow } from "@/features/console/views/settings-rows";
 import { cloudRetentionChoices, pcRetentionChoices } from "@/features/settings/retention-options";
@@ -16,7 +16,6 @@ export function useSettingsRows(): SettingsRow[] {
   const update = useUpdateSettings().mutate;
   const sound = useSoundSettings();
   const updater = useAppUpdate();
-  const exit = useConsoleMode((state) => state.exit);
 
   const updateRow: SettingsRow =
     updater.phase === "available"
@@ -135,6 +134,6 @@ export function useSettingsRows(): SettingsRow[] {
       set: (value) => update({ keepCloud: Number(value) }),
     },
     updateRow,
-    { kind: "action", id: "exit", label: t`Exit console mode`, icon: "arrowRight", run: exit },
+    { kind: "action", id: "exit", label: t`Exit console mode`, icon: "arrowRight", run: requestConsoleExit },
   ];
 }

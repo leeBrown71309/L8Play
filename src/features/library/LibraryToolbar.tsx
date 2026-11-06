@@ -54,6 +54,10 @@ export function LibraryToolbar({ games }: { games: readonly GameSummary[] }) {
     { value: "all", label: t`All games` },
     { value: "installed", label: t`Installed`, icon: <DsIcon name="drive" size={16} /> },
     { value: "not-installed", label: t`Not installed`, icon: <DsIcon name="download" size={16} /> },
+    // Only offered once some saves have been imported (or while it is the active filter).
+    ...(installCounts["saves-only"] > 0 || view.install === "saves-only"
+      ? [{ value: "saves-only" as const, label: t`Saves only`, icon: <DsIcon name="snapshot" size={16} /> }]
+      : []),
   ];
   const sorts: { id: LibrarySort; label: string }[] = [
     { id: "recent", label: t`Recently played` },

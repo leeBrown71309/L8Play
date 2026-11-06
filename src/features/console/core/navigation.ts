@@ -3,7 +3,7 @@
 export const SECTIONS = ["library", "saves", "cloud", "settings"] as const;
 export type ConsoleSection = (typeof SECTIONS)[number];
 
-export type ModalKind = "quick-menu" | "letters" | "game-snapshots" | "snapshot-detail" | "confirm-restore";
+export type ModalKind = "quick-menu" | "letters" | "game-snapshots" | "snapshot-detail" | "confirm-restore" | "confirm-exit";
 
 export interface ConsoleModal {
   kind: ModalKind;

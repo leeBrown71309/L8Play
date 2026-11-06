@@ -15,6 +15,8 @@ export function useConsoleGameActions() {
 
   return {
     play(game: GameSummary) {
+      // Nothing to launch for a saves-only game.
+      if (game.archived) return;
       consoleSound.play("launch");
       rumble({ strong: 0.5, weak: 0.5, durationMs: 220 });
       launch.mutate(game.id, {

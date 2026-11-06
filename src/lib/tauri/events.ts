@@ -1,6 +1,7 @@
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
 
 import type { AutoSnapshotEvent } from "@/lib/bindings/AutoSnapshotEvent";
+import type { ImportProgress } from "@/lib/bindings/ImportProgress";
 import type { CloudChangedEvent } from "@/lib/bindings/CloudChangedEvent";
 import type { SavesChangedEvent } from "@/lib/bindings/SavesChangedEvent";
 import type { SessionEvent } from "@/lib/bindings/SessionEvent";
@@ -14,6 +15,7 @@ export const EVENTS = {
   autoSnapshot: "snapshot://auto",
   cloudChanged: "cloud://changed",
   artworkFetched: "artwork://fetched",
+  importProgress: "import://progress",
 } as const;
 
 interface EventPayloads {
@@ -24,6 +26,7 @@ interface EventPayloads {
   [EVENTS.cloudChanged]: CloudChangedEvent;
   /** Id of the game whose background artwork lookup just ended (found something or not). */
   [EVENTS.artworkFetched]: number;
+  [EVENTS.importProgress]: ImportProgress;
 }
 
 /** Browser preview only: lets the mock backend emit events the way the real one does. */

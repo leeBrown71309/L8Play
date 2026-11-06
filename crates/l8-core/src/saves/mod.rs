@@ -8,6 +8,7 @@
 
 mod detect;
 mod finder;
+pub mod importer;
 mod locations;
 mod ludusavi;
 pub mod pcgamingwiki;

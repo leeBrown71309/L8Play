@@ -7,8 +7,8 @@ use l8_core::saves::{
     detect_save_locations, find_save_candidates, validate_user_folder,
 };
 use l8_core::snapshots::{
-    CreateOutcome, CreateRequest, CurrentSaveState, GameSaveStatus, RestoreReport, SnapshotEngine, SnapshotKind,
-    SnapshotRepository, SnapshotStorage, SnapshotSummary,
+    CreateOutcome, CreateRequest, CurrentSaveState, GameSaveStatus, RestoreReport, RestoreTarget, SnapshotEngine,
+    SnapshotKind, SnapshotRepository, SnapshotStorage, SnapshotSummary,
 };
 use l8_core::{CoreError, CoreResult};
 use tauri::{AppHandle, Manager, State};
@@ -136,6 +136,38 @@ pub async fn restore_snapshot(app: AppHandle, snapshot_id: String) -> CommandRes
     Ok(report)
 }
 
+/// Folders an imported snapshot (one that does not know its own save folder) can be restored into.
+#[tauri::command]
+pub async fn get_restore_targets(app: AppHandle, snapshot_id: String) -> CommandResult<Vec<RestoreTarget>> {
+    blocking(&app, move |state| {
+        let snapshot = SnapshotRepository::new(&state.db).get(&snapshot_id)?;
+        if snapshot.status == l8_core::snapshots::SnapshotStatus::MissingLocal {
+            state.cloud(|sync| sync.download_now(&snapshot_id))?;
+        }
+        SnapshotEngine::new(&state.db, state.snapshot_root()?).restore_targets(&snapshot_id)
+    })
+    .await
+}
+
+/// Restores an imported snapshot over the folder the user chose. Files are laid over it, never removed.
+#[tauri::command]
+pub async fn restore_snapshot_to(app: AppHandle, snapshot_id: String, target: String) -> CommandResult<RestoreReport> {
+    let (game_id, report) = blocking(&app, move |state| {
+        let snapshot = SnapshotRepository::new(&state.db).get(&snapshot_id)?;
+        state.ensure_not_running(snapshot.game_id)?;
+        let _guard = state.snapshot_lock()?;
+        if snapshot.status == l8_core::snapshots::SnapshotStatus::MissingLocal {
+            state.cloud(|sync| sync.download_now(&snapshot_id))?;
+        }
+        let report = SnapshotEngine::new(&state.db, state.snapshot_root()?)
+            .restore_imported(&snapshot_id, &PathBuf::from(target))?;
+        Ok((snapshot.game_id, report))
+    })
+    .await?;
+    events::saves_changed(&app, game_id);
+    Ok(report)
+}
+
 /// Deletes a snapshot from this PC. With `also_from_drive` its Google Drive copy is deleted too
 /// (queued, so it also works while offline); without it the Drive copy is kept.
 #[tauri::command]
@@ -178,6 +210,21 @@ pub async fn set_snapshot_pinned(
 ) -> CommandResult<SnapshotSummary> {
     let repository = SnapshotRepository::new(&state.db);
     repository.set_pinned(&snapshot_id, pinned)?;
+    let summary = repository.get(&snapshot_id)?;
+    events::saves_changed(&app, summary.game_id);
+    Ok(summary)
+}
+
+/// Names a snapshot (an empty name clears it). Imported snapshots take the name of their source folder.
+#[tauri::command]
+pub async fn rename_snapshot(
+    app: AppHandle,
+    state: State<'_, AppState>,
+    snapshot_id: String,
+    label: Option<String>,
+) -> CommandResult<SnapshotSummary> {
+    let repository = SnapshotRepository::new(&state.db);
+    repository.set_label(&snapshot_id, label.as_deref())?;
     let summary = repository.get(&snapshot_id)?;
     events::saves_changed(&app, summary.game_id);
     Ok(summary)

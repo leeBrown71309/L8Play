@@ -65,25 +65,24 @@ export function SaveLocationsCard({ game, unknownToDetector }: SaveLocationsCard
   const items = locations.data ?? [];
   return (
     <section className="gd-card">
-      <h3>
-        {t`Save locations`}
-        <span className="flex gap-1">
-          <Button size="sm" variant="ghost" icon="scan" loading={detect.isPending} onClick={runDetection}>
-            {t`Detect again`}
-          </Button>
-          <Button
-            size="sm"
-            variant={unknownToDetector ? "primary" : "ghost"}
-            icon="search"
-            onClick={() => setFinding(true)}
-          >
-            {t`Find saves`}
-          </Button>
-          <Button size="sm" variant="ghost" icon="plus" disabled={add.isPending} onClick={() => void addFolder()}>
-            {t`Add`}
-          </Button>
-        </span>
-      </h3>
+      <h3>{t`Save locations`}</h3>
+      {/* Their own row, which wraps: the card is narrow next to the timeline and must never hide a button. */}
+      <div className="gd-card-tools">
+        <Button size="sm" variant="secondary" icon="scan" loading={detect.isPending} onClick={runDetection}>
+          {t`Detect again`}
+        </Button>
+        <Button
+          size="sm"
+          variant={unknownToDetector ? "primary" : "secondary"}
+          icon="search"
+          onClick={() => setFinding(true)}
+        >
+          {t`Find saves`}
+        </Button>
+        <Button size="sm" variant="secondary" icon="plus" disabled={add.isPending} onClick={() => void addFolder()}>
+          {t`Add`}
+        </Button>
+      </div>
 
       {items.length === 0 && !locations.isPending ? (
         <Banner tone="warning" title={t`No save location yet`}>

@@ -17,6 +17,7 @@ const MIGRATIONS_SLICE: &[M<'_>] = &[
     M::up(include_str!("../migrations/0002_cloud_deletions.sql")),
     M::up(include_str!("../migrations/0003_xbox_and_gog.sql")),
     M::up(include_str!("../migrations/0004_snapshot_storage.sql")),
+    M::up(include_str!("../migrations/0005_archived_games.sql")),
 ];
 const MIGRATIONS: Migrations<'_> = Migrations::from_slice(MIGRATIONS_SLICE);
 

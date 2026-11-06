@@ -149,6 +149,10 @@ pub struct SnapshotSummary {
     pub pinned: bool,
     pub device_name: String,
     pub cloud: CloudState,
+    /// A name chosen by the user or taken from the folder an imported snapshot came from.
+    pub label: Option<String>,
+    /// Converted from a legacy backup folder (its files have no known save location yet).
+    pub imported: bool,
 }
 
 /// What a restore did, for the result message.

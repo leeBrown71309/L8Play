@@ -12,6 +12,7 @@ import type { CommandMap, CommandName } from "@/lib/tauri/commands";
 import { AppError } from "@/lib/tauri/errors";
 import { EVENTS, emitPreviewEvent } from "@/lib/tauri/events";
 import { sampleLibrary } from "@/lib/tauri/preview-library";
+import { samplePlan } from "@/lib/tauri/preview-import";
 import { DEFAULT_SETTINGS } from "@/features/settings/defaults";
 
 const STORAGE_KEY = "l8play.preview.settings";
@@ -111,6 +112,8 @@ const handlers: Handlers = {
     addedAt: new Date().toISOString(),
     sessionCount: 3,
   }),
+  get_link_candidates: () => [],
+  link_archived_game: ({ targetId }) => findGame(targetId),
   set_favorite: ({ gameId, favorite }) => {
     library = library.map((game) => (game.id === gameId ? { ...game, favorite } : game));
     return findGame(gameId);
@@ -376,6 +379,33 @@ const handlers: Handlers = {
         : [],
   }),
   open_wiki_page: () => null,
+  scan_backup_folder: () => samplePlan(),
+  replan_backup_game: () => samplePlan().games[0] ?? null,
+  import_backup_games: ({ games }) => ({
+    games: games.map((game) => ({
+      gameId: null,
+      title: game.title,
+      created: true,
+      imported: game.snapshots.length,
+      snapshotIds: [],
+      duplicates: 0,
+      errors: [],
+    })),
+  }),
+  get_restore_targets: () => [
+    { path: "C:\\Users\\Ryu\\AppData\\Local\\SB\\Saved", source: "detected", exists: true },
+  ],
+  restore_snapshot_to: ({ snapshotId }) => ({
+    restoredSnapshotId: snapshotId,
+    safetySnapshotId: null,
+    filesRestored: 3,
+  }),
+  rename_snapshot: ({ snapshotId, label }) => {
+    const found = snapshots.find((snapshot) => snapshot.id === snapshotId);
+    if (!found) throw new AppError("not_found", `snapshot ${snapshotId}`);
+    found.label = label;
+    return found;
+  },
   get_artwork_key_status: () => artworkKeySaved,
   get_artwork_pending: () => [],
   save_artwork_key: ({ key }) => {

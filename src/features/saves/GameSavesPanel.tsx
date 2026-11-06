@@ -4,13 +4,12 @@ import { Link } from "react-router";
 
 import { ROUTES } from "@/app/routes";
 import { DsIcon } from "@/components/ds/ds-icon";
-import { SearchField } from "@/components/ds/form-fields";
+import { Dropdown, SearchField } from "@/components/ds/form-fields";
 import { StatusBadge } from "@/components/ds/status-badge";
 import { EmptyState } from "@/components/feedback/EmptyState";
 import { Skeleton } from "@/components/feedback/Skeleton";
 import { SnapshotIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
-import { Chip } from "@/components/ui/chip";
 import { useCloudStatus } from "@/features/cloud/use-cloud";
 import { SaveLocationsCard } from "@/features/saves/SaveLocationsCard";
 import { SnapshotTimeline } from "@/features/saves/SnapshotTimeline";
@@ -77,22 +76,20 @@ export function GameSavesPanel({ game, running, snapshots, onCreate, onRestore, 
     <div className="gd-sv">
       <div>
         <div className="gd-tools">
-          <Chip selected={filter === "all"} count={counts.all} onClick={() => setFilter("all")}>
-            {t`All`}
-          </Chip>
-          <Chip selected={filter === "manual"} count={counts.manual} onClick={() => setFilter("manual")}>
-            {t`Manual`}
-          </Chip>
-          <Chip selected={filter === "auto"} count={counts.auto} onClick={() => setFilter("auto")}>
-            {t`Auto`}
-          </Chip>
-          <Chip selected={filter === "safety"} count={counts.safety} onClick={() => setFilter("safety")}>
-            {t`Safety copies`}
-          </Chip>
+          <Dropdown<SnapshotFilter>
+            prefix={t`Show`}
+            value={filter}
+            onChange={setFilter}
+            options={[
+              { id: "all", label: `${t`All`} · ${counts.all}` },
+              { id: "manual", label: `${t`Manual`} · ${counts.manual}` },
+              { id: "auto", label: `${t`Auto`} · ${counts.auto}` },
+              { id: "safety", label: `${t`Safety copies`} · ${counts.safety}` },
+            ]}
+          />
           <div className="push">
             <SearchField
-              size="sm"
-              width={210}
+              className="gd-search"
               placeholder={t`Search names and notes`}
               value={query}
               onChange={(event) => setQuery(event.target.value)}

@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { ArtworkDialog } from "@/features/artwork/ArtworkDialog";
 import { GameHero } from "@/features/game-details/GameHero";
 import { GameOverview } from "@/features/game-details/GameOverview";
+import { LinkSavesBanner } from "@/features/game-details/LinkSavesBanner";
 import { PropertiesPanel } from "@/features/game-details/PropertiesPanel";
 import "@/features/game-details/game-details.css";
 import { useGame, useRunningGames } from "@/features/library/use-library";
@@ -80,6 +81,8 @@ export function GameDetailsPage() {
           />
         }
       />
+
+      <LinkSavesBanner game={game} />
 
       {(tab === "overview" || tab === "artwork") && (
         <GameOverview

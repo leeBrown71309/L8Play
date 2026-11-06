@@ -21,6 +21,7 @@ export function FilterChips({ filter, letter, focused, onPick, onClearLetter }: 
     favourites: t`Favourites`,
     installed: t`Installed`,
     "not-installed": t`Not installed`,
+    "saves-only": t`Saves only`,
   };
   return (
     <div className="cs-chips" role="radiogroup" aria-label={t`Filter games`}>

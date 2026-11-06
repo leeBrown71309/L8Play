@@ -5,4 +5,8 @@ import type { Platform } from "./Platform";
 /**
  * A game as listed in the library grid, rows, rails and dashboard.
  */
-export type GameSummary = { id: number, title: string, platform: Platform, platformGameId: string | null, installed: boolean, favorite: boolean, lastPlayedAt: string | null, playtimeSeconds: number, sizeBytes: number | null, installPath: string | null, artwork: ArtworkUrls, };
+export type GameSummary = { id: number, title: string, platform: Platform, platformGameId: string | null, installed: boolean, 
+/**
+ * Saves-only game: imported from an older backup, never launched or installed by L8Play.
+ */
+archived: boolean, favorite: boolean, lastPlayedAt: string | null, playtimeSeconds: number, sizeBytes: number | null, installPath: string | null, artwork: ArtworkUrls, };

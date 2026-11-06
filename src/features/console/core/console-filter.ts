@@ -3,7 +3,7 @@ import type { LibraryFilters } from "@/features/library/library-view-store";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
 
 /** The chips above the coverflow. */
-export const CONSOLE_FILTERS = ["all", "recent", "favourites", "installed", "not-installed"] as const;
+export const CONSOLE_FILTERS = ["all", "recent", "favourites", "installed", "not-installed", "saves-only"] as const;
 export type ConsoleFilter = (typeof CONSOLE_FILTERS)[number];
 
 /** "#" stands for every title that starts with a digit or a symbol. */
@@ -46,6 +46,9 @@ export function filterConsoleGames(games: readonly GameSummary[], filter: Consol
       break;
     case "not-installed":
       result = filterGames(games, { ...BASE, install: "not-installed" });
+      break;
+    case "saves-only":
+      result = filterGames(games, { ...BASE, install: "saves-only" });
       break;
     default:
       result = filterGames(games, BASE);

@@ -141,6 +141,27 @@ pub async fn get_game(state: State<'_, AppState>, game_id: i64) -> CommandResult
         .ok_or_else(|| CoreError::NotFound(format!("game {game_id}")).into())
 }
 
+/// Installed games with the same title as a saves-only game: where its snapshots could be joined.
+#[tauri::command]
+pub async fn get_link_candidates(state: State<'_, AppState>, game_id: i64) -> CommandResult<Vec<GameSummary>> {
+    Ok(LibraryRepository::new(&state.db).link_candidates(game_id)?)
+}
+
+/// Joins a saves-only game to the installed game it turned out to be. Its snapshots move to that game.
+#[tauri::command]
+pub async fn link_archived_game(
+    app: AppHandle,
+    state: State<'_, AppState>,
+    archived_id: i64,
+    target_id: i64,
+) -> CommandResult<GameSummary> {
+    let _guard = state.snapshot_lock()?;
+    let game = LibraryRepository::new(&state.db).merge_archived_into(archived_id, target_id)?;
+    events::library_changed(&app);
+    events::saves_changed(&app, target_id);
+    Ok(game)
+}
+
 #[tauri::command]
 pub async fn set_favorite(
     app: AppHandle,

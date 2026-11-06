@@ -1,5 +1,6 @@
 import { useLingui } from "@lingui/react/macro";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "react-router";
 
 import { ROUTES } from "@/app/routes";
@@ -19,6 +20,7 @@ import {
 } from "@/features/save-manager/snapshot-filters";
 import { SnapshotDetailPanel } from "@/features/save-manager/SnapshotDetailPanel";
 import { useGames, useRunningGames } from "@/features/library/use-library";
+import { useImportStore } from "@/features/saves-import/import-store";
 import { CreateSnapshotDialog } from "@/features/saves/CreateSnapshotDialog";
 import { DeleteSnapshotDialog } from "@/features/saves/DeleteSnapshotDialog";
 import { RestoreSnapshotDialog } from "@/features/saves/RestoreSnapshotDialog";
@@ -43,6 +45,23 @@ export function SaveManagerPage() {
   const [restoring, setRestoring] = useState<SnapshotSummary | null>(null);
   const [deleting, setDeleting] = useState<SnapshotSummary | null>(null);
   const [creating, setCreating] = useState(false);
+  // On narrow windows the details slide over the page; this says whether that panel is out.
+  const [detailOpen, setDetailOpen] = useState(false);
+  const grid = useRef<HTMLDivElement>(null);
+  /** The detail column is hidden when the page is narrow (see the CSS): only then does the slide-over open. */
+  const detailColumnHidden = () => {
+    const column = grid.current?.querySelector(":scope > .sm-detail");
+    return column ? getComputedStyle(column).display === "none" : false;
+  };
+
+  useEffect(() => {
+    if (!detailOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setDetailOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [detailOpen]);
 
   const all = useMemo(() => snapshots.data ?? [], [snapshots.data]);
   const visible = useMemo(
@@ -67,9 +86,20 @@ export function SaveManagerPage() {
       .sort((a, b) => (b.status.lastSnapshotAt ?? "").localeCompare(a.status.lastSnapshotAt ?? ""));
   }, [gameList, statuses.data]);
 
+  const detailPanel = (
+    <SnapshotDetailPanel
+      snapshot={selected}
+      game={selectedGame}
+      onRestore={setRestoring}
+      onDelete={setDeleting}
+      onReveal={(snapshot) => reveal.mutate(snapshot.id)}
+      onClose={() => setDetailOpen(false)}
+    />
+  );
+
   return (
     <>
-      <div className="sm-grid">
+      <div ref={grid} className="sm-grid">
         <nav className="sm-games" aria-label={t`Games`}>
           <div className="l8-eyebrow">{t`Games`}</div>
           <button
@@ -83,20 +113,22 @@ export function SaveManagerPage() {
             <span className="t">{t`All games`}</span>
             <span className="n">{all.length}</span>
           </button>
-          {protectedGames.map(({ game, status }) => (
-            <button
-              key={game.id}
-              type="button"
-              className={`sm-gi${gameFilter === game.id ? " on" : ""}`}
-              onClick={() => setGameFilter(game.id)}
-            >
-              <span className="ic">
-                <GameArt game={game} kind="icon" showTitle={false} />
-              </span>
-              <span className="t">{game.title}</span>
-              <span className="n">{status.snapshotCount}</span>
-            </button>
-          ))}
+          <div className="sm-games-list">
+            {protectedGames.map(({ game, status }) => (
+              <button
+                key={game.id}
+                type="button"
+                className={`sm-gi${gameFilter === game.id ? " on" : ""}`}
+                onClick={() => setGameFilter(game.id)}
+              >
+                <span className="ic">
+                  <GameArt game={game} kind="icon" showTitle={false} />
+                </span>
+                <span className="t">{game.title}</span>
+                <span className="n">{status.snapshotCount}</span>
+              </button>
+            ))}
+          </div>
         </nav>
 
         <div className="sm-list">
@@ -110,6 +142,9 @@ export function SaveManagerPage() {
                     <Link to={`/games/${filterGame.id}`}>{t`Open game page`}</Link>
                   </Button>
                 )}
+                <Button variant="secondary" icon="upload" onClick={() => useImportStore.getState().open()}>
+                  {t`Import saves`}
+                </Button>
                 <Button
                   variant="primary"
                   icon="plus"
@@ -185,21 +220,29 @@ export function SaveManagerPage() {
               compact
               showNote={false}
               selectedId={selected?.id ?? null}
-              onSelect={(snapshot) => setSelectedId(snapshot.id)}
+              onSelect={(snapshot) => {
+                setSelectedId(snapshot.id);
+                setDetailOpen(detailColumnHidden());
+              }}
               onRestore={setRestoring}
               onDelete={setDeleting}
             />
           )}
         </div>
 
-        <SnapshotDetailPanel
-          snapshot={selected}
-          game={selectedGame}
-          onRestore={setRestoring}
-          onDelete={setDeleting}
-          onReveal={(snapshot) => reveal.mutate(snapshot.id)}
-        />
+        {detailPanel}
       </div>
+      {/*
+        Narrow windows: the same panel slides over the page. It lives at the root of the document so the page's
+        own animation (a transform) cannot trap it under the side rails.
+      */}
+      {createPortal(
+        <div className={`sm-drawer${detailOpen ? " is-open" : ""}`}>
+          <div className="sm-scrim" aria-hidden="true" onClick={() => setDetailOpen(false)} />
+          {detailPanel}
+        </div>,
+        document.body,
+      )}
 
       {filterGame && (
         <CreateSnapshotDialog

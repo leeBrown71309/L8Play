@@ -5,6 +5,8 @@ export const queryKeys = {
   games: ["games"] as const,
   game: (gameId: number) => ["games", gameId] as const,
   runningGames: ["running-games"] as const,
+  /** Installed games a saves-only game could be joined to. */
+  linkCandidates: (gameId: number) => ["games", gameId, "link-candidates"] as const,
   /** What the last owned-but-not-installed Steam lookup found (settings hint). */
   ownedLibraryStatus: ["owned-library-status"] as const,
   /** Whether a Steam Web API key is saved (never the key itself). */

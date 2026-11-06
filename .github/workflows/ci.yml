@@ -1,0 +1,41 @@
+name: CI
+
+# Runs on every pull request targeting main. Its two jobs are the required status checks of the main ruleset.
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Frontend (typecheck, lint, tests)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+      - run: bun run build
+
+  rust:
+    name: Rust (tests, clippy)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: bun install --frozen-lockfile
+      # The Tauri crate needs the sidecar binary and the built frontend to compile.
+      - run: bun run fetch:ludusavi
+      - run: bun run build
+      - run: cargo test --workspace
+      - run: cargo clippy --workspace --all-targets -- -D warnings

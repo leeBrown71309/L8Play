@@ -13,6 +13,8 @@ import { ConsoleHost } from "@/features/console/ConsoleHost";
 import { useConsoleShortcut } from "@/features/console/use-console-shortcut";
 import { useSettings, useUpdateSettings } from "@/features/settings/use-settings";
 import { AddGameDialogs } from "@/features/library/AddGameDialogs";
+import { ImportActivity } from "@/features/saves-import/ImportActivity";
+import { ImportSavesDialogs } from "@/features/saves-import/ImportSavesDialogs";
 import { OnboardingDialog } from "@/features/onboarding/OnboardingDialog";
 import { useAppUpdateWatcher } from "@/features/updates/use-app-update-watcher";
 import { cn } from "@/lib/cn";
@@ -45,6 +47,8 @@ export function AppShell() {
       </main>
       <QuickRail />
       <AddGameDialogs />
+      <ImportSavesDialogs />
+      <ImportActivity />
       <OnboardingDialog />
       <ConsoleHost />
       <Toaster />
