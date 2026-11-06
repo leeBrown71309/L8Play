@@ -12,7 +12,7 @@ use walkdir::{DirEntry, WalkDir};
 use crate::artwork::steamgriddb::normalize_title;
 use crate::db::Database;
 use crate::error::{CoreError, CoreResult};
-use crate::saves::normalize_path;
+use crate::library::paths::path_key;
 
 const MAX_DEPTH: usize = 4;
 const MAX_ENTRIES_PER_FOLDER: usize = 5_000;
@@ -115,9 +115,9 @@ impl Known {
             .query_map([], |row| Ok((row.get::<_, String>(0)?, row.get::<_, Option<String>>(1)?)))?
             .collect::<Result<Vec<_>, _>>()?;
         for (folder, executable) in rows {
-            folders.push(normalize_path(Path::new(&folder)));
+            folders.push(path_key(Path::new(&folder)));
             if let Some(executable) = executable {
-                executables.insert(normalize_path(Path::new(&executable)));
+                executables.insert(path_key(Path::new(&executable)));
             }
         }
         let mut statement = connection.prepare("SELECT title FROM games")?;
@@ -131,10 +131,11 @@ impl Known {
     }
 
     fn contains(&self, folder: &Path, title: &str, executables: &[ExecutableChoice]) -> bool {
-        let candidate = normalize_path(folder);
+        // Canonical keys: a folder picked through an 8.3 short name must still match the stored one.
+        let candidate = path_key(folder);
         let nested = |outer: &str, inner: &str| inner == outer || inner.starts_with(&format!("{outer}\\"));
         self.folders.iter().any(|known| nested(known, &candidate) || nested(&candidate, known))
-            || executables.iter().any(|exe| self.executables.contains(&normalize_path(Path::new(&exe.path))))
+            || executables.iter().any(|exe| self.executables.contains(&path_key(Path::new(&exe.path))))
             || self.titles.contains(&normalize_title(title))
     }
 }
@@ -395,7 +396,9 @@ mod tests {
         let exe = folder.join("tlou-i.exe");
         let added = repository.add_standalone_in(Some(&folder), &exe, Some("The Last of Us Part I"))?;
         assert!(added.created);
-        assert_eq!(added.game.install_path.as_deref(), Some(folder.to_string_lossy().as_ref()));
+        // Stored in canonical form, like the executable (a short 8.3 path is stored with its long names).
+        let canonical = crate::library::paths::dunce_canonicalize(&folder);
+        assert_eq!(added.game.install_path.as_deref(), Some(canonical.to_string_lossy().as_ref()));
         let again = repository.add_standalone_in(Some(&folder), &exe, Some("Other title"))?;
         assert!(!again.created);
         assert_eq!(again.game.id, added.game.id);

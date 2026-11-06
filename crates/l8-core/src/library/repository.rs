@@ -9,6 +9,7 @@ use crate::artwork::active_art_by_game;
 use crate::clock::{now_rfc3339, seconds_between};
 use crate::db::Database;
 use crate::error::{CoreError, CoreResult};
+use crate::library::paths::{dunce_canonicalize, path_key};
 use crate::library::slug::{slugify, sort_title};
 use crate::library::{ArtworkUrls, GameDetail, GameSummary, LaunchTarget, WatchedGame};
 use crate::platforms::steam_owned::OwnedGame;
@@ -194,15 +195,24 @@ impl<'db> LibraryRepository<'db> {
         title: Option<&str>,
     ) -> CoreResult<AddedGame> {
         let executable = validate_executable(executable)?;
-        let install_path = match folder {
+        let install_path: PathBuf = match folder {
             Some(folder) => {
-                let inside = normalize_path(&executable).starts_with(&format!("{}\\", normalize_path(folder)));
-                if !folder.is_dir() || !inside {
+                if !folder.is_dir() {
+                    return Err(CoreError::Validation("the executable must be inside the game folder".into()));
+                }
+                // Both sides canonical: the same folder can be written with its 8.3 short name
+                // (`C:\Users\RUNNER~1\…`) or its long one, and only canonical paths compare reliably.
+                let folder = dunce_canonicalize(folder);
+                let inside = normalize_path(&executable).starts_with(&format!("{}\\", normalize_path(&folder)));
+                if !inside {
                     return Err(CoreError::Validation("the executable must be inside the game folder".into()));
                 }
                 folder
             }
-            None => executable.parent().ok_or_else(|| CoreError::Validation("the executable has no folder".into()))?,
+            None => executable
+                .parent()
+                .map(Path::to_path_buf)
+                .ok_or_else(|| CoreError::Validation("the executable has no folder".into()))?,
         };
         let exe_text = executable.to_string_lossy().to_string();
         let existing: Option<i64> = self
@@ -234,7 +244,7 @@ impl<'db> LibraryRepository<'db> {
                 params![title, sort_title(&title), slug, now],
             )?;
             let game_id = tx.last_insert_rowid();
-            upsert_installation(&tx, game_id, install_path, Some(&executable), None, "manual", &now)?;
+            upsert_installation(&tx, game_id, &install_path, Some(&executable), None, "manual", &now)?;
             tx.commit()?;
             game_id
         };
@@ -576,9 +586,10 @@ fn adopt_standalone(
     if !matches!(platform, Platform::Xbox | Platform::Gog) {
         return Ok(None);
     }
-    let folder = normalize_path(&game.install_path);
+    // Canonical keys: the launcher and the user may write the same folder differently (8.3 short names).
+    let folder = path_key(&game.install_path);
     let inside = |path: &str| path == folder || path.starts_with(&format!("{folder}\\"));
-    let executable = game.executable_path.as_deref().map(normalize_path);
+    let executable = game.executable_path.as_deref().map(path_key);
     let mut statement = tx.prepare(
         "SELECT g.id, g.user_edited, i.install_path, i.executable_path
          FROM games g JOIN installations i ON i.game_id = g.id
@@ -588,8 +599,8 @@ fn adopt_standalone(
         .query_map([], |row| Ok((row.get(0)?, row.get(1)?, row.get(2)?, row.get(3)?)))?
         .collect::<Result<_, _>>()?;
     let found = rows.into_iter().find(|(_, _, install_path, exe)| {
-        let exe = exe.as_deref().map(|text| normalize_path(Path::new(text)));
-        inside(&normalize_path(Path::new(install_path)))
+        let exe = exe.as_deref().map(|text| path_key(Path::new(text)));
+        inside(&path_key(Path::new(install_path)))
             || exe.as_deref().is_some_and(inside)
             || (executable.is_some() && exe == executable)
     });
@@ -640,17 +651,6 @@ fn validate_executable(path: &Path) -> CoreResult<PathBuf> {
         return Err(CoreError::Validation(format!("{} does not exist", path.display())));
     }
     Ok(dunce_canonicalize(path))
-}
-
-/// Canonical path without the `\\?\` prefix Windows adds, so paths stay readable and comparable.
-fn dunce_canonicalize(path: &Path) -> PathBuf {
-    match std::fs::canonicalize(path) {
-        Ok(canonical) => {
-            let text = canonical.to_string_lossy();
-            text.strip_prefix(r"\\?\").map_or(canonical.clone(), PathBuf::from)
-        }
-        Err(_) => path.to_path_buf(),
-    }
 }
 
 /// `D:\Games\HollowKnight\hollow_knight.exe` → `"Hollow Knight"` (from the file name).
