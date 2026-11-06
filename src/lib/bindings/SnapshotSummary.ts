@@ -7,4 +7,12 @@ export type SnapshotSummary = { id: string, gameId: number, gameTitle: string,
 /**
  * Empty for automatic snapshots: the UI shows a translated label for the kind.
  */
-name: string, description: string | null, kind: SnapshotKind, status: SnapshotStatus, createdAt: string, verifiedAt: string | null, archivePath: string | null, archiveSizeBytes: number, totalFiles: number, totalBytes: number, archiveSha256: string, playtimeSeconds: number | null, pinned: boolean, deviceName: string, cloud: CloudState, };
+name: string, description: string | null, kind: SnapshotKind, status: SnapshotStatus, createdAt: string, verifiedAt: string | null, archivePath: string | null, archiveSizeBytes: number, totalFiles: number, totalBytes: number, archiveSha256: string, playtimeSeconds: number | null, pinned: boolean, deviceName: string, cloud: CloudState, 
+/**
+ * A name chosen by the user or taken from the folder an imported snapshot came from.
+ */
+label: string | null, 
+/**
+ * Converted from a legacy backup folder (its files have no known save location yet).
+ */
+imported: boolean, };

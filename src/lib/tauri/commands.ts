@@ -20,8 +20,15 @@ import type { FolderScanReport } from "@/lib/bindings/FolderScanReport";
 import type { GameDetail } from "@/lib/bindings/GameDetail";
 import type { GameSaveStatus } from "@/lib/bindings/GameSaveStatus";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
+import type { ImportGameRequest } from "@/lib/bindings/ImportGameRequest";
+import type { ImportPlan } from "@/lib/bindings/ImportPlan";
+import type { ImportReport } from "@/lib/bindings/ImportReport";
+import type { PlannedGame } from "@/lib/bindings/PlannedGame";
+import type { PlannedLayout } from "@/lib/bindings/PlannedLayout";
+import type { ScanMode } from "@/lib/bindings/ScanMode";
 import type { NewGameInput } from "@/lib/bindings/NewGameInput";
 import type { RestoreReport } from "@/lib/bindings/RestoreReport";
+import type { RestoreTarget } from "@/lib/bindings/RestoreTarget";
 import type { SaveLocation } from "@/lib/bindings/SaveLocation";
 import type { OwnedLibraryStatus } from "@/lib/bindings/OwnedLibraryStatus";
 import type { ScanReport } from "@/lib/bindings/ScanReport";
@@ -46,6 +53,8 @@ export interface CommandMap {
   open_steam_api_key_page: { args: undefined; result: null };
   list_games: { args: undefined; result: GameSummary[] };
   get_game: { args: { gameId: number }; result: GameDetail };
+  get_link_candidates: { args: { gameId: number }; result: GameSummary[] };
+  link_archived_game: { args: { archivedId: number; targetId: number }; result: GameSummary };
   set_favorite: { args: { gameId: number; favorite: boolean }; result: GameSummary };
   add_standalone_game: { args: { executablePath: string; title: string | null }; result: GameSummary };
   scan_game_folder: { args: { folder: string }; result: FolderScanReport };
@@ -72,6 +81,18 @@ export interface CommandMap {
   get_snapshot_folder: { args: undefined; result: string };
   find_saves: { args: { gameId: number }; result: FindSavesOutcome };
   open_wiki_page: { args: { url: string }; result: null };
+  scan_backup_folder: { args: { folder: string; mode: ScanMode | null }; result: ImportPlan };
+  replan_backup_game: {
+    args: { folder: string; key: string; fromCollection: string | null; layout: PlannedLayout };
+    result: PlannedGame | null;
+  };
+  import_backup_games: {
+    args: { games: ImportGameRequest[]; storage: SnapshotStorage | null };
+    result: ImportReport;
+  };
+  get_restore_targets: { args: { snapshotId: string }; result: RestoreTarget[] };
+  restore_snapshot_to: { args: { snapshotId: string; target: string }; result: RestoreReport };
+  rename_snapshot: { args: { snapshotId: string; label: string | null }; result: SnapshotSummary };
   get_artwork_key_status: { args: undefined; result: boolean };
   get_artwork_pending: { args: undefined; result: number[] };
   save_artwork_key: { args: { key: string }; result: null };
@@ -128,6 +149,9 @@ export const clearSteamKey = () => call("clear_steam_key");
 export const openSteamApiKeyPage = () => call("open_steam_api_key_page");
 export const listGames = () => call("list_games");
 export const getGame = (gameId: number) => call("get_game", { gameId });
+export const getLinkCandidates = (gameId: number) => call("get_link_candidates", { gameId });
+export const linkArchivedGame = (archivedId: number, targetId: number) =>
+  call("link_archived_game", { archivedId, targetId });
 export const setFavorite = (gameId: number, favorite: boolean) => call("set_favorite", { gameId, favorite });
 export const addStandaloneGame = (executablePath: string, title: string | null = null) =>
   call("add_standalone_game", { executablePath, title });
@@ -162,6 +186,22 @@ export const revealSnapshot = (snapshotId: string | null) => call("reveal_snapsh
 export const getSnapshotFolder = () => call("get_snapshot_folder");
 export const findSaves = (gameId: number) => call("find_saves", { gameId });
 export const openWikiPage = (url: string) => call("open_wiki_page", { url });
+
+export const scanBackupFolder = (folder: string, mode: ScanMode | null = null) =>
+  call("scan_backup_folder", { folder, mode });
+export const replanBackupGame = (
+  folder: string,
+  key: string,
+  fromCollection: string | null,
+  layout: PlannedLayout,
+) => call("replan_backup_game", { folder, key, fromCollection, layout });
+export const importBackupGames = (games: ImportGameRequest[], storage: SnapshotStorage | null = null) =>
+  call("import_backup_games", { games, storage });
+export const getRestoreTargets = (snapshotId: string) => call("get_restore_targets", { snapshotId });
+export const restoreSnapshotTo = (snapshotId: string, target: string) =>
+  call("restore_snapshot_to", { snapshotId, target });
+export const renameSnapshot = (snapshotId: string, label: string | null) =>
+  call("rename_snapshot", { snapshotId, label });
 
 export const getArtworkKeyStatus = () => call("get_artwork_key_status");
 /** Ids of the games whose automatic artwork lookup is still queued or running. */

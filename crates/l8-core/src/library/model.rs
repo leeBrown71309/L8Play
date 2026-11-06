@@ -20,6 +20,8 @@ pub struct GameSummary {
     pub platform: Platform,
     pub platform_game_id: Option<String>,
     pub installed: bool,
+    /// Saves-only game: imported from an older backup, never launched or installed by L8Play.
+    pub archived: bool,
     pub favorite: bool,
     pub last_played_at: Option<String>,
     #[ts(type = "number")]

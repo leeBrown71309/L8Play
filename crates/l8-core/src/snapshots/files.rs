@@ -89,6 +89,48 @@ pub fn collect_files(locations: &[SaveLocation]) -> CoreResult<Vec<SourceFile>> 
     Ok(files)
 }
 
+/// Lists the files of a plain folder that is not (yet) a save location of any game, as location 0.
+/// `skip` receives each path relative to `root` and returns `true` for files that must be left out
+/// (logs, screenshots…). Symbolic links and junctions are skipped, never followed.
+pub fn collect_folder(root: &Path, skip: &dyn Fn(&Path) -> bool) -> CoreResult<Vec<SourceFile>> {
+    if !root.is_dir() {
+        return Err(CoreError::Validation(format!("{} is not a folder", root.display())));
+    }
+    let mut files = Vec::new();
+    let mut total: u64 = 0;
+    for entry in WalkDir::new(root).follow_links(false) {
+        let entry = entry.map_err(|error| CoreError::Io(io::Error::other(error.to_string())))?;
+        if entry.path_is_symlink() || !entry.file_type().is_file() {
+            continue;
+        }
+        let relative = entry
+            .path()
+            .strip_prefix(root)
+            .map_err(|_| CoreError::Validation("file outside its folder".into()))?
+            .to_path_buf();
+        if skip(&relative) {
+            continue;
+        }
+        let metadata = entry.metadata().map_err(|error| CoreError::Io(io::Error::other(error.to_string())))?;
+        total += metadata.len();
+        files.push(SourceFile {
+            location_index: 0,
+            relative,
+            absolute: entry.path().to_path_buf(),
+            size: metadata.len(),
+            modified: metadata.modified().ok(),
+        });
+        if files.len() > MAX_FILES || total > MAX_BYTES {
+            return Err(CoreError::Validation(format!(
+                "{} holds more than {MAX_FILES} files or 4 GB; check that it is really a save folder",
+                root.display()
+            )));
+        }
+    }
+    files.sort_by(|a, b| a.relative.cmp(&b.relative));
+    Ok(files)
+}
+
 /// Opens a save file for reading while refusing to share it with a writer: if the game (or
 /// anything else) still has it open for writing, this fails instead of copying a half-written file.
 pub fn open_exclusive_read(path: &Path) -> CoreResult<File> {

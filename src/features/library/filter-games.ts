@@ -22,7 +22,16 @@ const COMPARATORS: Record<LibraryFilters["sort"], (a: GameSummary, b: GameSummar
 };
 
 function matchesInstall(game: GameSummary, install: InstallFilter): boolean {
-  return install === "all" || (install === "installed" ? game.installed : !game.installed);
+  switch (install) {
+    case "all":
+      return true;
+    case "installed":
+      return game.installed;
+    case "not-installed":
+      return !game.installed && !game.archived;
+    case "saves-only":
+      return game.archived;
+  }
 }
 
 export function filterGames(games: readonly GameSummary[], filters: LibraryFilters): GameSummary[] {
@@ -47,5 +56,11 @@ export function recentlyPlayed(games: readonly GameSummary[], limit: number): Ga
 export function countByInstall(games: readonly GameSummary[], filters: LibraryFilters): Record<InstallFilter, number> {
   const matching = filterGames(games, { ...filters, install: "all" });
   const installed = matching.filter((game) => game.installed).length;
-  return { all: matching.length, installed, "not-installed": matching.length - installed };
+  const savesOnly = matching.filter((game) => game.archived).length;
+  return {
+    all: matching.length,
+    installed,
+    "not-installed": matching.length - installed - savesOnly,
+    "saves-only": savesOnly,
+  };
 }

@@ -26,6 +26,25 @@ pub struct ArchivedLocation {
     pub index: usize,
     pub path: String,
     pub kind: LocationKind,
+    /// `true` for a snapshot imported from a legacy backup: the folder it came from is not a save
+    /// folder of this PC, so `path` is empty and the target is chosen when the snapshot is restored.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub unresolved: bool,
+    /// Where the files probably belong (e.g. `%LOCALAPPDATA%\Game\Saved\SaveGames`), read from a
+    /// hint file shipped with the backup. Only a suggestion, never written to without confirmation.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub hint: Option<String>,
+}
+
+impl ArchivedLocation {
+    pub fn resolved(index: usize, location: &SaveLocation) -> Self {
+        Self { index, path: location.path.clone(), kind: location.kind, unresolved: false, hint: None }
+    }
+
+    /// The single location of an imported snapshot.
+    pub fn imported(hint: Option<String>) -> Self {
+        Self { index: 0, path: String::new(), kind: LocationKind::Directory, unresolved: true, hint }
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -55,6 +74,12 @@ impl ArchiveManifest {
     pub fn total_bytes(&self) -> u64 {
         self.files.iter().map(|file| file.size).sum()
     }
+
+    /// What the archive contains, independent of where it came from: (archive entry, SHA-256).
+    /// Two snapshots with the same signature hold byte-identical files at identical relative paths.
+    pub fn signature(&self) -> std::collections::BTreeSet<(String, String)> {
+        self.files.iter().map(|file| (file.entry.clone(), file.sha256.clone())).collect()
+    }
 }
 
 impl<'de> Deserialize<'de> for LocationKind {
@@ -77,7 +102,7 @@ pub fn write_archive(
     snapshot_id: &str,
     game_title: &str,
     created_at: &str,
-    locations: &[SaveLocation],
+    locations: &[ArchivedLocation],
     files: &[SourceFile],
 ) -> CoreResult<ArchiveManifest> {
     let output = File::create(destination)?;
@@ -106,11 +131,7 @@ pub fn write_archive(
         snapshot_id: snapshot_id.to_owned(),
         game_title: game_title.to_owned(),
         created_at: created_at.to_owned(),
-        locations: locations
-            .iter()
-            .enumerate()
-            .map(|(index, location)| ArchivedLocation { index, path: location.path.clone(), kind: location.kind })
-            .collect(),
+        locations: locations.to_vec(),
         files: archived,
     };
     zip.start_file(MANIFEST_ENTRY, options).map_err(zip_error)?;

@@ -48,13 +48,15 @@ export function ConfirmRestoreModal({ snapshotId }: { snapshotId: string }) {
     });
   };
 
-  const items = [
-    { label: t`Back up current save & restore`, icon: "restore" as const, run },
-    { label: t`Cancel`, icon: "x" as const, run: () => dispatch({ type: "popModal" }) },
-  ];
+  // An imported snapshot needs a destination folder to be chosen: that is only offered on the desktop.
+  const needsDestination = snapshot?.imported === true;
+  const cancel = { label: t`Cancel`, icon: "x" as const, run: () => dispatch({ type: "popModal" }) };
+  const items = needsDestination
+    ? [cancel]
+    : [{ label: t`Back up current save & restore`, icon: "restore" as const, run }, cancel];
   const list = useModalList({
     count: items.length,
-    initialIndex: 1,
+    initialIndex: items.length - 1,
     onConfirm: (index) => items[index]?.run(),
     onBack: () => dispatch({ type: "popModal" }),
   });
@@ -84,7 +86,9 @@ export function ConfirmRestoreModal({ snapshotId }: { snapshotId: string }) {
       }
     >
       <p className="cs-note">
-        {t`Your current save is copied to a safety snapshot first, then replaced by this one. The game must be closed.`}
+        {needsDestination
+          ? t`This snapshot was imported from an old backup. Restore it from the desktop interface, where you choose the folder it goes to.`
+          : t`Your current save is copied to a safety snapshot first, then replaced by this one. The game must be closed.`}
       </p>
     </ModalFrame>
   );

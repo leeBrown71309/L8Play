@@ -22,7 +22,8 @@ const SUMMARY_SELECT: &str = "
              WHEN EXISTS (SELECT 1 FROM sync_operations o WHERE o.snapshot_id = s.id AND o.direction = 'upload' AND o.status IN ('queued', 'paused')) THEN 'queued'
              WHEN EXISTS (SELECT 1 FROM sync_operations o WHERE o.snapshot_id = s.id AND o.direction = 'upload' AND o.status = 'failed') THEN 'failed'
              ELSE 'none'
-           END
+           END,
+           s.label, s.origin
     FROM snapshots s JOIN games g ON g.id = s.game_id JOIN devices d ON d.id = s.device_id";
 
 fn summary_from_row(row: &Row<'_>) -> rusqlite::Result<SnapshotSummary> {
@@ -47,6 +48,8 @@ fn summary_from_row(row: &Row<'_>) -> rusqlite::Result<SnapshotSummary> {
         pinned: row.get(15)?,
         device_name: row.get(16)?,
         cloud: CloudState::from_db(&row.get::<_, String>(17)?),
+        label: row.get(18)?,
+        imported: row.get::<_, String>(19)? == "imported",
     })
 }
 
@@ -63,6 +66,8 @@ pub struct NewSnapshot<'a> {
     pub archive_size: i64,
     pub archive_sha256: &'a str,
     pub manifest: &'a ArchiveManifest,
+    pub label: Option<&'a str>,
+    pub imported: bool,
 }
 
 pub struct SnapshotRepository<'db> {
@@ -101,8 +106,9 @@ impl<'db> SnapshotRepository<'db> {
         let now = now_rfc3339();
         tx.execute(
             "INSERT INTO snapshots (id, game_id, name, description, kind, status, device_id, parent_snapshot_id, archive_path,
-                                    archive_size, archive_sha256, total_files, total_bytes, playtime_seconds, is_pinned, created_at, verified_at, storage)
-             VALUES (?1, ?2, ?3, ?4, ?5, 'ready', ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17)",
+                                    archive_size, archive_sha256, total_files, total_bytes, playtime_seconds, is_pinned, created_at, verified_at, storage,
+                                    label, origin)
+             VALUES (?1, ?2, ?3, ?4, ?5, 'ready', ?6, ?7, ?8, ?9, ?10, ?11, ?12, ?13, ?14, ?15, ?16, ?17, ?18, ?19)",
             params![
                 snapshot.id,
                 snapshot.game_id,
@@ -121,6 +127,8 @@ impl<'db> SnapshotRepository<'db> {
                 snapshot.manifest.created_at,
                 now,
                 snapshot.storage.as_db(),
+                snapshot.label,
+                if snapshot.imported { "imported" } else { "local" },
             ],
         )?;
         for file in &snapshot.manifest.files {
@@ -171,6 +179,26 @@ impl<'db> SnapshotRepository<'db> {
             connection.prepare("SELECT original_path, sha256 FROM snapshot_files WHERE snapshot_id = ?1")?;
         let rows = statement.query_map([id], |row| Ok((row.get(0)?, row.get(1)?)))?.collect::<Result<Vec<_>, _>>()?;
         Ok(rows)
+    }
+
+    /// (archive entry, SHA-256) of every file in a snapshot, to recognise an identical re-import.
+    pub fn content_signature(&self, id: &str) -> CoreResult<std::collections::BTreeSet<(String, String)>> {
+        let connection = self.db.connection()?;
+        let mut statement = connection.prepare("SELECT rel_path, sha256 FROM snapshot_files WHERE snapshot_id = ?1")?;
+        let rows = statement
+            .query_map([id], |row| Ok((row.get(0)?, row.get(1)?)))?
+            .collect::<Result<std::collections::BTreeSet<_>, _>>()?;
+        Ok(rows)
+    }
+
+    /// Gives a snapshot a name of the user's choosing (`None` or blank clears it).
+    pub fn set_label(&self, id: &str, label: Option<&str>) -> CoreResult<()> {
+        let label = label.map(str::trim).filter(|text| !text.is_empty());
+        let changed = self.db.connection()?.execute("UPDATE snapshots SET label = ?2 WHERE id = ?1", params![id, label])?;
+        if changed == 0 {
+            return Err(CoreError::NotFound(format!("snapshot {id}")));
+        }
+        Ok(())
     }
 
     pub fn set_status(&self, id: &str, status: &str) -> CoreResult<()> {

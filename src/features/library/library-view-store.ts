@@ -6,8 +6,11 @@ import type { Platform } from "@/lib/bindings/Platform";
 
 export type LibraryView = "grid" | "list";
 export type LibrarySort = "recent" | "title" | "playtime" | "size" | "added";
-/** Which games to list: everything, only those installed on this PC, or only those that are not. */
-export type InstallFilter = "all" | "installed" | "not-installed";
+/**
+ * Which games to list: everything, only those installed on this PC, those that are not (but could be),
+ * or those that exist only as saves imported from an older backup.
+ */
+export type InstallFilter = "all" | "installed" | "not-installed" | "saves-only";
 
 export interface LibraryFilters {
   search: string;
@@ -86,7 +89,9 @@ export const useLibraryView = create<LibraryViewState>()(
           ...current,
           view: saved.view === "list" ? "list" : "grid",
           pageSize: isPageSize(saved.pageSize) ? saved.pageSize : current.pageSize,
-          install: saved.install === "installed" || saved.install === "not-installed" ? saved.install : current.install,
+          install: saved.install === "installed" || saved.install === "not-installed" || saved.install === "saves-only"
+              ? saved.install
+              : current.install,
         };
       },
     },

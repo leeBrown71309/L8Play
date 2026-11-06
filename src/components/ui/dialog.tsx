@@ -19,6 +19,8 @@ interface DialogProps {
   hint?: ReactNode;
   actions: ReactNode;
   children: ReactNode;
+  /** `false` ignores clicks outside the dialog (work in progress the user must not lose by mistake). */
+  dismissOnOutsideClick?: boolean;
 }
 
 /**
@@ -36,6 +38,7 @@ export function Dialog({
   hint,
   actions,
   children,
+  dismissOnOutsideClick = true,
 }: DialogProps) {
   const { t } = useLingui();
   return (
@@ -44,6 +47,9 @@ export function Dialog({
         <DialogPrimitive.Overlay className="l8-scrim fixed inset-0 z-40 bg-scrim backdrop-blur-[4px]" />
         <DialogPrimitive.Content
           style={{ width }}
+          onInteractOutside={(event) => {
+            if (!dismissOnOutsideClick) event.preventDefault();
+          }}
           className="l8-dialog fixed top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2"
         >
           <header className="l8-dialog-head">

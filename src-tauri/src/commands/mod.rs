@@ -3,6 +3,7 @@
 
 pub mod artwork;
 pub mod cloud;
+pub mod import;
 pub mod library;
 pub mod saves;
 pub mod settings;

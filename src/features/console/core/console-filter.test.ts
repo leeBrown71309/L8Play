@@ -10,6 +10,7 @@ function game(id: number, title: string, patch: Partial<GameSummary> = {}): Game
     platform: "steam",
     platformGameId: null,
     installed: true,
+    archived: false,
     favorite: false,
     lastPlayedAt: null,
     playtimeSeconds: 0,
@@ -61,6 +62,7 @@ describe("console filter", () => {
   it("steps through the chips and stops at both ends", () => {
     expect(stepFilter("all", -1)).toBe("all");
     expect(stepFilter("all", 1)).toBe("recent");
-    expect(stepFilter("not-installed", 1)).toBe("not-installed");
+    expect(stepFilter("not-installed", 1)).toBe("saves-only");
+    expect(stepFilter("saves-only", 1)).toBe("saves-only");
   });
 });

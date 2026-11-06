@@ -18,8 +18,10 @@ use crate::db::Database;
 use crate::error::{CoreError, CoreResult};
 use crate::library::LibraryRepository;
 use crate::saves::{LocationKind, SaveLocationRepository, normalize_path};
-use crate::snapshots::archive::{ArchiveManifest, extract_file, open_archive, verify_archive, write_archive};
-use crate::snapshots::files::{collect_files, safe_relative, sha256_file};
+use crate::snapshots::archive::{
+    ArchiveManifest, ArchivedLocation, extract_file, open_archive, verify_archive, write_archive,
+};
+use crate::snapshots::files::{collect_files, collect_folder, safe_relative, sha256_file};
 use crate::snapshots::model::{
     CreateOutcome, CurrentSaveState, RestoreReport, SnapshotKind, SnapshotStatus, SnapshotStorage, SnapshotSummary,
 };
@@ -37,6 +39,29 @@ pub struct CreateRequest {
     pub skip_if_unchanged: bool,
     /// Where the snapshot should live (this PC, Google Drive, or both).
     pub storage: SnapshotStorage,
+}
+
+/// A backup folder to convert into a snapshot (see [`SnapshotEngine::import_folder`]).
+pub struct ImportRequest<'a> {
+    pub game_id: i64,
+    pub source: &'a Path,
+    /// Name of the snapshot, e.g. the sub-folder it was found in.
+    pub label: Option<String>,
+    /// Suggested restore target found next to the backup (see the importer's hint files).
+    pub hint: Option<String>,
+    /// Receives each file path relative to `source`; `true` leaves the file out (logs, screenshots…).
+    pub skip: &'a dyn Fn(&Path) -> bool,
+    pub storage: SnapshotStorage,
+}
+
+/// What an import did with one folder.
+#[derive(Debug, Clone, PartialEq)]
+pub enum ImportOutcome {
+    Imported(Box<SnapshotSummary>),
+    /// A snapshot of the game already holds exactly these files.
+    Duplicate { existing_snapshot_id: String },
+    /// The folder has no file worth keeping.
+    Empty,
 }
 
 /// How many automatic snapshots each game keeps, on this PC and in Google Drive.
@@ -108,7 +133,9 @@ impl<'db> SnapshotEngine<'db> {
         let guard = RemoveOnDrop(Some(partial.clone()));
 
         let created_at = now_rfc3339();
-        let manifest = write_archive(&partial, &id, &game.title, &created_at, &locations, &files)?;
+        let archived_locations: Vec<ArchivedLocation> =
+            locations.iter().enumerate().map(|(index, location)| ArchivedLocation::resolved(index, location)).collect();
+        let manifest = write_archive(&partial, &id, &game.title, &created_at, &archived_locations, &files)?;
         verify_archive(&partial)?;
         let archive_sha256 = sha256_file(&partial)?;
         let archive_size = i64::try_from(std::fs::metadata(&partial)?.len()).unwrap_or(i64::MAX);
@@ -127,6 +154,8 @@ impl<'db> SnapshotEngine<'db> {
             archive_size,
             archive_sha256: &archive_sha256,
             manifest: &manifest,
+            label: None,
+            imported: false,
         });
         if let Err(error) = recorded {
             // Keep the archive on disk (it is valid) but do not leave an unrecorded orphan silently.
@@ -135,6 +164,74 @@ impl<'db> SnapshotEngine<'db> {
         }
         tracing::info!(snapshot = %id, game_id = request.game_id, files = manifest.files.len(), "snapshot created");
         Ok(CreateOutcome::Created(Box::new(repository.get(&id)?)))
+    }
+
+    /// Converts a plain folder of an older backup into a snapshot of `request.game_id`, in the same
+    /// verified archive format as every other snapshot. The folder is only read, never changed.
+    ///
+    /// The snapshot has an *unresolved* location: where its files belong on this PC is decided when
+    /// it is restored. A folder whose content is already in a snapshot of the game is not imported twice.
+    pub fn import_folder(&self, request: &ImportRequest<'_>) -> CoreResult<ImportOutcome> {
+        let library = LibraryRepository::new(self.db);
+        let game = library
+            .summary(request.game_id)?
+            .ok_or_else(|| CoreError::NotFound(format!("game {}", request.game_id)))?;
+        let files = collect_folder(request.source, request.skip)?;
+        if files.is_empty() {
+            return Ok(ImportOutcome::Empty);
+        }
+
+        let repository = SnapshotRepository::new(self.db);
+        let id = uuid::Uuid::now_v7().to_string();
+        let folder = self.root.join(game_folder(self.db, request.game_id)?);
+        std::fs::create_dir_all(&folder)?;
+        let partial = folder.join(format!(".{id}.zip.partial"));
+        let final_path = folder.join(format!("{id}.zip"));
+        let guard = RemoveOnDrop(Some(partial.clone()));
+
+        // The snapshot is dated by the newest file, so an old backup lands where it belongs in the timeline.
+        let created_at = files
+            .iter()
+            .filter_map(|file| file.modified)
+            .max()
+            .map_or_else(now_rfc3339, crate::clock::to_rfc3339);
+        let locations = [ArchivedLocation::imported(request.hint.clone())];
+        let manifest = write_archive(&partial, &id, &game.title, &created_at, &locations, &files)?;
+        verify_archive(&partial)?;
+
+        let signature = manifest.signature();
+        for existing in repository.list(Some(request.game_id))? {
+            if repository.content_signature(&existing.id)? == signature {
+                return Ok(ImportOutcome::Duplicate { existing_snapshot_id: existing.id });
+            }
+        }
+
+        let archive_sha256 = sha256_file(&partial)?;
+        let archive_size = i64::try_from(std::fs::metadata(&partial)?.len()).unwrap_or(i64::MAX);
+        std::fs::rename(&partial, &final_path)?;
+        guard.disarm();
+
+        let recorded = repository.insert(&NewSnapshot {
+            id: &id,
+            game_id: request.game_id,
+            name: request.label.as_deref().unwrap_or_default().trim(),
+            description: None,
+            kind: SnapshotKind::Manual,
+            pinned: false,
+            storage: request.storage,
+            archive_path: &final_path,
+            archive_size,
+            archive_sha256: &archive_sha256,
+            manifest: &manifest,
+            label: request.label.as_deref().map(str::trim).filter(|text| !text.is_empty()),
+            imported: true,
+        });
+        if let Err(error) = recorded {
+            tracing::error!(%error, archive = %final_path.display(), "imported archive written but not recorded");
+            return Err(error);
+        }
+        tracing::info!(snapshot = %id, game_id = request.game_id, files = manifest.files.len(), "folder imported");
+        Ok(ImportOutcome::Imported(Box::new(repository.get(&id)?)))
     }
 
     /// Re-checks the archive checksum and every entry. Marks the snapshot corrupt on mismatch.
@@ -165,6 +262,12 @@ impl<'db> SnapshotEngine<'db> {
             }
             Err(error) => return Err(error),
         };
+
+        if manifest.locations.iter().any(|location| location.unresolved) {
+            return Err(CoreError::Validation(
+                "this snapshot was imported from a backup folder: choose where to restore it".into(),
+            ));
+        }
 
         // Only locations still registered for this game may be written to.
         let locations = SaveLocationRepository::new(self.db);
@@ -292,6 +395,18 @@ impl<'db> SnapshotEngine<'db> {
         })
     }
 
+    pub(super) fn database(&self) -> &'db Database {
+        self.db
+    }
+
+    pub(super) fn root_folder(&self) -> &Path {
+        &self.root
+    }
+
+    pub(super) fn archive_file(&self, snapshot: &SnapshotSummary) -> CoreResult<PathBuf> {
+        self.archive_path(snapshot)
+    }
+
     fn archive_path(&self, snapshot: &SnapshotSummary) -> CoreResult<PathBuf> {
         if snapshot.status == SnapshotStatus::MissingLocal {
             return Err(CoreError::NotFound("the snapshot archive is missing from this PC".into()));
@@ -305,7 +420,7 @@ impl<'db> SnapshotEngine<'db> {
 }
 
 /// Archive checksum, then per-entry verification.
-fn check_archive(path: &Path, expected_sha256: &str) -> CoreResult<ArchiveManifest> {
+pub(super) fn check_archive(path: &Path, expected_sha256: &str) -> CoreResult<ArchiveManifest> {
     if sha256_file(path)? != expected_sha256 {
         return Err(CoreError::Integrity("the archive changed since it was created".into()));
     }
@@ -326,7 +441,7 @@ fn same_files(recorded: &[(String, String)], current: &[PathBuf]) -> CoreResult<
     Ok(recorded == actual)
 }
 
-fn game_folder(db: &Database, game_id: i64) -> CoreResult<String> {
+pub(super) fn game_folder(db: &Database, game_id: i64) -> CoreResult<String> {
     Ok(db.connection()?.query_row("SELECT slug FROM games WHERE id = ?1", [game_id], |row| row.get(0))?)
 }
 
@@ -453,7 +568,7 @@ fn rollback(swap: &Swap) -> CoreResult<()> {
 }
 
 /// Removes a path this engine created (`.l8-…` staging or previous copies). Refuses anything else.
-fn remove_owned(path: &Path) -> CoreResult<()> {
+pub(super) fn remove_owned(path: &Path) -> CoreResult<()> {
     let owned = path.file_name().is_some_and(|name| name.to_string_lossy().starts_with(".l8-"));
     if !owned {
         return Err(CoreError::Validation(format!("refusing to delete {}", path.display())));
@@ -471,10 +586,14 @@ fn remove_path(path: &Path) -> CoreResult<()> {
 }
 
 /// Deletes a temporary file unless disarmed (used for partially written archives).
-struct RemoveOnDrop(Option<PathBuf>);
+pub(super) struct RemoveOnDrop(Option<PathBuf>);
 
 impl RemoveOnDrop {
-    fn disarm(mut self) {
+    pub(super) fn new(path: PathBuf) -> Self {
+        Self(Some(path))
+    }
+
+    pub(super) fn disarm(mut self) {
         self.0 = None;
     }
 }

@@ -83,7 +83,12 @@ export function GameHero({ game, running, protection, canSnapshot, onCreateSnaps
           <div className="l8-hero-meta">
             <PlatformTag platform={game.platform} tone="stage" />
             <span>
-              {game.installed ? (
+              {game.archived ? (
+                <>
+                  <DsIcon name="snapshot" size={14} />
+                  {t`Saves only · not installed`}
+                </>
+              ) : game.installed ? (
                 <>
                   <DsIcon name="drive" size={14} />
                   {t`Installed · ${formatBytes(game.sizeBytes, i18n.locale)}`}
@@ -110,7 +115,7 @@ export function GameHero({ game, running, protection, canSnapshot, onCreateSnaps
               <i />
               {t`Playing now`}
             </span>
-          ) : game.installed ? (
+          ) : game.archived ? null : game.installed ? (
             <Button
               variant="play"
               size="xl"

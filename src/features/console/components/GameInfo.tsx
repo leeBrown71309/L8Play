@@ -2,6 +2,7 @@ import { useLingui } from "@lingui/react/macro";
 
 import { usePlatformNames, PlatformIcon } from "@/components/game/PlatformTag";
 import { Button } from "@/components/ui/button";
+import { primaryAction } from "@/features/library/game-availability";
 import { useGameProtection } from "@/features/library/use-game-protection";
 import { useGame, useRunningGames } from "@/features/library/use-library";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
@@ -30,7 +31,12 @@ export function GameInfo({ game, onPlay, showAction = true }: GameInfoProps) {
     .at(-1);
 
   const played = game.playtimeSeconds >= 60 ? t`Played for ${formatPlaytime(game.playtimeSeconds)}` : t`Never played`;
-  const protectionText = !game.installed
+  const action = primaryAction(game);
+  const protectionText = game.archived
+    ? status.snapshotCount === 1
+      ? t`Saves only · 1 snapshot`
+      : t`Saves only · ${status.snapshotCount} snapshots`
+    : !game.installed
     ? t`Not installed on this PC`
     : status.snapshotCount === 0
       ? t`No snapshot yet`
@@ -54,18 +60,18 @@ export function GameInfo({ game, onPlay, showAction = true }: GameInfoProps) {
       </div>
       <p className="cs-protection">
         {protectionText}
-        {newest && game.installed ? ` · ${t`last snapshot ${formatRelative(newest, i18n.locale)}`}` : ""}
+        {newest && (game.installed || game.archived) ? ` · ${t`last snapshot ${formatRelative(newest, i18n.locale)}`}` : ""}
       </p>
       {showAction ? (
         <Button
           variant="play"
           size="xl"
-          icon={game.installed ? "play" : "download"}
+          icon={action === "play" ? "play" : action === "saves" ? "snapshot" : "download"}
           className="cs-cta"
           disabled={running}
           onClick={onPlay}
         >
-          {running ? t`Running` : game.installed ? t`Play` : t`Install`}
+          {running ? t`Running` : action === "play" ? t`Play` : action === "saves" ? t`Saves` : t`Install`}
         </Button>
       ) : null}
     </div>

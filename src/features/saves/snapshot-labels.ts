@@ -20,6 +20,8 @@ export function useSnapshotLabels() {
   /** Automatic snapshots are stored without a name; they are described by what triggered them. */
   const name = (snapshot: SnapshotSummary): string => {
     if (snapshot.name.trim() !== "") return snapshot.name;
+    if (snapshot.label) return snapshot.label;
+    if (snapshot.imported) return t`Imported backup`;
     return {
       manual: t`Snapshot`,
       auto_exit: t`Game closed`,

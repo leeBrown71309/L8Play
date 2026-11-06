@@ -8,8 +8,10 @@ import {
   addGames,
   addStandaloneGame,
   getGame,
+  getLinkCandidates,
   getRunningGames,
   launchGame,
+  linkArchivedGame,
   listGames,
   openInstallFolder,
   scanGameFolder,
@@ -26,6 +28,27 @@ export function useGame(gameId: number) {
     queryKey: queryKeys.game(gameId),
     queryFn: () => getGame(gameId),
     enabled: Number.isFinite(gameId),
+  });
+}
+
+/** Installed games that a saves-only game could be joined to (same title). Empty for any other game. */
+export function useLinkCandidates(gameId: number, enabled: boolean) {
+  return useQuery({
+    queryKey: queryKeys.linkCandidates(gameId),
+    queryFn: () => getLinkCandidates(gameId),
+    enabled: enabled && Number.isFinite(gameId),
+  });
+}
+
+export function useLinkArchivedGame() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: ({ archivedId, targetId }: { archivedId: number; targetId: number }) =>
+      linkArchivedGame(archivedId, targetId),
+    onSettled: () => {
+      void client.invalidateQueries({ queryKey: queryKeys.games });
+      void client.invalidateQueries({ queryKey: queryKeys.saves });
+    },
   });
 }
 

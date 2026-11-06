@@ -1,4 +1,5 @@
 import { useLingui } from "@lingui/react/macro";
+import { useNavigate } from "react-router";
 
 import { notify } from "@/components/feedback/toast-store";
 import { useLaunchGame, useOpenInstallFolder, useToggleFavorite } from "@/features/library/use-library";
@@ -11,12 +12,18 @@ export function useGameActions() {
   const launch = useLaunchGame();
   const favorite = useToggleFavorite();
   const openFolder = useOpenInstallFolder();
+  const navigate = useNavigate();
 
   const describe = (error: unknown) =>
     error instanceof AppError && error.code === "validation" ? error.message : undefined;
 
   return {
     play(game: GameSummary) {
+      // A saves-only game has no program to start or install: its main action is to open its saves.
+      if (game.archived) {
+        void navigate(`/games/${game.id}`);
+        return;
+      }
       launch.mutate(game.id, {
         onSuccess: () => {
           const via = {

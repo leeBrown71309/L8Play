@@ -26,7 +26,7 @@ pub struct MergeCounts {
 /// Summary columns, in the order [`summary_from_row`] reads them.
 const SUMMARY_SELECT: &str = "
     SELECT g.id, g.title, g.platform_id, g.platform_game_id, g.is_favorite, g.last_played_at,
-           g.playtime_seconds, i.size_bytes, i.install_path, COALESCE(i.is_installed, 0)
+           g.playtime_seconds, i.size_bytes, i.install_path, COALESCE(i.is_installed, 0), g.is_archived
     FROM games g
     LEFT JOIN installations i ON i.id = (
         SELECT id FROM installations WHERE game_id = g.id ORDER BY is_installed DESC, detected_at DESC LIMIT 1
@@ -242,6 +242,104 @@ impl<'db> LibraryRepository<'db> {
         Ok(AddedGame { game, created: true })
     }
 
+    /// Finds the game called `title` (ignoring case), or creates a saves-only game for it.
+    ///
+    /// An existing game of that name, installed or not, is reused: the imported snapshots simply join
+    /// its history. Only a new title creates an archived game (no installation, never rescanned).
+    pub fn find_or_create_archived(&self, title: &str) -> CoreResult<AddedGame> {
+        let title = title.trim();
+        if title.is_empty() || title.chars().count() > MAX_TEXT {
+            return Err(CoreError::Validation(format!("the title must be 1 to {MAX_TEXT} characters")));
+        }
+        let existing: Option<i64> = self
+            .db
+            .connection()?
+            .query_row("SELECT id FROM games WHERE title = ?1 COLLATE NOCASE ORDER BY is_archived, id LIMIT 1", [title], |row| {
+                row.get(0)
+            })
+            .optional()?;
+        if let Some(game_id) = existing {
+            let game = self.summary(game_id)?.ok_or_else(|| CoreError::NotFound(format!("game {game_id}")))?;
+            return Ok(AddedGame { game, created: false });
+        }
+        let game_id = {
+            let mut connection = self.db.connection()?;
+            let tx = connection.transaction()?;
+            let now = now_rfc3339();
+            let slug = unique_slug(&tx, title)?;
+            tx.execute(
+                "INSERT INTO games (platform_id, platform_game_id, title, sort_title, slug, user_edited, is_archived, added_at, updated_at)
+                 VALUES ('standalone', NULL, ?1, ?2, ?3, 1, 1, ?4, ?4)",
+                params![title, sort_title(title), slug, now],
+            )?;
+            let game_id = tx.last_insert_rowid();
+            tx.commit()?;
+            game_id
+        };
+        let game = self.summary(game_id)?.ok_or_else(|| CoreError::NotFound(format!("game {game_id}")))?;
+        Ok(AddedGame { game, created: true })
+    }
+
+    /// Games of the library, other than saves-only ones, that carry the same title as the saves-only
+    /// game `archived_id` (ignoring case, accents and spacing): the game was installed since the saves
+    /// were imported, and its snapshots can be joined to it.
+    pub fn link_candidates(&self, archived_id: i64) -> CoreResult<Vec<GameSummary>> {
+        let Some(archived) = self.summary(archived_id)?.filter(|game| game.archived) else { return Ok(Vec::new()) };
+        let wanted = crate::saves::importer::normalize_title(&archived.title);
+        Ok(self
+            .list()?
+            .into_iter()
+            .filter(|game| !game.archived && game.id != archived_id)
+            .filter(|game| crate::saves::importer::normalize_title(&game.title) == wanted)
+            .collect())
+    }
+
+    /// Joins a saves-only game to the real game it turned out to be: every snapshot (and what hangs off
+    /// them) moves to `target_id`, missing artwork and ids are inherited, and the saves-only row is
+    /// removed. Snapshot archives stay where they are, so nothing is copied or lost.
+    pub fn merge_archived_into(&self, archived_id: i64, target_id: i64) -> CoreResult<GameSummary> {
+        let mut connection = self.db.connection()?;
+        let tx = connection.transaction()?;
+        let is_archived: Option<bool> = tx
+            .query_row("SELECT is_archived FROM games WHERE id = ?1", [archived_id], |row| row.get(0))
+            .optional()?;
+        if is_archived != Some(true) {
+            return Err(CoreError::Validation("only a saves-only game can be joined to another game".into()));
+        }
+        let target_archived: Option<bool> = tx
+            .query_row("SELECT is_archived FROM games WHERE id = ?1", [target_id], |row| row.get(0))
+            .optional()?;
+        match target_archived {
+            None => return Err(CoreError::NotFound(format!("game {target_id}"))),
+            Some(true) => return Err(CoreError::Validation("choose a game that is not saves-only".into())),
+            Some(false) => {}
+        }
+        tx.execute("UPDATE snapshots SET game_id = ?2 WHERE game_id = ?1", params![archived_id, target_id])?;
+        tx.execute("UPDATE sync_conflicts SET game_id = ?2 WHERE game_id = ?1", params![archived_id, target_id])?;
+        tx.execute("UPDATE OR IGNORE save_locations SET game_id = ?2 WHERE game_id = ?1", params![archived_id, target_id])?;
+        tx.execute(
+            "INSERT OR IGNORE INTO game_external_ids (game_id, provider, external_id)
+             SELECT ?2, provider, external_id FROM game_external_ids WHERE game_id = ?1",
+            params![archived_id, target_id],
+        )?;
+        tx.execute(
+            "UPDATE artwork_assets SET game_id = ?2 WHERE game_id = ?1
+               AND kind NOT IN (SELECT kind FROM artwork_assets WHERE game_id = ?2 AND is_active = 1)",
+            params![archived_id, target_id],
+        )?;
+        tx.execute(
+            "UPDATE games SET is_favorite = MAX(is_favorite, (SELECT is_favorite FROM games WHERE id = ?1)),
+                              updated_at = ?3 WHERE id = ?2",
+            params![archived_id, target_id, now_rfc3339()],
+        )?;
+        // Everything that mattered has moved; what is left (sessions, lookups, spare artwork) goes with the row.
+        tx.execute("DELETE FROM games WHERE id = ?1", [archived_id])?;
+        tx.commit()?;
+        tracing::info!(archived_id, target_id, "saves-only game joined to its installed game");
+        drop(connection);
+        self.summary(target_id)?.ok_or_else(|| CoreError::NotFound(format!("game {target_id}")))
+    }
+
     pub fn list(&self) -> CoreResult<Vec<GameSummary>> {
         let connection = self.db.connection()?;
         let mut statement =
@@ -416,6 +514,7 @@ fn summary_from_row(row: &Row<'_>) -> rusqlite::Result<GameSummary> {
         size_bytes: row.get(7)?,
         install_path: row.get(8)?,
         installed: row.get(9)?,
+        archived: row.get(10)?,
     })
 }
 

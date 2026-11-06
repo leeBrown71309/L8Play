@@ -30,6 +30,9 @@ pub fn game_session(app: &AppHandle, event: SessionEvent) {
     }
 }
 
+/// Progress of an import of old backups (payload: `ImportProgress`).
+pub const IMPORT_PROGRESS: &str = "import://progress";
+
 /// Save locations or snapshots of a game changed: refetch them.
 pub const SAVES_CHANGED: &str = "saves://changed";
 /// An automatic snapshot finished (created, skipped or failed).

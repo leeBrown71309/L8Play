@@ -8,12 +8,14 @@ import {
   deleteSnapshot,
   detectSaves,
   getCurrentSave,
+  getRestoreTargets,
   getSaveStatuses,
   getSnapshotFolder,
   listSaveLocations,
   listSnapshots,
   removeSaveLocation,
   restoreSnapshot,
+  restoreSnapshotTo,
   revealSnapshot,
   setSnapshotPinned,
   verifySnapshot,
@@ -34,6 +36,15 @@ export function useSaveStatuses() {
 /** Hashes the current save on demand, so it is refreshed whenever the Saves tab opens. */
 export function useCurrentSave(gameId: number) {
   return useQuery({ queryKey: queryKeys.currentSave(gameId), queryFn: () => getCurrentSave(gameId), staleTime: 0 });
+}
+
+/** Folders an imported snapshot can be restored into (hint file, then the game's save folders). */
+export function useRestoreTargets(snapshotId: string) {
+  return useQuery({
+    queryKey: ["saves", "targets", snapshotId] as const,
+    queryFn: () => getRestoreTargets(snapshotId),
+    staleTime: 0,
+  });
 }
 
 export function useSnapshotFolder() {
@@ -70,6 +81,10 @@ export const useCreateSnapshot = () =>
     }) => createSnapshot(gameId, name, description, pinned, storage),
   );
 export const useRestoreSnapshot = () => useSaveMutation((snapshotId: string) => restoreSnapshot(snapshotId));
+export const useRestoreSnapshotTo = () =>
+  useSaveMutation(({ snapshotId, target }: { snapshotId: string; target: string }) =>
+    restoreSnapshotTo(snapshotId, target),
+  );
 export const useDeleteSnapshot = () =>
   useSaveMutation(({ snapshotId, alsoFromDrive }: { snapshotId: string; alsoFromDrive: boolean }) =>
     deleteSnapshot(snapshotId, alsoFromDrive),
