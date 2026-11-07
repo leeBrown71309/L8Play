@@ -5,10 +5,16 @@ import { createPortal } from "react-dom";
 import { ConsoleApp } from "@/features/console/ConsoleApp";
 import { useConsoleMode } from "@/features/console/console-mode-store";
 import { enterFullscreen, setFullscreen } from "@/features/console/core/fullscreen";
+import {
+  GAME_START_TIMEOUT_MS,
+  restoreAfterGame,
+  useConsoleGameWindow,
+} from "@/features/console/core/game-window";
 import { useConsoleNav } from "@/features/console/core/nav-store";
 import { usePresence } from "@/features/console/core/use-presence";
 import { consoleSound } from "@/features/console/sound";
 import { cn } from "@/lib/cn";
+import { EVENTS, onBackendEvent } from "@/lib/tauri/events";
 
 import "@/features/console/console.css";
 import "@/features/console/console-library.css";
@@ -49,6 +55,40 @@ function useConsoleFullscreen(active: boolean) {
 }
 
 /**
+ * The console steps aside while a game it launched is running (see `use-console-play`) and comes back
+ * when that game exits. It also comes back if the game never appears, so the screen is never stranded.
+ */
+function useGameWindowHandover(active: boolean) {
+  const gameId = useConsoleGameWindow((state) => state.gameId);
+
+  useEffect(() => {
+    if (!active) return undefined;
+    const bringBack = () => {
+      useConsoleGameWindow.getState().reset();
+      consoleSound.startAmbient();
+      void restoreAfterGame();
+    };
+    const subscription = onBackendEvent(EVENTS.gameSession, (event) => {
+      if (useConsoleGameWindow.getState().onSession(event.gameId, event.running)) bringBack();
+    });
+    return () => void subscription.then((unlisten) => unlisten());
+  }, [active]);
+
+  useEffect(() => {
+    if (gameId === null) return undefined;
+    const timer = window.setTimeout(() => {
+      const state = useConsoleGameWindow.getState();
+      if (state.gameId !== gameId || state.started) return;
+      state.reset();
+      void restoreAfterGame();
+      // Console mode may have been left meanwhile: the ambient sound belongs to it alone.
+      if (useConsoleMode.getState().active) consoleSound.startAmbient();
+    }, GAME_START_TIMEOUT_MS);
+    return () => window.clearTimeout(timer);
+  }, [gameId]);
+}
+
+/**
  * Renders the console interface above the desktop. The desktop and the app's providers stay mounted
  * underneath, so backend events and queries keep running while a game is chosen with the pad.
  */
@@ -67,6 +107,7 @@ export function ConsoleHost() {
 
   useDesktopInert(mounted);
   useConsoleFullscreen(active);
+  useGameWindowHandover(active);
 
   if (!mounted) return null;
   return createPortal(
