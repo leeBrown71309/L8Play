@@ -174,7 +174,7 @@ export function DashboardPage() {
         </section>
 
         <BackingUpSection operations={operations} games={all} />
-        {wide ? <RecentBackups snapshots={protection.snapshots} games={all} /> : null}
+        <RecentBackups snapshots={protection.snapshots} games={all} limit={wide ? 4 : 2} />
       </div>
 
       <div className="flex min-w-0 flex-col">
