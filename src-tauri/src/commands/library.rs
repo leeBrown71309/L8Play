@@ -221,9 +221,23 @@ pub async fn launch_game(app: AppHandle, state: State<'_, AppState>, game_id: i6
             )?;
         }
         LaunchPlan::Executable { path, working_dir } => {
-            std::process::Command::new(path).current_dir(working_dir).spawn().map_err(|error| {
-                CommandError::new(CommandErrorCode::Launch, format!("could not start {}: {error}", path.display()))
-            })?;
+            match std::process::Command::new(path).current_dir(working_dir).spawn() {
+                Ok(_) => {}
+                Err(error) if error.raw_os_error() == Some(ERROR_ELEVATION_REQUIRED) => {
+                    // The game's manifest asks for administrator rights, which CreateProcess cannot
+                    // grant: hand it to the shell, which shows the Windows UAC prompt.
+                    let (path, working_dir) = (path.clone(), working_dir.clone());
+                    tauri::async_runtime::spawn_blocking(move || launch_elevated(&path, &working_dir))
+                        .await
+                        .map_err(|error| CommandError::new(CommandErrorCode::Launch, error.to_string()))??;
+                }
+                Err(error) => {
+                    return Err(CommandError::new(
+                        CommandErrorCode::Launch,
+                        format!("could not start {}: {error}", path.display()),
+                    ));
+                }
+            }
         }
     }
     if target.installed {
@@ -231,6 +245,39 @@ pub async fn launch_game(app: AppHandle, state: State<'_, AppState>, game_id: i6
     }
     tracing::info!(game_id, installed = target.installed, ?plan, "game launch requested");
     Ok(())
+}
+
+/// Windows error returned by CreateProcess for an executable that requires administrator rights.
+const ERROR_ELEVATION_REQUIRED: i32 = 740;
+/// Keeps the helper PowerShell from flashing a console window.
+const CREATE_NO_WINDOW: u32 = 0x0800_0000;
+
+/// Starts an executable with the "runas" verb so Windows shows the UAC prompt. The path goes through
+/// environment variables, never through the command line, so no quoting can break or inject.
+/// Fails if the user declines the prompt.
+fn launch_elevated(path: &std::path::Path, working_dir: &std::path::Path) -> CommandResult<()> {
+    use std::os::windows::process::CommandExt;
+
+    let status = std::process::Command::new("powershell.exe")
+        .args([
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Start-Process -FilePath $env:L8_GAME_EXE -WorkingDirectory $env:L8_GAME_DIR -Verb RunAs",
+        ])
+        .env("L8_GAME_EXE", path)
+        .env("L8_GAME_DIR", working_dir)
+        .creation_flags(CREATE_NO_WINDOW)
+        .status()
+        .map_err(|error| CommandError::new(CommandErrorCode::Launch, format!("could not ask for elevation: {error}")))?;
+    if status.success() {
+        Ok(())
+    } else {
+        Err(CommandError::new(
+            CommandErrorCode::Launch,
+            format!("{} needs administrator rights and the request was declined", path.display()),
+        ))
+    }
 }
 
 #[tauri::command]
