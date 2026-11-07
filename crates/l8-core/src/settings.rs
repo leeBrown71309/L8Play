@@ -22,6 +22,7 @@ const KEY_DESKTOP_NOTIFICATIONS: &str = "shell.desktopNotifications";
 const KEY_ONBOARDING_DONE: &str = "shell.onboardingDone";
 const KEY_SHOW_OWNED_NOT_INSTALLED: &str = "libraries.showOwnedNotInstalled";
 const KEY_UPDATES_AUTO_CHECK: &str = "updates.autoCheck";
+const KEY_START_IN_CONSOLE: &str = "shell.startInConsole";
 
 /// Bounds for automatic-snapshot retention per game.
 pub const KEEP_AUTOMATIC_RANGE: std::ops::RangeInclusive<u32> = 1..=100;
@@ -79,6 +80,8 @@ pub struct AppSettings {
     pub show_owned_not_installed: bool,
     /// Check GitHub Releases for a newer version in the background; manual checks always work.
     pub updates_auto_check: bool,
+    /// Open console mode as soon as L8Play starts, also when Windows starts it at sign-in.
+    pub start_in_console: bool,
 }
 
 impl Default for AppSettings {
@@ -99,6 +102,7 @@ impl Default for AppSettings {
             onboarding_done: false,
             show_owned_not_installed: true,
             updates_auto_check: true,
+            start_in_console: false,
         }
     }
 }
@@ -123,6 +127,7 @@ pub struct SettingsPatch {
     pub onboarding_done: Option<bool>,
     pub show_owned_not_installed: Option<bool>,
     pub updates_auto_check: Option<bool>,
+    pub start_in_console: Option<bool>,
 }
 
 /// Reads and writes [`AppSettings`].
@@ -159,6 +164,7 @@ impl<'db> SettingsRepository<'db> {
             onboarding_done: self.read_or(KEY_ONBOARDING_DONE, defaults.onboarding_done)?,
             show_owned_not_installed: self.read_or(KEY_SHOW_OWNED_NOT_INSTALLED, defaults.show_owned_not_installed)?,
             updates_auto_check: self.read_or(KEY_UPDATES_AUTO_CHECK, defaults.updates_auto_check)?,
+            start_in_console: self.read_or(KEY_START_IN_CONSOLE, defaults.start_in_console)?,
         })
     }
 
@@ -234,6 +240,9 @@ impl<'db> SettingsRepository<'db> {
             }
             if let Some(value) = patch.updates_auto_check {
                 write(&transaction, KEY_UPDATES_AUTO_CHECK, &value)?;
+            }
+            if let Some(value) = patch.start_in_console {
+                write(&transaction, KEY_START_IN_CONSOLE, &value)?;
             }
             transaction.commit()?;
         }
@@ -341,7 +350,7 @@ mod tests {
     fn serializes_with_frontend_casing() -> Result<(), serde_json::Error> {
         let json = serde_json::to_string(&AppSettings::default())?;
         assert!(json.starts_with(r#"{"theme":"ember","locale":"en","navExpanded":false,"snapshotOnExit":true"#));
-        assert!(json.ends_with(r#""showOwnedNotInstalled":true,"updatesAutoCheck":true}"#));
+        assert!(json.ends_with(r#""showOwnedNotInstalled":true,"updatesAutoCheck":true,"startInConsole":false}"#));
         Ok(())
     }
 }

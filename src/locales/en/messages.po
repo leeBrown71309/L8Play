@@ -93,7 +93,7 @@ msgid "{0} conflicts"
 msgstr "{0} conflicts"
 
 #. placeholder {0}: game.title
-#: src/features/console/core/use-console-play.ts:32
+#: src/features/console/core/use-console-play.ts:48
 #: src/features/library/use-game-actions.ts:45
 msgid "{0} could not be started"
 msgstr "{0} could not be started"
@@ -423,7 +423,7 @@ msgstr "A snapshot is taken automatically each time you stop playing. You can al
 msgid "A soft background tone while console mode is open"
 msgstr "A soft background tone while console mode is open"
 
-#: src/features/settings/SettingsPage.tsx:281
+#: src/features/settings/SettingsPage.tsx:287
 msgid "About"
 msgstr "About"
 
@@ -452,7 +452,7 @@ msgstr "Add 1 game"
 #: src/components/shell/NavRail.tsx:62
 #: src/features/library/AddGameDialogs.tsx:224
 #: src/features/onboarding/OnboardingDialog.tsx:230
-#: src/features/settings/SettingsPage.tsx:171
+#: src/features/settings/SettingsPage.tsx:177
 msgid "Add a game"
 msgstr "Add a game"
 
@@ -460,7 +460,7 @@ msgstr "Add a game"
 msgid "Add a save folder"
 msgstr "Add a save folder"
 
-#: src/features/settings/SettingsPage.tsx:168
+#: src/features/settings/SettingsPage.tsx:174
 msgid "Add a whole folder of games, or any game by choosing its .exe file."
 msgstr "Add a whole folder of games, or any game by choosing its .exe file."
 
@@ -567,18 +567,18 @@ msgstr "API key removed"
 msgid "API key saved"
 msgstr "API key saved"
 
-#: src/features/settings/SettingsPage.tsx:279
+#: src/features/settings/SettingsPage.tsx:285
 msgid "Appearance"
 msgstr "Appearance"
 
-#: src/features/settings/SettingsPage.tsx:245
+#: src/features/settings/SettingsPage.tsx:251
 msgid "Application details could not be read."
 msgstr "Application details could not be read."
 
 #: src/features/console/views/GamePanel.tsx:113
 #: src/features/game-details/GameDetailsPage.tsx:78
 #: src/features/game-details/GameOverview.tsx:152
-#: src/features/settings/SettingsPage.tsx:275
+#: src/features/settings/SettingsPage.tsx:281
 msgid "Artwork"
 msgstr "Artwork"
 
@@ -635,12 +635,12 @@ msgstr "Automatic snapshot skipped"
 msgid "Automatic snapshots"
 msgstr "Automatic snapshots"
 
-#: src/features/console/views/use-settings-rows.ts:114
-#: src/features/console/views/use-settings-rows.ts:127
+#: src/features/console/views/use-settings-rows.ts:123
+#: src/features/console/views/use-settings-rows.ts:136
 msgid "Automatic snapshots per game"
 msgstr "Automatic snapshots per game"
 
-#: src/features/settings/SettingsPage.tsx:191
+#: src/features/settings/SettingsPage.tsx:197
 msgid "Available"
 msgstr "Available"
 
@@ -687,7 +687,7 @@ msgstr "Backed up on this PC and in Google Drive"
 msgid "Backing up now"
 msgstr "Backing up now"
 
-#: src/features/settings/SettingsPage.tsx:277
+#: src/features/settings/SettingsPage.tsx:283
 msgid "Backup"
 msgstr "Backup"
 
@@ -951,7 +951,7 @@ msgstr "Closing the window keeps L8Play running so automatic backups still happe
 #: src/features/console/components/ConsoleTopBar.tsx:25
 #: src/features/console/views/CloudView.tsx:129
 #: src/features/console/views/CloudView.tsx:131
-#: src/features/settings/SettingsPage.tsx:278
+#: src/features/settings/SettingsPage.tsx:284
 msgid "Cloud"
 msgstr "Cloud"
 
@@ -1001,7 +1001,7 @@ msgid "Connected"
 msgstr "Connected"
 
 #: src/components/shell/QuickRail.tsx:84
-#: src/features/console/ConsoleHost.tsx:77
+#: src/features/console/ConsoleHost.tsx:134
 msgid "Console mode"
 msgstr "Console mode"
 
@@ -1042,7 +1042,7 @@ msgstr "Controls"
 msgid "Copies"
 msgstr "Copies"
 
-#: src/features/settings/SettingsPage.tsx:214
+#: src/features/settings/SettingsPage.tsx:220
 msgid "Copies new snapshots to Google Drive in the background while an account is connected."
 msgstr "Copies new snapshots to Google Drive in the background while an account is connected."
 
@@ -1112,7 +1112,7 @@ msgstr "Damaged"
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: src/features/settings/SettingsPage.tsx:238
+#: src/features/settings/SettingsPage.tsx:244
 msgid "Database"
 msgstr "Database"
 
@@ -1273,7 +1273,7 @@ msgstr "Drive storage"
 msgid "Each snapshot is copied and checked. You can keep using L8Play meanwhile."
 msgstr "Each snapshot is copied and checked. You can keep using L8Play meanwhile."
 
-#: src/features/console/views/use-settings-rows.ts:96
+#: src/features/console/views/use-settings-rows.ts:105
 msgid "Ember (dark)"
 msgstr "Ember (dark)"
 
@@ -1323,7 +1323,7 @@ msgid "Existing snapshots stay where they are."
 msgstr "Existing snapshots stay where they are."
 
 #: src/features/console/components/modals/QuickMenu.tsx:18
-#: src/features/console/views/use-settings-rows.ts:137
+#: src/features/console/views/use-settings-rows.ts:146
 msgid "Exit console mode"
 msgstr "Exit console mode"
 
@@ -1403,7 +1403,7 @@ msgstr "Folder named like the game"
 msgid "Folder named like the install folder"
 msgstr "Folder named like the install folder"
 
-#: src/features/settings/SettingsPage.tsx:199
+#: src/features/settings/SettingsPage.tsx:205
 msgid "For games the database does not know, “Find saves” on a game’s page asks PCGamingWiki and searches your PC. Nothing is backed up until you confirm a folder."
 msgstr "For games the database does not know, “Find saves” on a game’s page asks PCGamingWiki and searches your PC. Nothing is backed up until you confirm a folder."
 
@@ -1420,7 +1420,7 @@ msgstr "Found {games} games"
 #. placeholder {2}: count("xbox")
 #. placeholder {3}: count("gog")
 #. placeholder {4}: count("standalone")
-#: src/features/settings/SettingsPage.tsx:136
+#: src/features/settings/SettingsPage.tsx:142
 msgid "Found automatically from their launchers. {0} Steam · {1} Epic · {2} Xbox · {3} GOG · {4} added by hand."
 msgstr "Found automatically from their launchers. {0} Steam · {1} Epic · {2} Xbox · {3} GOG · {4} added by hand."
 
@@ -1452,11 +1452,11 @@ msgstr "Game details are private"
 msgid "Game is closed"
 msgstr "Game is closed"
 
-#: src/features/settings/SettingsPage.tsx:135
+#: src/features/settings/SettingsPage.tsx:141
 msgid "Game launchers"
 msgstr "Game launchers"
 
-#: src/features/settings/SettingsPage.tsx:274
+#: src/features/settings/SettingsPage.tsx:280
 msgid "Game Libraries"
 msgstr "Game Libraries"
 
@@ -1502,7 +1502,7 @@ msgstr "Games without a known save folder can be completed later from their page
 msgid "Games you play will show up here, most recent first."
 msgstr "Games you play will show up here, most recent first."
 
-#: src/features/settings/SettingsPage.tsx:273
+#: src/features/settings/SettingsPage.tsx:279
 msgid "General"
 msgstr "General"
 
@@ -1551,7 +1551,7 @@ msgstr "Google could not be reached. Check your connection and try again."
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: src/features/settings/SettingsPage.tsx:219
+#: src/features/settings/SettingsPage.tsx:225
 msgid "Google Drive account"
 msgstr "Google Drive account"
 
@@ -1776,7 +1776,7 @@ msgstr "Keep both, change nothing yet"
 msgid "Keep going in the background"
 msgstr "Keep going in the background"
 
-#: src/features/console/views/use-settings-rows.ts:126
+#: src/features/console/views/use-settings-rows.ts:135
 #: src/features/settings/BackupSection.tsx:86
 #: src/features/settings/BackupSection.tsx:90
 msgid "Keep in Google Drive"
@@ -1787,7 +1787,7 @@ msgstr "Keep in Google Drive"
 msgid "Keep it"
 msgstr "Keep it"
 
-#: src/features/console/views/use-settings-rows.ts:113
+#: src/features/console/views/use-settings-rows.ts:122
 #: src/features/settings/BackupSection.tsx:74
 #: src/features/settings/BackupSection.tsx:78
 msgid "Keep on this PC"
@@ -1845,7 +1845,7 @@ msgstr "L8Play will close, install version {0} and restart."
 msgid "L8Play will restart to finish."
 msgstr "L8Play will restart to finish."
 
-#: src/features/console/views/use-settings-rows.ts:81
+#: src/features/console/views/use-settings-rows.ts:90
 #: src/features/settings/SettingsPage.tsx:71
 #: src/features/settings/SettingsPage.tsx:75
 msgid "Language"
@@ -1929,7 +1929,7 @@ msgstr "Listed on PCGamingWiki"
 msgid "Lists the games in your Epic library and opens the Epic Games Launcher to install them."
 msgstr "Lists the games in your Epic library and opens the Epic Games Launcher to install them."
 
-#: src/features/settings/SettingsPage.tsx:145
+#: src/features/settings/SettingsPage.tsx:151
 msgid "Lists the games your Steam account owns, read from Steam with your own free Steam Web API key or from your public profile. Nothing is sent about you except the request itself. Epic and other stores don’t offer this without signing in, so only Steam is listed."
 msgstr "Lists the games your Steam account owns, read from Steam with your own free Steam Web API key or from your public profile. Nothing is sent about you except the request itself. Epic and other stores don’t offer this without signing in, so only Steam is listed."
 
@@ -1946,7 +1946,7 @@ msgid "Lists your Xbox and Microsoft Store games and opens the Xbox app to insta
 msgstr "Lists your Xbox and Microsoft Store games and opens the Xbox app to install them."
 
 #: src/features/console/views/LibraryView.tsx:96
-#: src/features/settings/SettingsPage.tsx:244
+#: src/features/settings/SettingsPage.tsx:250
 msgid "Loading…"
 msgstr "Loading…"
 
@@ -1974,7 +1974,7 @@ msgstr "Looks for a newer version when L8Play starts and every 6 hours. Nothing 
 msgid "Looks up cover, hero and logo for Epic and standalone games. This also runs when the app starts."
 msgstr "Looks up cover, hero and logo for Epic and standalone games. This also runs when the app starts."
 
-#: src/features/settings/SettingsPage.tsx:187
+#: src/features/settings/SettingsPage.tsx:193
 msgid "Ludusavi save database"
 msgstr "Ludusavi save database"
 
@@ -2067,7 +2067,7 @@ msgstr "My Games"
 msgid "Name"
 msgstr "Name"
 
-#: src/features/settings/SettingsPage.tsx:301
+#: src/features/settings/SettingsPage.tsx:307
 msgid "Needs your attention"
 msgstr "Needs your attention"
 
@@ -2214,7 +2214,7 @@ msgid "Not connected."
 msgstr "Not connected."
 
 #: src/features/onboarding/OnboardingParts.tsx:139
-#: src/features/settings/SettingsPage.tsx:193
+#: src/features/settings/SettingsPage.tsx:199
 msgid "Not found"
 msgstr "Not found"
 
@@ -2334,7 +2334,7 @@ msgstr "Older automatic snapshots are removed from Google Drive too, so it never
 msgid "Oldest auto snapshots are removed first."
 msgstr "Oldest auto snapshots are removed first."
 
-#: src/features/settings/SettingsPage.tsx:200
+#: src/features/settings/SettingsPage.tsx:206
 msgid "On demand"
 msgstr "On demand"
 
@@ -2390,7 +2390,7 @@ msgid "Open"
 msgstr "Open"
 
 #: src/features/saves/CreateSnapshotDialog.tsx:245
-#: src/features/settings/SettingsPage.tsx:223
+#: src/features/settings/SettingsPage.tsx:229
 msgid "Open Cloud Storage"
 msgstr "Open Cloud Storage"
 
@@ -2433,11 +2433,19 @@ msgstr "Open the key page"
 msgid "Open the saves of {0}"
 msgstr "Open the saves of {0}"
 
+#: src/features/console/views/use-settings-rows.ts:82
+msgid "Open this interface as soon as L8Play starts"
+msgstr "Open this interface as soon as L8Play starts"
+
 #. placeholder {0}: game.title
-#: src/features/console/core/use-console-play.ts:26
+#: src/features/console/core/use-console-play.ts:28
 #: src/features/library/use-game-actions.ts:38
 msgid "Opening the installer for {0}"
 msgstr "Opening the installer for {0}"
+
+#: src/features/settings/SettingsPage.tsx:109
+msgid "Opens console mode full screen as soon as L8Play starts. With \"Start with Windows\", the window stays visible instead of hiding in the notification area."
+msgstr "Opens console mode full screen as soon as L8Play starts. With \"Start with Windows\", the window stays visible instead of hiding in the notification area."
 
 #: src/features/console/views/CloudView.tsx:85
 msgid "Opens your browser to sign in. L8Play only sees the files it creates."
@@ -2459,7 +2467,7 @@ msgstr "Optional: lets Steam list your games to this app."
 msgid "Other files"
 msgstr "Other files"
 
-#: src/features/settings/SettingsPage.tsx:167
+#: src/features/settings/SettingsPage.tsx:173
 msgid "Other games"
 msgstr "Other games"
 
@@ -2509,7 +2517,7 @@ msgstr "PC"
 msgid "PC and Drive"
 msgstr "PC and Drive"
 
-#: src/features/settings/SettingsPage.tsx:198
+#: src/features/settings/SettingsPage.tsx:204
 msgid "PCGamingWiki and local search"
 msgstr "PCGamingWiki and local search"
 
@@ -2811,7 +2819,7 @@ msgstr "Retry failed uploads"
 msgid "Review before importing"
 msgstr "Review before importing"
 
-#: src/features/console/views/use-settings-rows.ts:97
+#: src/features/console/views/use-settings-rows.ts:106
 msgid "Rosé (light)"
 msgstr "Rosé (light)"
 
@@ -2840,7 +2848,7 @@ msgstr "Safety copy"
 msgid "Safety copy before restore"
 msgstr "Safety copy before restore"
 
-#: src/features/console/views/use-settings-rows.ts:131
+#: src/features/console/views/use-settings-rows.ts:140
 #: src/features/settings/BackupSection.tsx:29
 msgid "Same as this PC"
 msgstr "Same as this PC"
@@ -2861,7 +2869,7 @@ msgstr "Save backed up"
 msgid "Save backed up before launch"
 msgstr "Save backed up before launch"
 
-#: src/features/settings/SettingsPage.tsx:276
+#: src/features/settings/SettingsPage.tsx:282
 msgid "Save Detection"
 msgstr "Save Detection"
 
@@ -2922,7 +2930,7 @@ msgstr "Save my client"
 msgid "Save protection"
 msgstr "Save protection"
 
-#: src/features/settings/SettingsPage.tsx:259
+#: src/features/settings/SettingsPage.tsx:265
 msgid "Save-location knowledge comes from the Ludusavi manifest and PCGamingWiki (CC BY-NC-SA 3.0)."
 msgstr "Save-location knowledge comes from the Ludusavi manifest and PCGamingWiki (CC BY-NC-SA 3.0)."
 
@@ -2984,7 +2992,7 @@ msgstr "Scan finished"
 
 #: src/features/library/LibraryPage.tsx:58
 #: src/features/library/LibraryPage.tsx:118
-#: src/features/settings/SettingsPage.tsx:139
+#: src/features/settings/SettingsPage.tsx:145
 msgid "Scan libraries"
 msgstr "Scan libraries"
 
@@ -3009,7 +3017,7 @@ msgstr "Scanning…"
 msgid "Scheduled"
 msgstr "Scheduled"
 
-#: src/features/settings/SettingsPage.tsx:239
+#: src/features/settings/SettingsPage.tsx:245
 msgid "Schema version"
 msgstr "Schema version"
 
@@ -3074,11 +3082,11 @@ msgstr "Set up SteamGridDB"
 #: src/features/console/components/modals/QuickMenu.tsx:17
 #: src/features/console/views/SettingsView.tsx:88
 #: src/features/console/views/SettingsView.tsx:89
-#: src/features/settings/SettingsPage.tsx:286
+#: src/features/settings/SettingsPage.tsx:292
 msgid "Settings"
 msgstr "Settings"
 
-#: src/features/settings/SettingsPage.tsx:288
+#: src/features/settings/SettingsPage.tsx:294
 msgid "Settings sections"
 msgstr "Settings sections"
 
@@ -3095,7 +3103,7 @@ msgstr "Show"
 msgid "Show game {0} of {pages}"
 msgstr "Show game {0} of {pages}"
 
-#: src/features/settings/SettingsPage.tsx:144
+#: src/features/settings/SettingsPage.tsx:150
 msgid "Show games I own but haven’t installed"
 msgstr "Show games I own but haven’t installed"
 
@@ -3107,7 +3115,7 @@ msgstr "Show in Explorer"
 msgid "Show in folder"
 msgstr "Show in folder"
 
-#: src/features/settings/SettingsPage.tsx:256
+#: src/features/settings/SettingsPage.tsx:262
 msgid "Show the welcome tour again"
 msgstr "Show the welcome tour again"
 
@@ -3136,7 +3144,7 @@ msgstr "Sign-in currently uses your own Google client."
 msgid "Sign-in needed"
 msgstr "Sign-in needed"
 
-#: src/features/settings/SettingsPage.tsx:220
+#: src/features/settings/SettingsPage.tsx:226
 msgid "Sign-in, storage, the sync queue and conflicts are on the Cloud Storage page."
 msgstr "Sign-in, storage, the sync queue and conflicts are on the Cloud Storage page."
 
@@ -3204,7 +3212,7 @@ msgstr "Snapshot verified"
 msgid "Snapshot verified (SHA-256 {0})"
 msgstr "Snapshot verified (SHA-256 {0})"
 
-#: src/features/console/views/use-settings-rows.ts:105
+#: src/features/console/views/use-settings-rows.ts:114
 msgid "Snapshot when a game closes"
 msgstr "Snapshot when a game closes"
 
@@ -3281,13 +3289,18 @@ msgstr "Split by sub-folder"
 msgid "Standalone"
 msgstr "Standalone"
 
+#: src/features/console/views/use-settings-rows.ts:81
+#: src/features/settings/SettingsPage.tsx:108
+msgid "Start in console mode"
+msgstr "Start in console mode"
+
 #: src/features/onboarding/OnboardingDialog.tsx:263
 #: src/features/settings/SettingsPage.tsx:102
 msgid "Start with Windows"
 msgstr "Start with Windows"
 
 #. placeholder {0}: game.title
-#: src/features/console/core/use-console-play.ts:26
+#: src/features/console/core/use-console-play.ts:28
 #: src/features/library/use-game-actions.ts:38
 msgid "Starting {0}"
 msgstr "Starting {0}"
@@ -3350,7 +3363,7 @@ msgstr "Steam, Epic Games, Xbox and GOG installations are detected automatically
 msgid "Steam, Epic, Xbox and GOG games are found automatically. Use this for any other game."
 msgstr "Steam, Epic, Xbox and GOG games are found automatically. Use this for any other game."
 
-#: src/features/settings/SettingsPage.tsx:150
+#: src/features/settings/SettingsPage.tsx:156
 msgid "Steam’s profile page could not be read just now. Scan again later."
 msgstr "Steam’s profile page could not be read just now. Scan again later."
 
@@ -3495,7 +3508,7 @@ msgstr "Syncing {active}"
 msgid "Syncing…"
 msgstr "Syncing…"
 
-#: src/features/settings/SettingsPage.tsx:109
+#: src/features/settings/SettingsPage.tsx:115
 msgid "Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden."
 msgstr "Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden."
 
@@ -3543,7 +3556,7 @@ msgstr "The Drive copy is downloaded and checked against its checksum first"
 msgid "The Drive save stays in your Drive as a conflict copy you can restore later."
 msgstr "The Drive save stays in your Drive as a conflict copy you can restore later."
 
-#: src/features/console/core/use-console-play.ts:42
+#: src/features/console/core/use-console-play.ts:58
 #: src/features/library/use-game-actions.ts:51
 msgid "The favourite could not be saved"
 msgstr "The favourite could not be saved"
@@ -3553,7 +3566,7 @@ msgstr "The favourite could not be saved"
 msgid "The file picker could not be opened"
 msgstr "The file picker could not be opened"
 
-#: src/features/settings/SettingsPage.tsx:188
+#: src/features/settings/SettingsPage.tsx:194
 msgid "The first place L8Play looks for where a game keeps its saves. It runs from the bundled Ludusavi tool and downloads the free community manifest."
 msgstr "The first place L8Play looks for where a game keeps its saves. It runs from the bundled Ludusavi tool and downloads the free community manifest."
 
@@ -3696,7 +3709,7 @@ msgstr "The update signature is invalid"
 msgid "The version you don’t use is kept as a snapshot."
 msgstr "The version you don’t use is kept as a snapshot."
 
-#: src/features/console/views/use-settings-rows.ts:93
+#: src/features/console/views/use-settings-rows.ts:102
 #: src/features/settings/SettingsPage.tsx:56
 #: src/features/settings/SettingsPage.tsx:60
 msgid "Theme"
@@ -3848,7 +3861,7 @@ msgstr "Update available"
 msgid "Update now"
 msgstr "Update now"
 
-#: src/features/settings/SettingsPage.tsx:280
+#: src/features/settings/SettingsPage.tsx:286
 msgid "Updates"
 msgstr "Updates"
 
@@ -3871,7 +3884,7 @@ msgstr "Upload new snapshots and look for ones from other PCs"
 msgid "Upload pending"
 msgstr "Upload pending"
 
-#: src/features/settings/SettingsPage.tsx:213
+#: src/features/settings/SettingsPage.tsx:219
 msgid "Upload snapshots automatically"
 msgstr "Upload snapshots automatically"
 
@@ -3969,7 +3982,7 @@ msgstr "Verified"
 msgid "Verify every snapshot"
 msgstr "Verify every snapshot"
 
-#: src/features/settings/SettingsPage.tsx:237
+#: src/features/settings/SettingsPage.tsx:243
 msgid "Version"
 msgstr "Version"
 
@@ -4039,7 +4052,7 @@ msgstr "Where are your games?"
 msgid "While playing"
 msgstr "While playing"
 
-#: src/features/settings/SettingsPage.tsx:108
+#: src/features/settings/SettingsPage.tsx:114
 msgid "Windows notifications"
 msgstr "Windows notifications"
 
@@ -4136,6 +4149,6 @@ msgstr "Your saves are ready to review"
 msgid "Your saves were imported"
 msgstr "Your saves were imported"
 
-#: src/features/settings/SettingsPage.tsx:148
+#: src/features/settings/SettingsPage.tsx:154
 msgid "Your Steam profile’s game details are private: set them to public to list owned games."
 msgstr "Your Steam profile’s game details are private: set them to public to list owned games."

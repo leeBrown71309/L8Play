@@ -1,4 +1,5 @@
 import { useLingui } from "@lingui/react/macro";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
@@ -14,6 +15,8 @@ import { useConsoleNav } from "@/features/console/core/nav-store";
 import { usePresence } from "@/features/console/core/use-presence";
 import { consoleSound } from "@/features/console/sound";
 import { cn } from "@/lib/cn";
+import { queryKeys } from "@/lib/query-keys";
+import { getSettings } from "@/lib/tauri/commands";
 import { EVENTS, onBackendEvent } from "@/lib/tauri/events";
 
 import "@/features/console/console.css";
@@ -88,6 +91,18 @@ function useGameWindowHandover(active: boolean) {
   }, [gameId]);
 }
 
+/** Opens console mode once per run when "start in console mode" is on, after the saved settings are read. */
+function useStartInConsole() {
+  const { data } = useQuery({ queryKey: queryKeys.settings, queryFn: getSettings });
+  const started = useRef(false);
+  useEffect(() => {
+    if (!data || started.current) return;
+    started.current = true;
+    // The first-run walkthrough must be finished before the console covers it.
+    if (data.startInConsole && data.onboardingDone) useConsoleMode.getState().enter();
+  }, [data]);
+}
+
 /**
  * Renders the console interface above the desktop. The desktop and the app's providers stay mounted
  * underneath, so backend events and queries keep running while a game is chosen with the pad.
@@ -108,6 +123,7 @@ export function ConsoleHost() {
   useDesktopInert(mounted);
   useConsoleFullscreen(active);
   useGameWindowHandover(active);
+  useStartInConsole();
 
   if (!mounted) return null;
   return createPortal(

@@ -51,4 +51,8 @@ showOwnedNotInstalled: boolean,
 /**
  * Check GitHub Releases for a newer version in the background; manual checks always work.
  */
-updatesAutoCheck: boolean, };
+updatesAutoCheck: boolean, 
+/**
+ * Open console mode as soon as L8Play starts, also when Windows starts it at sign-in.
+ */
+startInConsole: boolean, };
