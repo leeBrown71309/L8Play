@@ -1,0 +1,8 @@
+{
+  "Both saves are kept until you choose. You can hide this notice and decide later.": "Les deux sauvegardes sont conservées tant que vous n’avez pas choisi. Vous pouvez masquer cet avis et décider plus tard.",
+  "Hide": "Masquer",
+  "It happens when this PC and Google Drive each hold a different latest save of the same game, so L8Play cannot tell which one is right. It usually means the game was played on two PCs, or that L8Play was reinstalled. Nothing is lost: both saves are kept and never cleaned up automatically. Press Resolve to choose one (if you are unsure, choose “Keep both, change nothing yet”), or leave it for later.": "Cela arrive quand ce PC et Google Drive ont chacun une dernière sauvegarde différente du même jeu : L8Play ne peut pas savoir laquelle est la bonne. C’est souvent le signe que le jeu a été joué sur deux PC, ou que L8Play a été réinstallé. Rien n’est perdu : les deux sauvegardes sont conservées et jamais nettoyées automatiquement. Appuyez sur Résoudre pour en choisir une (en cas de doute, choisissez « Garder les deux, ne rien changer pour l’instant »), ou laissez-le pour plus tard.",
+  "Show {hiddenCount} hidden conflicts": "Afficher {hiddenCount} conflits masqués",
+  "Show 1 hidden conflict": "Afficher 1 conflit masqué",
+  "What is a sync conflict?": "Qu’est-ce qu’un conflit de synchronisation ?"
+}
