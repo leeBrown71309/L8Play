@@ -5,7 +5,7 @@ use std::path::{Path, PathBuf};
 use l8_core::CoreError;
 use l8_core::saves::importer::{
     ImportGameRequest, ImportPlan, ImportReport, PlannedGame, PlannedLayout, ScanMode, import_games, plan_game,
-    scan_folder, suggest_titles,
+    scan_folder, scan_pc_for_saves, suggest_titles,
 };
 use l8_core::snapshots::SnapshotStorage;
 use tauri::{AppHandle, Emitter, Manager};
@@ -39,6 +39,13 @@ pub async fn scan_backup_folder(app: AppHandle, folder: String, mode: Option<Sca
     .await
 }
 
+/// Looks on this PC for the saves of games that are not installed (a long scan of Ludusavi's whole
+/// database) and proposes them like a backup folder. Writes nothing.
+#[tauri::command]
+pub async fn scan_pc_for_leftover_saves(app: AppHandle) -> CommandResult<ImportPlan> {
+    blocking(&app, move |state| scan_pc_for_saves(&state.db, &state.ludusavi)).await
+}
+
 /// Reads one game folder again with a forced layout (one snapshot, or one per sub-folder), when the
 /// user disagrees with the first reading.
 #[tauri::command]
@@ -52,12 +59,8 @@ pub async fn replan_backup_game(
     blocking(&app, move |state| {
         let mut game = plan_game(Path::new(&folder), key, from_collection, Some(layout));
         if let Some(game) = &mut game {
-            let mut plan = ImportPlan {
-                source: folder,
-                mode: ScanMode::OneGame,
-                games: vec![game.clone()],
-                warnings: Vec::new(),
-            };
+            let mut plan =
+                ImportPlan { source: folder, mode: ScanMode::OneGame, games: vec![game.clone()], warnings: Vec::new() };
             suggest_titles(&state.ludusavi, &mut plan);
             if let Some(updated) = plan.games.pop() {
                 *game = updated;

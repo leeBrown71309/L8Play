@@ -16,8 +16,20 @@ use crate::saves::importer::titles::{clean_title, is_container_name, normalize_t
 
 /// Folder names that say nothing about the game when looking for a second title inside a backup.
 const GENERIC_INNER_NAMES: &[&str] = &[
-    "saved", "savegames", "saves", "save", "steam", "windows", "users", "documents", "appdata", "local", "roaming",
-    "my games", "saved games", "profiles",
+    "saved",
+    "savegames",
+    "saves",
+    "save",
+    "steam",
+    "windows",
+    "users",
+    "documents",
+    "appdata",
+    "local",
+    "roaming",
+    "my games",
+    "saved games",
+    "profiles",
 ];
 const MAX_ALT_TITLE_DEPTH: usize = 3;
 
@@ -93,12 +105,7 @@ pub fn plan_game(
         None => {
             let measured = measure(folder, hint_file);
             skipped_files += measured.skipped;
-            let snapshot = measured.into_snapshot(
-                None,
-                folder,
-                hint_target,
-                hint_file.map(str::to_owned),
-            );
+            let snapshot = measured.into_snapshot(None, folder, hint_target, hint_file.map(str::to_owned));
             (PlannedLayout::Single, snapshot.into_iter().collect())
         }
     };
@@ -126,7 +133,11 @@ fn resolve_mode(root: &Path, mode: ScanMode) -> ScanMode {
         return mode;
     }
     let listing = list_folder(root, None);
-    if !listing.files.is_empty() || variants_at(root, None).is_some() { ScanMode::OneGame } else { ScanMode::GamesFolder }
+    if !listing.files.is_empty() || variants_at(root, None).is_some() {
+        ScanMode::OneGame
+    } else {
+        ScanMode::GamesFolder
+    }
 }
 
 /// Plans `folder` as a game, or, if it only groups games (`save`, `My Games`), the games inside it.
@@ -222,15 +233,15 @@ fn empty_folder_names(parent: &Path, kept: &[PathBuf]) -> Vec<String> {
 }
 
 #[derive(Default)]
-struct Measured {
+pub(super) struct Measured {
     files: u32,
     bytes: u64,
     newest: Option<SystemTime>,
-    skipped: u32,
+    pub(super) skipped: u32,
 }
 
 impl Measured {
-    fn into_snapshot(
+    pub(super) fn into_snapshot(
         self,
         label: Option<String>,
         root: &Path,
@@ -250,7 +261,7 @@ impl Measured {
 }
 
 /// Counts what importing `root` would keep, and what it would leave out as noise.
-fn measure(root: &Path, hint_file: Option<&str>) -> Measured {
+pub(super) fn measure(root: &Path, hint_file: Option<&str>) -> Measured {
     let mut measured = Measured::default();
     for entry in WalkDir::new(root).follow_links(false).into_iter().filter_map(Result::ok) {
         if !entry.file_type().is_file() || entry.path_is_symlink() {

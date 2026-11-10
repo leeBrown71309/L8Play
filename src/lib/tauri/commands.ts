@@ -21,6 +21,7 @@ import type { GameDetail } from "@/lib/bindings/GameDetail";
 import type { GameSaveStatus } from "@/lib/bindings/GameSaveStatus";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
 import type { ImportGameRequest } from "@/lib/bindings/ImportGameRequest";
+import type { ExportReport } from "@/lib/bindings/ExportReport";
 import type { ImportPlan } from "@/lib/bindings/ImportPlan";
 import type { ImportReport } from "@/lib/bindings/ImportReport";
 import type { PlannedGame } from "@/lib/bindings/PlannedGame";
@@ -82,6 +83,8 @@ export interface CommandMap {
   find_saves: { args: { gameId: number }; result: FindSavesOutcome };
   open_wiki_page: { args: { url: string }; result: null };
   scan_backup_folder: { args: { folder: string; mode: ScanMode | null }; result: ImportPlan };
+  scan_pc_for_leftover_saves: { args: undefined; result: ImportPlan };
+  export_all_saves: { args: { folder: string }; result: ExportReport };
   replan_backup_game: {
     args: { folder: string; key: string; fromCollection: string | null; layout: PlannedLayout };
     result: PlannedGame | null;
@@ -189,6 +192,8 @@ export const openWikiPage = (url: string) => call("open_wiki_page", { url });
 
 export const scanBackupFolder = (folder: string, mode: ScanMode | null = null) =>
   call("scan_backup_folder", { folder, mode });
+export const scanPcForLeftoverSaves = () => call("scan_pc_for_leftover_saves");
+export const exportAllSaves = (folder: string) => call("export_all_saves", { folder });
 export const replanBackupGame = (
   folder: string,
   key: string,

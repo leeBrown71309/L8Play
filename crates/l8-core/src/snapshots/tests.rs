@@ -319,3 +319,39 @@ fn delete_relinks_lineage_and_removes_the_archive() -> TestResult {
     assert_eq!(parent.as_deref(), Some(first.as_str()));
     Ok(())
 }
+
+#[test]
+fn export_holds_every_local_snapshot_in_the_drive_layout() -> TestResult {
+    let fixture = Fixture::new()?;
+    let first = fixture.create(&fixture.manual("one"))?;
+    fs::write(fixture.saves.join("settings.ini"), b"volume=3")?;
+    let second = fixture.create(&fixture.manual("two"))?;
+
+    let destination = fixture.snapshots.join("exports").join("all.zip");
+    let report = crate::snapshots::export_all_snapshots(&fixture.db, &destination)?;
+    assert_eq!((report.snapshots, report.games, report.skipped), (2, 1, 0));
+    assert!(destination.is_file());
+    assert!(!destination.with_file_name("all.zip.part").exists(), "no temporary file is left behind");
+
+    let mut zip = zip::ZipArchive::new(fs::File::open(&destination)?)?;
+    let names: Vec<String> = zip.file_names().filter_map(Result::ok).map(|name| name.to_string()).collect();
+    assert!(names.contains(&format!("L8Play/sekiro/{first}.zip")), "{names:?}");
+    assert!(names.contains(&format!("L8Play/sekiro/{second}.zip")), "{names:?}");
+    let mut index = String::new();
+    std::io::Read::read_to_string(&mut zip.by_name("L8Play/l8-export.json")?, &mut index)?;
+    assert!(index.contains(&first) && index.contains(&second));
+    Ok(())
+}
+
+#[test]
+fn export_skips_snapshots_without_a_local_archive() -> TestResult {
+    let fixture = Fixture::new()?;
+    let id = fixture.create(&fixture.manual("gone"))?;
+    let archive = SnapshotRepository::new(&fixture.db).get(&id)?.archive_path.unwrap_or_default();
+    fs::remove_file(archive)?;
+
+    let destination = fixture.snapshots.join("all.zip");
+    let report = crate::snapshots::export_all_snapshots(&fixture.db, &destination)?;
+    assert_eq!((report.snapshots, report.skipped), (0, 1));
+    Ok(())
+}

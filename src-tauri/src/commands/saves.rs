@@ -7,8 +7,8 @@ use l8_core::saves::{
     detect_save_locations, find_save_candidates, validate_user_folder,
 };
 use l8_core::snapshots::{
-    CreateOutcome, CreateRequest, CurrentSaveState, GameSaveStatus, RestoreReport, RestoreTarget, SnapshotEngine,
-    SnapshotKind, SnapshotRepository, SnapshotStorage, SnapshotSummary,
+    CreateOutcome, CreateRequest, CurrentSaveState, ExportReport, GameSaveStatus, RestoreReport, RestoreTarget,
+    SnapshotEngine, SnapshotKind, SnapshotRepository, SnapshotStorage, SnapshotSummary, export_all_snapshots,
 };
 use l8_core::{CoreError, CoreResult};
 use tauri::{AppHandle, Manager, State};
@@ -116,6 +116,22 @@ pub async fn create_snapshot(
     }
     events::saves_changed(&app, game_id);
     Ok(outcome.into())
+}
+
+/// Writes every snapshot this PC holds into one zip inside `folder`, named after today's date.
+#[tauri::command]
+pub async fn export_all_saves(app: AppHandle, folder: String) -> CommandResult<ExportReport> {
+    blocking(&app, move |state| {
+        let folder = PathBuf::from(folder);
+        if !folder.is_dir() {
+            return Err(CoreError::Validation("the export folder does not exist".into()));
+        }
+        // Snapshots must not change under the copy (a restore or a retention pass).
+        let _guard = state.snapshot_lock()?;
+        let date: String = l8_core::clock::now_rfc3339().chars().take(10).collect();
+        export_all_snapshots(&state.db, &folder.join(format!("L8Play-saves-{date}.zip")))
+    })
+    .await
 }
 
 #[tauri::command]

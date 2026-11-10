@@ -88,6 +88,8 @@ pub fn run() {
             commands::library::open_install_folder,
             commands::saves::list_save_locations,
             commands::saves::detect_saves,
+            commands::saves::export_all_saves,
+            commands::import::scan_pc_for_leftover_saves,
             commands::saves::add_save_folder,
             commands::saves::remove_save_location,
             commands::saves::list_snapshots,

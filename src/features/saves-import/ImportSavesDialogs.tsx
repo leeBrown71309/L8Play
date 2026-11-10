@@ -22,6 +22,7 @@ import {
   useImportProgress,
   useReplanBackupGame,
   useScanBackupFolder,
+  useScanPcForSaves,
 } from "@/features/saves-import/use-import";
 import { useFolderPicker } from "@/features/saves/use-folder-picker";
 import type { ImportPlan } from "@/lib/bindings/ImportPlan";
@@ -38,6 +39,20 @@ function ChooseStage() {
   const { close, analyzing, review } = useImportStore.getState();
   const pickFolder = useFolderPicker();
   const scan = useScanBackupFolder();
+  const scanPc = useScanPcForSaves();
+
+  /** Same flow as a chosen folder, but the whole PC is searched for the saves of uninstalled games. */
+  const startPcScan = async () => {
+    analyzing(t`This PC`);
+    try {
+      const plan = await scanPc.mutateAsync();
+      if (useImportStore.getState().stage.kind === "analyzing") review(plan);
+    } catch {
+      if (useImportStore.getState().stage.kind !== "analyzing") return;
+      notify({ tone: "danger", title: t`This PC could not be searched` });
+      useImportStore.getState().open();
+    }
+  };
 
   const start = async (mode: ScanMode | null, title: string) => {
     const folder = await pickFolder(title);
@@ -91,6 +106,14 @@ function ChooseStage() {
           description={t`Choose the backup folder of a single game. Sub-folders become separate named snapshots.`}
           onClick={() => void start("one_game", t`Choose the backup folder of the game`)}
         />
+        <OptionCard
+          selected={false}
+          icon="scan"
+          tone="cloud"
+          title={t`Search this PC`}
+          description={t`Looks in the usual save folders (AppData, Documents, Saved Games, Steam) for the saves of games that are no longer installed.`}
+          onClick={() => void startPcScan()}
+        />
       </div>
     </Dialog>
   );
@@ -122,7 +145,7 @@ function AnalyzingStage({ folder }: { folder: string }) {
     >
       <ProgressBar indeterminate label={t`Looking for games and snapshots`} />
       <p className="m-0 text-[12.5px] text-ink-faint">
-        {t`A big folder can take a few minutes. You can hide this window: the work continues and you will be told when it is ready.`}
+        {t`A big folder, or a search of the whole PC, can take a few minutes. You can hide this window: the work continues and you will be told when it is ready.`}
       </p>
     </Dialog>
   );

@@ -11,6 +11,7 @@ mod hints;
 mod layout;
 mod model;
 mod noise;
+mod pc_scan;
 mod scan;
 mod titles;
 
@@ -23,5 +24,6 @@ pub use model::{
     ImportGameRequest, ImportPlan, ImportProgress, ImportReport, ImportedGame, PlannedGame, PlannedLayout,
     PlannedSnapshot, ScanMode,
 };
+pub use pc_scan::scan_pc_for_saves;
 pub use scan::{plan_game, scan_folder};
 pub use titles::{clean_title, normalize_title};
