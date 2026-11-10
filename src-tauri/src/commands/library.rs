@@ -221,9 +221,23 @@ pub async fn launch_game(app: AppHandle, state: State<'_, AppState>, game_id: i6
             )?;
         }
         LaunchPlan::Executable { path, working_dir } => {
-            std::process::Command::new(path).current_dir(working_dir).spawn().map_err(|error| {
-                CommandError::new(CommandErrorCode::Launch, format!("could not start {}: {error}", path.display()))
-            })?;
+            match std::process::Command::new(path).current_dir(working_dir).spawn() {
+                Ok(_) => {}
+                Err(error) if error.raw_os_error() == Some(ERROR_ELEVATION_REQUIRED) => {
+                    // The game's manifest asks for administrator rights, which CreateProcess cannot
+                    // grant: hand it to the shell, which shows the Windows UAC prompt.
+                    let (path, working_dir) = (path.clone(), working_dir.clone());
+                    tauri::async_runtime::spawn_blocking(move || launch_elevated(&path, &working_dir))
+                        .await
+                        .map_err(|error| CommandError::new(CommandErrorCode::Launch, error.to_string()))??;
+                }
+                Err(error) => {
+                    return Err(CommandError::new(
+                        CommandErrorCode::Launch,
+                        format!("could not start {}: {error}", path.display()),
+                    ));
+                }
+            }
         }
     }
     if target.installed {
@@ -231,6 +245,83 @@ pub async fn launch_game(app: AppHandle, state: State<'_, AppState>, game_id: i6
     }
     tracing::info!(game_id, installed = target.installed, ?plan, "game launch requested");
     Ok(())
+}
+
+/// Windows error returned by CreateProcess for an executable that requires administrator rights.
+const ERROR_ELEVATION_REQUIRED: i32 = 740;
+/// Keeps the helper PowerShell from flashing a console window.
+const CREATE_NO_WINDOW: u32 = 0x0800_0000;
+
+/// Starts an executable with the "runas" verb so Windows shows the UAC prompt. The path goes through
+/// environment variables, never through the command line, so no quoting can break or inject.
+/// Fails if the user declines the prompt.
+fn launch_elevated(path: &std::path::Path, working_dir: &std::path::Path) -> CommandResult<()> {
+    use std::os::windows::process::CommandExt;
+
+    let status = std::process::Command::new("powershell.exe")
+        .args([
+            "-NoProfile",
+            "-NonInteractive",
+            "-Command",
+            "Start-Process -FilePath $env:L8_GAME_EXE -WorkingDirectory $env:L8_GAME_DIR -Verb RunAs",
+        ])
+        .env("L8_GAME_EXE", path)
+        .env("L8_GAME_DIR", working_dir)
+        .creation_flags(CREATE_NO_WINDOW)
+        .status()
+        .map_err(|error| CommandError::new(CommandErrorCode::Launch, format!("could not ask for elevation: {error}")))?;
+    if status.success() {
+        Ok(())
+    } else {
+        Err(CommandError::new(
+            CommandErrorCode::Launch,
+            format!("{} needs administrator rights and the request was declined", path.display()),
+        ))
+    }
+}
+
+/// A store where a game can be bought or installed.
+#[derive(Debug, Clone, Copy, serde::Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Store {
+    Steam,
+    Epic,
+    Gog,
+    Xbox,
+}
+
+/// Percent-encodes `text` for a URL query (everything but unreserved characters).
+fn encode_query(text: &str) -> String {
+    text.bytes()
+        .map(|byte| match byte {
+            b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => char::from(byte).to_string(),
+            _ => format!("%{byte:02X}"),
+        })
+        .collect()
+}
+
+/// Where a store searches for `title`: its app when it has a link scheme, its site otherwise.
+fn store_search_url(store: Store, title: &str) -> String {
+    let query = encode_query(title.trim());
+    match store {
+        // `steam://openurl/` shows the store page inside the Steam app (the browser if Steam is missing).
+        Store::Steam => format!("steam://openurl/https://store.steampowered.com/search/?term={query}"),
+        Store::Epic => format!("https://store.epicgames.com/browse?q={query}"),
+        Store::Gog => format!("https://www.gog.com/en/games?query={query}"),
+        Store::Xbox => format!("ms-windows-store://search/?query={query}"),
+    }
+}
+
+/// Opens a store's search for a game title, to install a game whose saves are already here.
+#[tauri::command]
+pub async fn open_store_search(app: AppHandle, store: Store, title: String) -> CommandResult<()> {
+    if title.trim().is_empty() {
+        return Err(CoreError::Validation("the game has no title to search for".into()).into());
+    }
+    let url = store_search_url(store, &title);
+    app.opener()
+        .open_url(&url, None::<&str>)
+        .map_err(|error| CommandError::new(CommandErrorCode::Launch, format!("could not open the store: {error}")))
 }
 
 #[tauri::command]
@@ -304,4 +395,21 @@ pub async fn add_games(app: AppHandle, games: Vec<NewGameInput>) -> CommandResul
     }
     events::library_changed(&app);
     Ok(report)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn titles_are_encoded_for_each_store() {
+        assert_eq!(encode_query("Hades II: Night & Day"), "Hades%20II%3A%20Night%20%26%20Day");
+        assert_eq!(
+            store_search_url(Store::Steam, " Elden Ring "),
+            "steam://openurl/https://store.steampowered.com/search/?term=Elden%20Ring"
+        );
+        assert_eq!(store_search_url(Store::Epic, "A+B"), "https://store.epicgames.com/browse?q=A%2BB");
+        assert!(store_search_url(Store::Xbox, "Halo").starts_with("ms-windows-store://search/?query="));
+        assert!(store_search_url(Store::Gog, "Witcher").contains("query=Witcher"));
+    }
 }

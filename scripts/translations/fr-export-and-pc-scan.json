@@ -1,0 +1,14 @@
+{
+  "{0} snapshots from {1} games · {size}": "{0} snapshots de {1} jeux · {size}",
+  "{summary}. {0} snapshots only exist in Google Drive and were left out.": "{summary}. {0} snapshots n’existent que dans Google Drive et ont été laissés de côté.",
+  "A big folder, or a search of the whole PC, can take a few minutes. You can hide this window: the work continues and you will be told when it is ready.": "Un gros dossier, ou la recherche sur tout le PC, peut prendre quelques minutes. Vous pouvez masquer cette fenêtre : le travail continue et vous serez prévenu quand ce sera prêt.",
+  "Choose where to save the export": "Choisissez où enregistrer l’export",
+  "Export all saves": "Exporter toutes les sauvegardes",
+  "Exporting…": "Export en cours…",
+  "Looks in the usual save folders (AppData, Documents, Saved Games, Steam) for the saves of games that are no longer installed.": "Cherche dans les dossiers de sauvegarde habituels (AppData, Documents, Saved Games, Steam) les sauvegardes de jeux qui ne sont plus installés.",
+  "Saves exported": "Sauvegardes exportées",
+  "Search this PC": "Rechercher sur ce PC",
+  "The saves could not be exported": "Les sauvegardes n’ont pas pu être exportées",
+  "This PC could not be searched": "La recherche sur ce PC a échoué",
+  "Actions": "Actions"
+}

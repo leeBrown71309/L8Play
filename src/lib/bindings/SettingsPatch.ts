@@ -5,4 +5,4 @@ import type { Theme } from "./Theme";
 /**
  * Partial update sent by the UI; absent fields keep their stored value.
  */
-export type SettingsPatch = { theme?: Theme, locale?: Locale, navExpanded?: boolean, snapshotOnExit?: boolean, snapshotBeforeLaunch?: boolean, keepAutomatic?: number, keepCloud?: number, snapshotFolder?: string, cloudAutoSync?: boolean, closeToTray?: boolean, launchAtStartup?: boolean, desktopNotifications?: boolean, onboardingDone?: boolean, showOwnedNotInstalled?: boolean, updatesAutoCheck?: boolean, };
+export type SettingsPatch = { theme?: Theme, locale?: Locale, navExpanded?: boolean, snapshotOnExit?: boolean, snapshotBeforeLaunch?: boolean, keepAutomatic?: number, keepCloud?: number, snapshotFolder?: string, cloudAutoSync?: boolean, closeToTray?: boolean, launchAtStartup?: boolean, desktopNotifications?: boolean, onboardingDone?: boolean, showOwnedNotInstalled?: boolean, updatesAutoCheck?: boolean, startInConsole?: boolean, };

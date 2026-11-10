@@ -21,6 +21,7 @@ import type { GameDetail } from "@/lib/bindings/GameDetail";
 import type { GameSaveStatus } from "@/lib/bindings/GameSaveStatus";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
 import type { ImportGameRequest } from "@/lib/bindings/ImportGameRequest";
+import type { ExportReport } from "@/lib/bindings/ExportReport";
 import type { ImportPlan } from "@/lib/bindings/ImportPlan";
 import type { ImportReport } from "@/lib/bindings/ImportReport";
 import type { PlannedGame } from "@/lib/bindings/PlannedGame";
@@ -62,6 +63,7 @@ export interface CommandMap {
   get_running_games: { args: undefined; result: number[] };
   launch_game: { args: { gameId: number }; result: null };
   open_install_folder: { args: { gameId: number }; result: null };
+  open_store_search: { args: { store: Store; title: string }; result: null };
   list_save_locations: { args: { gameId: number }; result: SaveLocation[] };
   detect_saves: { args: { gameId: number }; result: DetectionOutcome };
   add_save_folder: { args: { gameId: number; folder: string }; result: SaveLocation[] };
@@ -82,6 +84,8 @@ export interface CommandMap {
   find_saves: { args: { gameId: number }; result: FindSavesOutcome };
   open_wiki_page: { args: { url: string }; result: null };
   scan_backup_folder: { args: { folder: string; mode: ScanMode | null }; result: ImportPlan };
+  scan_pc_for_leftover_saves: { args: undefined; result: ImportPlan };
+  export_all_saves: { args: { folder: string }; result: ExportReport };
   replan_backup_game: {
     args: { folder: string; key: string; fromCollection: string | null; layout: PlannedLayout };
     result: PlannedGame | null;
@@ -126,6 +130,9 @@ export interface CommandMap {
   download_snapshot: { args: { snapshotId: string }; result: null };
 }
 
+/** Stores a game can be installed from (see `open_store_search`). */
+export type Store = "steam" | "epic" | "gog" | "xbox";
+
 export type CommandName = keyof CommandMap;
 
 async function call<K extends CommandName>(command: K, args?: CommandMap[K]["args"]): Promise<CommandMap[K]["result"]> {
@@ -160,6 +167,7 @@ export const addGames = (games: NewGameInput[]) => call("add_games", { games });
 export const getRunningGames = () => call("get_running_games");
 export const launchGame = (gameId: number) => call("launch_game", { gameId });
 export const openInstallFolder = (gameId: number) => call("open_install_folder", { gameId });
+export const openStoreSearch = (store: Store, title: string) => call("open_store_search", { store, title });
 
 export const listSaveLocations = (gameId: number) => call("list_save_locations", { gameId });
 export const detectSaves = (gameId: number) => call("detect_saves", { gameId });
@@ -189,6 +197,8 @@ export const openWikiPage = (url: string) => call("open_wiki_page", { url });
 
 export const scanBackupFolder = (folder: string, mode: ScanMode | null = null) =>
   call("scan_backup_folder", { folder, mode });
+export const scanPcForLeftoverSaves = () => call("scan_pc_for_leftover_saves");
+export const exportAllSaves = (folder: string) => call("export_all_saves", { folder });
 export const replanBackupGame = (
   folder: string,
   key: string,

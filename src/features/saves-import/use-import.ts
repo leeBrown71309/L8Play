@@ -7,13 +7,23 @@ import type { ImportGameRequest } from "@/lib/bindings/ImportGameRequest";
 import type { PlannedLayout } from "@/lib/bindings/PlannedLayout";
 import type { ScanMode } from "@/lib/bindings/ScanMode";
 import { queryKeys } from "@/lib/query-keys";
-import { importBackupGames, replanBackupGame, scanBackupFolder } from "@/lib/tauri/commands";
+import {
+  importBackupGames,
+  replanBackupGame,
+  scanBackupFolder,
+  scanPcForLeftoverSaves,
+} from "@/lib/tauri/commands";
 import { EVENTS, onBackendEvent } from "@/lib/tauri/events";
 
 export function useScanBackupFolder() {
   return useMutation({
     mutationFn: ({ folder, mode }: { folder: string; mode: ScanMode | null }) => scanBackupFolder(folder, mode),
   });
+}
+
+/** Looks for the leftover saves of uninstalled games on this PC (no folder to choose). */
+export function useScanPcForSaves() {
+  return useMutation({ mutationFn: () => scanPcForLeftoverSaves() });
 }
 
 export function useReplanBackupGame() {

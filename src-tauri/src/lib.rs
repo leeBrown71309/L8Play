@@ -14,6 +14,7 @@ mod shell;
 mod state;
 
 use l8_core::saves::{LudusaviCli, sidecar_path};
+use l8_core::settings::SettingsRepository;
 use tauri::Manager;
 use tauri_plugin_autostart::MacosLauncher;
 
@@ -48,10 +49,16 @@ pub fn run() {
             app.manage(state);
             tracing::info!(version = env!("CARGO_PKG_VERSION"), "L8Play started");
             shell::setup_tray(app.handle())?;
+            let start_in_console = SettingsRepository::new(&app.state::<AppState>().db)
+                .load()
+                .map(|settings| settings.start_in_console)
+                .unwrap_or_default();
             if std::env::args().any(|argument| argument == START_MINIMIZED_FLAG)
+                && !start_in_console
                 && let Some(window) = app.get_webview_window(MAIN_WINDOW)
             {
                 // Launched by Windows at sign-in: stay in the notification area until the user opens it.
+                // (With "start in console" the window stays up: the console is the point of the sign-in launch.)
                 window.hide()?;
             }
             background::start(app.handle().clone());
@@ -79,8 +86,11 @@ pub fn run() {
             commands::library::get_running_games,
             commands::library::launch_game,
             commands::library::open_install_folder,
+            commands::library::open_store_search,
             commands::saves::list_save_locations,
             commands::saves::detect_saves,
+            commands::saves::export_all_saves,
+            commands::import::scan_pc_for_leftover_saves,
             commands::saves::add_save_folder,
             commands::saves::remove_save_location,
             commands::saves::list_snapshots,

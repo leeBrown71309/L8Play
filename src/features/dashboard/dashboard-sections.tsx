@@ -139,18 +139,20 @@ export function SaveProtectionSection({ snapshots, protectedGames, totalGames }:
   );
 }
 
-/** Wide screens only: the newest snapshots as small cards. */
+/** The newest snapshots as small cards; the grid wraps as the window narrows and the caller picks how many. */
 export function RecentBackups({
   snapshots,
   games,
+  limit,
 }: {
   snapshots: readonly SnapshotSummary[];
   games: readonly GameSummary[];
+  limit: number;
 }) {
   const { t, i18n } = useLingui();
   const navigate = useNavigate();
   const labels = useSnapshotLabels();
-  const recent = [...snapshots].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 4);
+  const recent = [...snapshots].sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, limit);
   if (recent.length === 0) return null;
   return (
     <section>
@@ -162,7 +164,7 @@ export function RecentBackups({
           </Button>
         }
       />
-      <div className="mb-3.5 grid grid-cols-4 gap-3.5">
+      <div className="mb-3.5 grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3.5">
         {recent.map((snapshot) => {
           const game = games.find((candidate) => candidate.id === snapshot.gameId);
           return (

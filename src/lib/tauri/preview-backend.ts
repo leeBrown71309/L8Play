@@ -185,6 +185,7 @@ const handlers: Handlers = {
     return null;
   },
   open_install_folder: () => null,
+  open_store_search: () => null,
   list_save_locations: ({ gameId }) => sampleLocations(gameId),
   detect_saves: ({ gameId }) =>
     gameId === 1
@@ -380,6 +381,8 @@ const handlers: Handlers = {
   }),
   open_wiki_page: () => null,
   scan_backup_folder: () => samplePlan(),
+  scan_pc_for_leftover_saves: () => samplePlan(),
+  export_all_saves: () => ({ path: "D:/Exports/L8Play-saves.zip", snapshots: 12, games: 5, bytes: 48_000_000, skipped: 0 }),
   replan_backup_game: () => samplePlan().games[0] ?? null,
   import_backup_games: ({ games }) => ({
     games: games.map((game) => ({

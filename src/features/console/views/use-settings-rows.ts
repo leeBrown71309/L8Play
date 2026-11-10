@@ -76,6 +76,15 @@ export function useSettingsRows(): SettingsRow[] {
       disabled: !sound.enabled,
     },
     {
+      kind: "toggle",
+      id: "start-in-console",
+      label: t`Start in console mode`,
+      detail: t`Open this interface as soon as L8Play starts`,
+      icon: "gamepad",
+      value: settings.startInConsole,
+      set: (value) => update({ startInConsole: value }),
+    },
+    {
       kind: "picker",
       id: "language",
       label: t`Language`,

@@ -11,6 +11,7 @@ import { EmptyState } from "@/components/feedback/EmptyState";
 import { Skeleton } from "@/components/feedback/Skeleton";
 import { GameArt } from "@/components/game/GameArt";
 import { SnapshotIcon } from "@/components/icons";
+import { ActionMenu } from "@/components/ui/action-menu";
 import { Button } from "@/components/ui/button";
 import {
   filterSnapshots,
@@ -19,6 +20,7 @@ import {
   type StoredFilter,
 } from "@/features/save-manager/snapshot-filters";
 import { SnapshotDetailPanel } from "@/features/save-manager/SnapshotDetailPanel";
+import { useExportAllSaves } from "@/features/save-manager/use-export-saves";
 import { useGames, useRunningGames } from "@/features/library/use-library";
 import { useImportStore } from "@/features/saves-import/import-store";
 import { CreateSnapshotDialog } from "@/features/saves/CreateSnapshotDialog";
@@ -36,6 +38,7 @@ export function SaveManagerPage() {
   const snapshots = useSnapshots(null);
   const statuses = useSaveStatuses();
   const reveal = useRevealSnapshot();
+  const exporter = useExportAllSaves();
   const running = useRunningGames();
   const [gameFilter, setGameFilter] = useState<number | null>(null);
   const [kindFilter, setKindFilter] = useState<KindFilter>("all");
@@ -142,18 +145,42 @@ export function SaveManagerPage() {
                     <Link to={`/games/${filterGame.id}`}>{t`Open game page`}</Link>
                   </Button>
                 )}
-                <Button variant="secondary" icon="upload" onClick={() => useImportStore.getState().open()}>
-                  {t`Import saves`}
-                </Button>
-                <Button
-                  variant="primary"
-                  icon="plus"
-                  disabled={!filterGame}
-                  title={filterGame ? undefined : t`Pick a game on the left first`}
-                  onClick={() => setCreating(true)}
-                >
-                  {t`Create snapshot`}
-                </Button>
+                <ActionMenu
+                  items={[
+                    {
+                      id: "create",
+                      label: t`Create snapshot`,
+                      icon: "plus",
+                      disabled: !filterGame,
+                      hint: t`Pick a game on the left first`,
+                      onSelect: () => setCreating(true),
+                    },
+                    {
+                      id: "import",
+                      label: t`Import saves`,
+                      icon: "upload",
+                      onSelect: () => useImportStore.getState().open(),
+                    },
+                    {
+                      id: "export",
+                      label: exporter.exporting ? t`Exporting…` : t`Export all saves`,
+                      icon: "download",
+                      disabled: exporter.exporting,
+                      onSelect: () => void exporter.run(),
+                    },
+                  ]}
+                  trigger={({ open, toggle }) => (
+                    <Button
+                      variant="primary"
+                      iconRight="chevronDown"
+                      aria-haspopup="menu"
+                      aria-expanded={open}
+                      onClick={toggle}
+                    >
+                      {t`Actions`}
+                    </Button>
+                  )}
+                />
               </>
             }
           />

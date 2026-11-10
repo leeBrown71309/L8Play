@@ -105,6 +105,12 @@ function GeneralSection() {
         onChange={(launchAtStartup) => update.mutate({ launchAtStartup })}
       />
       <ToggleSetting
+        title={t`Start in console mode`}
+        description={t`Opens console mode full screen as soon as L8Play starts. With "Start with Windows", the window stays visible instead of hiding in the notification area.`}
+        checked={settings.startInConsole}
+        onChange={(startInConsole) => update.mutate({ startInConsole })}
+      />
+      <ToggleSetting
         title={t`Windows notifications`}
         description={t`Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden.`}
         checked={settings.desktopNotifications}

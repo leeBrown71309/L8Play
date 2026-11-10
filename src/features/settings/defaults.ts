@@ -17,4 +17,5 @@ export const DEFAULT_SETTINGS: AppSettings = {
   onboardingDone: false,
   showOwnedNotInstalled: true,
   updatesAutoCheck: true,
+  startInConsole: false,
 };

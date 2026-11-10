@@ -1,0 +1,14 @@
+{
+  "For a game installed outside the stores. L8Play adds it to your library and joins these saves to it.": "Pour un jeu installé en dehors des stores. L8Play l’ajoute à votre bibliothèque et y rattache ces sauvegardes.",
+  "I already have the game: choose its executable": "J’ai déjà le jeu : choisir son exécutable",
+  "Install {0} from the store": "Installer {0} depuis le store",
+  "Install from {0}": "Installer depuis {0}",
+  "Install or link": "Installer ou lier",
+  "Install or link {0}": "Installer ou lier {0}",
+  "Linking a game needs the desktop app": "Lier un jeu nécessite l’application de bureau",
+  "Once it is installed, scan your libraries: L8Play will offer to join these saves to it.": "Une fois installé, lancez un scan de vos bibliothèques : L8Play vous proposera d’y rattacher ces sauvegardes.",
+  "Opens {0} on a search for “{1}”. You must own the game there.": "Ouvre {0} sur une recherche de « {1} ». Vous devez posséder le jeu là-bas.",
+  "The game could not be linked": "Le jeu n’a pas pu être lié",
+  "The store could not be opened": "Le store n’a pas pu être ouvert",
+  "These saves are kept, but the game itself is not on this PC. Install it from a store you own it on, or link it to a copy you already have.": "Ces sauvegardes sont conservées, mais le jeu lui-même n’est pas sur ce PC. Installez-le depuis un store où vous le possédez, ou liez-le à une copie que vous avez déjà."
+}

@@ -87,6 +87,13 @@ impl LudusaviCli {
         parse_preview(&output, manifest_title)
     }
 
+    /// Every game of Ludusavi's database that has save files on this PC right now, installed or not:
+    /// manifest title -> absolute file paths. One call scans the whole manifest, so it takes a while.
+    pub fn preview_all(&self) -> CoreResult<HashMap<String, Vec<PathBuf>>> {
+        let output = self.run(&["backup", "--preview", "--api"])?;
+        parse_preview_all(&output)
+    }
+
     fn run(&self, args: &[&str]) -> CoreResult<String> {
         if !self.is_available() {
             return Err(CoreError::External(format!("Ludusavi is missing at {}", self.executable.display())));
@@ -141,6 +148,26 @@ fn parse_preview(json: &str, manifest_title: &str) -> CoreResult<Vec<PathBuf>> {
     Ok(files)
 }
 
+fn parse_preview_all(json: &str) -> CoreResult<HashMap<String, Vec<PathBuf>>> {
+    let parsed: BackupOutput = serde_json::from_str(json)
+        .map_err(|error| CoreError::External(format!("unreadable Ludusavi output: {error}")))?;
+    let mut games = HashMap::new();
+    for (title, game) in parsed.games {
+        let mut files: Vec<PathBuf> = game
+            .files
+            .iter()
+            .filter(|(_, file)| !file.ignored && !file.failed)
+            .map(|(path, _)| to_windows_path(path))
+            .collect();
+        if files.is_empty() {
+            continue;
+        }
+        files.sort();
+        games.insert(title, files);
+    }
+    Ok(games)
+}
+
 /// Ludusavi prints `C:/Users/...`; Windows APIs and our comparisons expect backslashes.
 fn to_windows_path(path: &str) -> PathBuf {
     PathBuf::from(path.replace('/', "\\"))
@@ -189,6 +216,19 @@ mod tests {
             ]
         );
         assert!(parse_preview(json, "Other Game")?.is_empty());
+        Ok(())
+    }
+
+    #[test]
+    fn preview_all_keeps_only_games_with_files() -> CoreResult<()> {
+        let json = r#"{"games":{
+            "Hades":{"files":{"C:/Users/me/Saved Games/Hades/Profile1.sav":{"bytes":9}}},
+            "Empty":{"files":{}},
+            "Ignored":{"files":{"C:/x.bin":{"bytes":1,"ignored":true}}}
+        }}"#;
+        let games = parse_preview_all(json)?;
+        assert_eq!(games.len(), 1);
+        assert_eq!(games["Hades"], vec![PathBuf::from(r"C:\Users\me\Saved Games\Hades\Profile1.sav")]);
         Ok(())
     }
 

@@ -2,7 +2,7 @@ import { useLingui } from "@lingui/react/macro";
 import { useState } from "react";
 
 import { DsIcon } from "@/components/ds/ds-icon";
-import { Banner, PageHeader } from "@/components/ds/page-blocks";
+import { PageHeader } from "@/components/ds/page-blocks";
 import { StatusBadge } from "@/components/ds/status-badge";
 import { notify } from "@/components/feedback/toast-store";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { Dialog, Kbd } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
 import { AdvancedClient } from "@/features/cloud/AdvancedClient";
 import { ConflictDialog } from "@/features/cloud/ConflictDialog";
+import { ConflictNotices } from "@/features/cloud/ConflictNotices";
 import { DriveFolders, StorageCard } from "@/features/cloud/StoragePanels";
 import { TransferList } from "@/features/cloud/TransferList";
 import {
@@ -190,25 +191,7 @@ export function CloudPage() {
     <>
       {header}
 
-      {account && conflicts.data && conflicts.data.length > 0 && (
-        <div className="cloud-banners">
-          {conflicts.data.map((conflict) => (
-            <Banner
-              key={conflict.id}
-              tone="warning"
-              icon="merge"
-              title={t`${conflict.gameTitle} has two different saves.`}
-              action={
-                <Button size="sm" variant="primary" onClick={() => setOpen(conflict)}>
-                  {t`Resolve`}
-                </Button>
-              }
-            >
-              {t`Sync is paused for this game until you choose.`}
-            </Banner>
-          ))}
-        </div>
-      )}
+      {account && conflicts.data ? <ConflictNotices conflicts={conflicts.data} onResolve={setOpen} /> : null}
 
       {account ? (
         <div className="cloud-cols">

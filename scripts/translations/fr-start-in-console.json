@@ -1,0 +1,5 @@
+{
+  "Start in console mode": "Démarrer en mode console",
+  "Opens console mode full screen as soon as L8Play starts. With \"Start with Windows\", the window stays visible instead of hiding in the notification area.": "Ouvre le mode console en plein écran dès le démarrage de L8Play. Avec « Démarrer avec Windows », la fenêtre reste visible au lieu de se cacher dans la zone de notification.",
+  "Open this interface as soon as L8Play starts": "Ouvrir cette interface dès le démarrage de L8Play"
+}

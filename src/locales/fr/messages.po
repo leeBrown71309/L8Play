@@ -60,7 +60,7 @@ msgstr "{0} · {1} sur {2}"
 
 #. placeholder {0}: account.email
 #. placeholder {1}: formatDay(account.connectedAt, i18n.locale)
-#: src/features/cloud/CloudPage.tsx:97
+#: src/features/cloud/CloudPage.tsx:98
 msgid "{0} · connected since {1}"
 msgstr "{0} · connecté depuis le {1}"
 
@@ -88,25 +88,25 @@ msgid "{0} already in your library · {1} could not be added"
 msgstr "{0} déjà dans votre bibliothèque · {1} n’ont pas pu être ajoutés"
 
 #. placeholder {0}: data.openConflicts
-#: src/features/cloud/CloudPage.tsx:110
+#: src/features/cloud/CloudPage.tsx:111
 msgid "{0} conflicts"
 msgstr "{0} conflits"
 
 #. placeholder {0}: game.title
-#: src/features/console/core/use-console-play.ts:32
+#: src/features/console/core/use-console-play.ts:48
 #: src/features/library/use-game-actions.ts:45
 msgid "{0} could not be started"
 msgstr "Impossible de lancer {0}"
 
 #. placeholder {0}: data.failed
-#: src/features/cloud/CloudPage.tsx:107
+#: src/features/cloud/CloudPage.tsx:108
 msgid "{0} failed"
 msgstr "{0} en échec"
 
 #. placeholder {0}: side.totalFiles
 #. placeholder {0}: snapshot.files
 #: src/features/cloud/ConflictDialog.tsx:41
-#: src/features/saves-import/ImportSavesDialogs.tsx:153
+#: src/features/saves-import/ImportSavesDialogs.tsx:176
 msgid "{0} files"
 msgstr "{0} fichiers"
 
@@ -126,12 +126,12 @@ msgid "{0} games were hidden because they are already in your library."
 msgstr "{0} jeux ont été masqués car ils sont déjà dans votre bibliothèque."
 
 #. placeholder {0}: conflict.gameTitle
-#: src/features/cloud/CloudPage.tsx:200
+#: src/features/cloud/ConflictNotices.tsx:68
 msgid "{0} has two different saves."
 msgstr "{0} a deux sauvegardes différentes."
 
 #. placeholder {0}: data.running
-#: src/features/cloud/CloudPage.tsx:105
+#: src/features/cloud/CloudPage.tsx:106
 msgid "{0} in progress"
 msgstr "{0} en cours"
 
@@ -151,7 +151,7 @@ msgid "{0} is not running"
 msgstr "{0} n’est pas en cours d’exécution"
 
 #. placeholder {0}: game.skippedFiles
-#: src/features/saves-import/ImportSavesDialogs.tsx:216
+#: src/features/saves-import/ImportSavesDialogs.tsx:239
 msgid "{0} logs and screenshots left out"
 msgstr "{0} journaux et captures d’écran ignorés"
 
@@ -179,7 +179,7 @@ msgstr "{0} sur le PC · {1} dans Drive"
 #. placeholder {0}: formatPlaytime(game.playtimeSeconds)
 #. placeholder {0}: formatPlaytime(snapshot.playtimeSeconds)
 #: src/features/console/views/GamePanel.tsx:76
-#: src/features/game-details/GameHero.tsx:109
+#: src/features/game-details/GameHero.tsx:110
 #: src/features/saves/RestoreSnapshotDialog.tsx:130
 #: src/features/saves/SnapshotTimeline.tsx:197
 msgid "{0} played"
@@ -210,6 +210,12 @@ msgstr "{0} snapshots"
 msgid "{0} snapshots · protected"
 msgstr "{0} snapshots · protégé"
 
+#. placeholder {0}: report.snapshots
+#. placeholder {1}: report.games
+#: src/features/save-manager/use-export-saves.ts:17
+msgid "{0} snapshots from {1} games · {size}"
+msgstr "{0} snapshots de {1} jeux · {size}"
+
 #. placeholder {0}: report.uploaded
 #. placeholder {1}: report.downloaded
 #: src/features/console/views/CloudView.tsx:59
@@ -219,7 +225,7 @@ msgstr "{0} envoyés · {1} téléchargés"
 #. placeholder {0}: report.uploaded
 #. placeholder {1}: report.imported
 #. placeholder {2}: report.failed
-#: src/features/cloud/CloudPage.tsx:164
+#: src/features/cloud/CloudPage.tsx:165
 msgid "{0} uploaded · {1} found in Drive · {2} failed"
 msgstr "{0} envoyées · {1} trouvées dans Drive · {2} en échec"
 
@@ -239,7 +245,7 @@ msgid "{0} used · existing snapshots stay where they are"
 msgstr "{0} utilisés · les snapshots existantes restent où elles sont"
 
 #. placeholder {0}: data.queued
-#: src/features/cloud/CloudPage.tsx:106
+#: src/features/cloud/CloudPage.tsx:107
 msgid "{0} waiting"
 msgstr "{0} en attente"
 
@@ -255,7 +261,7 @@ msgstr "{count} jeux"
 msgid "{count} save locations found"
 msgstr "{count} emplacements de sauvegarde trouvés"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:385
+#: src/features/saves-import/ImportSavesDialogs.tsx:408
 msgid "{duplicates} were already imported and were skipped."
 msgstr "{duplicates} étaient déjà importées et ont été ignorées."
 
@@ -263,7 +269,7 @@ msgstr "{duplicates} étaient déjà importées et ont été ignorées."
 msgid "{files} files · {size}"
 msgstr "{files} fichiers · {size}"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:383
+#: src/features/saves-import/ImportSavesDialogs.tsx:406
 msgid "{imported} snapshots imported"
 msgstr "{imported} snapshots importés"
 
@@ -279,13 +285,18 @@ msgstr "{saveFolders} dossiers de sauvegarde trouvés."
 msgid "{saveFolders} save folders protected"
 msgstr "{saveFolders} dossiers de sauvegarde protégés"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:322
+#: src/features/saves-import/ImportSavesDialogs.tsx:345
 msgid "{snapshotCount} snapshots will be created."
 msgstr "{snapshotCount} snapshots seront créés."
 
 #: src/features/onboarding/OnboardingParts.tsx:147
 msgid "{standalone} games"
 msgstr "{standalone} jeux"
+
+#. placeholder {0}: report.skipped
+#: src/features/save-manager/use-export-saves.ts:23
+msgid "{summary}. {0} snapshots only exist in Google Drive and were left out."
+msgstr "{summary}. {0} snapshots n’existent que dans Google Drive et ont été laissés de côté."
 
 #. placeholder {0}: formatPlaytime(event.durationSeconds)
 #: src/app/use-backend-events.ts:86
@@ -306,12 +317,12 @@ msgstr "{title} : les fichiers de sauvegarde étaient encore utilisés. Créez u
 msgid "<0>{0} of {1}</0> snapshots uploaded"
 msgstr "<0>{0} sur {1}</0> snapshots envoyés"
 
-#: src/features/cloud/CloudPage.tsx:110
+#: src/features/cloud/CloudPage.tsx:111
 msgid "1 conflict"
 msgstr "1 conflit"
 
 #: src/features/cloud/ConflictDialog.tsx:41
-#: src/features/saves-import/ImportSavesDialogs.tsx:153
+#: src/features/saves-import/ImportSavesDialogs.tsx:176
 msgid "1 file"
 msgstr "1 fichier"
 
@@ -336,7 +347,7 @@ msgstr "1 jeu dans votre bibliothèque"
 msgid "1 game was hidden because it is already in your library."
 msgstr "1 jeu a été masqué car il est déjà dans votre bibliothèque."
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:215
+#: src/features/saves-import/ImportSavesDialogs.tsx:238
 msgid "1 log or screenshot left out"
 msgstr "1 journal ou capture d’écran ignoré"
 
@@ -359,11 +370,11 @@ msgstr "1 snapshot"
 msgid "1 snapshot · protected"
 msgstr "1 snapshot · protégé"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:383
+#: src/features/saves-import/ImportSavesDialogs.tsx:406
 msgid "1 snapshot imported"
 msgstr "1 snapshot importé"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:322
+#: src/features/saves-import/ImportSavesDialogs.tsx:345
 msgid "1 snapshot will be created."
 msgstr "1 snapshot sera créé."
 
@@ -375,11 +386,11 @@ msgstr "15 Go gratuits avec n’importe quel compte Google"
 msgid "A backup or Drive upload is in progress. Restarting now may interrupt it."
 msgstr "Une sauvegarde ou un envoi vers Drive est en cours. Redémarrer maintenant peut l’interrompre."
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:125
-msgid "A big folder can take a few minutes. You can hide this window: the work continues and you will be told when it is ready."
-msgstr "Un gros dossier peut prendre quelques minutes. Vous pouvez masquer cette fenêtre : le travail continue et vous serez prévenu quand c’est prêt."
+#: src/features/saves-import/ImportSavesDialogs.tsx:148
+msgid "A big folder, or a search of the whole PC, can take a few minutes. You can hide this window: the work continues and you will be told when it is ready."
+msgstr "Un gros dossier, ou la recherche sur tout le PC, peut prendre quelques minutes. Vous pouvez masquer cette fenêtre : le travail continue et vous serez prévenu quand ce sera prêt."
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:82
+#: src/features/saves-import/ImportSavesDialogs.tsx:97
 msgid "A folder with all my saves"
 msgstr "Un dossier avec toutes mes sauvegardes"
 
@@ -423,13 +434,17 @@ msgstr "Une snapshot est prise automatiquement chaque fois que vous arrêtez de 
 msgid "A soft background tone while console mode is open"
 msgstr "Une légère ambiance sonore tant que le mode console est ouvert"
 
-#: src/features/settings/SettingsPage.tsx:281
+#: src/features/settings/SettingsPage.tsx:287
 msgid "About"
 msgstr "À propos"
 
 #: src/features/console/views/CloudView.tsx:113
 msgid "Account"
 msgstr "Compte"
+
+#: src/features/save-manager/SaveManagerPage.tsx:180
+msgid "Actions"
+msgstr "Actions"
 
 #: src/features/saves/SaveLocationsCard.tsx:83
 msgid "Add"
@@ -452,7 +467,7 @@ msgstr "Ajouter 1 jeu"
 #: src/components/shell/NavRail.tsx:62
 #: src/features/library/AddGameDialogs.tsx:224
 #: src/features/onboarding/OnboardingDialog.tsx:230
-#: src/features/settings/SettingsPage.tsx:171
+#: src/features/settings/SettingsPage.tsx:177
 msgid "Add a game"
 msgstr "Ajouter un jeu"
 
@@ -460,7 +475,7 @@ msgstr "Ajouter un jeu"
 msgid "Add a save folder"
 msgstr "Ajouter un dossier de sauvegardes"
 
-#: src/features/settings/SettingsPage.tsx:168
+#: src/features/settings/SettingsPage.tsx:174
 msgid "Add a whole folder of games, or any game by choosing its .exe file."
 msgstr "Ajoutez un dossier entier de jeux, ou n’importe quel jeu en choisissant son fichier .exe."
 
@@ -475,7 +490,7 @@ msgid "Add its save folder yourself to protect it."
 msgstr "Ajoutez vous-même son dossier de sauvegarde pour le protéger."
 
 #: src/features/console/views/GamePanel.tsx:84
-#: src/features/game-details/GameHero.tsx:150
+#: src/features/game-details/GameHero.tsx:153
 msgid "Add to favourites"
 msgstr "Ajouter aux favoris"
 
@@ -506,7 +521,7 @@ msgstr "Avancé : utiliser mon propre projet Google"
 
 #: src/features/console/components/modals/LetterPicker.tsx:61
 #: src/features/library/LibraryToolbar.tsx:45
-#: src/features/save-manager/SaveManagerPage.tsx:166
+#: src/features/save-manager/SaveManagerPage.tsx:193
 #: src/features/saves/GameSavesPanel.tsx:84
 msgid "All"
 msgstr "Tous"
@@ -514,7 +529,7 @@ msgstr "Tous"
 #: src/features/console/components/FilterChips.tsx:19
 #: src/features/console/views/SavesView.tsx:84
 #: src/features/library/LibraryToolbar.tsx:54
-#: src/features/save-manager/SaveManagerPage.tsx:113
+#: src/features/save-manager/SaveManagerPage.tsx:116
 msgid "All games"
 msgstr "Tous les jeux"
 
@@ -530,7 +545,7 @@ msgstr "Tout est prêt"
 msgid "All styles"
 msgstr "Tous les styles"
 
-#: src/features/save-manager/SaveManagerPage.tsx:189
+#: src/features/save-manager/SaveManagerPage.tsx:216
 msgid "All time"
 msgstr "Depuis toujours"
 
@@ -555,7 +570,7 @@ msgstr "Toujours actif"
 msgid "Ambient sound"
 msgstr "Ambiance sonore"
 
-#: src/features/save-manager/SaveManagerPage.tsx:177
+#: src/features/save-manager/SaveManagerPage.tsx:204
 msgid "Anywhere"
 msgstr "Partout"
 
@@ -567,18 +582,18 @@ msgstr "Clé d’API supprimée"
 msgid "API key saved"
 msgstr "Clé d’API enregistrée"
 
-#: src/features/settings/SettingsPage.tsx:279
+#: src/features/settings/SettingsPage.tsx:285
 msgid "Appearance"
 msgstr "Apparence"
 
-#: src/features/settings/SettingsPage.tsx:245
+#: src/features/settings/SettingsPage.tsx:251
 msgid "Application details could not be read."
 msgstr "Impossible de lire les informations de l’application."
 
 #: src/features/console/views/GamePanel.tsx:113
 #: src/features/game-details/GameDetailsPage.tsx:78
 #: src/features/game-details/GameOverview.tsx:152
-#: src/features/settings/SettingsPage.tsx:275
+#: src/features/settings/SettingsPage.tsx:281
 msgid "Artwork"
 msgstr "Illustrations"
 
@@ -615,7 +630,7 @@ msgstr "Auto"
 msgid "Auto snapshots when a game closes"
 msgstr "Snapshots automatiques à la fermeture d’un jeu"
 
-#: src/features/save-manager/SaveManagerPage.tsx:168
+#: src/features/save-manager/SaveManagerPage.tsx:195
 msgid "Automatic"
 msgstr "Automatiques"
 
@@ -635,12 +650,12 @@ msgstr "Snapshot automatique ignorée"
 msgid "Automatic snapshots"
 msgstr "Snapshots automatiques"
 
-#: src/features/console/views/use-settings-rows.ts:114
-#: src/features/console/views/use-settings-rows.ts:127
+#: src/features/console/views/use-settings-rows.ts:123
+#: src/features/console/views/use-settings-rows.ts:136
 msgid "Automatic snapshots per game"
 msgstr "Snapshots automatiques par jeu"
 
-#: src/features/settings/SettingsPage.tsx:191
+#: src/features/settings/SettingsPage.tsx:197
 msgid "Available"
 msgstr "Disponible"
 
@@ -687,7 +702,7 @@ msgstr "Sauvegardé sur ce PC et dans Google Drive"
 msgid "Backing up now"
 msgstr "Sauvegarde en cours"
 
-#: src/features/settings/SettingsPage.tsx:277
+#: src/features/settings/SettingsPage.tsx:283
 msgid "Backup"
 msgstr "Sauvegarde"
 
@@ -703,7 +718,11 @@ msgstr "Avant le lancement"
 msgid "Before launching a game"
 msgstr "Avant de lancer un jeu"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:65
+#: src/features/cloud/ConflictNotices.tsx:80
+msgid "Both saves are kept until you choose. You can hide this notice and decide later."
+msgstr "Les deux sauvegardes sont conservées tant que vous n’avez pas choisi. Vous pouvez masquer cet avis et décider plus tard."
+
+#: src/features/saves-import/ImportSavesDialogs.tsx:80
 msgid "Bring in backups you made by hand, even for games that are not installed. Your original files are never changed."
 msgstr "Importez les sauvegardes que vous avez faites à la main, même pour des jeux qui ne sont pas installés. Vos fichiers d’origine ne sont jamais modifiés."
 
@@ -712,11 +731,11 @@ msgstr "Importez les sauvegardes que vous avez faites à la main, même pour des
 msgid "By {0}"
 msgstr "Par {0}"
 
-#: src/features/cloud/CloudPage.tsx:275
+#: src/features/cloud/CloudPage.tsx:258
 #: src/features/library/AddGameDialogs.tsx:137
 #: src/features/library/AddGameDialogs.tsx:228
-#: src/features/saves-import/ImportSavesDialogs.tsx:68
-#: src/features/saves-import/ImportSavesDialogs.tsx:287
+#: src/features/saves-import/ImportSavesDialogs.tsx:83
+#: src/features/saves-import/ImportSavesDialogs.tsx:310
 #: src/features/saves/CreateSnapshotDialog.tsx:122
 #: src/features/saves/DeleteSnapshotDialog.tsx:83
 #: src/features/saves/RestoreImportedDialog.tsx:74
@@ -726,11 +745,12 @@ msgstr "annuler"
 
 #: src/features/console/components/modals/ConfirmRestoreModal.tsx:53
 #: src/features/dashboard/dashboard-sections.tsx:93
+#: src/features/game-details/InstallSavesGame.tsx:90
 #: src/features/library/AddGameDialogs.tsx:143
 #: src/features/library/AddGameDialogs.tsx:233
-#: src/features/saves-import/ImportSavesDialogs.tsx:73
-#: src/features/saves-import/ImportSavesDialogs.tsx:115
-#: src/features/saves-import/ImportSavesDialogs.tsx:293
+#: src/features/saves-import/ImportSavesDialogs.tsx:88
+#: src/features/saves-import/ImportSavesDialogs.tsx:138
+#: src/features/saves-import/ImportSavesDialogs.tsx:316
 #: src/features/saves/CreateSnapshotDialog.tsx:128
 #: src/features/saves/RestoreImportedDialog.tsx:80
 #: src/features/saves/RestoreSnapshotDialog.tsx:85
@@ -771,7 +791,7 @@ msgstr "Modifiée depuis le dernier snapshot"
 msgid "Changed since the latest snapshot"
 msgstr "Modifiée depuis la dernière snapshot"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:308
+#: src/features/saves-import/ImportSavesDialogs.tsx:331
 msgid "Check each game’s title and the name of its snapshots. Games you import appear in your library as “Saves only” until you install them."
 msgstr "Vérifiez le titre de chaque jeu et le nom de ses snapshots. Les jeux importés apparaissent dans votre bibliothèque comme « Sauvegardes seules » tant que vous ne les installez pas."
 
@@ -798,7 +818,7 @@ msgid "Check the log file for details, then try again."
 msgstr "Consultez le fichier journal pour plus de détails, puis réessayez."
 
 #: src/features/library/AddGameDialogs.tsx:123
-#: src/features/saves-import/ImportSavesDialogs.tsx:271
+#: src/features/saves-import/ImportSavesDialogs.tsx:294
 msgid "Check the log file for details."
 msgstr "Consultez le fichier journal pour en savoir plus."
 
@@ -835,11 +855,11 @@ msgstr "Choisir un autre dossier…"
 msgid "Choose one program"
 msgstr "Choisir un seul programme"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:91
+#: src/features/saves-import/ImportSavesDialogs.tsx:106
 msgid "Choose the backup folder of a single game. Sub-folders become separate named snapshots."
 msgstr "Choisissez le dossier de sauvegarde d’un seul jeu. Les sous-dossiers deviennent des snapshots nommés distincts."
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:92
+#: src/features/saves-import/ImportSavesDialogs.tsx:107
 msgid "Choose the backup folder of the game"
 msgstr "Choisissez le dossier de sauvegarde du jeu"
 
@@ -847,7 +867,7 @@ msgstr "Choisissez le dossier de sauvegarde du jeu"
 msgid "Choose the folder that contains your games"
 msgstr "Choisissez le dossier qui contient vos jeux"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:84
+#: src/features/saves-import/ImportSavesDialogs.tsx:99
 msgid "Choose the folder that contains your saves"
 msgstr "Choisissez le dossier qui contient vos sauvegardes"
 
@@ -860,6 +880,7 @@ msgstr "Choisissez le dossier dans lequel restaurer"
 msgid "Choose the folder where {0} keeps its saves"
 msgstr "Choisissez le dossier où {0} enregistre ses sauvegardes"
 
+#: src/features/game-details/InstallSavesGame.tsx:53
 #: src/features/library/use-library-flows.ts:72
 msgid "Choose the game's executable"
 msgstr "Choisissez l’exécutable du jeu"
@@ -867,6 +888,10 @@ msgstr "Choisissez l’exécutable du jeu"
 #: src/features/settings/BackupSection.tsx:35
 msgid "Choose where snapshots are stored"
 msgstr "Choisissez où stocker les snapshots"
+
+#: src/features/save-manager/use-export-saves.ts:36
+msgid "Choose where to save the export"
+msgstr "Choisissez où enregistrer l’export"
 
 #: src/features/saves/use-folder-picker.ts:16
 msgid "Choosing a folder needs the desktop app"
@@ -934,7 +959,7 @@ msgstr "Fermez {0} avant de restaurer."
 msgid "Close the game before using the Drive version."
 msgstr "Fermez le jeu avant d’utiliser la version Drive."
 
-#: src/features/game-details/GameHero.tsx:144
+#: src/features/game-details/GameHero.tsx:147
 #: src/features/saves/CreateSnapshotDialog.tsx:167
 #: src/features/saves/GameSavesPanel.tsx:102
 msgid "Close the game first"
@@ -951,12 +976,12 @@ msgstr "Fermer la fenêtre laisse L8Play actif pour que les sauvegardes automati
 #: src/features/console/components/ConsoleTopBar.tsx:25
 #: src/features/console/views/CloudView.tsx:129
 #: src/features/console/views/CloudView.tsx:131
-#: src/features/settings/SettingsPage.tsx:278
+#: src/features/settings/SettingsPage.tsx:284
 msgid "Cloud"
 msgstr "Cloud"
 
 #: src/components/shell/NavRail.tsx:79
-#: src/features/cloud/CloudPage.tsx:172
+#: src/features/cloud/CloudPage.tsx:173
 msgid "Cloud Storage"
 msgstr "Stockage cloud"
 
@@ -985,7 +1010,7 @@ msgstr "Connecter"
 msgid "Connect a store to list every game you own, installed or not, and open its install page from L8Play. Sign-in always happens on the store’s own page: L8Play never sees or stores your password."
 msgstr "Connectez une boutique pour lister tous les jeux que vous possédez, installés ou non, et ouvrir leur page d’installation depuis L8Play. La connexion se fait toujours sur la page de la boutique : L8Play ne voit ni ne stocke jamais votre mot de passe."
 
-#: src/features/cloud/CloudPage.tsx:60
+#: src/features/cloud/CloudPage.tsx:61
 #: src/features/console/views/CloudView.tsx:84
 #: src/features/onboarding/OnboardingDialog.tsx:170
 #: src/features/saves/GameSavesPanel.tsx:188
@@ -996,12 +1021,12 @@ msgstr "Connecter Google Drive"
 msgid "Connect Google Drive to also keep snapshots there, or only there."
 msgstr "Connectez Google Drive pour y garder aussi vos snapshots, ou uniquement là."
 
-#: src/features/cloud/CloudPage.tsx:101
+#: src/features/cloud/CloudPage.tsx:102
 msgid "Connected"
 msgstr "Connecté"
 
 #: src/components/shell/QuickRail.tsx:84
-#: src/features/console/ConsoleHost.tsx:77
+#: src/features/console/ConsoleHost.tsx:134
 msgid "Console mode"
 msgstr "Mode console"
 
@@ -1042,7 +1067,7 @@ msgstr "Commandes"
 msgid "Copies"
 msgstr "Copies"
 
-#: src/features/settings/SettingsPage.tsx:214
+#: src/features/settings/SettingsPage.tsx:220
 msgid "Copies new snapshots to Google Drive in the background while an account is connected."
 msgstr "Copie les nouvelles snapshots vers Google Drive en arrière-plan tant qu’un compte est connecté."
 
@@ -1072,8 +1097,8 @@ msgid "Create a free account on steamgriddb.com."
 msgstr "Créez un compte gratuit sur steamgriddb.com."
 
 #: src/features/console/views/GamePanel.tsx:95
-#: src/features/game-details/GameHero.tsx:146
-#: src/features/save-manager/SaveManagerPage.tsx:155
+#: src/features/game-details/GameHero.tsx:149
+#: src/features/save-manager/SaveManagerPage.tsx:152
 #: src/features/saves/CreateSnapshotDialog.tsx:117
 #: src/features/saves/CreateSnapshotDialog.tsx:138
 #: src/features/saves/GameSavesPanel.tsx:104
@@ -1112,11 +1137,11 @@ msgstr "Endommagée"
 msgid "Dashboard"
 msgstr "Tableau de bord"
 
-#: src/features/settings/SettingsPage.tsx:238
+#: src/features/settings/SettingsPage.tsx:244
 msgid "Database"
 msgstr "Base de données"
 
-#: src/features/save-manager/SaveManagerPage.tsx:185
+#: src/features/save-manager/SaveManagerPage.tsx:212
 msgid "Date"
 msgstr "Date"
 
@@ -1194,8 +1219,8 @@ msgstr "directement"
 msgid "Discard changes"
 msgstr "Annuler les modifications"
 
-#: src/features/cloud/CloudPage.tsx:123
-#: src/features/cloud/CloudPage.tsx:297
+#: src/features/cloud/CloudPage.tsx:124
+#: src/features/cloud/CloudPage.tsx:280
 msgid "Disconnect"
 msgstr "Déconnecter"
 
@@ -1203,7 +1228,7 @@ msgstr "Déconnecter"
 msgid "Disconnect any time; local snapshots stay"
 msgstr "Déconnectez-vous quand vous voulez ; les snapshots locales restent"
 
-#: src/features/cloud/CloudPage.tsx:293
+#: src/features/cloud/CloudPage.tsx:276
 msgid "Disconnect failed"
 msgstr "Échec de la déconnexion"
 
@@ -1211,7 +1236,7 @@ msgstr "Échec de la déconnexion"
 msgid "Disconnect Google Drive first to change the client. Your snapshots and Drive files are not touched."
 msgstr "Déconnectez d’abord Google Drive pour changer de client. Vos snapshots et vos fichiers Drive ne sont pas touchés."
 
-#: src/features/cloud/CloudPage.tsx:271
+#: src/features/cloud/CloudPage.tsx:254
 msgid "Disconnect Google Drive?"
 msgstr "Déconnecter Google Drive ?"
 
@@ -1220,7 +1245,7 @@ msgid "Dismiss"
 msgstr "Fermer"
 
 #: src/features/artwork/ArtworkDialog.tsx:169
-#: src/features/saves-import/ImportSavesDialogs.tsx:389
+#: src/features/saves-import/ImportSavesDialogs.tsx:412
 #: src/features/saves/FindSavesDialog.tsx:73
 msgid "Done"
 msgstr "Terminé"
@@ -1269,11 +1294,11 @@ msgstr "Drive contient une sauvegarde différente de {0}"
 msgid "Drive storage"
 msgstr "Stockage Drive"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:348
+#: src/features/saves-import/ImportSavesDialogs.tsx:371
 msgid "Each snapshot is copied and checked. You can keep using L8Play meanwhile."
 msgstr "Chaque snapshot est copié puis vérifié. Vous pouvez continuer à utiliser L8Play pendant ce temps."
 
-#: src/features/console/views/use-settings-rows.ts:96
+#: src/features/console/views/use-settings-rows.ts:105
 msgid "Ember (dark)"
 msgstr "Ember (sombre)"
 
@@ -1282,7 +1307,7 @@ msgid "Ember is the dark theme; Rosé is its light counterpart."
 msgstr "Ember est le thème sombre ; Rosé est sa version claire."
 
 #. placeholder {0}: game.emptySnapshots.join(", ")
-#: src/features/saves-import/ImportSavesDialogs.tsx:220
+#: src/features/saves-import/ImportSavesDialogs.tsx:243
 msgid "Empty folders skipped: {0}"
 msgstr "Dossiers vides ignorés : {0}"
 
@@ -1306,7 +1331,7 @@ msgstr "Tous les jeux trouvés dans ce dossier sont déjà dans votre bibliothè
 msgid "Every save protected."
 msgstr "Chaque sauvegarde protégée."
 
-#: src/features/cloud/CloudPage.tsx:55
+#: src/features/cloud/CloudPage.tsx:56
 msgid "Everything works on this PC without it. Connecting keeps a second, verified copy of your snapshots and lets you continue on another PC."
 msgstr "Tout fonctionne sur ce PC sans cela. La connexion garde une seconde copie vérifiée de vos snapshots et permet de continuer sur un autre PC."
 
@@ -1323,13 +1348,21 @@ msgid "Existing snapshots stay where they are."
 msgstr "Les snapshots existantes restent où elles sont."
 
 #: src/features/console/components/modals/QuickMenu.tsx:18
-#: src/features/console/views/use-settings-rows.ts:137
+#: src/features/console/views/use-settings-rows.ts:146
 msgid "Exit console mode"
 msgstr "Quitter le mode console"
 
 #: src/components/shell/NavRail.tsx:63
 msgid "Expand the menu"
 msgstr "Déplier le menu"
+
+#: src/features/save-manager/SaveManagerPage.tsx:166
+msgid "Export all saves"
+msgstr "Exporter toutes les sauvegardes"
+
+#: src/features/save-manager/SaveManagerPage.tsx:166
+msgid "Exporting…"
+msgstr "Export en cours…"
 
 #: src/components/ds/status-badge.tsx:58
 #: src/features/cloud/TransferList.tsx:48
@@ -1403,7 +1436,11 @@ msgstr "Dossier nommé comme le jeu"
 msgid "Folder named like the install folder"
 msgstr "Dossier nommé comme le dossier d’installation"
 
-#: src/features/settings/SettingsPage.tsx:199
+#: src/features/game-details/InstallSavesGame.tsx:111
+msgid "For a game installed outside the stores. L8Play adds it to your library and joins these saves to it."
+msgstr "Pour un jeu installé en dehors des stores. L8Play l’ajoute à votre bibliothèque et y rattache ces sauvegardes."
+
+#: src/features/settings/SettingsPage.tsx:205
 msgid "For games the database does not know, “Find saves” on a game’s page asks PCGamingWiki and searches your PC. Nothing is backed up until you confirm a folder."
 msgstr "Pour les jeux que la base ne connaît pas, « Trouver les sauvegardes » sur la page d’un jeu interroge PCGamingWiki et cherche sur votre PC. Rien n’est sauvegardé tant que vous n’avez pas confirmé un dossier."
 
@@ -1420,7 +1457,7 @@ msgstr "{games} jeux trouvés"
 #. placeholder {2}: count("xbox")
 #. placeholder {3}: count("gog")
 #. placeholder {4}: count("standalone")
-#: src/features/settings/SettingsPage.tsx:136
+#: src/features/settings/SettingsPage.tsx:142
 msgid "Found automatically from their launchers. {0} Steam · {1} Epic · {2} Xbox · {3} GOG · {4} added by hand."
 msgstr "Trouvés automatiquement depuis leurs lanceurs. {0} Steam · {1} Epic · {2} Xbox · {3} GOG · {4} ajoutés à la main."
 
@@ -1452,11 +1489,11 @@ msgstr "Les détails de jeux sont privés"
 msgid "Game is closed"
 msgstr "Le jeu est fermé"
 
-#: src/features/settings/SettingsPage.tsx:135
+#: src/features/settings/SettingsPage.tsx:141
 msgid "Game launchers"
 msgstr "Lanceurs de jeux"
 
-#: src/features/settings/SettingsPage.tsx:274
+#: src/features/settings/SettingsPage.tsx:280
 msgid "Game Libraries"
 msgstr "Bibliothèques de jeux"
 
@@ -1469,7 +1506,7 @@ msgstr "Nom du jeu (par défaut : {0})"
 msgid "Game save folder"
 msgstr "Dossier de sauvegardes du jeu"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:185
+#: src/features/saves-import/ImportSavesDialogs.tsx:208
 msgid "Game title"
 msgstr "Titre du jeu"
 
@@ -1477,8 +1514,8 @@ msgstr "Titre du jeu"
 msgid "games"
 msgstr "jeux"
 
-#: src/features/save-manager/SaveManagerPage.tsx:103
-#: src/features/save-manager/SaveManagerPage.tsx:104
+#: src/features/save-manager/SaveManagerPage.tsx:106
+#: src/features/save-manager/SaveManagerPage.tsx:107
 msgid "Games"
 msgstr "Jeux"
 
@@ -1502,7 +1539,7 @@ msgstr "Les jeux sans dossier de sauvegarde connu pourront être complétés plu
 msgid "Games you play will show up here, most recent first."
 msgstr "Les jeux auxquels vous jouez apparaîtront ici, du plus récent au plus ancien."
 
-#: src/features/settings/SettingsPage.tsx:273
+#: src/features/settings/SettingsPage.tsx:279
 msgid "General"
 msgstr "Général"
 
@@ -1518,7 +1555,7 @@ msgstr "Commencer"
 msgid "GitHub could not be reached"
 msgstr "GitHub est injoignable"
 
-#: src/features/save-manager/SaveManagerPage.tsx:210
+#: src/features/save-manager/SaveManagerPage.tsx:237
 msgid "Go to My Games"
 msgstr "Aller à Mes jeux"
 
@@ -1551,11 +1588,11 @@ msgstr "Impossible de joindre Google. Vérifiez votre connexion et réessayez."
 msgid "Google Drive"
 msgstr "Google Drive"
 
-#: src/features/settings/SettingsPage.tsx:219
+#: src/features/settings/SettingsPage.tsx:225
 msgid "Google Drive account"
 msgstr "Compte Google Drive"
 
-#: src/features/cloud/CloudPage.tsx:154
+#: src/features/cloud/CloudPage.tsx:155
 #: src/features/console/views/CloudView.tsx:90
 #: src/features/onboarding/OnboardingDialog.tsx:78
 msgid "Google Drive connected"
@@ -1566,7 +1603,7 @@ msgstr "Google Drive connecté"
 msgid "Google Drive connected · {0}"
 msgstr "Google Drive connecté · {0}"
 
-#: src/features/cloud/CloudPage.tsx:291
+#: src/features/cloud/CloudPage.tsx:274
 msgid "Google Drive disconnected"
 msgstr "Google Drive déconnecté"
 
@@ -1574,7 +1611,7 @@ msgstr "Google Drive déconnecté"
 msgid "Google Drive is not connected"
 msgstr "Google Drive n’est pas connecté"
 
-#: src/features/cloud/CloudPage.tsx:53
+#: src/features/cloud/CloudPage.tsx:54
 msgid "Google Drive isn’t connected"
 msgstr "Google Drive n’est pas connecté"
 
@@ -1582,13 +1619,13 @@ msgstr "Google Drive n’est pas connecté"
 msgid "Google Drive uploads are switched off in Settings."
 msgstr "L’envoi vers Google Drive est désactivé dans les paramètres."
 
-#: src/features/cloud/CloudPage.tsx:155
+#: src/features/cloud/CloudPage.tsx:156
 #: src/features/console/views/CloudView.tsx:91
 #: src/features/onboarding/OnboardingDialog.tsx:81
 msgid "Google Drive was not connected"
 msgstr "Google Drive n’a pas été connecté"
 
-#: src/features/cloud/CloudPage.tsx:69
+#: src/features/cloud/CloudPage.tsx:70
 msgid "Google may show an “unverified app” warning while the app is not yet verified: choose “Advanced”, then “Continue”."
 msgstr "Google peut afficher un avertissement « application non vérifiée » tant que l’appli n’est pas validée : choisissez « Paramètres avancés », puis « Continuer »."
 
@@ -1612,6 +1649,14 @@ msgstr "Vue grille (Ctrl+G)"
 msgid "Hero"
 msgstr "Bannière"
 
+#: src/features/cloud/ConflictNotices.tsx:72
+msgid "Hide"
+msgstr "Masquer"
+
+#: src/features/game-details/InstallSavesGame.tsx:110
+msgid "I already have the game: choose its executable"
+msgstr "J’ai déjà le jeu : choisir son exécutable"
+
 #: src/features/artwork/ArtworkDialog.tsx:146
 #: src/features/artwork/ArtworkDialog.tsx:187
 msgid "Icon"
@@ -1634,15 +1679,15 @@ msgstr "Images"
 msgid "Images are cropped to fit, never stretched."
 msgstr "Les images sont recadrées, jamais déformées."
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:296
+#: src/features/saves-import/ImportSavesDialogs.tsx:319
 msgid "Import {chosen} games"
 msgstr "Importer {chosen} jeux"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:296
+#: src/features/saves-import/ImportSavesDialogs.tsx:319
 msgid "Import 1 game"
 msgstr "Importer 1 jeu"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:64
+#: src/features/saves-import/ImportSavesDialogs.tsx:79
 msgid "Import existing saves"
 msgstr "Importer des sauvegardes existantes"
 
@@ -1650,7 +1695,7 @@ msgstr "Importer des sauvegardes existantes"
 msgid "Import finished"
 msgstr "Importation terminée"
 
-#: src/features/save-manager/SaveManagerPage.tsx:146
+#: src/features/save-manager/SaveManagerPage.tsx:160
 msgid "Import saves"
 msgstr "Importer des sauvegardes"
 
@@ -1658,19 +1703,19 @@ msgstr "Importer des sauvegardes"
 msgid "Import saves only"
 msgstr "Importer des sauvegardes seules"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:148
+#: src/features/saves-import/ImportSavesDialogs.tsx:171
 #: src/features/saves/snapshot-labels.ts:24
 msgid "Imported backup"
 msgstr "Sauvegarde importée"
 
 #: src/features/saves-import/ImportActivity.tsx:42
-#: src/features/saves-import/ImportSavesDialogs.tsx:347
+#: src/features/saves-import/ImportSavesDialogs.tsx:370
 msgid "Importing your saves…"
 msgstr "Importation de vos sauvegardes…"
 
 #: src/components/ds/storage-tags.tsx:64
 #: src/features/cloud/ConflictDialog.tsx:50
-#: src/features/save-manager/SaveManagerPage.tsx:179
+#: src/features/save-manager/SaveManagerPage.tsx:206
 msgid "In Google Drive"
 msgstr "Dans Google Drive"
 
@@ -1698,7 +1743,7 @@ msgstr "Info"
 #: src/components/game/GameRow.tsx:80
 #: src/features/console/components/GameInfo.tsx:74
 #: src/features/console/views/GamePanel.tsx:75
-#: src/features/game-details/GameHero.tsx:135
+#: src/features/game-details/GameHero.tsx:138
 msgid "Install"
 msgstr "Installer"
 
@@ -1708,9 +1753,28 @@ msgstr "Installer"
 msgid "Install {0}"
 msgstr "Installer {0}"
 
+#. placeholder {0}: game.title
+#: src/features/game-details/InstallSavesGame.tsx:32
+msgid "Install {0} from the store"
+msgstr "Installer {0} depuis le store"
+
 #: src/features/game-details/PropertiesPanel.tsx:42
 msgid "Install folder"
 msgstr "Dossier d’installation"
+
+#. placeholder {0}: names[store] ?? store
+#: src/features/game-details/InstallSavesGame.tsx:101
+msgid "Install from {0}"
+msgstr "Installer depuis {0}"
+
+#: src/features/game-details/InstallSavesGame.tsx:127
+msgid "Install or link"
+msgstr "Installer ou lier"
+
+#. placeholder {0}: game.title
+#: src/features/game-details/InstallSavesGame.tsx:86
+msgid "Install or link {0}"
+msgstr "Installer ou lier {0}"
 
 #: src/features/game-details/GameOverview.tsx:59
 #: src/features/library/LibraryToolbar.tsx:66
@@ -1731,13 +1795,17 @@ msgid "Installed"
 msgstr "Installés"
 
 #. placeholder {0}: formatBytes(game.sizeBytes, i18n.locale)
-#: src/features/game-details/GameHero.tsx:94
+#: src/features/game-details/GameHero.tsx:95
 msgid "Installed · {0}"
 msgstr "Installé · {0}"
 
 #: src/features/settings/SettingsPage.tsx:72
 msgid "Interface language."
 msgstr "Langue de l’interface."
+
+#: src/features/cloud/ConflictNotices.tsx:61
+msgid "It happens when this PC and Google Drive each hold a different latest save of the same game, so L8Play cannot tell which one is right. It usually means the game was played on two PCs, or that L8Play was reinstalled. Nothing is lost: both saves are kept and never cleaned up automatically. Press Resolve to choose one (if you are unsure, choose “Keep both, change nothing yet”), or leave it for later."
+msgstr "Cela arrive quand ce PC et Google Drive ont chacun une dernière sauvegarde différente du même jeu : L8Play ne peut pas savoir laquelle est la bonne. C’est souvent le signe que le jeu a été joué sur deux PC, ou que L8Play a été réinstallé. Rien n’est perdu : les deux sauvegardes sont conservées et jamais nettoyées automatiquement. Appuyez sur Résoudre pour en choisir une (en cas de doute, choisissez « Garder les deux, ne rien changer pour l’instant »), ou laissez-le pour plus tard."
 
 #: src/features/cloud/TransferList.tsx:49
 msgid "It will be tried again"
@@ -1759,7 +1827,7 @@ msgstr "Aller aux jeux qui commencent par une lettre"
 msgid "Keep a copy in Google Drive?"
 msgstr "Garder une copie dans Google Drive ?"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:224
+#: src/features/saves-import/ImportSavesDialogs.tsx:247
 msgid "Keep as one snapshot"
 msgstr "Garder en un seul snapshot"
 
@@ -1771,12 +1839,12 @@ msgstr "Garder les deux séparément"
 msgid "Keep both, change nothing yet"
 msgstr "Garder les deux, ne rien changer pour l’instant"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:118
-#: src/features/saves-import/ImportSavesDialogs.tsx:351
+#: src/features/saves-import/ImportSavesDialogs.tsx:141
+#: src/features/saves-import/ImportSavesDialogs.tsx:374
 msgid "Keep going in the background"
 msgstr "Continuer en arrière-plan"
 
-#: src/features/console/views/use-settings-rows.ts:126
+#: src/features/console/views/use-settings-rows.ts:135
 #: src/features/settings/BackupSection.tsx:86
 #: src/features/settings/BackupSection.tsx:90
 msgid "Keep in Google Drive"
@@ -1787,7 +1855,7 @@ msgstr "Conserver dans Google Drive"
 msgid "Keep it"
 msgstr "La garder"
 
-#: src/features/console/views/use-settings-rows.ts:113
+#: src/features/console/views/use-settings-rows.ts:122
 #: src/features/settings/BackupSection.tsx:74
 #: src/features/settings/BackupSection.tsx:78
 msgid "Keep on this PC"
@@ -1807,7 +1875,7 @@ msgstr "Garde la sauvegarde de ce PC et télécharge l’autre en copie de confl
 msgid "Key saved"
 msgstr "Clé enregistrée"
 
-#: src/features/save-manager/SaveManagerPage.tsx:162
+#: src/features/save-manager/SaveManagerPage.tsx:189
 msgid "Kind"
 msgstr "Type"
 
@@ -1824,7 +1892,7 @@ msgstr "L8Play trouve vos jeux, les lance depuis un seul endroit et garde une co
 msgid "L8Play keeps “Safety copy before restore” on this PC, so you can undo this by restoring it from Saves."
 msgstr "L8Play garde « Copie de sécurité avant restauration » sur ce PC : vous pouvez annuler en la restaurant depuis Sauvegardes."
 
-#: src/features/cloud/CloudPage.tsx:66
+#: src/features/cloud/CloudPage.tsx:67
 msgid "L8Play only accesses the files it creates, in a folder named “L8Play” in your Drive. It cannot see anything else."
 msgstr "L8Play n’accède qu’aux fichiers qu’il crée, dans un dossier « L8Play » de votre Drive. Il ne peut rien voir d’autre."
 
@@ -1845,7 +1913,7 @@ msgstr "L8Play va se fermer, installer la version {0} et redémarrer."
 msgid "L8Play will restart to finish."
 msgstr "L8Play va redémarrer pour terminer."
 
-#: src/features/console/views/use-settings-rows.ts:81
+#: src/features/console/views/use-settings-rows.ts:90
 #: src/features/settings/SettingsPage.tsx:71
 #: src/features/settings/SettingsPage.tsx:75
 msgid "Language"
@@ -1855,11 +1923,11 @@ msgstr "Langue"
 msgid "Last {count} per game"
 msgstr "{count} dernières par jeu"
 
-#: src/features/save-manager/SaveManagerPage.tsx:191
+#: src/features/save-manager/SaveManagerPage.tsx:218
 msgid "Last 30 days"
 msgstr "30 derniers jours"
 
-#: src/features/save-manager/SaveManagerPage.tsx:190
+#: src/features/save-manager/SaveManagerPage.tsx:217
 msgid "Last 7 days"
 msgstr "7 derniers jours"
 
@@ -1871,7 +1939,7 @@ msgstr "Dernière partie"
 #. placeholder {0}: formatDateTime(game.lastPlayedAt, i18n.locale)
 #. placeholder {0}: formatRelative(game.lastPlayedAt, i18n.locale)
 #: src/features/console/components/GameInfo.tsx:59
-#: src/features/game-details/GameHero.tsx:106
+#: src/features/game-details/GameHero.tsx:107
 msgid "Last played {0}"
 msgstr "Dernière partie : {0}"
 
@@ -1917,6 +1985,10 @@ msgstr "Bibliothèques analysées"
 msgid "Library"
 msgstr "Bibliothèque"
 
+#: src/features/game-details/InstallSavesGame.tsx:45
+msgid "Linking a game needs the desktop app"
+msgstr "Lier un jeu nécessite l’application de bureau"
+
 #: src/features/library/LibraryToolbar.tsx:127
 msgid "List view (Ctrl+L)"
 msgstr "Vue liste (Ctrl+L)"
@@ -1929,7 +2001,7 @@ msgstr "Listé sur PCGamingWiki"
 msgid "Lists the games in your Epic library and opens the Epic Games Launcher to install them."
 msgstr "Liste les jeux de votre bibliothèque Epic et ouvre l’Epic Games Launcher pour les installer."
 
-#: src/features/settings/SettingsPage.tsx:145
+#: src/features/settings/SettingsPage.tsx:151
 msgid "Lists the games your Steam account owns, read from Steam with your own free Steam Web API key or from your public profile. Nothing is sent about you except the request itself. Epic and other stores don’t offer this without signing in, so only Steam is listed."
 msgstr "Liste les jeux que votre compte Steam possède, lus depuis Steam avec votre propre clé d’API Web Steam gratuite ou depuis votre profil public. Rien n’est envoyé à votre sujet, hormis la requête elle-même. Epic et les autres boutiques ne le permettent pas sans connexion, donc seul Steam est listé."
 
@@ -1946,7 +2018,7 @@ msgid "Lists your Xbox and Microsoft Store games and opens the Xbox app to insta
 msgstr "Liste vos jeux Xbox et Microsoft Store et ouvre l’application Xbox pour les installer."
 
 #: src/features/console/views/LibraryView.tsx:96
-#: src/features/settings/SettingsPage.tsx:244
+#: src/features/settings/SettingsPage.tsx:250
 msgid "Loading…"
 msgstr "Chargement…"
 
@@ -1958,7 +2030,7 @@ msgstr "Local"
 msgid "Logo"
 msgstr "Logo"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:123
+#: src/features/saves-import/ImportSavesDialogs.tsx:146
 msgid "Looking for games and snapshots"
 msgstr "Recherche des jeux et des snapshots"
 
@@ -1970,11 +2042,15 @@ msgstr "Recherche de jeux…"
 msgid "Looks for a newer version when L8Play starts and every 6 hours. Nothing is downloaded or installed until you ask."
 msgstr "Recherche une version plus récente au démarrage de L8Play et toutes les 6 heures. Rien n’est téléchargé ni installé sans votre accord."
 
+#: src/features/saves-import/ImportSavesDialogs.tsx:114
+msgid "Looks in the usual save folders (AppData, Documents, Saved Games, Steam) for the saves of games that are no longer installed."
+msgstr "Cherche dans les dossiers de sauvegarde habituels (AppData, Documents, Saved Games, Steam) les sauvegardes de jeux qui ne sont plus installés."
+
 #: src/features/settings/ArtworkSection.tsx:118
 msgid "Looks up cover, hero and logo for Epic and standalone games. This also runs when the app starts."
 msgstr "Cherche jaquette, bannière et logo pour les jeux Epic et indépendants. Cette recherche s’exécute aussi au démarrage de l’appli."
 
-#: src/features/settings/SettingsPage.tsx:187
+#: src/features/settings/SettingsPage.tsx:193
 msgid "Ludusavi save database"
 msgstr "Base de sauvegardes Ludusavi"
 
@@ -1987,7 +2063,7 @@ msgid "Manage the key"
 msgstr "Gérer la clé"
 
 #: src/components/ds/status-badge.tsx:62
-#: src/features/save-manager/SaveManagerPage.tsx:167
+#: src/features/save-manager/SaveManagerPage.tsx:194
 #: src/features/saves/GameSavesPanel.tsx:85
 #: src/features/saves/snapshot-labels.ts:12
 msgid "Manual"
@@ -2048,7 +2124,7 @@ msgstr "Plus de jeux"
 msgid "More progress"
 msgstr "Plus de progression"
 
-#: src/features/saves/snapshot-menu.tsx:43
+#: src/features/saves/snapshot-menu.tsx:17
 msgid "More snapshot actions"
 msgstr "Autres actions sur le snapshot"
 
@@ -2057,7 +2133,7 @@ msgid "Move these imported snapshots to the installed game, so they restore into
 msgstr "Déplacez ces snapshots importés vers le jeu installé, pour qu’ils se restaurent dans son propre dossier de sauvegarde."
 
 #: src/components/shell/NavRail.tsx:77
-#: src/features/game-details/GameHero.tsx:74
+#: src/features/game-details/GameHero.tsx:75
 #: src/features/library/LibraryPage.tsx:48
 #: src/features/library/LibraryPage.tsx:164
 msgid "My Games"
@@ -2067,7 +2143,7 @@ msgstr "Mes jeux"
 msgid "Name"
 msgstr "Nom"
 
-#: src/features/settings/SettingsPage.tsx:301
+#: src/features/settings/SettingsPage.tsx:307
 msgid "Needs your attention"
 msgstr "Demande votre attention"
 
@@ -2086,7 +2162,7 @@ msgstr "Jamais supprimée automatiquement"
 msgid "Never played"
 msgstr "Jamais joué"
 
-#: src/features/cloud/CloudPage.tsx:238
+#: src/features/cloud/CloudPage.tsx:221
 msgid "New snapshots are copied to Drive in the background. Safety copies stay on this PC."
 msgstr "Les nouvelles snapshots sont copiées vers Drive en arrière-plan. Les copies de sécurité restent sur ce PC."
 
@@ -2154,7 +2230,7 @@ msgstr "Aucune sauvegarde trouvée"
 msgid "No save location yet"
 msgstr "Aucun emplacement de sauvegardes"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:303
+#: src/features/saves-import/ImportSavesDialogs.tsx:326
 msgid "No saves found in this folder. Choose the folder that holds your backups, one sub-folder per game."
 msgstr "Aucune sauvegarde trouvée dans ce dossier. Choisissez le dossier qui contient vos sauvegardes, un sous-dossier par jeu."
 
@@ -2162,7 +2238,7 @@ msgstr "Aucune sauvegarde trouvée dans ce dossier. Choisissez le dossier qui co
 msgid "No snapshot is in Drive yet."
 msgstr "Aucune snapshot n’est encore dans Drive."
 
-#: src/features/save-manager/SaveManagerPage.tsx:201
+#: src/features/save-manager/SaveManagerPage.tsx:228
 msgid "No snapshot matches these filters"
 msgstr "Aucune snapshot ne correspond à ces filtres"
 
@@ -2191,7 +2267,7 @@ msgstr "Aucun snapshot pour l’instant. Lancez un jeu, ou créez-en un depuis s
 msgid "No snapshot yet. Your save is copied each time you stop playing."
 msgstr "Aucune snapshot pour l’instant. Votre sauvegarde est copiée à chaque fin de partie."
 
-#: src/features/save-manager/SaveManagerPage.tsx:201
+#: src/features/save-manager/SaveManagerPage.tsx:228
 #: src/features/saves/GameSavesPanel.tsx:114
 msgid "No snapshots yet"
 msgstr "Aucun snapshot pour l’instant"
@@ -2214,7 +2290,7 @@ msgid "Not connected."
 msgstr "Non connecté."
 
 #: src/features/onboarding/OnboardingParts.tsx:139
-#: src/features/settings/SettingsPage.tsx:193
+#: src/features/settings/SettingsPage.tsx:199
 msgid "Not found"
 msgstr "Introuvable"
 
@@ -2225,7 +2301,7 @@ msgstr "Absent de Google Drive"
 #: src/components/game/GameCard.tsx:37
 #: src/components/game/GameCard.tsx:84
 #: src/features/console/components/FilterChips.tsx:23
-#: src/features/game-details/GameHero.tsx:99
+#: src/features/game-details/GameHero.tsx:100
 #: src/features/library/LibraryToolbar.tsx:56
 msgid "Not installed"
 msgstr "Non installé"
@@ -2257,7 +2333,7 @@ msgstr "Pas encore protégé"
 msgid "Not scanned yet"
 msgstr "Pas encore analysé"
 
-#: src/features/cloud/CloudPage.tsx:114
+#: src/features/cloud/CloudPage.tsx:115
 msgid "Not synced yet"
 msgstr "Pas encore synchronisé"
 
@@ -2334,7 +2410,7 @@ msgstr "Les anciennes snapshots automatiques sont aussi supprimées de Google Dr
 msgid "Oldest auto snapshots are removed first."
 msgstr "Les plus anciennes snapshots automatiques sont supprimées en premier."
 
-#: src/features/settings/SettingsPage.tsx:200
+#: src/features/settings/SettingsPage.tsx:206
 msgid "On demand"
 msgstr "À la demande"
 
@@ -2345,7 +2421,7 @@ msgstr "sur ce PC"
 #: src/components/ds/storage-tags.tsx:62
 #: src/features/cloud/ConflictDialog.tsx:50
 #: src/features/console/views/GamePanel.tsx:96
-#: src/features/save-manager/SaveManagerPage.tsx:178
+#: src/features/save-manager/SaveManagerPage.tsx:205
 #: src/features/saves/CreateSnapshotDialog.tsx:233
 msgid "On this PC"
 msgstr "Sur ce PC"
@@ -2367,16 +2443,20 @@ msgstr "sur ce PC uniquement"
 msgid "On this PC only"
 msgstr "Sur ce PC uniquement"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:83
+#: src/features/game-details/InstallSavesGame.tsx:33
+msgid "Once it is installed, scan your libraries: L8Play will offer to join these saves to it."
+msgstr "Une fois installé, lancez un scan de vos bibliothèques : L8Play vous proposera d’y rattacher ces sauvegardes."
+
+#: src/features/saves-import/ImportSavesDialogs.tsx:98
 msgid "One sub-folder per game, like Save Games/Elden Ring. L8Play finds each game for you."
 msgstr "Un sous-dossier par jeu, comme Save Games/Elden Ring. L8Play retrouve chaque jeu pour vous."
 
-#: src/features/save-manager/SaveManagerPage.tsx:181
+#: src/features/save-manager/SaveManagerPage.tsx:208
 msgid "Only in Drive"
 msgstr "Seulement dans Drive"
 
 #: src/features/onboarding/OnboardingDialog.tsx:300
-#: src/features/save-manager/SaveManagerPage.tsx:180
+#: src/features/save-manager/SaveManagerPage.tsx:207
 msgid "Only on this PC"
 msgstr "Seulement sur ce PC"
 
@@ -2390,15 +2470,15 @@ msgid "Open"
 msgstr "Ouvrir"
 
 #: src/features/saves/CreateSnapshotDialog.tsx:245
-#: src/features/settings/SettingsPage.tsx:223
+#: src/features/settings/SettingsPage.tsx:229
 msgid "Open Cloud Storage"
 msgstr "Ouvrir Stockage cloud"
 
-#: src/features/save-manager/SaveManagerPage.tsx:142
+#: src/features/save-manager/SaveManagerPage.tsx:145
 msgid "Open game page"
 msgstr "Ouvrir la page du jeu"
 
-#: src/features/game-details/GameHero.tsx:159
+#: src/features/game-details/GameHero.tsx:162
 msgid "Open install folder"
 msgstr "Ouvrir le dossier d’installation"
 
@@ -2433,11 +2513,25 @@ msgstr "Ouvrir la page de la clé"
 msgid "Open the saves of {0}"
 msgstr "Ouvrir les sauvegardes de {0}"
 
+#: src/features/console/views/use-settings-rows.ts:82
+msgid "Open this interface as soon as L8Play starts"
+msgstr "Ouvrir cette interface dès le démarrage de L8Play"
+
 #. placeholder {0}: game.title
-#: src/features/console/core/use-console-play.ts:26
+#: src/features/console/core/use-console-play.ts:28
 #: src/features/library/use-game-actions.ts:38
 msgid "Opening the installer for {0}"
 msgstr "Ouverture de l’installation de {0}"
+
+#. placeholder {0}: names[store] ?? store
+#. placeholder {1}: game.title
+#: src/features/game-details/InstallSavesGame.tsx:102
+msgid "Opens {0} on a search for “{1}”. You must own the game there."
+msgstr "Ouvre {0} sur une recherche de « {1} ». Vous devez posséder le jeu là-bas."
+
+#: src/features/settings/SettingsPage.tsx:109
+msgid "Opens console mode full screen as soon as L8Play starts. With \"Start with Windows\", the window stays visible instead of hiding in the notification area."
+msgstr "Ouvre le mode console en plein écran dès le démarrage de L8Play. Avec « Démarrer avec Windows », la fenêtre reste visible au lieu de se cacher dans la zone de notification."
 
 #: src/features/console/views/CloudView.tsx:85
 msgid "Opens your browser to sign in. L8Play only sees the files it creates."
@@ -2459,11 +2553,11 @@ msgstr "Facultatif : permet à Steam de lister vos jeux à cette application."
 msgid "Other files"
 msgstr "Autres fichiers"
 
-#: src/features/settings/SettingsPage.tsx:167
+#: src/features/settings/SettingsPage.tsx:173
 msgid "Other games"
 msgstr "Autres jeux"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:192
+#: src/features/saves-import/ImportSavesDialogs.tsx:215
 msgid "Other names found:"
 msgstr "Autres noms trouvés :"
 
@@ -2509,7 +2603,7 @@ msgstr "PC"
 msgid "PC and Drive"
 msgstr "PC et Drive"
 
-#: src/features/settings/SettingsPage.tsx:198
+#: src/features/settings/SettingsPage.tsx:204
 msgid "PCGamingWiki and local search"
 msgstr "PCGamingWiki et recherche locale"
 
@@ -2525,7 +2619,7 @@ msgstr "PCGamingWiki liste des dossiers de sauvegarde pour ce jeu, mais aucun n�
 msgid "Per page"
 msgstr "Par page"
 
-#: src/features/save-manager/SaveManagerPage.tsx:152
+#: src/features/save-manager/SaveManagerPage.tsx:155
 msgid "Pick a game on the left first"
 msgstr "Choisissez d’abord un jeu à gauche"
 
@@ -2543,7 +2637,7 @@ msgstr "Plateforme"
 #: src/features/console/components/HintBar.tsx:30
 #: src/features/console/views/GamePanel.tsx:75
 #: src/features/dashboard/HeroCard.tsx:117
-#: src/features/game-details/GameHero.tsx:131
+#: src/features/game-details/GameHero.tsx:134
 msgid "Play"
 msgstr "Jouer"
 
@@ -2554,7 +2648,7 @@ msgstr "Jouer"
 msgid "Play {0}"
 msgstr "Jouer à {0}"
 
-#: src/features/save-manager/SaveManagerPage.tsx:204
+#: src/features/save-manager/SaveManagerPage.tsx:231
 msgid "Play a game and quit it: L8Play copies its saves automatically. You can also create a snapshot from a game’s page."
 msgstr "Jouez puis quittez un jeu : L8Play copie ses sauvegardes automatiquement. Vous pouvez aussi créer une snapshot depuis la page d’un jeu."
 
@@ -2572,7 +2666,7 @@ msgstr "{0} de jeu"
 #: src/components/game/GameRow.tsx:59
 #: src/components/game/GameTile.tsx:29
 #: src/features/dashboard/HeroCard.tsx:52
-#: src/features/game-details/GameHero.tsx:116
+#: src/features/game-details/GameHero.tsx:117
 msgid "Playing now"
 msgstr "En cours de jeu"
 
@@ -2588,7 +2682,7 @@ msgstr "Temps de jeu"
 msgid "PNG · JPG · WebP"
 msgstr "PNG · JPG · WebP"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:358
+#: src/features/saves-import/ImportSavesDialogs.tsx:381
 msgid "Preparing"
 msgstr "Préparation"
 
@@ -2604,6 +2698,7 @@ msgstr "Page précédente"
 msgid "Program to launch"
 msgstr "Programme à lancer"
 
+#: src/features/game-details/InstallSavesGame.tsx:54
 #: src/features/library/use-library-flows.ts:73
 msgid "Programs"
 msgstr "Programmes"
@@ -2662,7 +2757,7 @@ msgid "Reading the current save…"
 msgstr "Lecture de la sauvegarde actuelle…"
 
 #: src/features/saves-import/ImportActivity.tsx:31
-#: src/features/saves-import/ImportSavesDialogs.tsx:110
+#: src/features/saves-import/ImportSavesDialogs.tsx:133
 msgid "Reading your saves…"
 msgstr "Lecture de vos sauvegardes…"
 
@@ -2678,7 +2773,7 @@ msgstr "Prêt à vérifier"
 msgid "Recent"
 msgstr "Récents"
 
-#: src/features/dashboard/dashboard-sections.tsx:158
+#: src/features/dashboard/dashboard-sections.tsx:160
 msgid "Recent backups"
 msgstr "Sauvegardes récentes"
 
@@ -2710,7 +2805,7 @@ msgid "Remove {0} from favourites"
 msgstr "Retirer {0} des favoris"
 
 #: src/features/console/views/GamePanel.tsx:84
-#: src/features/game-details/GameHero.tsx:150
+#: src/features/game-details/GameHero.tsx:153
 msgid "Remove from favourites"
 msgstr "Retirer des favoris"
 
@@ -2735,7 +2830,7 @@ msgstr "Échec de la réinitialisation"
 msgid "Reset to automatic"
 msgstr "Revenir à l’automatique"
 
-#: src/features/cloud/CloudPage.tsx:203
+#: src/features/cloud/ConflictNotices.tsx:75
 msgid "Resolve"
 msgstr "Résoudre"
 
@@ -2797,7 +2892,7 @@ msgstr "La rétention garde les {0} derniers snapshots automatiques par jeu. Les
 msgid "Retry"
 msgstr "Réessayer"
 
-#: src/features/cloud/CloudPage.tsx:230
+#: src/features/cloud/CloudPage.tsx:213
 #: src/features/cloud/TransferList.tsx:62
 #: src/features/console/views/CloudView.tsx:75
 msgid "Retry failed"
@@ -2807,11 +2902,11 @@ msgstr "Réessayer les échecs"
 msgid "Retry failed uploads"
 msgstr "Relancer les envois échoués"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:283
+#: src/features/saves-import/ImportSavesDialogs.tsx:306
 msgid "Review before importing"
 msgstr "Vérifier avant d’importer"
 
-#: src/features/console/views/use-settings-rows.ts:97
+#: src/features/console/views/use-settings-rows.ts:106
 msgid "Rosé (light)"
 msgstr "Rosé (clair)"
 
@@ -2826,7 +2921,7 @@ msgstr "Lancez la détection ou ajoutez le dossier vous-même."
 msgid "Running"
 msgstr "En cours"
 
-#: src/features/save-manager/SaveManagerPage.tsx:169
+#: src/features/save-manager/SaveManagerPage.tsx:196
 #: src/features/saves/GameSavesPanel.tsx:87
 msgid "Safety copies"
 msgstr "Copies de sécurité"
@@ -2840,12 +2935,12 @@ msgstr "Copie de sécurité"
 msgid "Safety copy before restore"
 msgstr "Copie de sécurité avant restauration"
 
-#: src/features/console/views/use-settings-rows.ts:131
+#: src/features/console/views/use-settings-rows.ts:140
 #: src/features/settings/BackupSection.tsx:29
 msgid "Same as this PC"
 msgstr "Comme sur ce PC"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:209
+#: src/features/saves-import/ImportSavesDialogs.tsx:232
 msgid "Same game as another folder: their snapshots will be joined."
 msgstr "Même jeu qu’un autre dossier : leurs snapshots seront réunis."
 
@@ -2861,7 +2956,7 @@ msgstr "Sauvegarde copiée"
 msgid "Save backed up before launch"
 msgstr "Sauvegarde copiée avant le lancement"
 
-#: src/features/settings/SettingsPage.tsx:276
+#: src/features/settings/SettingsPage.tsx:282
 msgid "Save Detection"
 msgstr "Détection des sauvegardes"
 
@@ -2909,8 +3004,8 @@ msgstr "Emplacements de sauvegarde"
 
 #: src/components/shell/NavRail.tsx:78
 #: src/features/dashboard/dashboard-sections.tsx:73
-#: src/features/dashboard/dashboard-sections.tsx:161
-#: src/features/save-manager/SaveManagerPage.tsx:136
+#: src/features/dashboard/dashboard-sections.tsx:163
+#: src/features/save-manager/SaveManagerPage.tsx:139
 msgid "Save Manager"
 msgstr "Sauvegardes"
 
@@ -2922,7 +3017,7 @@ msgstr "Enregistrer mon client"
 msgid "Save protection"
 msgstr "Protection des sauvegardes"
 
-#: src/features/settings/SettingsPage.tsx:259
+#: src/features/settings/SettingsPage.tsx:265
 msgid "Save-location knowledge comes from the Ludusavi manifest and PCGamingWiki (CC BY-NC-SA 3.0)."
 msgstr "Les emplacements de sauvegarde proviennent du manifeste Ludusavi et de PCGamingWiki (CC BY-NC-SA 3.0)."
 
@@ -2944,7 +3039,12 @@ msgstr "Sauvegardes"
 msgid "Saves are kept on this PC only"
 msgstr "Les sauvegardes sont conservées sur ce PC uniquement"
 
+#: src/features/save-manager/use-export-saves.ts:20
+msgid "Saves exported"
+msgstr "Sauvegardes exportées"
+
 #. placeholder {0}: joined.title
+#: src/features/game-details/InstallSavesGame.tsx:66
 #: src/features/game-details/LinkSavesBanner.tsx:27
 msgid "Saves joined to {0}"
 msgstr "Sauvegardes réunies avec {0}"
@@ -2966,7 +3066,7 @@ msgstr "Sauvegardes seules · {0} snapshots"
 msgid "Saves only · 1 snapshot"
 msgstr "Sauvegardes seules · 1 snapshot"
 
-#: src/features/game-details/GameHero.tsx:89
+#: src/features/game-details/GameHero.tsx:90
 msgid "Saves only · not installed"
 msgstr "Sauvegardes seules · non installé"
 
@@ -2984,7 +3084,7 @@ msgstr "Analyse terminée"
 
 #: src/features/library/LibraryPage.tsx:58
 #: src/features/library/LibraryPage.tsx:118
-#: src/features/settings/SettingsPage.tsx:139
+#: src/features/settings/SettingsPage.tsx:145
 msgid "Scan libraries"
 msgstr "Analyser les bibliothèques"
 
@@ -3009,7 +3109,7 @@ msgstr "Analyse…"
 msgid "Scheduled"
 msgstr "Planifiée"
 
-#: src/features/settings/SettingsPage.tsx:239
+#: src/features/settings/SettingsPage.tsx:245
 msgid "Schema version"
 msgstr "Version du schéma"
 
@@ -3020,6 +3120,10 @@ msgstr "Rechercher"
 #: src/features/saves/GameSavesPanel.tsx:93
 msgid "Search names and notes"
 msgstr "Rechercher dans les noms et les notes"
+
+#: src/features/saves-import/ImportSavesDialogs.tsx:113
+msgid "Search this PC"
+msgstr "Rechercher sur ce PC"
 
 #: src/components/shell/TopBar.tsx:45
 msgid "Search your games…"
@@ -3074,11 +3178,11 @@ msgstr "Configurer SteamGridDB"
 #: src/features/console/components/modals/QuickMenu.tsx:17
 #: src/features/console/views/SettingsView.tsx:88
 #: src/features/console/views/SettingsView.tsx:89
-#: src/features/settings/SettingsPage.tsx:286
+#: src/features/settings/SettingsPage.tsx:292
 msgid "Settings"
 msgstr "Paramètres"
 
-#: src/features/settings/SettingsPage.tsx:288
+#: src/features/settings/SettingsPage.tsx:294
 msgid "Settings sections"
 msgstr "Sections des paramètres"
 
@@ -3090,12 +3194,20 @@ msgstr "Étapes de configuration"
 msgid "Show"
 msgstr "Afficher"
 
+#: src/features/cloud/ConflictNotices.tsx:86
+msgid "Show {hiddenCount} hidden conflicts"
+msgstr "Afficher {hiddenCount} conflits masqués"
+
+#: src/features/cloud/ConflictNotices.tsx:86
+msgid "Show 1 hidden conflict"
+msgstr "Afficher 1 conflit masqué"
+
 #. placeholder {0}: index + 1
 #: src/features/dashboard/HeroCard.tsx:131
 msgid "Show game {0} of {pages}"
 msgstr "Afficher le jeu {0} sur {pages}"
 
-#: src/features/settings/SettingsPage.tsx:144
+#: src/features/settings/SettingsPage.tsx:150
 msgid "Show games I own but haven’t installed"
 msgstr "Afficher les jeux que je possède mais n’ai pas installés"
 
@@ -3107,7 +3219,7 @@ msgstr "Afficher dans l’Explorateur"
 msgid "Show in folder"
 msgstr "Afficher dans le dossier"
 
-#: src/features/settings/SettingsPage.tsx:256
+#: src/features/settings/SettingsPage.tsx:262
 msgid "Show the welcome tour again"
 msgstr "Revoir la visite de bienvenue"
 
@@ -3115,7 +3227,7 @@ msgstr "Revoir la visite de bienvenue"
 msgid "Showing {from}–{to} of {total}"
 msgstr "Affichage de {from} à {to} sur {total}"
 
-#: src/features/cloud/CloudPage.tsx:119
+#: src/features/cloud/CloudPage.tsx:120
 msgid "Sign in again"
 msgstr "Se reconnecter"
 
@@ -3131,12 +3243,12 @@ msgstr "La connexion utilise actuellement le client Google intégré à L8Play. 
 msgid "Sign-in currently uses your own Google client."
 msgstr "La connexion utilise actuellement votre propre client Google."
 
-#: src/features/cloud/CloudPage.tsx:103
+#: src/features/cloud/CloudPage.tsx:104
 #: src/features/cloud/TransferList.tsx:44
 msgid "Sign-in needed"
 msgstr "Connexion requise"
 
-#: src/features/settings/SettingsPage.tsx:220
+#: src/features/settings/SettingsPage.tsx:226
 msgid "Sign-in, storage, the sync queue and conflicts are on the Cloud Storage page."
 msgstr "La connexion, le stockage, la file de synchro et les conflits sont sur la page Stockage cloud."
 
@@ -3181,7 +3293,7 @@ msgstr "Dossier des snapshots"
 msgid "Snapshot folder changed"
 msgstr "Dossier des snapshots modifié"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:145
+#: src/features/saves-import/ImportSavesDialogs.tsx:168
 msgid "Snapshot name"
 msgstr "Nom du snapshot"
 
@@ -3204,7 +3316,7 @@ msgstr "Snapshot vérifiée"
 msgid "Snapshot verified (SHA-256 {0})"
 msgstr "Snapshot vérifié (SHA-256 {0})"
 
-#: src/features/console/views/use-settings-rows.ts:105
+#: src/features/console/views/use-settings-rows.ts:114
 msgid "Snapshot when a game closes"
 msgstr "Snapshot à la fermeture d’un jeu"
 
@@ -3230,7 +3342,7 @@ msgstr "Les snapshots sont sur Drive, en attente de restauration"
 msgid "Snapshots happen on their own when a game closes. You can change anything later in Settings."
 msgstr "Les snapshots se font toutes seules à la fermeture d’un jeu. Vous pourrez tout modifier plus tard dans les Réglages."
 
-#: src/features/cloud/CloudPage.tsx:173
+#: src/features/cloud/CloudPage.tsx:174
 msgid "Snapshots live in a private “L8Play” folder in your own Google Drive. Free, and only this app can see it."
 msgstr "Les snapshots vivent dans un dossier privé « L8Play » de votre propre Google Drive. Gratuit, et seule cette appli peut le voir."
 
@@ -3273,7 +3385,7 @@ msgstr "Effets sonores"
 msgid "Source"
 msgstr "Source"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:224
+#: src/features/saves-import/ImportSavesDialogs.tsx:247
 msgid "Split by sub-folder"
 msgstr "Séparer par sous-dossier"
 
@@ -3281,13 +3393,18 @@ msgstr "Séparer par sous-dossier"
 msgid "Standalone"
 msgstr "Autonome"
 
+#: src/features/console/views/use-settings-rows.ts:81
+#: src/features/settings/SettingsPage.tsx:108
+msgid "Start in console mode"
+msgstr "Démarrer en mode console"
+
 #: src/features/onboarding/OnboardingDialog.tsx:263
 #: src/features/settings/SettingsPage.tsx:102
 msgid "Start with Windows"
 msgstr "Démarrer avec Windows"
 
 #. placeholder {0}: game.title
-#: src/features/console/core/use-console-play.ts:26
+#: src/features/console/core/use-console-play.ts:28
 #: src/features/library/use-game-actions.ts:38
 msgid "Starting {0}"
 msgstr "Lancement de {0}"
@@ -3304,7 +3421,7 @@ msgstr "Démarre masqué dans la zone de notification à l’ouverture de sessio
 msgid "Starts with {letter}"
 msgstr "Commence par {letter}"
 
-#: src/features/cloud/CloudPage.tsx:281
+#: src/features/cloud/CloudPage.tsx:264
 msgid "Stay connected"
 msgstr "Rester connecté"
 
@@ -3350,7 +3467,7 @@ msgstr "Les installations Steam, Epic Games, Xbox et GOG sont détectées automa
 msgid "Steam, Epic, Xbox and GOG games are found automatically. Use this for any other game."
 msgstr "Les jeux Steam, Epic, Xbox et GOG sont trouvés automatiquement. Utilisez ceci pour tout autre jeu."
 
-#: src/features/settings/SettingsPage.tsx:150
+#: src/features/settings/SettingsPage.tsx:156
 msgid "Steam’s profile page could not be read just now. Scan again later."
 msgstr "La page de profil Steam n’a pas pu être lue pour l’instant. Relancez un scan plus tard."
 
@@ -3410,7 +3527,7 @@ msgstr "Les chiffres de stockage apparaissent dès que Google répond."
 msgid "Store accounts"
 msgstr "Comptes de boutiques"
 
-#: src/features/save-manager/SaveManagerPage.tsx:173
+#: src/features/save-manager/SaveManagerPage.tsx:200
 #: src/features/save-manager/SnapshotDetailPanel.tsx:115
 msgid "Stored"
 msgstr "Stockée"
@@ -3469,21 +3586,17 @@ msgstr "Conflits de synchronisation : {conflicts}"
 msgid "Sync failed"
 msgstr "La synchronisation a échoué"
 
-#: src/features/cloud/CloudPage.tsx:163
+#: src/features/cloud/CloudPage.tsx:164
 #: src/features/console/views/CloudView.tsx:58
 msgid "Sync finished"
 msgstr "Synchro terminée"
 
-#: src/features/cloud/CloudPage.tsx:207
-msgid "Sync is paused for this game until you choose."
-msgstr "La synchronisation est en pause pour ce jeu jusqu’à votre choix."
-
-#: src/features/cloud/CloudPage.tsx:177
+#: src/features/cloud/CloudPage.tsx:178
 #: src/features/console/views/CloudView.tsx:49
 msgid "Sync now"
 msgstr "Synchroniser maintenant"
 
-#: src/features/cloud/CloudPage.tsx:166
+#: src/features/cloud/CloudPage.tsx:167
 msgid "Sync stopped"
 msgstr "Synchro interrompue"
 
@@ -3495,7 +3608,7 @@ msgstr "Synchronisation de {active}"
 msgid "Syncing…"
 msgstr "Synchronisation…"
 
-#: src/features/settings/SettingsPage.tsx:109
+#: src/features/settings/SettingsPage.tsx:115
 msgid "Tells you about problems that need attention (a failed backup, a save conflict, a Drive sign-in) while the window is hidden."
 msgstr "Vous prévient des problèmes à traiter (sauvegarde échouée, conflit de sauvegardes, connexion Drive) pendant que la fenêtre est masquée."
 
@@ -3543,25 +3656,26 @@ msgstr "La copie Drive est d’abord téléchargée et vérifiée avec sa somme 
 msgid "The Drive save stays in your Drive as a conflict copy you can restore later."
 msgstr "La sauvegarde Drive reste dans votre Drive comme copie de conflit, restaurable plus tard."
 
-#: src/features/console/core/use-console-play.ts:42
+#: src/features/console/core/use-console-play.ts:58
 #: src/features/library/use-game-actions.ts:51
 msgid "The favourite could not be saved"
 msgstr "Le favori n’a pas pu être enregistré"
 
 #: src/features/artwork/ArtworkDialog.tsx:117
+#: src/features/game-details/InstallSavesGame.tsx:58
 #: src/features/library/use-library-flows.ts:77
 msgid "The file picker could not be opened"
 msgstr "Le sélecteur de fichiers n’a pas pu s’ouvrir"
 
-#: src/features/settings/SettingsPage.tsx:188
+#: src/features/settings/SettingsPage.tsx:194
 msgid "The first place L8Play looks for where a game keeps its saves. It runs from the bundled Ludusavi tool and downloads the free community manifest."
 msgstr "Le premier endroit où L8Play cherche où un jeu range ses sauvegardes. Il utilise l’outil Ludusavi fourni et télécharge le manifeste communautaire gratuit."
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:53
+#: src/features/saves-import/ImportSavesDialogs.tsx:68
 msgid "The folder could not be read"
 msgstr "Le dossier n’a pas pu être lu"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:261
+#: src/features/saves-import/ImportSavesDialogs.tsx:284
 msgid "The folder could not be read again"
 msgstr "Le dossier n’a pas pu être relu"
 
@@ -3576,6 +3690,10 @@ msgstr "Impossible d’ouvrir le sélecteur de dossier"
 #: src/features/saves/RestoreImportedDialog.tsx:117
 msgid "The folder you chose"
 msgstr "Le dossier que vous avez choisi"
+
+#: src/features/game-details/InstallSavesGame.tsx:73
+msgid "The game could not be linked"
+msgstr "Le jeu n’a pas pu être lié"
 
 #: src/features/saves/snapshot-labels.ts:40
 msgid "The game or another program is still using its save files. Close it and try again."
@@ -3646,15 +3764,19 @@ msgstr "Le détecteur de sauvegardes n’a pas pu démarrer. Réinstallez L8Play
 msgid "The save folder of {0} is empty."
 msgstr "Le dossier de sauvegarde de {0} est vide."
 
+#: src/features/save-manager/use-export-saves.ts:29
+msgid "The saves could not be exported"
+msgstr "Les sauvegardes n’ont pas pu être exportées"
+
 #: src/features/game-details/LinkSavesBanner.tsx:30
 msgid "The saves could not be joined"
 msgstr "Les sauvegardes n’ont pas pu être réunies"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:90
+#: src/features/saves-import/ImportSavesDialogs.tsx:105
 msgid "The saves of one game"
 msgstr "Les sauvegardes d’un seul jeu"
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:271
+#: src/features/saves-import/ImportSavesDialogs.tsx:294
 msgid "The saves were not imported"
 msgstr "Les sauvegardes n’ont pas été importées"
 
@@ -3680,6 +3802,10 @@ msgstr "La snapshot n’a pas été supprimée"
 msgid "The snapshot’s files are copied over it. Any file they replace is kept first in a safety copy you can restore from Saves."
 msgstr "Les fichiers du snapshot sont copiés par-dessus. Tout fichier remplacé est d’abord conservé dans une copie de sécurité que vous pouvez restaurer depuis Sauvegardes."
 
+#: src/features/game-details/InstallSavesGame.tsx:39
+msgid "The store could not be opened"
+msgstr "Le store n’a pas pu être ouvert"
+
 #: src/features/updates/UpdatesSection.tsx:77
 msgid "The update check failed"
 msgstr "La vérification des mises à jour a échoué"
@@ -3696,7 +3822,7 @@ msgstr "La signature de la mise à jour est invalide"
 msgid "The version you don’t use is kept as a snapshot."
 msgstr "La version que vous n’utilisez pas est gardée comme snapshot."
 
-#: src/features/console/views/use-settings-rows.ts:93
+#: src/features/console/views/use-settings-rows.ts:102
 #: src/features/settings/SettingsPage.tsx:56
 #: src/features/settings/SettingsPage.tsx:60
 msgid "Theme"
@@ -3706,7 +3832,11 @@ msgstr "Thème"
 msgid "These folders exist on this PC and look like this game’s saves. Check the evidence, then add the ones that are right. Nothing is backed up until you do."
 msgstr "Ces dossiers existent sur ce PC et ressemblent aux sauvegardes de ce jeu. Vérifiez les preuves, puis ajoutez ceux qui sont bons. Rien n’est sauvegardé tant que vous ne le faites pas."
 
-#: src/features/saves-import/ImportSavesDialogs.tsx:385
+#: src/features/game-details/InstallSavesGame.tsx:87
+msgid "These saves are kept, but the game itself is not on this PC. Install it from a store you own it on, or link it to a copy you already have."
+msgstr "Ces sauvegardes sont conservées, mais le jeu lui-même n’est pas sur ce PC. Installez-le depuis un store où vous le possédez, ou liez-le à une copie que vous avez déjà."
+
+#: src/features/saves-import/ImportSavesDialogs.tsx:408
 msgid "They are now in your library."
 msgstr "Ils sont maintenant dans votre bibliothèque."
 
@@ -3741,8 +3871,13 @@ msgstr "Ce chemin n’existe pas pour l’instant"
 #: src/features/console/views/SavesView.tsx:38
 #: src/features/dashboard/dashboard-sections.tsx:132
 #: src/features/save-manager/SnapshotDetailPanel.tsx:109
+#: src/features/saves-import/ImportSavesDialogs.tsx:46
 msgid "This PC"
 msgstr "Ce PC"
+
+#: src/features/saves-import/ImportSavesDialogs.tsx:52
+msgid "This PC could not be searched"
+msgstr "La recherche sur ce PC a échoué"
 
 #: src/features/saves/DeleteSnapshotDialog.tsx:120
 msgid "This removes the snapshot archive from this PC."
@@ -3848,12 +3983,12 @@ msgstr "Mise à jour disponible"
 msgid "Update now"
 msgstr "Mettre à jour maintenant"
 
-#: src/features/settings/SettingsPage.tsx:280
+#: src/features/settings/SettingsPage.tsx:286
 msgid "Updates"
 msgstr "Mises à jour"
 
-#: src/features/cloud/CloudPage.tsx:236
-#: src/features/cloud/CloudPage.tsx:242
+#: src/features/cloud/CloudPage.tsx:219
+#: src/features/cloud/CloudPage.tsx:225
 #: src/features/onboarding/OnboardingDialog.tsx:284
 msgid "Upload automatically"
 msgstr "Envoyer automatiquement"
@@ -3871,7 +4006,7 @@ msgstr "Envoie les nouveaux snapshots et cherche ceux des autres PC"
 msgid "Upload pending"
 msgstr "Envoi en attente"
 
-#: src/features/settings/SettingsPage.tsx:213
+#: src/features/settings/SettingsPage.tsx:219
 msgid "Upload snapshots automatically"
 msgstr "Envoyer les snapshots automatiquement"
 
@@ -3910,7 +4045,7 @@ msgstr "Envois échoués : {failed}"
 msgid "Uploads queued again"
 msgstr "Envois remis en file"
 
-#: src/features/cloud/CloudPage.tsx:303
+#: src/features/cloud/CloudPage.tsx:286
 msgid "Uploads stop and L8Play’s access to your Drive is revoked. Your snapshots on this PC and the files already in Drive are not deleted."
 msgstr "Les envois s’arrêtent et l’accès de L8Play à votre Drive est révoqué. Vos snapshots sur ce PC et les fichiers déjà dans Drive ne sont pas supprimés."
 
@@ -3969,7 +4104,7 @@ msgstr "Vérifiée"
 msgid "Verify every snapshot"
 msgstr "Vérifier chaque snapshot"
 
-#: src/features/settings/SettingsPage.tsx:237
+#: src/features/settings/SettingsPage.tsx:243
 msgid "Version"
 msgstr "Version"
 
@@ -3991,8 +4126,8 @@ msgstr "Affichage"
 msgid "Volume"
 msgstr "Volume"
 
-#: src/features/cloud/CloudPage.tsx:60
-#: src/features/cloud/CloudPage.tsx:119
+#: src/features/cloud/CloudPage.tsx:61
+#: src/features/cloud/CloudPage.tsx:120
 #: src/features/console/views/CloudView.tsx:84
 msgid "Waiting for Google…"
 msgstr "En attente de Google…"
@@ -4023,6 +4158,10 @@ msgstr "Bienvenue"
 msgid "Welcome to L8Play"
 msgstr "Bienvenue sur L8Play"
 
+#: src/features/cloud/ConflictNotices.tsx:60
+msgid "What is a sync conflict?"
+msgstr "Qu’est-ce qu’un conflit de synchronisation ?"
+
 #: src/features/saves/CreateSnapshotDialog.tsx:191
 msgid "What makes this save worth keeping? Build, route, items…"
 msgstr "Pourquoi garder cette sauvegarde ? Build, parcours, objets…"
@@ -4039,7 +4178,7 @@ msgstr "Où sont vos jeux ?"
 msgid "While playing"
 msgstr "Pendant la partie"
 
-#: src/features/settings/SettingsPage.tsx:108
+#: src/features/settings/SettingsPage.tsx:114
 msgid "Windows notifications"
 msgstr "Notifications Windows"
 
@@ -4136,6 +4275,6 @@ msgstr "Vos sauvegardes sont prêtes à être vérifiées"
 msgid "Your saves were imported"
 msgstr "Vos sauvegardes ont été importées"
 
-#: src/features/settings/SettingsPage.tsx:148
+#: src/features/settings/SettingsPage.tsx:154
 msgid "Your Steam profile’s game details are private: set them to public to list owned games."
 msgstr "Les détails de jeux de votre profil Steam sont privés : passez-les en public pour lister les jeux possédés."
