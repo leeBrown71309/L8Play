@@ -86,6 +86,7 @@ pub fn run() {
             commands::library::get_running_games,
             commands::library::launch_game,
             commands::library::open_install_folder,
+            commands::library::open_store_search,
             commands::saves::list_save_locations,
             commands::saves::detect_saves,
             commands::saves::export_all_saves,

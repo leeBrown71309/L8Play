@@ -52,6 +52,33 @@ export function useLinkArchivedGame() {
   });
 }
 
+/**
+ * Adds a game from its executable and joins a saves-only game's snapshots to it: the "I already have the
+ * game" path of a saves-only game's page.
+ */
+export function useInstallSavesFromExecutable() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: async ({
+      archivedId,
+      executablePath,
+      title,
+    }: {
+      archivedId: number;
+      executablePath: string;
+      title: string;
+    }) => {
+      const added = await addStandaloneGame(executablePath, title);
+      return linkArchivedGame(archivedId, added.id);
+    },
+    onSuccess: (game) => useArtworkLoading.getState().markPending([game.id]),
+    onSettled: () => {
+      void client.invalidateQueries({ queryKey: queryKeys.games });
+      void client.invalidateQueries({ queryKey: queryKeys.saves });
+    },
+  });
+}
+
 /** Ids of games currently running (kept fresh by `game://session` events). */
 export function useRunningGames(): Set<number> {
   const { data } = useQuery({ queryKey: queryKeys.runningGames, queryFn: getRunningGames });

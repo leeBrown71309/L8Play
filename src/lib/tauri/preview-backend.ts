@@ -185,6 +185,7 @@ const handlers: Handlers = {
     return null;
   },
   open_install_folder: () => null,
+  open_store_search: () => null,
   list_save_locations: ({ gameId }) => sampleLocations(gameId),
   detect_saves: ({ gameId }) =>
     gameId === 1

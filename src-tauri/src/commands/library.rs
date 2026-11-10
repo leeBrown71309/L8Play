@@ -280,6 +280,50 @@ fn launch_elevated(path: &std::path::Path, working_dir: &std::path::Path) -> Com
     }
 }
 
+/// A store where a game can be bought or installed.
+#[derive(Debug, Clone, Copy, serde::Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Store {
+    Steam,
+    Epic,
+    Gog,
+    Xbox,
+}
+
+/// Percent-encodes `text` for a URL query (everything but unreserved characters).
+fn encode_query(text: &str) -> String {
+    text.bytes()
+        .map(|byte| match byte {
+            b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => char::from(byte).to_string(),
+            _ => format!("%{byte:02X}"),
+        })
+        .collect()
+}
+
+/// Where a store searches for `title`: its app when it has a link scheme, its site otherwise.
+fn store_search_url(store: Store, title: &str) -> String {
+    let query = encode_query(title.trim());
+    match store {
+        // `steam://openurl/` shows the store page inside the Steam app (the browser if Steam is missing).
+        Store::Steam => format!("steam://openurl/https://store.steampowered.com/search/?term={query}"),
+        Store::Epic => format!("https://store.epicgames.com/browse?q={query}"),
+        Store::Gog => format!("https://www.gog.com/en/games?query={query}"),
+        Store::Xbox => format!("ms-windows-store://search/?query={query}"),
+    }
+}
+
+/// Opens a store's search for a game title, to install a game whose saves are already here.
+#[tauri::command]
+pub async fn open_store_search(app: AppHandle, store: Store, title: String) -> CommandResult<()> {
+    if title.trim().is_empty() {
+        return Err(CoreError::Validation("the game has no title to search for".into()).into());
+    }
+    let url = store_search_url(store, &title);
+    app.opener()
+        .open_url(&url, None::<&str>)
+        .map_err(|error| CommandError::new(CommandErrorCode::Launch, format!("could not open the store: {error}")))
+}
+
 #[tauri::command]
 pub async fn open_install_folder(app: AppHandle, state: State<'_, AppState>, game_id: i64) -> CommandResult<()> {
     let target = LibraryRepository::new(&state.db).launch_target(game_id)?;
@@ -351,4 +395,21 @@ pub async fn add_games(app: AppHandle, games: Vec<NewGameInput>) -> CommandResul
     }
     events::library_changed(&app);
     Ok(report)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn titles_are_encoded_for_each_store() {
+        assert_eq!(encode_query("Hades II: Night & Day"), "Hades%20II%3A%20Night%20%26%20Day");
+        assert_eq!(
+            store_search_url(Store::Steam, " Elden Ring "),
+            "steam://openurl/https://store.steampowered.com/search/?term=Elden%20Ring"
+        );
+        assert_eq!(store_search_url(Store::Epic, "A+B"), "https://store.epicgames.com/browse?q=A%2BB");
+        assert!(store_search_url(Store::Xbox, "Halo").starts_with("ms-windows-store://search/?query="));
+        assert!(store_search_url(Store::Gog, "Witcher").contains("query=Witcher"));
+    }
 }

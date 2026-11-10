@@ -11,6 +11,7 @@ import { PlatformTag } from "@/components/game/PlatformTag";
 import { PlayIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
+import { InstallSavesButton } from "@/features/game-details/InstallSavesGame";
 import { useGameActions } from "@/features/library/use-game-actions";
 import type { GameSummary } from "@/lib/bindings/GameSummary";
 import { cn } from "@/lib/cn";
@@ -115,7 +116,9 @@ export function GameHero({ game, running, protection, canSnapshot, onCreateSnaps
               <i />
               {t`Playing now`}
             </span>
-          ) : game.archived ? null : game.installed ? (
+          ) : game.archived ? (
+            <InstallSavesButton game={game} />
+          ) : game.installed ? (
             <Button
               variant="play"
               size="xl"
